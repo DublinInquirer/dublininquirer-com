@@ -1,0 +1,26 @@
+= form_for [:admin, @user, @subscription], html: { class: 'admin-form' } do |f|
+  - if @subscription.errors.any?
+    %ul.errors
+      - @subscription.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    = f.hidden_field :subscription_type
+
+    - if @subscription.is_fixed?
+      .field
+        = f.label :plan_id
+        .input
+          = f.select :plan_id, Product.active.map { |p| [p.name, p.base_plan.id] }
+      .field
+        = f.label :duration_months, 'Duration'
+        .input
+          = f.select :duration_months, {'Six months': 6, 'One year': 12}
+
+    - else
+      .field
+        = f.label :plan_id
+        .input
+          = f.select :plan_id, Product.active.map { |p| [p.name, p.base_plan.id] }
+
+  .actions= f.submit 'Save changes', class: 'button'

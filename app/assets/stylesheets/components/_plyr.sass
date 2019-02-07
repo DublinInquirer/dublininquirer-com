@@ -1,0 +1,44 @@
+.plyr.plyr--audio
+  border-radius: 0
+  border: 1px solid var(--black)
+  font-family: $sans
+  font-size: var(-b4)
+  line-height: 1.4
+  padding: 0
+  margin: 0
+
+  .plyr__controls
+    background: var(--default)
+    color: var(--black)
+    padding: 0.5rem 1rem
+    display: flex
+    flex-direction: row
+
+    .plyr__control
+      border-radius: 0
+
+.plyr--audio .plyr__control.plyr__tab-focus, .plyr--audio .plyr__control:hover, .plyr--audio .plyr__control[aria-expanded=true]
+  background-color: var(--blue)
+
+.plyr--full-ui .plyr__controls input[type=range]::-webkit-slider-thumb
+  border: 1px solid var(--black)
+  box-shadow: none
+
+.plyr--full-ui .plyr__controls input[type=range]
+  color: var(--blue)
+
+.plyr.plyr--audio + .podcast-meta
+  border-top: 0
+  margin: 0
+  padding: 0.75rem 1rem
+  text-align: right
+  font-family: $sans
+  font-size: var(--b4)
+  line-height: 1.4
+  color: var(--grey)
+  background: var(--default)
+
+.podcast
+  background: var(--faint)
+  padding: 1rem
+  margin-bottom: 1rem

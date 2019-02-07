@@ -1,0 +1,32 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    = display_meta_tags site: 'Dublin Inquirer'
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'admin', media: 'all'
+    = javascript_include_tag 'admin'
+
+  %body.admin
+    .admin{role: 'layout'}
+      %header.admin-header
+        = link_to 'Dashboard', admin_root_path, class: current_page?(admin_root_path) ? 'current' : nil
+        = link_to 'Issues', admin_issues_path, class: current_page?(admin_issues_path) ? 'current' : nil
+        = link_to 'Articles', admin_articles_path, class: current_page?(admin_articles_path) ? 'current' : nil
+        = link_to 'Tags', admin_tags_path, class: current_page?(admin_tags_path) ? 'current' : nil
+        = link_to 'Authors', admin_authors_path, class: current_page?(admin_authors_path) ? 'current' : nil
+        = link_to 'Users', admin_users_path, class: current_page?(admin_users_path) ? 'current' : nil
+        = link_to 'Subscriptions', admin_subscriptions_path, class: current_page?(admin_subscriptions_path) ? 'current' : nil
+        = link_to 'Gifts', admin_gift_subscriptions_path, class: current_page?(admin_gift_subscriptions_path) ? 'current' : nil
+        = link_to 'Landing pages', admin_landing_pages_path, class: current_page?(admin_landing_pages_path) ? 'current' : nil
+
+      %main.admin-main
+        - if content_for(:subheader_detail) && content_for(:subheader_list)
+          - raise "Choose detail or list header only"
+        - elsif content_for(:subheader_detail)
+          .admin-subheader.-detail= yield :subheader_detail
+        - elsif content_for(:subheader_list)
+          .admin-subheader.-index= yield :subheader_list
+
+        .admin-view= yield

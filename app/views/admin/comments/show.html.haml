@@ -1,0 +1,37 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Article', [:admin, @comment.article]
+      = link_to "#{@comment.display_name}'s comment", [:admin, @comment.user]
+
+    %nav
+      - if !@comment.is_spam?
+        = link_to 'mark as spam', :mark_as_spam_admin_comment, method: :put, class: 'button', 'data-confirm': "You sure? This will ban the commenter."
+
+        - if @comment.is_published?
+          = link_to 'unpublish', :toggle_admin_comment, method: :put, class: 'button'
+        - else
+          = link_to 'approve', :toggle_admin_comment, method: :put, class: 'button'
+
+.text.-comment
+  - if @comment.parent.present?
+    :markdown
+      #{ raw @comment.parent.display_name }:
+      #{ raw @comment.content_markdown }
+  - else
+    :markdown
+      #{ raw @comment.content_markdown }
+
+%dl.admin-data
+  %dt Date
+  %dd= @comment.created_at.strftime('%e %b %Y')
+  %dt Status
+  %dd= @comment.is_published? ? 'published' : 'not published'
+
+%dl.admin-data
+  - if @comment.article.present?
+    %dt Article
+    %dd= link_to @comment.article.title, [:admin, @comment.article]
+  - if @comment.user.present?
+    %dt User
+    %dd= link_to @comment.user.email_address, [:admin, @comment.user]

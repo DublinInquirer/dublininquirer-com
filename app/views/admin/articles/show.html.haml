@@ -1,0 +1,43 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Articles', [:admin, :articles]
+      = link_to truncate(@article.title, length: 30), [:admin, @article]
+
+    %nav
+      = link_to "Edit metadata", [:edit, :admin, @article], class: 'button'
+      = link_to "Edit content", [:edit_content, :admin, @article], class: 'button'
+      = link_to "Delete", [:admin, @article], class: 'button', 'data-confirm': "This can't be undone! Are you 100% sure?", method: 'delete'
+
+.admin-preview
+  %header
+    .p.-category= link_to display_category(@article.category), category_path(@article.category)
+    %h1.headline= raw @article.title
+
+  %article{lang: 'en'}
+    - if @article.featured_artwork.present?
+      %figure.artwork.-featured
+        = image_tag @article.featured_artwork.image.large.url
+        %figcaption= @article.featured_artwork.caption
+
+    = raw render_content(@article.content)
+
+.admin-details
+  %header.admin-subheader.-details
+    %div
+      .breadcrumbs
+        Images
+
+  %div
+    %ul.admin-list.-artworks
+      - @article.artworks.order('created_at desc').each do |artwork|
+        %li.artwork
+          = link_to [:edit, :admin, artwork] do
+            - if artwork.image.present?
+              %figure.artwork.-small= image_tag artwork.image.small.url
+
+          - if artwork.image.present?
+            %code= artwork.element
+
+  %nav.admin-actions.box.-padded
+    = link_to "Attach a new image", [:new, :admin, @article, :artwork], class: 'button'

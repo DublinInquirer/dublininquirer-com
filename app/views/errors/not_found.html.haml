@@ -1,0 +1,10 @@
+.wrapper.-tiny{role: 'layout'}
+  %header.header.-fancy
+    %h1.heading 404
+
+  .text
+    :markdown
+      The requested page could not be found. Either there's a typo in the URL, or the page has moved.
+
+  %nav.nav.-actions.-centered
+    = link_to "Return home", :root, class: 'button -standard'

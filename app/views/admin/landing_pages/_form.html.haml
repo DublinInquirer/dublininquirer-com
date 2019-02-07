@@ -1,0 +1,15 @@
+= form_for [:admin, landing_page], html: { class: 'admin-form', multipart: true } do |f|
+  - if landing_page.errors.any?
+    %ul.errors
+      - landing_page.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :name
+      = f.text_field :name
+    .field
+      = f.label :slug
+      = f.text_field :slug
+
+  .actions= f.submit 'Save', class: 'button'

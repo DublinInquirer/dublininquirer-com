@@ -1,0 +1,161 @@
+.header
+  .anchor
+    position: absolute
+    top: 0
+    right: 0
+    height: 0
+    width: 0
+    overflow: hidden
+
+header.-fancy
+  margin-bottom: 1rem
+  .heading, .headline
+    font-family: $serif
+    font-size: var(--h3)
+    line-height: 1.4
+    text-align: center
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    .heading, .headline
+      font-family: $serif
+      font-size: var(--h2)
+      line-height: 1.4
+
+header.-tiny
+  position: relative
+  text-align: center
+  line-height: calc(var(--baseline) * 1.5)
+  padding-bottom: calc(var(--gutter)/2)
+  &:after
+    position: absolute
+    height: 1px
+    background-color: var(--grey)
+    content: ' '
+    display: block
+    bottom: calc(var(--gutter)/4)
+    left: calc(50% - (var(--gutter)/4))
+    right: calc(50% - (var(--gutter)/4))
+
+  .heading + p, .headline + p, p + p
+    margin-top: calc(var(--baseline)/2)
+
+header.-issue
+  .heading
+    margin-bottom: var(--baseline)
+    font-size: var(--b1)
+    font-weight: 800
+    font-family: $sans
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    .heading
+      padding-left: var(--gutter)
+      font-size: var(--h3)
+  @media screen and (min-width: $large)
+
+header.-modal
+  margin-top: var(--gutter)
+  .heading
+    margin-left: var(--gutter)
+    margin-bottom: 1rem
+    font-size: var(--h3)
+    line-height: 1.1
+    font-weight: 800
+    font-family: $sans
+  .text
+    margin-bottom: 1rem
+
+header.-box
+  margin: calc(-1 * var(--baseline)) calc(-1 * var(--baseline)) var(--baseline)
+  border-bottom: 1px solid var(--black)
+  text-align: left
+  padding: 0.75rem 1rem 0.55rem
+  .heading, .headline, .meta
+    font-weight: 500
+    font-size: var(--b4)
+    &:before
+      content: '■ '
+  .meta
+    div
+      display: inline-block
+
+    .name
+
+    .date
+      float: right
+
+  &.-black
+    color: var(--default)
+    background-color: var(--black)
+
+header.-category
+  padding: var(--gutter) 0 var(--baseline) var(--gutter)
+  border-bottom: 1px solid var(--black)
+
+  .heading, .headline
+    font-weight: 800
+    font-size: var(--h3)
+    line-height: 1.4
+    code
+      font-weight: 800
+      font-size: var(--h3)
+      line-height: 1.4
+
+  &.-author
+    display: flex
+    flex-direction: row
+    padding: var(--gutter) 0 var(--baseline)
+    justify-content: stretch
+    align-items: stretch
+
+    .portrait
+      flex: none
+      width: 8rem
+      height: 8rem
+      background: var(--faint)
+
+      img
+        width: 8rem
+        height: 8rem
+        object-fit: cover
+
+    .info
+      flex-basis: calc(100% - 8rem)
+      flex-grow: 0
+      flex-shrink: 1
+      padding: 0 0 0 1rem
+
+      .bio
+        font-family: $serif
+
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+    @media screen and (min-width: $large)
+      .info
+        flex-basis: calc(50% - 8rem)
+
+header.-section
+  border-top: 1px solid var(--black)
+  margin: var(--gutter) 0
+  .heading, .headline
+    padding-top: var(--baseline)
+    font-weight: 400
+    font-size: var(--b2)
+    line-height: 1.4
+
+.header nav
+  position: absolute
+  right: var(--baseline)
+  top: 0
+  bottom: 0
+  display: flex
+  flex-direction: row
+  justify-content: flex-end
+  align-items: center
+
+nav.-box
+  font-size: var(--b4)
+  a, a:link, a:visited
+    color: var(--grey)

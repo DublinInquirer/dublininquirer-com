@@ -1,0 +1,47 @@
+.content-nav
+  border-bottom: 2px solid var(--black)
+  display: none
+  flex-direction: row
+  justify-content: space-between
+  padding: 0.5rem 2rem
+
+  & > div
+    flex-grow: 1
+
+    &.left, &.right
+      display: none
+      flex-basis: 0
+      font-size: var(--b4)
+
+    &.left
+      .links
+        justify-content: flex-start
+
+    &.right
+      .links
+        justify-content: flex-end
+
+  a, a:link, a:visited
+    color: var(--black)
+    &:hover
+      color: var(--blue)
+
+  .links
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+
+  @media screen and (min-width: $small)
+    display: flex
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    & > div
+      &.left, &.right
+        display: block
+        flex-basis: 18rem
+        flex-grow: 0
+
+    .links
+      justify-content: center
+      a + a
+        margin-left: 2rem

@@ -1,0 +1,11 @@
+- cache [article, 'cartoon'] do
+  .excerpt.-cartoon
+    .content
+      .illustration
+        %figure.artwork
+          = link_to article.path do
+            = image_tag article.featured_artwork.image.large.url
+      .caption
+        %strong Cartoon of the week
+        by
+        = link_to article.author.try(:full_name), article.author

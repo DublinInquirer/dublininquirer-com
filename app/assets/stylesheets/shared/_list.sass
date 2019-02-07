@@ -1,0 +1,101 @@
+.list
+  &.-nav
+    & > li
+      display: inline
+    & > li + li
+      &:before
+        content: ' / '
+        color: var(--grey)
+
+  &.-em
+    & > li
+      &:before
+        content: '—'
+        color: var(--grey)
+
+  &.-delineated
+    li
+      padding: 0 0 calc(var(--baseline)/2)
+      &:last-child
+        padding-bottom: 0
+    li + li
+      padding-top: calc(var(--baseline)/2)
+      border-top: 1px solid var(--faint)
+  &.-options
+    li + li
+      margin-top: var(--baseline)
+
+  &.-meta
+    li + li
+      border-top: 1px solid var(--black)
+    li
+      position: relative
+      padding: calc(var(--baseline)*2.75) var(--baseline) var(--baseline)
+
+      label
+        position: absolute
+        top: calc(var(--baseline)/2)
+        left: var(--baseline)
+        font-size: var(--b5)
+
+  &.-articles
+    font-family: $serif
+    & > li
+      display: inline
+    & > li + li
+      &:before
+        content: ' / '
+        color: var(--grey)
+
+  &.-sentence
+    & > li
+      display: inline
+      &:after
+        content: ', '
+      &:last-child
+        &:after
+          content: ''
+
+  &.-tags
+    margin-top: -0.5rem
+    line-height: 2em
+    li
+      display: inline-block
+
+    a, a:link, a:visited, .tag
+      font-size: var(--b4)
+      color: var(--red)
+      border: 1px solid var(--red)
+      padding: 0.5rem 0.75rem
+      transition: 0.25s all ease
+      &:hover
+        background: var(--red)
+        color: var(--default)
+
+  &.-expansive
+    flex: 1
+    display: flex
+    flex-direction: column
+    justify-content: stretch
+    align-items: stretch
+    font-size: var(--h3)
+
+    & > li
+      flex: 1
+      display: flex
+      flex-direction: column
+      justify-content: stretch
+      align-items: stretch
+      border-bottom: 1px solid var(--black)
+      a, a:link, a:visited
+        padding: 0 5%
+        display: flex
+        flex: 1
+        flex-direction: row
+        justify-content: center
+        align-items: center
+
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+      font-size: var(--h2)
+    @media screen and (min-width: $large)

@@ -1,0 +1,28 @@
+= form_for [:admin, author], html: { class: 'admin-form', multipart: true } do |f|
+  - if author.errors.any?
+    %ul.errors
+      - author.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :full_name, 'Name'
+      = f.text_field :full_name
+    .field
+      = f.label :bio
+      = f.text_area :bio
+
+    - if author.portrait.url.present?
+      .field.-tick
+        = f.label :portrait
+        = image_tag author.portrait.url
+        = f.label :remove_portrait do
+          = f.check_box :remove_portrait
+          Remove portrait?
+    - else
+      .field
+        = f.label :portrait
+        = f.file_field :portrait
+        = f.hidden_field :portrait_cache
+
+  %nav.actions= f.submit 'Save', class: 'button'

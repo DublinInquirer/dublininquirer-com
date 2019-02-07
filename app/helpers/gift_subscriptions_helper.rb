@@ -1,0 +1,2 @@
+module GiftSubscriptionsHelper
+end

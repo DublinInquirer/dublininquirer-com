@@ -1,0 +1,25 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Articles', [:admin, :articles]
+      = link_to truncate(@article.title, length: 30), [:admin, @article]
+      = link_to 'Edit content', [:edit_content, :admin, @article]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @article], class: 'button -cancel'
+      = link_to "Save", [:admin, @article], class: 'button', 'data-action': 'submitForm'
+
+= form_for [:update_content, :admin, @article], method: 'put', html: { class: 'admin-form' } do |f|
+  - if @article.errors.any?
+    %ul.errors
+      - @article.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :title, 'Headline'
+      .input= f.text_field :title, disabled: true
+    .field
+      .input= f.text_area :content_markdown, class: 'article'
+
+  .actions= f.submit 'Save', class: 'button'

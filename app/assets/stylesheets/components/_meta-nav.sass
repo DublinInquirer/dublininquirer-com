@@ -1,0 +1,92 @@
+.meta-nav
+  border-bottom: 1px solid var(--black)
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  transition: top 0.5s ease
+
+  .right, .left
+    display: flex
+    flex-direction: row
+    flex-basis: calc(50vw - 18rem)
+    flex-grow: 0
+    flex-shrink: 0
+
+  .left
+    justify-content: flex-start
+    .links, .breadcrumbs
+      justify-content: flex-start
+
+  .right
+    justify-content: flex-end
+    .links, .breadcrumbs
+      justify-content: flex-end
+
+  .center
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: stretch
+
+    a, a:link, a:visited
+      display: flex
+      flex-direction: row
+      justify-content: center
+      align-items: center
+
+    .logotype
+      margin-bottom: -1.5px
+
+  .links, .breadcrumbs
+    display: none
+    flex-direction: row
+    align-items: center
+    padding: 0 1rem
+
+    a + a
+      margin-left: 1rem
+
+  .breadcrumbs
+    a + a, a + .current
+      &:before
+        color: var(--grey)
+        content: ' / '
+
+  .left
+    .icons
+      border-right: 1px solid var(--black)
+
+  .right
+    .icons
+      border-left: 1px solid var(--black)
+
+  &.-small
+    font-size: var(--b4)
+    .icons
+      .icon
+        width: 3rem
+        height: 3rem
+
+  &.-fixed
+    position: fixed
+    left: 0
+    right: 0
+    top: -4.32rem
+    border-top: 0.75rem solid var(--black)
+    background-color: var(--default)
+    z-index: 999
+    height: 4.32rem
+    overflow: hidden
+
+    &.-omnipresent
+      top: 0
+
+    &.-open
+      top: 0
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    .right, .left
+      .links, .breadcrumbs
+        display: flex

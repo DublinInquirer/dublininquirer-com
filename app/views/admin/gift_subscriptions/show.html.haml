@@ -1,0 +1,30 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Gifts', [:admin, :gift_subscriptions]
+      = link_to @gift_subscription.user_full_name, [:admin, @gift_subscription]
+
+    %nav
+      - if current_user.is_admin?
+        - if @issue.published
+          = link_to "Unpublish", [:unpublish, :admin, @issue], class: 'button', method: :put
+        - else
+          = link_to "Publish", [:publish, :admin, @issue], class: 'button', method: :put
+
+%dl.admin-data
+  %dt Giver
+  %dd #{ @gift_subscription.giver_full_name } (#{ @gift_subscription.giver_email_address })
+
+  %dt Recipient
+  %dd= link_to "#{ @gift_subscription.user_full_name } (#{ @gift_subscription.user_email_address })", [:admin, @gift_subscription.user]
+
+  %dt Subscription
+  %dd= link_to @gift_subscription.product_name, [:admin, @gift_subscription.subscription]
+
+  - if @gift_subscription.has_address?
+    %dt Certificate address
+    %dd
+      - if @gift_subscription.address_lines.any?
+        = raw @gift_subscription.address_lines.join("<br>")
+      - else
+        [blank]

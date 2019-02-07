@@ -1,0 +1,30 @@
+- title 'Reset password'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Reset password
+
+%header.header.-modal
+  %h1.heading Reset your password
+
+  .text.-article
+    :markdown
+      Enter the email address linked to your account below, and we’ll send you an email to reset your password.
+
+.box.-tight
+  = form_tag password_resets_path, method: :post, class: 'box-form' do
+    .field
+      = label_tag :email_address
+      .input= email_field_tag :email_address, nil, placeholder: %w(sean@example.ie aoife@example.ie).sample
+
+    %nav.actions
+      = submit_tag "Reset", class: 'button -standard -big'
+
+.box.-other
+  %header.-box
+    .heading Other options
+  .content
+    %ul.list.-options
+      %li= link_to "Register for a free account", :register, class: 'button -standard'
+      %li= link_to "Log in to an existing account", :login, class: 'button -standard'
+      %li= link_to "Migrate an account from the old site", '/migrate', class: 'button -standard'

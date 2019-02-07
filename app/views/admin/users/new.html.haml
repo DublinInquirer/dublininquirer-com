@@ -1,0 +1,11 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Users', [:admin, :users]
+      = link_to 'New user', [:new, :admin, :user]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, :users], class: 'button''button -cancel'
+      = link_to "Save", [:admin, :users], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/users/form', locals: {user: @user}

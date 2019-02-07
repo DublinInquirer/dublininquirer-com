@@ -1,0 +1,34 @@
+- title 'Set a password'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Migrate
+
+%header.header.-section
+  %h1.heading Set a password
+
+.box.-padded-v
+  .text.-static
+    :markdown
+      To set up your new **DublinInquirer.com** account, we need you to set a password. You'll use your email address and password to log in to manage your subscription and place comments in the future.
+
+.box.-padded-v
+  .box.-padded.-apart
+    = form_for @user, url: migrate_set_password_path(token: @token), html: {method: :put, class: 'modal-form'} do |f|
+
+      - if @user.errors.any?
+        %ul.modal-form_errors
+          - @user.errors.full_messages.each do |message|
+            %li= message
+
+      .modal-form_fields
+        .modal-form_field
+          = f.label :email_address
+          = f.email_field :email_address, disabled: true
+
+        .modal-form_field
+          = f.label :password
+          = f.password_field :password
+
+      .modal-form_actions
+        = f.submit 'Save', class: 'button'

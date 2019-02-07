@@ -1,0 +1,12 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Subscriptions', [:admin, :subscriptions]
+      = link_to @subscription.user.email_address, [:admin, @subscription]
+      = link_to 'Edit', [:edit, :admin, @subscription]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @subscription], class: 'button -cancel'
+      = link_to "Save", [:admin, @subscription], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/subscriptions/form', locals: { subscription: @subscription }

@@ -1,0 +1,15 @@
+- if logged_in? && current_user.delinquent?
+  .notice.-paywall.-fixed
+    %nav.close
+      %a.icon.-large.-close{'data-action': 'closeNotice'}
+        %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
+          %rect{fill: "#070707", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
+          %rect{fill: "#070707", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
+
+    .content
+      .message
+        :markdown
+          We're having trouble charging your card. Please update your payment details.
+
+    .actions
+      = link_to "Update payment details", [:payment, :user], class: 'button -standard'

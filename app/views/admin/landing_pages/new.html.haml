@@ -1,0 +1,11 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Landing pages', [:admin, :landing_pages]
+      = link_to 'New page', [:new, :admin, :landing_page]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, :landing_pages], class: 'button -cancel'
+      = link_to "Save", [:admin, :landing_pages], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/landing_pages/form', locals: {landing_page: @landing_page}

@@ -1,0 +1,30 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Gift subscriptions', [:admin, :gift_subscriptions]
+
+    %nav &nbsp;
+
+  %div.filters
+    .page
+      .current #{ @gift_subscriptions.current_page }/#{ @gift_subscriptions.total_pages }
+      .pagination
+        - if !@gift_subscriptions.first_page?
+          = link_to '<', p: (@gift_subscriptions.current_page - 1)
+        - else
+          %a.-disabled
+            <
+        - if !@gift_subscriptions.last_page?
+          = link_to '>', p: (@gift_subscriptions.current_page + 1)
+        - else
+          %a.-disabled
+            >
+
+%table.admin-table
+  %tbody
+    - @gift_subscriptions.each do |gift_subscription|
+      - cache ['admin', gift_subscription, 'row'] do
+        %tr
+          %td= link_to gift_subscription.user_full_name, [:admin, gift_subscription]
+          %td{width: '300'}= gift_subscription.product_name
+          %td{width: '150'}= gift_subscription.created_at.strftime('%e %b %Y')

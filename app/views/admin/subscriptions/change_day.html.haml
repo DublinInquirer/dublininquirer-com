@@ -1,0 +1,18 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Subscriptions', [:admin, :users]
+      = link_to @subscription.user.email_address, [:admin, @subscription]
+      = link_to 'Change date', [:change_day, :admin, @subscription]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @subscription], class: 'button -cancel'
+      = link_to "Save", [:admin, @subscription], class: 'button', 'data-action': 'submitForm'
+
+= form_tag [:change_day, :admin, @subscription], method: 'put', class: 'admin-form' do
+  .field
+    = label_tag :date, 'Next billing date'
+    = text_field_tag :date, @subscription.current_period_ends_at.to_date, placeholder: "YYYY-MM-DD"
+
+  %nav.actions
+    = submit_tag 'Change price', class: 'button'

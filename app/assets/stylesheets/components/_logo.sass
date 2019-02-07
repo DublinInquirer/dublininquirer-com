@@ -1,0 +1,41 @@
+.logotype
+  display: block
+  text-indent: -9999px
+  overflow: hidden
+  background-position: center center
+  background-repeat: no-repeat
+  background-size: auto 2.75rem
+  height: 2.75rem
+  width: calc(2.75rem * (26.2/3))
+
+  svg
+    display: block
+    width: 100%
+    height: auto
+
+  &.-small
+    height: 1.625rem
+    width: calc(1.625rem * (26.2/3))
+    background-size: auto 1.625rem
+
+  &.-medium
+    height: 1.875rem
+    width: calc(1.875rem * (26.2/3))
+    background-size: auto 1.875rem
+
+  &.-large
+    height: 3rem
+    width: calc(3rem * (26.2/3))
+    background-size: auto 3rem
+
+  &.-stacked
+    height: 7rem
+    width: calc(7rem * 2.287234042553191)
+    background-image: url(asset-path('logo-stacked-white.svg'))
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: auto 7rem
+
+  &.-white
+      path
+        fill: var(--default)

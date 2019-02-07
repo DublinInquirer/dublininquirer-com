@@ -1,0 +1,58 @@
+.header.-article.-standard
+  .headline, .heading
+    font-size: var(--h2)
+    letter-spacing: -0.025em
+    line-height: 1.1
+    font-weight: 300
+    text-align: center
+    margin: calc(var(--gutter)/2) 0
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    .headline, .heading
+      font-size: var(--h1)
+      line-height: 1.1
+  @media screen and (min-width: $large)
+    margin: 0 20vw
+    .headline, .heading
+      margin: calc(var(--gutter)/2) 0
+
+.article.-standard
+  margin: 0
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    margin: 0
+
+.article.-standard .artwork
+  margin: 0 calc(var(--gutter) * -0.5)
+
+  figcaption
+    padding-left: 2.5vw
+    padding-right: 2.5vw
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    margin: var(--gutter) auto
+    max-width: $large
+    width: 90vw
+    img
+      display: block
+
+    &.-featured
+      margin: 0 auto var(--gutter)
+
+    &.-portrait
+      max-width: 58rem
+      margin-left: auto
+      margin-right: auto
+
+.article.-standard .content
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    max-width: 58rem
+    margin: 0 auto
+
+    .artwork
+      width: 100%

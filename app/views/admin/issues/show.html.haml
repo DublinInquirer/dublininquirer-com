@@ -1,0 +1,42 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Issues', [:admin, :issues]
+      = link_to @issue.issue_date, [:admin, @issue]
+
+    %nav
+      - if current_user.is_admin?
+        - if @issue.published
+          = link_to "Unpublish", [:unpublish, :admin, @issue], class: 'button', method: :put
+        - else
+          = link_to "Publish", [:publish, :admin, @issue], class: 'button', method: :put
+
+- cache ['admin', @issue, @issue.articles] do
+  %table.admin-table.-issue
+    %tbody.-sortable{'data-url': reorder_admin_issue_path(@issue)}
+      - @issue.articles.by_position.each do |article|
+        - cache ['admin', @issue, article, 'row'] do
+          %tr{'data-id': article.id}
+            %td= link_to truncate(article.title, length: 92), [:admin, article]
+            %td= link_to truncate(article.author.try(:full_name), length: 92), [:admin, article.author]
+
+:coffeescript
+  for sortableTable in $('tbody.-sortable')
+    $(sortableTable).sortable
+      placeholder: 'placeholder'
+      stop: ->
+        payload = tableToPositionHash($(sortableTable))
+        $.ajax(
+          type: 'put'
+          data: {positions: payload}
+          url: $(sortableTable).data('url')
+          ).done (res) ->
+            console.log res
+
+  tableToPositionHash = (table) ->
+    positions = []
+
+    for row in $('tr', table)
+      positions.push $(row).data('id')
+
+    positions

@@ -1,0 +1,35 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Users', [:admin, :users]
+
+    %nav
+      = link_to 'New user', [:new, :admin, :user], class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @users.current_page }/#{ @users.total_pages }
+      .pagination
+        - if !@users.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@users.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@users.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@users.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options
+      = form_tag [:admin, :users], method: 'get', class: 'admin-search-form' do
+        = text_field_tag :query, @filter[:query]
+        = submit_tag raw('⏎'), class: 'button -small'
+
+%table.admin-table
+  %tbody
+    - @users.each do |user|
+      - cache ['admin', user, user.subscription, 'row'] do
+        %tr
+          %td= link_to "#{ user.full_name.present? ? user.full_name : user.email_address }", [:admin, user]
+          %td{width: '150'}= user.created_at.strftime('%e %b %Y')

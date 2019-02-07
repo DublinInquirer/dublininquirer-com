@@ -1,0 +1,42 @@
+- set_meta_tags title: @article.title
+- set_meta_tags description: @article.excerpt
+- set_meta_tags canonical: "https://www.dublininquirer.com#{ @article.path }"
+- set_meta_tags author: "https://www.dublininquirer.com/contributors/#{ @article.author.try(:slug) }"
+
+- if @article.featured_artwork.present?
+  - set_meta_tags image_src: @article.featured_artwork.image.large.url
+  - set_meta_tags og: {image: @article.featured_artwork.image.large.url}
+- set_meta_tags twitter: {image: {'_': @article.featured_artwork.image.large.url}}
+
+= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
+
+- if !@limited
+  - if @article.tags.any?
+    .wrapper.-small{role: 'layout'}
+      %header.-section
+        %h3.heading Filed under
+      %ul.list.-tags
+        - @article.displayable_tags.each do |tag|
+          %li= link_to tag.name, tag_path(id: tag.slug)
+
+  - if @article.commentable?
+    .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
+
+  .wrapper.-contained{role: 'layout'}
+    .block.-gy
+      %header.header.-issue
+        %h4.heading Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+
+      .row
+        - @article.from_the_same_issue.by_position.first(6).each do |article|
+          .col-xs-12.col-md-4.col-lg-2.col.flex
+            = render partial: 'articles/excerpts/tiny', locals: { article: article }
+            %hr.-stroke
+
+  - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
+    = render partial: 'user_sessions/paywall'
+
+  = render partial: 'products/enticement'
+
+- else
+  = render partial: 'user_sessions/limited'

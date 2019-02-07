@@ -1,0 +1,24 @@
+= form_for @artwork.persisted? ? [:admin, @artwork] : [:admin, @article, @artwork], html: { class: 'admin-form' } do |f|
+  - if @artwork.errors.any?
+    %ul.errors
+      - @artwork.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    - if @artwork.image.url.present?
+      .field.-tick
+        = image_tag @artwork.image.small.url
+        = f.label :remove_image do
+          = f.check_box :remove_image
+          Remove image?
+    - else
+      .field
+        = f.file_field :image
+        = f.hidden_field :image_cache
+
+    .field
+      = f.label :caption
+      .input
+        = f.text_area :caption
+
+  .actions= f.submit 'Save changes', class: 'button'

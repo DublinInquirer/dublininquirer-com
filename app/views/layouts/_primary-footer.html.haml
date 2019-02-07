@@ -1,0 +1,39 @@
+.block.-mt4
+  %footer.primary-footer
+    .wrapper{role: 'layout'}
+      .container
+        .row
+          .col-xs-12.col-md-3
+            .section.-small
+              = link_to :root do
+                .logotype.-medium
+                  = render partial: 'layouts/images/logo-horizontal'
+              .text
+                :markdown
+                  Dublin Inquirer is an independent, reader-supported newspaper serving Ireland's capital.
+
+          .col-xs-12.col-md-3.col-md-offset-3
+            %section.section.-small
+              %p
+                %big Managing editor
+                = link_to "Lois Kaplia", "/contributors/lois-kapila"
+              %p
+                %big Deputy editor
+                = link_to "Sam Tranum", "/contributors/sam-tranum"
+              %p
+                %big City reporters
+                = link_to "Sean Finnan", "/contributors/sean-finnan"
+                <br>
+                = link_to "Erin McGuire", "/contributors/erin-mcguire"
+
+          .col-xs-12.col-md-3
+            %section.section.-small
+              :markdown
+                &copy; 2015&ndash;#{ Date.current.year }
+
+                Dublin Inquirer<br>
+                Parkview House<br>
+                65 Crumlin Rd<br>
+                Dublin 12
+
+                CRO #559820

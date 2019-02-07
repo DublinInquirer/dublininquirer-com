@@ -1,0 +1,74 @@
+.invoice
+  .container
+    - if @invoice.paid?
+      .row
+        .col-xs-12
+          .box.-padded.-set-apart
+            .text.-centered <strong>Paid.</strong> Thank you for supporting Dublin Inquirer.
+
+    .row
+      .col-xs-8
+        .box.-padded-v
+          %header
+            .logotype Dublin Inquirer
+
+          .text.-basic
+            :markdown
+              65 Crumlin Rd<br>
+              Dublin 12<br>
+              Ireland
+
+              CRO #559820
+
+      .col-xs-4
+        .box.-padded-v
+          %div
+            %h3 Billed To:
+            %p #{ @invoice.user.full_name }
+            %p #{ raw @invoice.user.address_lines.join('<br>') }
+
+          %div
+            %h3 Payment Info:
+            %p Receipt ID: #{ @invoice.number }
+            %p Billed on #{ @invoice.created_on.strftime('%-d %b %Y') }
+
+    .row
+      .col-xs-12
+        .box.-padded-v
+          %table.invoice-table
+            %thead
+              %tr.-hr
+                %th Service
+                %th Qty
+                %th VAT Rate
+                %th Price (EUR)
+            %tbody
+              - @invoice.lines_with_vat.each do |line|
+                %tr
+                  %td= line[:title]
+                  %td= line[:quantity]
+                  %td #{ (line[:vat_rate] * 100.0).to_i }%
+                  %td #{ number_to_currency (line[:net]/100.0), unit: '€' }
+
+    .row
+      .col-xs-6.col-xs-offset-6
+        .box.-padded-v
+          %table.invoice-table
+            %tbody
+              %tr.-hr
+                %td Subtotal
+                %td #{ number_to_currency (@invoice.net_amount/100.0), unit: '€' }
+
+              - @invoice.lines_with_vat.group_by { |l| l[:vat_rate ] }.each do |rate, lines|
+                %tr
+                  %td VAT @ #{ (rate * 100.0).to_i }%
+                  %td #{ number_to_currency ((lines.sum { |l| (l[:gross] - l[:net]) })/100.0), unit: '€' }
+
+              %tr.-totals.-hr
+                %th Total
+                %th #{ number_to_currency (@invoice.gross_amount/100.0), unit: '€' }
+
+    .row
+      .col-xs-12
+        .box.-padded
+          .text.-centered Questions? Send us an email at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

@@ -1,0 +1,34 @@
+%header.-section
+  %a.anchor{title: 'comments', id: 'comments'} &nbsp;
+  %h3.heading Reader responses
+
+.box.-tight
+  %header.-box
+    %h4.heading Write a response to the article
+
+  - if logged_in?
+    = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {class: 'box-form', remote: true} do |f|
+      .field
+        = f.label :nickname
+        = f.text_field :nickname
+
+      .field
+        = f.hidden_field :article_id
+        = f.label :response
+        = f.text_area :content
+
+      %nav.actions= f.submit 'Submit response', class: 'button -standard'
+
+      .submitted-overlay{style: article.comments.where(user: current_user).not_approved.any? ? nil : 'display:none'}
+        :markdown
+          Thanks for your response. Your response is in moderation.
+
+  - else
+    .form-overlay
+      .text.-centered
+        :markdown
+          #{ link_to "Log in", :login } to write a response.
+
+- cache [article.comments.order('published_at asc').approved] do
+  - article.comments.order('published_at asc').approved.each do |comment|
+    = render partial: 'comments/comment', locals: {comment: comment}

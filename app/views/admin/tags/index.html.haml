@@ -1,0 +1,36 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Tags', [:admin, :tags]
+
+    %nav
+      = link_to 'New tag', [:new, :admin, :tag], class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @tags.current_page }/#{ @tags.total_pages }
+      .pagination
+        - if !@tags.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@tags.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@tags.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@tags.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options
+      = form_tag [:admin, :tags], method: 'get', class: 'admin-search-form' do
+        = text_field_tag :query, @filter[:query]
+        = submit_tag raw('⏎'), class: 'button -small'
+
+%table.admin-table
+  %tbody
+    - @tags.each do |tag|
+      %tr
+        %td= link_to truncate(tag.name, length: 92), [:admin, tag]
+        %td <code>/#{ tag.slug }</code>
+        %td= tag.displayable ? 'displayed' : 'hidden'
+        %td= pluralize tag.articles.count, 'article'

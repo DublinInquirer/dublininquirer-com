@@ -1,0 +1,13 @@
+- unless logged_in? and current_user.subscriber?
+  .wrapper{role: 'layout'}
+    .block.-my4.-bg-black
+      .enticement
+        %figure.artwork= image_tag "ads/meath-street.jpg"
+        .text
+          %header.-issue
+            %h3.heading Understand your city
+          .p.-b3.-serif
+            :markdown
+              We do in-depth, shoe-leather reporting about the issues that shape Dublin. We're not funded by advertisers. We're funded by readers like you.
+        %nav.options
+          = link_to raw("Become a subscriber &rarr;"), :products, class: 'button -yellow'

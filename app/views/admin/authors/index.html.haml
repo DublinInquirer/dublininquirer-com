@@ -1,0 +1,34 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Authors', [:admin, :authors]
+
+    %nav
+      = link_to 'New author', [:new, :admin, :author], class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @authors.current_page }/#{ @authors.total_pages }
+      .pagination
+        - if !@authors.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@authors.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@authors.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@authors.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options
+      = form_tag [:admin, :authors], method: 'get', class: 'admin-search-form' do
+        = text_field_tag :query, @filter[:query]
+        = submit_tag raw('⏎'), class: 'button -small'
+
+%table.admin-table
+  %tbody
+    - @authors.each do |author|
+      %tr
+        %td= link_to author.full_name, [:admin, author]
+        %td{width: '150'}= pluralize author.articles.count, 'article'

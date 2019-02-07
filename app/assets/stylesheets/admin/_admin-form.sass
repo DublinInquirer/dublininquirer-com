@@ -1,0 +1,68 @@
+.admin-form
+  border: 1px solid var(--black)
+  margin: 1rem
+  .errors
+    border-bottom: 1px solid var(--black)
+    padding: 1rem
+    li
+      color: var(--red)
+      font-weight: 400
+      font-style: italic
+      &:before
+        content: '– '
+
+  .field
+    border-bottom: 1px solid var(--black)
+    padding: 1rem
+
+    .hint
+      text-align: right
+      font-size: var(--b5)
+      color: var(--grey)
+
+    label
+      display: block
+      font-style: italic
+
+    input, textarea
+      background: var(--faint)
+      border: 0
+      padding: 0.25rem
+      font-size: var(--b3)
+      line-height: 1.4
+      width: 100%
+
+    textarea.article
+      height: 80vh
+      font-size: var(--b3)
+      line-height: 1.5
+      font-family: $serif
+
+    img
+      max-width: 30vw
+      width: auto
+      max-height: 40vh
+      height: auto
+
+  .actions
+    padding: 1rem
+    display: flex
+    flex-direction: row
+    justify-content: flex-end
+
+.input.-image-picker
+  overflow: hidden
+  margin: 0 -1rem
+  .option
+    float: left
+    width: 20%
+    padding: 1rem
+
+.admin-search-form
+  input[type="submit"], button
+    border: 0
+    color: var(--black)
+    background-color: transparent
+    &:hover
+      color: var(--red)
+      background-color: transparent

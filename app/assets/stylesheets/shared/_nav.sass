@@ -1,0 +1,46 @@
+nav.-centered
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+nav.-box
+  margin-top: 0
+  border-top: 1px solid var(--black)
+
+  a, a:link, a:visited
+    display: block
+    color: var(--black)
+    &:hover
+      color: var(--blue)
+
+  &.-tight
+    padding: 1rem
+    flex-direction: row
+    justify-content: center
+    align-items: center
+    text-align: right
+
+nav.-actions
+  padding: var(--baseline)
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: center
+
+  .button + .button
+    margin-left: 1rem
+
+  &.-centered
+    justify-content: center
+
+  &.-right
+    justify-content: flex-end
+
+  &.-full
+    align-items: stretch
+    flex-direction: column
+
+    .button + .button
+      margin-left: 0
+      margin-top: 1rem

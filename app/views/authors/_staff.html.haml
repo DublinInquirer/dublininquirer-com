@@ -1,0 +1,16 @@
+.block.-my2
+  %section.section.staff
+    .details
+      .portrait
+        - if staff[:author].portrait.present?
+          = image_tag staff[:author].portrait.url
+
+      .bio.text
+        :markdown
+          #{ staff[:author].full_name }, #{ staff[:title] }
+
+          #{ raw staff[:author].bio }
+
+        - if staff[:author].articles.published.any?
+          :markdown
+            _#{ link_to raw("Articles by #{ staff[:author].full_name } &rarr;"), staff[:author] }_

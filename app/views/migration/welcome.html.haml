@@ -1,0 +1,22 @@
+- title 'Migrate'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Welcome
+
+%header.header.-section
+  %h1.heading Welcome
+
+.box.-padded-v
+  .text.-static
+    :markdown
+      You're all set.
+
+      Most of our readers read online, so we're focusing on making the experience as good as we can. Your new account and this new site design are part of that.
+
+      We're going to continue improving the site, so we appreciate your patience as we fix bugs, add features, and iterate on the design.
+
+      If you have any problems, suggestions, or just want to talk: email me at [brian@dublininquirer.com](mailto:brian@dublininquirer.com). I'll respond.
+
+%nav.box.-padded-v
+  = link_to "Go to the home page", :root, class: 'button -big'

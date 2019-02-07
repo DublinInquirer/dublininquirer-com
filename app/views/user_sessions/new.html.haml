@@ -1,0 +1,35 @@
+- title 'Log in'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Log in
+
+%header.header.-modal
+  %h1.heading Welcome back
+
+.box.-tight
+  %header.-box.-tight
+    .heading Log in to an existing account
+
+  = form_tag user_sessions_path, method: :post, class: 'box-form' do
+    .field
+      = label_tag :email_address
+      = email_field_tag :email_address, nil, placeholder: 'sean@example.ie'
+
+    .field
+      = label_tag :password
+      = password_field_tag :password, nil, placeholder: 'password123'
+
+    %nav.actions
+      - if @failure
+        .error This email address or password is incorrect.
+      = submit_tag "Log in", class: 'button -standard -big'
+
+.box.-other
+  %header.-box
+    .heading Other options
+  .content
+    %ul.list.-options
+      %li= link_to "Register for a free account", :register, class: 'button -standard'
+      %li= link_to "Reset your password", [:new, :password_reset], class: 'button -standard'
+      %li= link_to "Migrate an account from the old (pre August 2018) site", '/migrate', class: 'button -standard'

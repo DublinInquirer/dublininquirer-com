@@ -1,0 +1,81 @@
+- content_for :breadcrumbs do
+  .current= link_to "Account", :user
+
+%header.header.-modal
+  %h1.heading Your account
+
+.box.-tight
+  %header.-box.-tight
+    %h2.heading Details
+  %div
+    %ul.list.-meta
+      %li
+        %label Name
+        #{ current_user.full_name.present? ? current_user.full_name : "[blank]" }
+      %li
+        %label Email
+        #{ current_user.email_address.present? ? current_user.email_address : "[blank]" }
+      %li
+        %label Nickname for comments
+        #{ current_user.nickname.present? ? current_user.nickname : "[blank]" }
+
+- if current_user.subscription
+  - cache ['user/show', current_user, 'subscription', current_user.subscription] do
+    .box
+      %header.-box
+        %h3.heading Subscription
+      %div
+        %p
+          - if current_user.subscription.plan.is_friend?
+            #{ 'Friend' }:
+          - elsif current_user.subscription.plan.is_patron?
+            #{ 'Patron' }:
+          - else
+            #{ current_user.subscription.plan.product.name }:
+
+          %code #{ number_to_currency((current_user.subscription.plan.amount/100.0), unit: '€') }/#{ current_user.subscription.plan.interval }
+        %p Next billing date is <code>#{ current_user.subscription.current_period_ends_at.strftime('%-d %B') }</code>.
+
+- if current_user.requires_address?
+  .box
+    %header.-box
+      %h3.heading Shipping address
+    %div
+      = raw current_user.address_lines.join('<br>')
+
+- if current_user.subscription && current_user.subscriber?
+  - cache ['user/show', current_user, 'payment', current_user.subscription] do
+    .box
+      %header.-box
+        %h3.heading Payment method
+      %div
+        - if current_user.stripe_default_source.present?
+          %p
+            #{ current_user.stripe_default_source['brand'] }
+          %code #{ '···· ' * 3 }#{ current_user.stripe_default_source['last4'] } (Expires #{ current_user.stripe_default_source['exp_month'].to_s.rjust(2, '0') }/#{ current_user.stripe_default_source['exp_year'] })
+        - else
+          :markdown
+            We don't have a working payment method on file for you. Can you supply one?
+
+- if @invoices.any?
+  .box
+    %header.-box
+      %h3.heading Invoices
+    %div
+      %ol.list
+        - @invoices.each do |invoice|
+          %li= link_to invoice.display_name, invoice, target: "_blank"
+
+.box.-other
+  %header.-box
+    .heading Account options
+  .content
+    %ul.list.-options
+      %li= link_to "Change account details", [:edit, :user], class: 'button -standard'
+      - if current_user.subscription && current_user.subscriber?
+        %li= link_to "Change payment method", [:payment, :user], class: 'button -standard'
+        - if current_user.subscription.changeable?
+          %li= link_to "Change subscription plan", [:subscription, :user], class: 'button -standard'
+        - if current_user.subscription.requires_address?
+          %li= link_to "Change subscription address", [:address, :user], class: 'button -standard'
+      %li= link_to "Log out", :user_session, class: 'button -standard', method: :delete

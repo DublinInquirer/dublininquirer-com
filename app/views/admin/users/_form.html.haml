@@ -1,0 +1,62 @@
+= form_for [:admin, user], html: { class: 'admin-form' } do |f|
+  - if user.errors.any?
+    %ul.errors
+      - user.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :email_address
+      .input
+        = f.text_field :email_address
+    .field
+      = f.label :given_name
+      .input
+        = f.text_field :given_name
+    .field
+      = f.label :surname
+      .input
+        = f.text_field :surname
+    - if !user.persisted?
+      .field
+        = f.label :password
+        .input
+          = f.password_field :password
+
+    - if (user.role != 'superadmin')
+      .field
+        = f.label :role
+        .input
+          = f.select :role, %w(user free staff admin superadmin)
+
+  %fieldset
+    .field
+      = f.label :address_line_1
+      .input
+        = f.text_field :address_line_1
+    .field
+      = f.label :address_line_2
+      .input
+        = f.text_field :address_line_2
+    .field
+      = f.label :city
+      .input
+        = f.text_field :city
+    .field
+      = f.label :county
+      .input
+        = f.text_field :county
+    .field
+      = f.label :post_code
+      .input
+        = f.text_field :post_code
+    .field
+      = f.label :country_code, 'Country'
+      .input
+        = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+    .field
+      = f.label :hub
+      .input
+        = f.select :hub, User.all.pluck(:hub).uniq
+
+  %nav.actions= f.submit 'Save changes', class: 'button'

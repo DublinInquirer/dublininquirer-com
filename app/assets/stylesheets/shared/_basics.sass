@@ -1,0 +1,74 @@
+html
+  font-size: 10px
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    font-size: 12.5px
+  @media screen and (min-width: $large)
+  @media screen and (min-width: $max)
+
+body
+  border-top: 0.75rem solid var(--black)
+  font-family: $sans
+  font-size: var(--b3)
+  line-height: calc(var(--baseline) * 2)
+  background-color: var(--default)
+
+  &.-overlay-open
+    overflow: hidden
+
+::selection
+  color: var(--white)
+  background: var(--blue)
+  text-shadow: none
+  a, a:link, a:visited
+    text-shadow: none
+
+a, a:link, a:visited
+  color: var(--black)
+  text-decoration: none
+  &:hover
+    color: var(--blue)
+    cursor: pointer
+
+  &.-disabled
+    color: var(--grey)
+    &:hover
+      cursor: default
+      color: var(--grey)
+
+big
+  font-weight: 600
+
+h4, h5
+  font-weight: 600
+
+  em
+    font-weight: 400
+
+code
+  font-family: $sans
+  font-weight: 400
+  background: var(--faint)
+
+  &.-quote
+    &:before
+      content: '‘'
+    &:after
+      content: '’'
+
+.hidden
+  display: none
+
+.hidden.md-show
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    display: block
+  @media screen and (min-width: $large)
+  @media screen and (min-width: $max)
+
+.hidden.lg-show
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    display: block
+  @media screen and (min-width: $max)

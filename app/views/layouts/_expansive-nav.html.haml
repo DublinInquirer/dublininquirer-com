@@ -1,0 +1,24 @@
+%div{role: 'overlay', id: 'menu', style: 'display: none'}
+  %div.progress-bar.-fixed &nbsp;
+  %nav.meta-nav.-fixed.-omnipresent
+    .left
+      .icons
+        %a{class: 'icon -close', 'data-action': 'closeOverlay'}
+          %svg{width: "242px", height: "242px", viewBox: "0 0 242 242"}
+            <rect transform="translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) " x="-38.7918472" y="111.208153" width="320" height="20"></rect>
+            <rect transform="translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) " x="-39" y="111" width="320" height="20"></rect>
+
+  %main.sub-omnipresent.overlay-content
+    %ul.list.-expansive
+      %li= link_to "Home", :root
+      - if logged_in?
+        %li= link_to "Account details", :user
+      - if !(logged_in? and current_user.subscriber?)
+        %li= link_to "Subscribe", :products
+      - if logged_in? and current_user.subscriber?
+        %li= link_to "Manage subscription", :user
+      - if !logged_in?
+        %li= link_to "Log in", :login
+      %li= link_to "Give a subscription", :gift_subscriptions
+      %li= link_to "About us", :imprint
+      %li= link_to "Contact us", :contact

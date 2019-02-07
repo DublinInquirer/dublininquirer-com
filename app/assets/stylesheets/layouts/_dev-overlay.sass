@@ -1,0 +1,35 @@
+.grid-overlay
+  position: fixed
+  left: 0
+  right: 0
+  bottom: 0
+  top: 0
+  z-index: 9999
+  pointer-events: none
+
+  .row
+    height: 100vh
+
+    & > div
+      border-left: 1px solid rgba(#ff0000,0.25)
+
+      &:first-child
+        border-left: 0
+
+      .content
+        height: 100vh
+        background: rgba(#ff0000,0.125)
+
+.baseline-overlay
+  pointer-events: none
+  position: absolute
+  left: 0
+  right: 0
+  top: 0.5rem
+  height: 100%
+  z-index: 9999
+  opacity: 0.125
+  pointer-events: none
+  background-image: url(asset-path('baseline.svg'))
+  background-repeat: repeat
+  background-size: auto calc(var(--baseline) * 2)

@@ -1,0 +1,57 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Users', [:admin, :users]
+      = link_to @user.email_address, [:admin, @user]
+
+    %nav
+      = link_to "Edit user", [:edit, :admin, @user], class: 'button'
+      = link_to "Add a fixed subscription", new_admin_user_subscription_path(@user, subscription_type: 'fixed'), class: 'button'
+      = link_to "Add a Stripe subscription", new_admin_user_subscription_path(@user, subscription_type: 'stripe'), class: 'button'
+      - if current_user.is_superadmin?
+        = link_to "Impersonate this user", [:impersonate, :admin, @user], class: 'button', method: :put
+
+.admin-details
+  %dl.admin-data
+    %dt Email address
+    %dd= @user.email_address
+
+    %dt Name
+    %dd= @user.full_name.present? ? @user.full_name : '[blank]'
+
+    %dt Comment nickname
+    %dd= @user.nickname.present? ? @user.nickname : '[blank]'
+
+    %dt Wants newsletter?
+    %dd= @user.subscribed_weekly ? 'Yes' : 'No'
+
+    %dt Role
+    %dd= @user.role
+
+    - if @user.created_at < Date.new(2018,9,1)
+      %dt Migrated?
+      %dd= @user.needs_setup? ? 'No' : 'Yes'
+
+    - if @user.has_address?
+      %dt User address
+      %dd
+        - if @user.address_lines.any?
+          = raw @user.address_lines.join("<br>")
+        - else
+          [blank]
+
+      %dt Hub
+      %dd
+        - if @user.hub.present?
+          = @user.hub
+        - else
+          [blank]
+
+    %dt Subscriptions
+    %dd
+      %ul.admin-list.-subscriptions.-hyphenated
+        - @user.subscriptions.order('created_at desc').each do |subscription|
+          %li
+            = link_to [:admin, subscription] do
+              = subscription.plan.product.name
+              (#{subscription.human_status})

@@ -1,0 +1,29 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Authors', [:admin, :authors]
+      = link_to @author.full_name, [:admin, @author]
+
+    %nav
+      = link_to "Edit", [:edit, :admin, @author], class: 'button'
+
+%dl.admin-data
+  %dt Portrait
+  %dd
+    - if @author.portrait.present?
+      = image_tag @author.portrait.url
+  %dt Name
+  %dd= @author.full_name
+  %dt Bio
+  %dd
+    :markdown
+      #{ raw @author.bio }
+
+- cache ['admin', @author, @author.articles] do
+  %table.admin-table
+    %tbody
+      - @author.articles.each do |article|
+        - cache ['admin', @author, article, 'row'] do
+          %tr
+            %td= link_to truncate(article.title, length: 92), [:admin, article]
+            %td{width: '150'}= article.is_published? ? article.issue_date.strftime('%e %b %Y') : '-'

@@ -1,0 +1,53 @@
+.flag-ears
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+  border-bottom: 2px solid var(--black)
+  padding: 2rem 1rem
+
+  .ear
+    display: none
+    width: 0
+    padding: 1rem 0
+    margin: 1.25rem 0
+    align-self: stretch
+    border-color: var(--black)
+    border-style: solid
+    border-width: 1px
+
+  .flag
+    position: relative
+    justify-self: stretch
+    text-align: center
+    padding-top: 0.5rem
+
+    .strapline
+      display: none
+      text-align: center
+      text-transform: uppercase
+      position: absolute
+      left: 0
+      right: 0
+      top: -3.25rem
+      span
+        margin: 0 0.075rem
+        padding: 0 0.25rem
+        background-color: var(--default)
+        line-height: calc(var(--baseline) * 1.5)
+        font-weight: 600
+        font-size: var(--b4)
+
+  @media screen and (min-width: $small)
+    border-bottom: 1px solid var(--black)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)
+    justify-content: space-between
+    padding: 0 2rem
+
+    .ear
+      display: block
+      width: 20rem
+    .flag
+      .strapline
+        display: block

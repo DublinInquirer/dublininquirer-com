@@ -1,0 +1,13 @@
+.meta
+  .byline= link_to article.author.full_name, article.author
+
+  - if article.issue_date.present?
+    .date
+      #{ link_to article.issue_date.strftime('%e %B %Y'), article.issue }
+
+.share
+  %ul.list.-nav
+    %li= link_to "Facebook", "http://www.facebook.com/share.php?u=#{ "https://www.dublininquirer.com#{ article.path }" }"
+    %li= link_to "Twitter", "https://twitter.com/intent/tweet?text=#{ article.title }&url=#{ "https://www.dublininquirer.com#{ article.path }" }"
+    - if article.commentable?
+      %li= link_to "Comment", "#{ article.path }#comments"

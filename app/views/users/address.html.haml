@@ -1,0 +1,32 @@
+- content_for :breadcrumbs do
+  = link_to "Account", :user
+  .current Update your address
+
+%header.header.-modal
+  %h1.heading Update your address
+
+.box.-tight
+  = form_for @user, url: [:address, :user], html: {method: :put, class: 'box-form'} do |f|
+    .field
+      = f.label :address_line_1
+      = f.text_field :address_line_1
+    .field
+      = f.label :address_line_2
+      = f.text_field :address_line_2
+    .field
+      = f.label :city
+      = f.text_field :city
+    .field.twofer
+      .field
+        = f.label :county
+        = f.text_field :county
+      .field
+        = f.label :post_code
+        = f.text_field :post_code
+    .field.-select
+      = f.label :country_code, 'Country'
+      = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+
+    %nav.actions
+      %p.status
+      = f.submit 'Save changes', class: 'button -standard'

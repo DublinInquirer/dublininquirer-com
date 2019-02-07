@@ -1,0 +1,15 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Landing pages', [:admin, :landing_pages]
+      = link_to @landing_page.name, [:admin, @landing_page]
+
+    %nav
+      = link_to "Edit", [:edit, :admin, @landing_page], class: 'button'
+
+.admin-details
+  %dl.admin-data
+    %dt Name
+    %dd= @landing_page.name
+    %dt Slug
+    %dd= @landing_page.slug

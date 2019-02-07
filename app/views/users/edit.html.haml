@@ -1,0 +1,34 @@
+- content_for :breadcrumbs do
+  = link_to "Account", :user
+  .current Change details
+
+%header.header.-modal
+  %h1.heading Change account details
+
+.box.-tight
+  = form_for @user, html: {class: 'box-form'} do |f|
+    .field
+      = f.label :given_name, 'Name'
+      .twofer
+        = f.text_field :given_name, placeholder: 'First'
+        = f.text_field :surname, placeholder: 'Surname'
+      - if @user.errors[:given_name].any? or @user.errors[:surname].any?
+        .error Nickname #{ (@user.errors[:given_name] + @user.errors[:surname]).first }.
+
+    .field
+      = f.label :email_address
+      = f.email_field :email_address, placeholder: 'aoife@example.ie'
+      - if @user.errors[:email_address].any?
+        .error Email address #{ @user.errors[:email_address].first }.
+
+    .field
+      = f.label :nickname, 'Nickname for comments'
+      = f.text_field :nickname
+      - if @user.errors[:nickname].any?
+        .error Nickname #{ @user.errors[:nickname].first }.
+      - else
+        .hint This will be displayed publicly when you comment on articles.
+
+    %nav.actions
+      %p.status
+      = f.submit 'Save changes', class: 'button -standard'

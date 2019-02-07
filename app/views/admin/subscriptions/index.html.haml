@@ -1,0 +1,43 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Subscriptions', [:admin, :subscriptions]
+
+    %nav
+      = link_to "Export shipping list", admin_subscriptions_path(format: 'csv'), class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @subscriptions.current_page }/#{ @subscriptions.total_pages }
+      .pagination
+        - if !@subscriptions.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@subscriptions.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@subscriptions.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@subscriptions.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options
+      = form_tag [:admin, :subscriptions], method: 'get', class: 'admin-search-form' do
+        = text_field_tag :query, @filter[:query]
+        = submit_tag raw('⏎'), class: 'button -small'
+
+%table.admin-table
+  %tbody
+    - @subscriptions.each do |subscription|
+      - cache ['admin', subscription, 'row'] do
+        %tr
+          %td= link_to "#{ subscription.full_name.present? ? subscription.full_name : '[blank]' }", [:admin, subscription]
+          %td{width: '150'}= subscription.human_status
+          %td{width: '300'}
+            - if subscription.plan.present?
+              #{ subscription.plan.human_name }
+              - if subscription.is_stripe?
+                (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
+            - else
+              &mdash;
+          %td{width: '150'}= subscription.created_at.strftime('%e %b %Y')

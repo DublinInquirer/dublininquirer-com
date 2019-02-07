@@ -1,0 +1,23 @@
+- cache [article, 'small'] do
+  = link_to article.path, class: ['excerpt', '-small'] do
+    .illustration
+      %figure.artwork
+        - if article.featured_artwork.image.present?
+          = image_tag article.featured_artwork.image.large.url
+
+      .meta
+        .byline #{ article.author.try(:full_name) }
+        .category #{ display_category(article.category) }
+
+    .content
+      %header
+        %h3.headline= article.title
+
+      .more
+        .meta
+          .byline #{ article.author.try(:full_name) }
+          .category #{ display_category(article.category) }
+
+        .text
+          :markdown
+            #{ raw article.excerpt }

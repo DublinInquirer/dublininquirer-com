@@ -1,0 +1,6 @@
+%ol.list.-delineated
+  - @recent_podcasts.each do |podcast|
+    %li
+      = link_to podcast.path do
+        #{ truncate(podcast.title, length: 34) }
+        <em class="c -grey">&ndash; #{ podcast.issue_date.strftime('%d %b') }</em>

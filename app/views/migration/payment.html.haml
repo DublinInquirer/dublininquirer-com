@@ -1,0 +1,35 @@
+- title 'Migrate'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Update payment method
+
+%header.header.-section
+  %h1.heading Update your payment method
+
+.box.-padded-v
+  .text
+    :markdown
+      We've been having trouble charging your card. Please enter your credit/debit card details below to avoid an interruption in your subscription.
+
+.box
+  = form_for @user, url: :migrate_payment_save, method: :put, html: {class: 'modal-form subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
+    .error{style: 'display:none;'}
+      .message &nbsp; |f|
+    .box.-padded.-apart
+      .modal-form_fields
+        .modal-form_field
+          %label Card number
+          #stripe-form_card-number.field.empty
+
+        .modal-form_field.-double
+          .modal-form_field
+            %label Expiration date
+            #stripe-form_card-expiry.field.empty
+          .modal-form_field
+            %label Security code
+            #stripe-form_card-cvc.field.empty
+
+    .modal-form_actions
+      %p.status
+      = f.submit 'Save', class: 'button'

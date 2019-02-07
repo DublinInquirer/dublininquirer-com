@@ -1,0 +1,59 @@
+= form_for [:admin, article], html: { class: 'admin-form' } do |f|
+  - if article.errors.any?
+    %ul.errors
+      - article.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :title, 'Headline'
+      .input= f.text_field :title
+    .field
+      = f.label :excerpt_markdown, 'Excerpt'
+      .input= f.text_area :excerpt_markdown
+      .hint{'data-bind': 'charCount'}
+    .field
+      = f.label :category
+      .input= f.select :category, Article.category_options
+    .field
+      = f.label :template
+      .input= f.select :template, Article.template_options
+    .field
+      = f.label :tag_ids, 'Tags'
+      .input= f.select :tag_ids, Tag.order('name asc').map { |a| [a.name, a.id] }, {}, multiple: true
+    .field
+      = f.label :issue_id, 'Issue'
+      .input= f.select :issue_id, Issue.order('issue_date desc').map { |i| [i.issue_date, i.id] }, include_blank: true
+    .field
+      = f.label :author_id, 'Author'
+      .input= f.select :author_id, Author.order('full_name asc').map { |a| [a.full_name, a.id] }, include_blank: true
+    .field
+      = f.label :featured_artwork_id, 'Featured image'
+      .input.-image-picker
+        - article.artworks.each do |artwork|
+          %div.option
+            %label
+              = f.radio_button :featured_artwork_id, artwork.id, checked: (artwork == article.featured_artwork)
+              = image_tag artwork.image.small.url
+
+  .actions= f.submit 'Save', class: 'button'
+
+:coffee
+  for charCounter in $('[data-bind="charCount"]')
+    el = $(charCounter)
+    field = $(el.parents('.field:first'))
+    hint = $('.hint', field)
+    input = $('textarea:first', field)
+
+    count = input.val().length
+    if count < 1
+      hint.text "Ideal excerpt length: 140-160 characters."
+    else if count > 0
+      hint.text count + " characters. Ideal excerpt length: 140-160 characters."
+
+    input.on 'keyup', ->
+      count = input.val().length
+      if count < 1
+        hint.text "Ideal excerpt length: 140-160 characters."
+      else if count > 0
+        hint.text count + " characters. Ideal excerpt length: 140-160 characters."

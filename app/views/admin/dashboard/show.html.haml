@@ -1,0 +1,27 @@
+.container
+  .row
+    .col-xs-6
+      %h2 Current issue
+      - if @current_issue.any?
+        %table.admin-table
+          - @current_issue.each do |article|
+            %tr
+              %td= link_to article.title, [:admin, article]
+      - else
+        .empty
+          :markdown
+            Nothing 😬
+
+    .col-xs-6
+      %h2 Comments in moderation
+      - if @unapproved_comments.any?
+        %table.admin-table
+          - @unapproved_comments.each do |comment|
+            %tr
+              %td
+                = link_to [:admin, comment] do
+                  Comment on #{ comment.article.title }
+      - else
+        .empty
+          :markdown
+            Nothing to moderate!

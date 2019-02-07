@@ -1,0 +1,34 @@
+.staff
+  display: flex
+  flex-direction: column
+  justify-content: stretch
+  align-items: stretch
+  font-size: var(--b3)
+  line-height: 1.4
+  font-family: $serif
+
+  .portrait
+    flex: none
+    width: 9rem
+    height: 9rem
+    background: var(--faint)
+
+    img
+      width: 9rem
+      height: 9rem
+      object-fit: cover
+
+  .details
+    display: flex
+    flex-direction: row-reverse
+    justify-content: stretch
+    align-items: flex-start
+    padding: 1rem 0
+
+  .bio
+    flex: 1
+    padding-right: 10%
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+  @media screen and (min-width: $large)

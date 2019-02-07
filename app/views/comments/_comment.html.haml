@@ -1,0 +1,16 @@
+- cache [comment, 'partial'] do
+  .box
+    %header.-box
+      %a.anchor{id: "comment-#{ comment.id }"}
+      .meta
+        .name= comment.display_name
+        .date= comment.created_at.strftime('%e %B at %H:%M')
+    .content
+      .text.p.-serif
+        - if comment.parent.present?
+          :markdown
+            #{ link_to "@#{ comment.parent.display_name }", "#comment-#{ comment.parent.id }" }:
+            #{ comment.content_markdown }
+        - else
+          :markdown
+            #{ comment.content_markdown }

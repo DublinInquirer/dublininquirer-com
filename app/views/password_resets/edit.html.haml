@@ -1,0 +1,30 @@
+- title 'Reset password'
+- noindex true
+
+- content_for :breadcrumbs do
+  .current Reset password
+
+%header.header.-modal
+  %h1.heading Set a new password
+
+.box.-tight
+  = form_for @user, url: password_reset_path(@token), html: {method: :put, class: 'box-form'} do |f|
+    .field
+      = f.label :email_address
+      = f.email_field :email_address, disabled: true
+
+    .field
+      = f.label :password
+      = f.password_field :password
+
+    %nav.actions
+      = submit_tag "Save", class: 'button -standard -big'
+
+.box.-other
+  %header.-box
+    .heading Other options
+  .content
+    %ul.list.-options
+      %li= link_to "Register for a free account", :register, class: 'button -standard'
+      %li= link_to "Log in to an existing account", :login, class: 'button -standard'
+      %li= link_to "Migrate an account from the old site", '/migrate', class: 'button -standard'

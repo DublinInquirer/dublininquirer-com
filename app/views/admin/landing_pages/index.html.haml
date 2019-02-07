@@ -1,0 +1,31 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Landing pages', [:admin, :landing_pages]
+    %nav
+      = link_to 'New landing page', [:new, :admin, :landing_page], class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @landing_pages.current_page }/#{ @landing_pages.total_pages }
+      .pagination
+        - if !@landing_pages.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@landing_pages.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@landing_pages.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@landing_pages.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options &nbsp;
+
+%table.admin-table
+  %tbody
+    - @landing_pages.each do |landing_page|
+      %tr
+        %td= link_to truncate(landing_page.name, length: 92), [:admin, landing_page]
+        %td <code>/#{ landing_page.slug }</code>
+        %td= pluralize landing_page.subscriptions.count, 'subscription'

@@ -1,0 +1,38 @@
+.icon
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 0.5rem
+  width: 3.5rem
+  height: 3.5rem
+  svg
+    display: block
+    width: 80%
+    height: auto
+
+  &.-large
+    width: 4.25rem
+    height: 4.25rem
+    svg
+      width: 65%
+
+  &.-close
+    svg
+      width: 50%
+
+  &.-home
+    svg
+      display: block
+      width: 75%
+
+a, a:link, a:visited
+  &.icon
+    &:hover
+      cursor: pointer
+      background-color: var(--blue)
+      svg
+        fill: var(--default)
+        stroke-color: var(--default)
+        rect
+          fill: var(--default)
+          stroke-color: var(--default)

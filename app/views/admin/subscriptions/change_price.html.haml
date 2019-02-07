@@ -1,0 +1,18 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Subscriptions', [:admin, :users]
+      = link_to @subscription.user.email_address, [:admin, @subscription]
+      = link_to 'Change price', [:change_price, :admin, @subscription]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @subscription], class: 'button -cancel'
+      = link_to "Save", [:admin, @subscription], class: 'button', 'data-action': 'submitForm'
+
+= form_tag [:change_price, :admin, @subscription], method: 'put', class: 'admin-form' do
+  .field
+    = label_tag :price, 'New price in cents'
+    = text_field_tag :price, @subscription.plan.amount
+
+  %nav.actions
+    = submit_tag 'Change price', class: 'button'

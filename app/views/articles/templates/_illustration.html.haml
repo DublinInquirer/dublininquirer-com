@@ -1,0 +1,18 @@
+.wrapper.-small{role: 'layout'}
+  %article.article.-illustration{lang: 'en'}
+    - if article.featured_artwork.present?
+      %figure.artwork.-featured
+        = image_tag article.featured_artwork.image.massive.url
+        %figcaption= article.featured_artwork.caption
+
+    %main
+      %header
+        - if article.category.downcase == 'cover'
+          %h1.headline Print edition cover
+        - elsif article.category.downcase != 'cartoon'
+          %h1.headline= raw article.title
+
+        = render partial: 'articles/meta', locals: {article: article}
+
+      .description
+        = raw render_content(article.content)

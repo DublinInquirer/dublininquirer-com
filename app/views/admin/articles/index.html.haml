@@ -1,0 +1,36 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Articles', [:admin, :articles]
+
+    %nav
+      = link_to 'New article', [:new, :admin, :article], class: 'button'
+
+  %div.filters
+    .page
+      .current #{ @articles.current_page }/#{ @articles.total_pages }
+      .pagination
+        - if !@articles.first_page?
+          = link_to '<', request.query_parameters.merge(p: (@articles.current_page - 1))
+        - else
+          %a.-disabled
+            <
+        - if !@articles.last_page?
+          = link_to '>', request.query_parameters.merge(p: (@articles.current_page + 1))
+        - else
+          %a.-disabled
+            >
+
+    .options
+      = form_tag [:admin, :articles], method: 'get', class: 'admin-search-form' do
+        = text_field_tag :query, @filter[:query]
+        = submit_tag raw('⏎'), class: 'button -small'
+
+%table.admin-table
+  %tbody
+    - @articles.each do |article|
+      - cache ['admin', article, 'row'] do
+        %tr
+          %td= link_to truncate(article.title, length: 92), [:admin, article]
+          %td{width: '150'}= article.is_published? ? 'published' : article.status
+          %td{width: '150'}= article.issue_date.present? ? article.issue_date.strftime('%e %b %Y') : '-'

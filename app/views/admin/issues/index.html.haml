@@ -1,0 +1,30 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Issues', [:admin, :issues]
+
+    %nav &nbsp;
+
+  %div.filters
+    .page
+      .current #{ @issues.current_page }/#{ @issues.total_pages }
+      .pagination
+        - if !@issues.first_page?
+          = link_to '<', p: (@issues.current_page - 1)
+        - else
+          %a.-disabled
+            <
+        - if !@issues.last_page?
+          = link_to '>', p: (@issues.current_page + 1)
+        - else
+          %a.-disabled
+            >
+
+%table.admin-table
+  %tbody
+    - @issues.each do |issue|
+      - cache ['admin', issue, 'row'] do
+        %tr
+          %td= link_to issue.issue_date, [:admin, issue]
+          %td{width: '300'}= pluralize issue.articles.count, 'article'
+          %td{width: '150'}= issue.published ? 'published' : '-'

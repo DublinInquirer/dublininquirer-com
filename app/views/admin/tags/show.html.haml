@@ -1,0 +1,27 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Tags', [:admin, :tags]
+      = link_to @tag.name, [:admin, @tag]
+
+    %nav
+      - if @tag.displayable
+        = link_to "Hide", [:hide, :admin, @tag], class: 'button', method: :put
+      - else
+        = link_to "Display", [:display, :admin, @tag], class: 'button', method: :put
+      = link_to "Delete", [:admin, @tag], class: 'button', 'data-confirm': "This can't be undone! Are you 100% sure?", method: 'delete'
+
+%dl.admin-data
+  %dt Name
+  %dd= @tag.name
+  %dt Slug
+  %dd= @tag.slug
+
+- cache ['admin', @tag, @tag.articles] do
+  %table.admin-table
+    %tbody
+      - @tag.articles.each do |article|
+        - cache ['admin', @tag, article, 'row'] do
+          %tr
+            %td= link_to truncate(article.title, length: 92), [:admin, article]
+            %td{width: '150'}= article.is_published? ? article.issue_date.strftime('%e %b %Y') : '-'

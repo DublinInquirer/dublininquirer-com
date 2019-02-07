@@ -1,0 +1,77 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Subscriptions', [:admin, :subscriptions]
+      = link_to @subscription.user.try(:email_address), [:admin, @subscription]
+
+    %nav
+      - if @subscription.is_stripe?
+        - if @subscription.is_cancelling?
+          = link_to "Cancel cancellation", [:cancel, :admin, @subscription], class: 'button', method: 'put'
+        - elsif !@subscription.is_cancelled?
+          - if @subscription.product.is_active_digital?
+            = link_to "Switch to print", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: false), class: 'button', method: 'put'
+          - elsif @subscription.product.is_active_print?
+            = link_to "Switch to digital-only", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
+          - else
+            = link_to "Switch to print (base price)", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: false), class: 'button', method: 'put'
+            = link_to "Switch to print (current price)", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: true), class: 'button', method: 'put'
+            = link_to "Switch to digital-only (base price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
+            = link_to "Switch to digital-only (current price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: true), class: 'button', method: 'put'
+
+          = link_to "Change subscription price", [:change_price, :admin, @subscription], class: 'button', method: 'get'
+          = link_to "Change billing day", [:change_day, :admin, @subscription], class: 'button', method: 'get'
+          = link_to "Cancel at period end", [:cancel, :admin, @subscription], class: 'button', method: 'put'
+
+      - elsif !@subscription.is_cancelled?
+        = link_to "Edit subscription", [:edit, :admin, @subscription], class: 'button'
+        = link_to "Cancel subscription now", [:cancel, :admin, @subscription], class: 'button', method: 'put'
+
+
+%dl.admin-data
+  %dt User
+  %dd
+    - if @subscription.user.present?
+      = link_to @subscription.user.email_address, [:admin, @subscription.user]
+    - else
+      [blank]
+
+  %dt Status
+  %dd #{ @subscription.status } #{ @subscription.is_cancelling? ? "(cancelling)" : nil}
+
+  %dt Billing price
+  %dd
+    - if @subscription.is_stripe?
+      = number_to_currency((@subscription.plan.amount/100.0), unit: '€')
+    - else
+      [NA]
+
+  %dt Base price
+  %dd= number_to_currency((@subscription.product.base_price/100.0), unit: '€')
+
+  %dt Billing interval
+  %dd
+    - if @subscription.is_stripe?
+      = @subscription.plan.interval
+    - else
+      [NA]
+
+  %dt Created at
+  %dd= @subscription.created_at
+
+  %dt Next billing date
+  %dd
+    - if @subscription.is_stripe?
+      = @subscription.current_period_ends_at
+    - else
+      [NA]
+
+  %dt= (@subscription.ended_at.present? && (@subscription.ended_at > Time.zone.now)) ? 'Ends at' : 'Ended at'
+  %dd
+    - if @subscription.ended_at.present?
+      = @subscription.ended_at
+    - else
+      [blank]
+
+  %dt Plan
+  %dd= @subscription.plan.product.name

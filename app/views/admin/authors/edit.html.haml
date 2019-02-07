@@ -1,0 +1,12 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Authors', [:admin, :authors]
+      = link_to @author.full_name, [:admin, @author]
+      = link_to 'Edit', [:edit, :admin, @author]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @author], class: 'button -cancel'
+      = link_to "Save", [:admin, @author], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/authors/form', locals: {author: @author}

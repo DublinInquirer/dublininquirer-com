@@ -1,0 +1,11 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Article', [:admin, @article]
+      = link_to 'New image', [:new, :admin, @article, :artwork]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @article], class: 'button -cancel'
+      = link_to "Save", [:admin, @article], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/artworks/form', locals: {artwork: @artwork}
