@@ -17,7 +17,7 @@ Seed the db and setup the Stripe plans:
         $ rake db:seed
         $ rake stripe:setup
 
-Set up your own credentials (see `/config/credentials.yml`) or contact me for the master key:
+Set up your own credentials file (see `/config/credentials.yml.example`) or contact me for the master key:
 
         $ rails credentials:edit
 
