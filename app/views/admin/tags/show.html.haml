@@ -22,7 +22,7 @@
 - cache ['admin', @tag, @tag.articles] do
   %table.admin-table
     %tbody
-      - @tag.articles.each do |article|
+      - @tag.articles.by_date.each do |article|
         - cache ['admin', @tag, article, 'row'] do
           %tr
             %td= link_to truncate(article.title, length: 92), [:admin, article]
