@@ -1,0 +1,19 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Tags', [:admin, :tags]
+      = link_to "Merge #{ @tag.name }", [:merge, :admin, @tag]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, @tag], class: 'button -cancel'
+      = link_to "Save", [:merge, :admin, @tag], class: 'button', 'data-action': 'submitForm'
+
+= form_tag [:merge, :admin, @tag], class: 'admin-form' do
+  %fieldset
+    .field
+      %label Merge into:
+      .input
+        %select#merge_tag_id{name: 'destination_id'}
+
+  .actions
+    = submit_tag 'Save', class: 'button'

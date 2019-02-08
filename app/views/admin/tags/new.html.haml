@@ -8,4 +8,4 @@
       = link_to "Cancel without saving", [:admin, :tags], class: 'button -cancel'
       = link_to "Save", [:admin, :tags], class: 'button', 'data-action': 'submitForm'
 
-= render partial: 'admin/tags/form', locals: {tag: @taglanding
+= render partial: 'admin/tags/form', locals: {tag: @tag}

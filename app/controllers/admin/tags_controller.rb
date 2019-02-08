@@ -50,6 +50,17 @@ class Admin::TagsController < Admin::ApplicationController
     end
   end
 
+  def merge
+    @tag = Tag.find_by(slug: params[:id])
+    if request.method.downcase.to_sym == :post
+      @destination_tag = Tag.find(params[:destination_id])
+      @tag.merge_into!(@destination_tag)
+      redirect_to [:admin, @destination_tag]
+    else
+      render :merge
+    end
+  end
+
   def hide
     @tag = Tag.find_by(slug: params[:id])
     @tag.displayable = false

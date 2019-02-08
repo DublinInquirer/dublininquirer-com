@@ -149,6 +149,8 @@ Rails.application.routes.draw do
         get :autocomplete
       end
       member do
+        get :merge
+        post :merge
         put :display
         put :hide
       end

@@ -20,7 +20,7 @@
       .input= f.select :template, Article.template_options
     .field
       = f.label :tag_ids, 'Tags'
-      .input= f.select :tag_ids, Tag.order('name asc').map { |a| [a.name, a.id] }, {}, multiple: true
+      .input= f.select :tag_ids, article.tags.order('name asc').map { |a| [a.name, a.id] }, {}, multiple: true
     .field
       = f.label :issue_id, 'Issue'
       .input= f.select :issue_id, Issue.order('issue_date desc').map { |i| [i.issue_date, i.id] }, include_blank: true

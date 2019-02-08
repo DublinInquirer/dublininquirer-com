@@ -19,6 +19,13 @@ class Tag < ApplicationRecord
     [:name, :slug]
   end
 
+  def merge_into!(destination_tag)
+    articles.each do |article|
+      article.update(tag_ids: article.tag_ids - [self.id] + [destination_tag.id])
+    end
+    self.destroy!
+  end
+
   private
 
   def generate_slug

@@ -9,6 +9,7 @@
         = link_to "Hide", [:hide, :admin, @tag], class: 'button', method: :put
       - else
         = link_to "Display", [:display, :admin, @tag], class: 'button', method: :put
+      = link_to "Merge", [:merge, :admin, @tag], class: 'button'
       = link_to "Edit", [:edit, :admin, @tag], class: 'button'
       = link_to "Delete", [:admin, @tag], class: 'button', 'data-confirm': "This can't be undone! Are you 100% sure?", method: 'delete'
 
