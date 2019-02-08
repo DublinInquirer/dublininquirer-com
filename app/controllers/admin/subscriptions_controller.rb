@@ -26,7 +26,7 @@ class Admin::SubscriptionsController < Admin::ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        send_data @subscriptions.needs_shipping.to_csv, filename: "subscriptions-#{Date.today}.csv"
+        send_data Subscription.needs_shipping.to_csv, filename: "subscriptions-#{Date.today}.csv"
       end
     end
   end
