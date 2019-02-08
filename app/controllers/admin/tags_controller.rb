@@ -37,6 +37,19 @@ class Admin::TagsController < Admin::ApplicationController
     end
   end
 
+  def edit
+    @tag = Tag.find_by(slug: params[:id])
+  end
+
+  def update
+    @tag = Tag.find_by(slug: params[:id])
+    if @tag.update(tag_params)
+      redirect_to [:admin, @tag]
+    else
+      render :edit
+    end
+  end
+
   def hide
     @tag = Tag.find_by(slug: params[:id])
     @tag.displayable = false
@@ -52,10 +65,13 @@ class Admin::TagsController < Admin::ApplicationController
   end
 
   def destroy
-
+    @tag = Tag.find_by(slug: params[:id])
+    @tag.destroy!
+    redirect_to [:admin, :tags]
   end
 
   def tag_params
     params.require(:tag).permit(:name, :displayable)
   end
 end
+

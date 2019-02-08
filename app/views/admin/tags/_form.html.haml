@@ -1,0 +1,12 @@
+= form_for [:admin, tag], html: { class: 'admin-form' } do |f|
+  - if tag.errors.any?
+    %ul.errors
+      - tag.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :name
+      = f.text_field :name
+
+  .actions= f.submit 'Save', class: 'button'

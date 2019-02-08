@@ -3,6 +3,7 @@ class Tag < ApplicationRecord
   validates :slug, uniqueness: true
 
   after_validation :generate_slug
+  before_destroy :remove_from_articles
 
   scope :by_name, -> { order('name asc') }
 
@@ -22,5 +23,11 @@ class Tag < ApplicationRecord
 
   def generate_slug
     self.slug = self.name.parameterize
+  end
+
+  def remove_from_articles
+    articles.each do |article|
+      article.update(tag_ids: article.tag_ids - [self.id])
+    end
   end
 end

@@ -1,0 +1,11 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Tags', [:admin, :tags]
+      = link_to 'New tag', [:new, :admin, :tag]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, :tags], class: 'button -cancel'
+      = link_to "Save", [:admin, :tags], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/tags/form', locals: {tag: @taglanding
