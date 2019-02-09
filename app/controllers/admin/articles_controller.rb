@@ -14,9 +14,9 @@ class Admin::ArticlesController < Admin::ApplicationController
     else
       case @sort
       when 'headline'
-        Article.by_title.limit(100).page(params[:p]).per(25)
+        Article.by_title.page(params[:p]).per(25)
       when 'date'
-        Article.by_date.limit(100).page(params[:p]).per(25)
+        Article.by_date.page(params[:p]).per(25)
       else
         raise "Unsupported sort option: #{ @sort }"
       end
