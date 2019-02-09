@@ -8,6 +8,8 @@ class Comment < ApplicationRecord
   belongs_to :parent, class_name: "Comment", optional: true
   has_many :children, class_name: "Comment", foreign_key: 'parent_id'
 
+  before_create :preapprove_if_staff
+
   scope :not_spam, -> { where(marked_as_spam: false) }
   scope :approved, -> { where(status: 'approved') }
   scope :not_approved, -> { where(published_at: nil) }
@@ -64,5 +66,15 @@ class Comment < ApplicationRecord
     self.marked_as_spam = true
     self.save!
     self.user.ban! if self.user.present?
+  end
+
+  private
+
+  def preapprove_if_staff
+    return true unless user.present?
+    if user.is_staff?
+      self.status = 'approved'
+    end
+    true
   end
 end

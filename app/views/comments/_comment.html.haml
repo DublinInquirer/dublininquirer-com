@@ -1,5 +1,5 @@
 - cache [comment, 'partial'] do
-  .box
+  .box.-oh
     %header.-box
       %a.anchor{id: "comment-#{ comment.id }"}
       .meta
@@ -10,7 +10,7 @@
         - if comment.parent.present?
           :markdown
             #{ link_to "@#{ comment.parent.display_name }", "#comment-#{ comment.parent.id }" }:
-            #{ comment.content_markdown }
+            #{ render_comment comment.content_markdown }
         - else
           :markdown
-            #{ comment.content_markdown }
+            #{ render_comment comment.content_markdown }
