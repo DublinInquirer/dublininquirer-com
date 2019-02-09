@@ -68,6 +68,10 @@ class User < ApplicationRecord
     save!
   end
 
+  def can_comment?(article)
+    article.comments.where(user: self).not_approved.any?
+  end
+
   def has_address?
     self.address_lines.many?
   end

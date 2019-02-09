@@ -1,6 +1,6 @@
 %header.-section
-  %a.anchor{title: 'comments', id: 'comments'} &nbsp;
-  %h3.heading Reader responses
+  %h3.heading
+    %a.anchor{title: 'comments', id: 'comments'} Reader responses
 
 .box.-tight
   %header.-box
@@ -19,7 +19,7 @@
 
       %nav.actions= f.submit 'Submit response', class: 'button -standard'
 
-      .submitted-overlay{style: article.comments.where(user: current_user).not_approved.any? ? nil : 'display:none'}
+      .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
         :markdown
           Thanks for your response. Your response is in moderation.
 

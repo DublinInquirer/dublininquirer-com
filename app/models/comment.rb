@@ -74,6 +74,7 @@ class Comment < ApplicationRecord
     return true unless user.present?
     if user.is_staff?
       self.status = 'approved'
+      self.published_at = Time.now.utc
     end
     true
   end

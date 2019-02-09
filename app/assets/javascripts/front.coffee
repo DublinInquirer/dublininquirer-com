@@ -10,6 +10,11 @@ $(document).ready ->
     else
       $('.meta-nav.-fixed').removeClass('-open')
 
+  $('[data-behaviour="scroll"]').on 'click', (e) ->
+    targetOffset = $($(e.currentTarget).attr('href')).offset().top
+    $('html, body').animate({scrollTop: (targetOffset - 80)});
+
+
   player = new Plyr('#player', controls: [
     'play'
     'progress'

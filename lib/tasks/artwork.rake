@@ -1,7 +1,8 @@
 namespace :artwork do
   task recreate_versions: :environment do
     (Artwork.count / 50).times do |i|
-      Artwork.order('created_at asc').page(i + 1).per(50).each do |artwork|
+      Raven.capture_message 'Starting artwork page', extra: { page: (i + 1).to_s }
+      Artwork.order('created_at desc').page(i + 1).per(50).each do |artwork|
         begin
           artwork.image.recreate_versions!
         rescue CarrierWave::ProcessingError
