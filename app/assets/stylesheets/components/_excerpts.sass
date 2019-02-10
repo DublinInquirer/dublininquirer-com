@@ -87,6 +87,7 @@
   flex-direction: column
   .content, .illustration
     flex-grow: 0
+    flex-basis: auto
 
   .illustration
     position: relative
@@ -152,6 +153,10 @@
 =result-md
   flex-direction: column
   justify-content: space-between
+
+  .illustration, .content
+    flex-basis: auto
+
   .headline
     font-size: var(--b1)
     line-height: 1.3em

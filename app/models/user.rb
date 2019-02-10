@@ -296,8 +296,12 @@ class User < ApplicationRecord
     nc = cus.sources.create(source: self.stripe_token)
     cus.default_source = nc
     cus.save
-
-    self.pay_outstanding_invoice
     self.stripe_token = nil
+
+    begin
+      self.pay_outstanding_invoice
+    rescue Stripe::CardError
+      raise "Card error" # TODO: something with this!
+    end
   end
 end

@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :gift_subscription do
-    subscription nil
     giver_given_name {"MyText"}
     giver_surname {"MyText"}
     giver_email_address {"MyText"}
