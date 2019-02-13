@@ -66,6 +66,10 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def thanks
+    @subscription = current_user.subscription
+  end
+
   private
 
   def subscription_params
