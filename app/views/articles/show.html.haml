@@ -3,12 +3,12 @@
 - set_meta_tags canonical: "https://www.dublininquirer.com#{ @article.path }"
 - set_meta_tags author: "https://www.dublininquirer.com/contributors/#{ @article.author.try(:slug) }"
 
-- set_meta_tags og: {type: 'article', url: "https://www.dublininquirer.com#{ @article.path }"}
+- set_meta_tags og: {type: 'article', url: "https://www.dublininquirer.com#{ @article.path }", description: raw(@article.excerpt), title: raw(@article.title)}
 
 - if @article.featured_artwork.present?
-  - set_meta_tags image_src: @article.featured_artwork.image.large.url
-  - set_meta_tags og: {image: @article.featured_artwork.image.large.url}
-- set_meta_tags twitter: {image: {'_': @article.featured_artwork.image.large.url}}
+  - set_meta_tags image_src: @article.featured_artwork.image.medium.url
+  - set_meta_tags og: {image: @article.featured_artwork.image.medium.url}
+- set_meta_tags twitter: {image: {'_': @article.featured_artwork.image.medium.url}}
 
 = render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
