@@ -144,6 +144,10 @@ class Subscription < ApplicationRecord
     (self.subscription_type == 'fixed')
   end
 
+  def patron?
+    (self.plan.amount > self.product.base_price)
+  end
+
   def changeable?
     (self.is_stripe? && self.product.is_active? && self.is_base_price?)
   end

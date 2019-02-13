@@ -75,6 +75,8 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: [:new, :create] do
     collection do
+      get :upgrade
+      put :upgrade
       get :thanks
     end
   end

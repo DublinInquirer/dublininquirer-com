@@ -147,6 +147,11 @@ class User < ApplicationRecord
     false
   end
 
+  def patron? # pays more than base price
+    return false unless self.subscription
+    self.subscription.patron?
+  end
+
   def subscription
     return nil unless self.subscriptions.active.any?
     subscriptions.active.first

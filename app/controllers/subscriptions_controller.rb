@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-  layout 'modal', only: [:create, :thanks]
+  layout 'modal', only: [:upgrade, :create, :thanks]
 
   def create # not for gifts
     if logged_in? and (current_user.subscriptions.active.any? or current_user.is_banned?)
@@ -49,6 +49,20 @@ class SubscriptionsController < ApplicationController
       @plan = Plan.find(subscription_params[:plan_id])
       @product = @plan.product
       render 'products/show'
+    end
+  end
+
+  def upgrade
+    @subscription = current_user.subscription
+    if request.put?
+      case params[:id].downcase.to_sym
+      when :friend
+        @subscription.change_price_to!(20_00)
+      when :patron
+        @subscription.change_price_to!(50_00)
+      end
+
+      redirect_to [:thanks, :subscriptions]
     end
   end
 

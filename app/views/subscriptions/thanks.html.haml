@@ -8,9 +8,15 @@
   %h1.heading Thanks
 
 .text.-article
-  :markdown
-    It's readers like you who make Dublin Inquirer's work possible. Thank you.
+  - if @subscription.patron?
+    :markdown
+      In-depth local reporting is more important than ever, and it's subscribers like you who make it possible.
 
+  - else
+    :markdown
+      It's subscribers like you who make Dublin Inquirer's work possible. Thank you.
+
+  :markdown
     If you have any problems, story suggestions, or just want to talk: email us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>. We like talking to our readers!
 
 %nav.box.-invisible.-tight.-other
