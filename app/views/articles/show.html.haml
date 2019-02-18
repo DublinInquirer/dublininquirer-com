@@ -16,34 +16,36 @@
     - set_meta_tags 'og:image:width': @article.featured_artwork.width_px
     - set_meta_tags 'og:image:height': @article.featured_artwork.height_px
 
+
 = render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-- if !@limited
-  - if @article.tags.any?
-    .wrapper.-small{role: 'layout'}
-      %header.-section
-        %h3.heading Filed under
+- if @article.commentable?
+  .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
+
+- if @article.tags.any?
+  .block.-mt4.-mb4.-bt.-pt4
+    %header.header.-issue
+      %h3.heading Filed under
+
+    .block.-mt4.p.-b2
       %ul.list.-tags
         - @article.displayable_tags.each do |tag|
           %li= link_to tag.name, tag_path(id: tag.slug)
 
-  - if @article.commentable?
-    .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
+.block.-mt4.-mb4.-bt.-pt4
+  %header.header.-issue
+    %h4.heading Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
 
-  .block.-mt4.-mb4.-bt.-pt4
-    %header.header.-issue
-      %h4.heading Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+  .row
+    - @article.from_the_same_issue.by_position.first(6).each do |article|
+      .col-xs-12.col-md-4.col-lg-2.col.flex
+        = render partial: 'articles/excerpts/tiny', locals: { article: article }
+        %hr.-stroke
 
-    .row
-      - @article.from_the_same_issue.by_position.first(6).each do |article|
-        .col-xs-12.col-md-4.col-lg-2.col.flex
-          = render partial: 'articles/excerpts/tiny', locals: { article: article }
-          %hr.-stroke
+- if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
+  = render partial: 'user_sessions/paywall'
 
-  - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
-    = render partial: 'user_sessions/paywall'
+= render partial: 'products/enticement'
 
-  = render partial: 'products/enticement'
-
-- else
+- if @limited
   = render partial: 'user_sessions/limited'

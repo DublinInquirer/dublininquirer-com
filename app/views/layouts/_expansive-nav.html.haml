@@ -40,14 +40,14 @@
                 .block.-py2.-bt
                   %h3 Subscriptions
                 %ul.block.-mb2
+                  - if !logged_in?
+                    %li= link_to "Log in", :login
                   - if logged_in?
                     %li= link_to "Account details", :user
                   - if !(logged_in? and current_user.subscriber?)
                     %li= link_to "Subscribe", :products
                   - if logged_in? and current_user.subscriber?
                     %li= link_to "Manage subscription", :user
-                  - if !logged_in?
-                    %li= link_to "Log in", :login
                   %li= link_to "Give a subscription", :gift_subscriptions
 
               .col-xs-12.col-md-3
