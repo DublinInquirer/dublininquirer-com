@@ -5,15 +5,12 @@ class UsersTest < ApplicationSystemTestCase
   end
 
   test 'paywall w/ account' do
-
   end
 
   test 'paywall login' do
-
   end
 
   test 'paywall register' do
-
   end
 
   test 'creating a new user' do

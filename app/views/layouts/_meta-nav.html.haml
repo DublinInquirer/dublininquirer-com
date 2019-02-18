@@ -6,27 +6,29 @@
 
 %div.progress-bar.-fixed &nbsp;
 %nav.meta-nav{class: css_classes}
-  .left
-    .icons
-      %a{class: 'icon -hamburger', 'data-action': 'openOverlay', 'data-target': 'menu'}
-        = render partial: 'layouts/images/hamburger'
+  .frame{role: 'layout'}
+    .meta-nav_content
+      .left
+        .icons
+          %a{class: 'icon -hamburger', 'data-action': 'openOverlay', 'data-target': 'menu'}
+            = render partial: 'layouts/images/hamburger'
 
-  - if !(defined?(small) && small)
-    .center
-      = link_to root_path do
-        .logotype.-small
-          = render partial: 'layouts/images/logo-horizontal'
+      - if !(defined?(small) && small)
+        .center
+          = link_to root_path do
+            .logotype.-small
+              = render partial: 'layouts/images/logo-horizontal'
 
-  .right
-    .links
-      - if logged_in?
-        = link_to current_user.email_address, :user
-      - else
-        = link_to "Log in", login_path, class: 'button -nav'
+      .right
+        .links
+          - if logged_in?
+            = link_to current_user.email_address, :user
+          - else
+            = link_to "Log in", login_path, class: 'button -nav'
 
-      - if !logged_in? or !current_user.subscriber?
-        = link_to 'Subscribe', :products, class: 'button -nav'
+          - if !logged_in? or !current_user.subscriber?
+            = link_to 'Subscribe', :products, class: 'button -nav'
 
-    .icons
-      %a{class: 'icon -search', 'data-action': 'openOverlay', 'data-target': 'search'}
-        = render partial: 'layouts/images/search'
+        .icons
+          %a{class: 'icon -search', 'data-action': 'openOverlay', 'data-target': 'search'}
+            = render partial: 'layouts/images/search'

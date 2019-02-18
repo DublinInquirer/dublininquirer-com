@@ -53,30 +53,6 @@
     &:last-child
       margin-bottom: 0
 
-.text.-big
-  margin: var(--gutter) 0
-  padding: var(--gutter) 0
-  border-bottom: 1px solid var(--black)
-  padding-right: 10%
-  margin-bottom: 0
-  font-size: var(--h3)
-  line-height: 1.4
-  font-weight: 400
-  letter-spacing: -0.025em
-
-  h1
-    display: inline-block
-    font-weight: 600
-  h1 + p
-    display: inline
-    margin-top: 0
-
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-    font-size: 2.4vw
-    line-height: 1.4
-  @media screen and (min-width: $large)
-
 .text.-tiny
   font-size: var(--b5)
   line-height: 1.25
@@ -118,6 +94,16 @@
 
 .p.-serif
   font-family: $serif
+
+.p.-scale
+  font-size: var(--b2)
+  line-height: calc(1.5 * var(--b2)) // 2.4rem
+  h3
+    font-weight: 600
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    font-size: 1.6vw
+    line-height: 1.4
 
 .p.-b1
   font-size: var(--b1)

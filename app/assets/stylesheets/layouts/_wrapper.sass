@@ -1,10 +1,16 @@
 .wrapper[role=layout]
-  margin: 0 calc(var(--gutter)/2)
 
-  @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
+    &.-medium
+      max-width: $medium
+      margin-left: auto
+      margin-right: auto
+
   @media screen and (min-width: $large)
-    margin: 0 calc(var(--gutter)/2)
+    &.-large
+      max-width: $large
+      margin-left: auto
+      margin-right: auto
 
   @media screen and (min-width: 58rem)
     &.-small

@@ -19,5 +19,4 @@
 //= require cookie
 //= require notice
 //= require front
-//= require dev
 //= require plyr

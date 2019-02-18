@@ -2,6 +2,9 @@
   &.-bg-black
     color: var(--default)
     background-color: var(--black)
+  &.-bg-blue
+    color: var(--default)
+    background-color: var(--blue)
   &.-bg-faint
     color: var(--black)
     background-color: var(--faint)
@@ -193,3 +196,27 @@
     margin-top: calc(var(--gutter) * 2)
   &.-gb
     margin-bottom: calc(var(--gutter) * 2)
+
+  &.-by
+    border-top: 1px solid var(--black)
+    border-bottom: 1px solid var(--black)
+  &.-bx
+    border-left: 1px solid var(--black)
+    border-right: 1px solid var(--black)
+  &.-bt
+    border-top: 1px solid var(--black)
+  &.-bb
+    border-bottom: 1px solid var(--black)
+  &.-bl
+    border-left: 1px solid var(--black)
+  &.-br
+    border-right: 1px solid var(--black)
+
+.flex
+  display: flex
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    &.-cy
+      flex-direction: column
+      justify-content: center
+      align-items: stretch

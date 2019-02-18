@@ -30,9 +30,17 @@
   %body
     = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 
-    .sub-omnipresent= yield
+    .frame.sub-omnipresent{role: 'layout'}
+      .block.-p2= yield
 
-    = render partial: 'layouts/primary-footer'
+    .block.-bt
+      .frame{role: 'layout'}
+        = render partial: 'layouts/primary-footer'
+
+    .block.-bt
+      .frame{role: 'layout'}
+        .block.-py4
+          &nbsp;
 
     = render partial: 'user_sessions/cookies'
 
@@ -46,14 +54,3 @@
     = render partial: 'layouts/expansive-nav'
     = auto_discovery_link_tag(:rss, feed_url(format: :xml))
     = render partial: 'layouts/analytics'
-
-    - if Rails.env.development?
-      .baseline-overlay{style: 'display:none;'}
-      .grid-overlay{style: 'display:none;'}
-        .full-wrapper{role: 'layout'}
-          .wrapper{role: 'layout'}
-            .container
-              .row
-                - 12.times do
-                  .col-xs-1
-                    .content &nbsp;
