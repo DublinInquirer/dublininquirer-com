@@ -9,7 +9,7 @@
 
 - if @article.featured_artwork.present?
   - set_meta_tags image_src: @article.featured_artwork.image.large.url
-  - set_meta_tags og: {image: @article.featured_artwork.image.large.url}
+  - set_meta_tags og: {image: @article.featured_artwork.image.large.url.gsub('https:','http:'), 'image:secure_url': @article.featured_artwork.image.large.url}
   - set_meta_tags twitter: {image: {'_': @article.featured_artwork.image.large.url}}
 
   - if @article.featured_artwork.width_px.present? && @article.featured_artwork.height_px.present?
