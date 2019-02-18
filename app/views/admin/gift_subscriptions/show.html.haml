@@ -4,12 +4,7 @@
       = link_to 'Gifts', [:admin, :gift_subscriptions]
       = link_to @gift_subscription.user_full_name, [:admin, @gift_subscription]
 
-    %nav
-      - if current_user.is_admin?
-        - if @issue.published
-          = link_to "Unpublish", [:unpublish, :admin, @issue], class: 'button', method: :put
-        - else
-          = link_to "Publish", [:publish, :admin, @issue], class: 'button', method: :put
+    %nav &nbsp;
 
 %dl.admin-data
   %dt Giver
