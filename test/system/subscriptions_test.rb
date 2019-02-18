@@ -17,28 +17,10 @@ class SubscriptionsTest < ApplicationSystemTestCase
     fill_stripe_elements(card: '4242424242424242')
 
     click_button 'Subscribe'
-
-#     assert_content 'Thanks, Lois'
-#
-#     fill_in 'Password', with: 'secret'
-#     click_button 'Save'
-#
-#     assert_content 'subscriber@localhost.ie'
-#     click_link 'subscriber@localhost.ie'
-#     click_link 'Log out'
-#
-#     assert_selector 'a', text: 'Log in'
-#
-#     click_link 'Log in'
-#     fill_in 'email_address', with: 'subscriber@localhost.ie'
-#     fill_in 'password', with: 'secret'
-#
-#     assert_selector 'a', text: 'Lois Kapila'
   end
 
   def fill_stripe_elements(card: , expiry: '1234', cvc: '123', postal: '12345')
     using_wait_time(4) do
-
       frame = find('#stripe-form_card-number > div > iframe')
       within_frame(frame) do
         card.to_s.chars.each do |piece|

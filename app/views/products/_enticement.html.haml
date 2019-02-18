@@ -1,7 +1,7 @@
 - unless logged_in? and current_user.is_staff?
-  - if logged_in? and current_user.subscriber? and current_user.patron?
-    .wrapper{role: 'layout'}
-      .block.-my4.-bg-black
+  .wrapper{role: 'layout'}
+    .block.-mt2.-bg-black
+      - if logged_in? and current_user.subscriber? and current_user.patron?
         .enticement
           %figure.artwork= image_tag "ads/meath-street.jpg"
           .text
@@ -13,9 +13,7 @@
           %nav.options
             = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -yellow'
 
-  - elsif logged_in? and current_user.subscriber?
-    .wrapper{role: 'layout'}
-      .block.-my4.-bg-black
+      - elsif logged_in? and current_user.subscriber?
         .enticement
           %figure.artwork= image_tag "ads/meath-street.jpg"
           .text
@@ -30,9 +28,7 @@
           %nav.options
             = link_to raw("Become a patron &rarr;"), [:upgrade, :subscriptions], class: 'button -yellow'
 
-  - else
-    .wrapper{role: 'layout'}
-      .block.-my4.-bg-black
+      - else
         .enticement
           %figure.artwork= image_tag "ads/meath-street.jpg"
           .text

@@ -3,7 +3,7 @@ $medium: 960px;
 $large: 1260px;
 $max: 1500px;
 $contained: 1740px;
-$gutter: 4.25rem;
+$gutter: 4rem;
 
 .container-fluid,
 .container {
@@ -45,8 +45,6 @@ $gutter: 4.25rem;
 }
 
 .col.flex {
-  display: flex;
-
   &.-sticky {
     position: relative;
     flex-direction: column;

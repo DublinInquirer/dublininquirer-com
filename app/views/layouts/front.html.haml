@@ -30,9 +30,17 @@
     = render partial: 'layouts/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/primary-flag'
 
-    = yield
+    .frame{role: 'layout'}
+      .block.-px2.-pb2= yield
 
-    = render partial: 'layouts/primary-footer'
+    .block.-bt
+      .frame{role: 'layout'}
+        = render partial: 'layouts/primary-footer'
+
+    .block.-bt
+      .frame{role: 'layout'}
+        .block.-py4
+          &nbsp;
 
     = render partial: 'user_sessions/cookies'
     - if permission_for_cookie?
@@ -41,14 +49,3 @@
     = render partial: 'layouts/search'
     = render partial: 'layouts/expansive-nav'
     = render partial: 'layouts/analytics'
-
-    - if Rails.env.development?
-      .baseline-overlay{style: 'display:none;'}
-      .grid-overlay{style: 'display:none;'}
-        .full-wrapper{role: 'layout'}
-          .wrapper{role: 'layout'}
-            .container
-              .row
-                - 12.times do
-                  .col-xs-1
-                    .content &nbsp;

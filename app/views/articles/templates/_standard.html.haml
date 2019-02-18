@@ -1,13 +1,12 @@
-.wrapper.-contained{role: 'layout'}
-  %header.header.-article.-standard
-    .p.-category= link_to display_category(@article.category), category_path(@article.category)
-    %h1.headline= raw article.title
+%header.header.-article.-standard
+  .p.-category= link_to display_category(@article.category), category_path(@article.category)
+  %h1.headline= raw article.title
 
-    = render partial: 'articles/meta', locals: {article: article}
+  = render partial: 'articles/meta', locals: {article: article}
 
-  %article.article.-standard{lang: 'en'}
-    - if article.featured_artwork.present?
-      %figure.artwork.-featured
-        = image_tag article.featured_artwork.image.large.url
-        %figcaption= article.featured_artwork.caption
-    = raw render_content(article.content)
+%article.article.-standard{lang: 'en'}
+  - if article.featured_artwork.present?
+    %figure.artwork.-featured
+      = image_tag article.featured_artwork.image.large.url
+      %figcaption= article.featured_artwork.caption
+  = raw render_content(article.content)
