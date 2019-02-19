@@ -9,12 +9,12 @@
 
 - if @article.featured_artwork.present?
   - set_meta_tags image_src: @article.featured_artwork.image.large.url
-  - set_meta_tags og: {image: @article.featured_artwork.image.massive.url.gsub('https:','http:'), 'image:url': @article.featured_artwork.image.massive.url, 'image:secure_url': @article.featured_artwork.image.massive.url}
+  - set_meta_tags og: {image: @article.featured_artwork.image.large.url.gsub('https:','http:'), 'image:url': @article.featured_artwork.image.large.url, 'image:secure_url': @article.featured_artwork.image.large.url}
   - set_meta_tags twitter: {image: {'_': @article.featured_artwork.image.large.url}}
 
   - if @article.featured_artwork.width_px.present? && @article.featured_artwork.height_px.present?
-    - set_meta_tags 'og:image:width': @article.featured_artwork.width_px
-    - set_meta_tags 'og:image:height': @article.featured_artwork.height_px
+    - set_meta_tags 'og:image:width': @article.featured_artwork.large_width_px
+    - set_meta_tags 'og:image:height': @article.featured_artwork.large_height_px
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
 

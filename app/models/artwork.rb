@@ -41,6 +41,20 @@ class Artwork < ApplicationRecord
     nil
   end
 
+  def large_width_px # 1600^2
+    return nil unless height_px && width_px
+    return 1600 if !self.portrait? # lol
+
+    ((1600.0/height_px) * width_px).round
+  end
+
+  def large_height_px # 1600^2
+    return nil unless height_px && width_px
+    return 1600 if self.portrait? # lol
+
+    ((1600.0/width_px) * height_px).round
+  end
+
   def portrait?
     return false unless self.height_px && self.width_px
     (self.height_px > self.width_px)
