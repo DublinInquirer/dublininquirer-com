@@ -6,6 +6,7 @@
 
     %nav
       = link_to "Edit user", [:edit, :admin, @user], class: 'button'
+      = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put
       = link_to "Add a fixed subscription", new_admin_user_subscription_path(@user, subscription_type: 'fixed'), class: 'button'
       = link_to "Add a Stripe subscription", new_admin_user_subscription_path(@user, subscription_type: 'stripe'), class: 'button'
       - if current_user.is_superadmin?

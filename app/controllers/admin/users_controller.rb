@@ -49,6 +49,12 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def reset_password
+    @user = User.find(params[:id])
+    @user.deliver_reset_password_instructions! if @user
+    redirect_to [:admin, @user]
+  end
+
   def impersonate
     @user = User.find(params[:id])
     impersonate_user(@user)

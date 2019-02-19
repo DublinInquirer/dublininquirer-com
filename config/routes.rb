@@ -163,6 +163,7 @@ Rails.application.routes.draw do
     resources :users do
       resources :subscriptions, only: [:new, :create]
       member do
+        put :reset_password
         put :impersonate
       end
     end
