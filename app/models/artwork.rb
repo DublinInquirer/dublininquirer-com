@@ -33,6 +33,14 @@ class Artwork < ApplicationRecord
     end
   end
 
+  def file_type
+    return nil unless self.image.present? && self.image.file.present?
+    return 'image/jpeg' if (image.file.to_s.include?('.jpg') or image.file.to_s.include?('.jpeg'))
+    return 'image/gif' if (image.file.to_s.include?('.gif'))
+    return 'image/png' if (image.file.to_s.include?('.png'))
+    nil
+  end
+
   def portrait?
     return false unless self.height_px && self.width_px
     (self.height_px > self.width_px)
