@@ -3,7 +3,12 @@ class Admin::IssuesController < Admin::ApplicationController
 
   def index
     @issues = Issue.order('issue_date desc').includes(:articles).page(params[:p]).per(25)
-    @next_wednesday = Issue.maximum(:issue_date).next_week.advance(days: 2)
+  end
+
+  def create
+    next_wednesday = Issue.maximum(:issue_date).next_week.advance(days: 2)
+    Issue.create! issue_date: next_wednesday
+    redirect_to [:admin, :issues]
   end
 
   def show

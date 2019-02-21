@@ -139,7 +139,7 @@ Rails.application.routes.draw do
       end
       resources :artworks, only: [:new, :create]
     end
-    resources :issues, only: [:index, :show] do
+    resources :issues, only: [:index, :show, :create] do
       member do
         put :publish
         put :unpublish

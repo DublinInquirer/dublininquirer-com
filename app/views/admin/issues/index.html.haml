@@ -3,7 +3,9 @@
     .breadcrumbs
       = link_to 'Issues', [:admin, :issues]
 
-    %nav &nbsp;
+    %nav
+      - if Issue.maximum(:issue_date) < Date.current
+        = link_to 'Generate next issue', [:admin, :issues], class: 'button', method: 'post'
 
   %div.filters
     .page
