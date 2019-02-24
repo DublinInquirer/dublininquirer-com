@@ -123,6 +123,11 @@ class Subscription < ApplicationRecord
     self.requires_address?
   end
 
+  def is_delinquent?
+    return false unless self.status
+    %w(past_due unpaid).include? self.status.downcase
+  end
+
   def is_cancelling?
     ((self.cancel_at_period_end) && (self.status != 'canceled'))
   end
@@ -228,7 +233,7 @@ class Subscription < ApplicationRecord
     str_sub = self.stripe_subscription
 
     # if there's an unpaid or overdue invoice, cancel immediately so it doesn't keep trying to charge the card
-    if %w(past_due unpaid).include? str_sub.status.try(:downcase)
+    if is_delinquent?
       str_sub.delete
     else # otherwise cancel at period end
       str_sub.cancel_at_period_end = true
