@@ -6,6 +6,10 @@ class Subscription < ApplicationRecord
 
   has_many :invoices
 
+  validates :subscription_type, presence: true
+  validates :stripe_id, uniqueness: true, allow_blank: true
+  # validates :stripe_id, presence: true, if: { is_stripe? } // rejigger sub creation sequence to do this
+
   attribute :given_name, :string
   attribute :surname, :string
   attribute :email_address, :string
@@ -145,7 +149,7 @@ class Subscription < ApplicationRecord
   end
 
   def patron?
-    (self.plan.amount > self.product.base_price)
+    (self.plan.is_friend? or self.plan.is_patron?)
   end
 
   def changeable?
@@ -282,7 +286,7 @@ class Subscription < ApplicationRecord
   def set_status
     return true if self.subscription_type != 'fixed'
 
-    self.status = if self.ended_at > (Time.zone.now + 1.day)
+    self.status = if self.ended_at.nil? || (self.ended_at > (Time.zone.now + 1.day))
       'active'
     else
       'lapsed'

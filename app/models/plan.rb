@@ -1,6 +1,11 @@
+# Plans always should have an associated Stripe plan
+
 class Plan < ApplicationRecord
   belongs_to :product
   has_many :subscriptions
+
+  validates :interval, presence: true, if: -> (p) { p.stripe_id.blank? }
+  validates :interval_count, presence: true, if: -> (p) { p.stripe_id.blank? }
 
   after_create :sync_to_stripe
 
@@ -10,10 +15,10 @@ class Plan < ApplicationRecord
     str_plan = self.stripe_plan
     return false unless str_plan.present?
 
-    self.product = Product.find_or_create_by(stripe_id: str_plan['product'])
-    self.amount = str_plan['amount']
-    self.interval = str_plan['interval']
-    self.interval_count = str_plan['interval_count']
+    self.product = Product.find_or_create_by(stripe_id: str_plan.product)
+    self.amount = str_plan.amount
+    self.interval = str_plan.interval
+    self.interval_count = str_plan.interval_count
 
     self.save!
   end
@@ -41,10 +46,12 @@ class Plan < ApplicationRecord
   end
 
   def is_friend?
+    return false unless amount.present?
     ((self.amount > self.product.base_price) && !self.is_patron?)
   end
 
   def is_patron?
+    return false unless amount.present?
     (self.amount >= 50_00)
   end
 

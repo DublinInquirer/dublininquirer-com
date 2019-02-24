@@ -59,6 +59,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'webmock'
+  gem 'faker'
+  gem 'database_cleaner'
+  gem 'mocha'
 end
 
 group :development do
