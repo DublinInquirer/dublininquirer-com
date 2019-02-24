@@ -216,6 +216,7 @@ class Subscription < ApplicationRecord
     end
 
     raise "Can't cancel cancelled subscription" if (self.status == 'canceled')
+
     if is_cancelling?
       uncancel_subscription!
     else
@@ -225,8 +226,14 @@ class Subscription < ApplicationRecord
 
   def cancel_subscription! # affects stripe
     str_sub = self.stripe_subscription
-    str_sub.cancel_at_period_end = true
-    str_sub.save
+
+    # if there's an unpaid or overdue invoice, cancel immediately so it doesn't keep trying to charge the card
+    if %w(past_due unpaid).include? str_sub.status.try(:downcase)
+      str_sub.delete
+    else # otherwise cancel at period end
+      str_sub.cancel_at_period_end = true
+      str_sub.save
+    end
 
     update_from_stripe!
   end
