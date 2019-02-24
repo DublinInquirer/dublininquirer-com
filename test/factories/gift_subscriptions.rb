@@ -1,14 +1,15 @@
 FactoryBot.define do
   factory :gift_subscription do
-    giver_given_name {"MyText"}
-    giver_surname {"MyText"}
-    giver_email_address {"MyText"}
-    first_address_line_1 {"MyText"}
-    first_address_line_2 {"MyText"}
-    first_city {"MyText"}
-    first_county {"MyText"}
-    first_country_code {"MyText"}
-    product {"MyText"}
-    notes {"MyText"}
+    plan
+
+    giver_given_name { Faker::Name.first_name }
+    giver_surname { Faker::Name.last_name }
+    giver_email_address { Faker::Internet.email }
+
+    recipient_given_name { Faker::Name.first_name }
+    recipient_surname { Faker::Name.unique.last_name }
+    recipient_email_address { Faker::Internet.unique.email }
+
+    duration { 6 }
   end
 end

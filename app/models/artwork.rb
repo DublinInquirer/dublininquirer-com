@@ -3,7 +3,6 @@ require 'open-uri'
 class Artwork < ApplicationRecord
   mount_uploader :image, ImageUploader
 
-  validates :wp_file, uniqueness: true, allow_nil: true
   validates :hashed_id, presence: true, uniqueness: true
   validates :image, presence: true
 

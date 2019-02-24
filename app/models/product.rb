@@ -3,6 +3,8 @@ class Product < ApplicationRecord
   has_many :subscriptions, through: :plans
   has_many :users, through: :subscriptions
 
+  validates :name, presence: true
+
   scope :active, -> { where(name: ['Digital + Print subscription', 'Digital subscription']) }
   scope :includes_print, -> { where('name ILIKE ?', '%print%') }
 

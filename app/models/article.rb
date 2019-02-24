@@ -6,18 +6,18 @@ class Article < ApplicationRecord
   validates :template, inclusion: { in: %w(standard airspace opinion illustration stack podcast) }
   validates :category, inclusion: { in: %w(the-dish unreal-estate city-desk culture-desk opinion fiction podcast cover cartoon a-quick-note) }, on: :create
 
+  belongs_to :issue, optional: true, touch: true
+  belongs_to :featured_artwork, class_name: 'Artwork', foreign_key: 'featured_artwork_id', optional: true
+
+  has_many :artworks, dependent: :nullify
+  has_many :comments, dependent: :delete_all
+
   after_initialize :clean_text_fields
   before_validation :sanitize_html, :uniq_tags
   after_validation :generate_slug, :generate_text, :uniq_slugs
   before_save :format_common_hacks
 
   paginates_per 8
-
-  belongs_to :issue, optional: true, touch: true
-  belongs_to :featured_artwork, class_name: 'Artwork', foreign_key: 'featured_artwork_id', optional: true
-
-  has_many :artworks, dependent: :nullify
-  has_many :comments, dependent: :delete_all
 
   scope :by_title, -> { order('title asc') }
   scope :by_position, -> { order('position asc') }

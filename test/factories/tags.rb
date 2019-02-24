@@ -1,7 +1,5 @@
 FactoryBot.define do
   factory :tag do
-    name { "Waste management" }
-    slug { "waste-management" }
-    displayable { false }
+    name { Faker::Internet.unique.slug }
   end
 end
