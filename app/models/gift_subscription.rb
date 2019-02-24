@@ -24,6 +24,8 @@ class GiftSubscription < ApplicationRecord
   after_initialize :setup_subscription, if: -> (gs) { !gs.subscription }
   after_save :save_subscription, if: -> (gs) { !gs.subscription.changed? }
 
+  validates :plan_id, presence: true
+
   validates :giver_given_name, presence: true
   validates :giver_surname, presence: true
   validates :giver_email_address, presence: true
@@ -144,7 +146,7 @@ class GiftSubscription < ApplicationRecord
       email_address: self.recipient_email_address,
       given_name: self.recipient_given_name,
       surname: self.recipient_surname,
-      plan_id: self.plan.id,
+      plan_id: self.plan.try(:id),
       address_line_1: self.recipient_address_line_1,
       address_line_2: self.recipient_address_line_2,
       city: self.recipient_city,

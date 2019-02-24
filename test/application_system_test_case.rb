@@ -4,11 +4,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   driven_by :selenium, using: :chrome, screen_size: [1440, 900], options: { args: %w[headless disable-gpu] }
 
   def setup
-    StripeSetterUp.setup_products
-    StripeSetterUp.setup_plans
+    DatabaseCleaner.start
   end
 
   def teardown
+    DatabaseCleaner.clean
     page.driver.browser.manage.logs.get(:browser).each do |log|
       case log.message
       when /This page includes a password or credit card input in a non-secure context/,

@@ -6,6 +6,10 @@ class Subscription < ApplicationRecord
 
   has_many :invoices
 
+  validates :subscription_type, presence: true
+  validates :stripe_id, uniqueness: true, allow_blank: true
+  # validates :stripe_id, presence: true, if: { is_stripe? } // rejigger sub creation sequence to do this
+
   attribute :given_name, :string
   attribute :surname, :string
   attribute :email_address, :string
@@ -119,6 +123,11 @@ class Subscription < ApplicationRecord
     self.requires_address?
   end
 
+  def is_delinquent?
+    return false unless self.status
+    %w(past_due unpaid).include? self.status.downcase
+  end
+
   def is_cancelling?
     ((self.cancel_at_period_end) && (self.status != 'canceled'))
   end
@@ -145,7 +154,7 @@ class Subscription < ApplicationRecord
   end
 
   def patron?
-    (self.plan.amount > self.product.base_price)
+    (self.plan.is_friend? or self.plan.is_patron?)
   end
 
   def changeable?
@@ -212,6 +221,7 @@ class Subscription < ApplicationRecord
     end
 
     raise "Can't cancel cancelled subscription" if (self.status == 'canceled')
+
     if is_cancelling?
       uncancel_subscription!
     else
@@ -221,8 +231,14 @@ class Subscription < ApplicationRecord
 
   def cancel_subscription! # affects stripe
     str_sub = self.stripe_subscription
-    str_sub.cancel_at_period_end = true
-    str_sub.save
+
+    # if there's an unpaid or overdue invoice, cancel immediately so it doesn't keep trying to charge the card
+    if is_delinquent?
+      str_sub.delete
+    else # otherwise cancel at period end
+      str_sub.cancel_at_period_end = true
+      str_sub.save
+    end
 
     update_from_stripe!
   end
@@ -282,7 +298,7 @@ class Subscription < ApplicationRecord
   def set_status
     return true if self.subscription_type != 'fixed'
 
-    self.status = if self.ended_at > (Time.zone.now + 1.day)
+    self.status = if self.ended_at.nil? || (self.ended_at > (Time.zone.now + 1.day))
       'active'
     else
       'lapsed'
