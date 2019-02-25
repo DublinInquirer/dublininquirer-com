@@ -15,10 +15,6 @@ class Comment < ApplicationRecord
   scope :not_approved, -> { where(published_at: nil) }
   scope :created_since, -> (t) { where('created_at > ?', t) }
 
-  def child?
-    self.parent.nil?
-  end
-
   def display_name
     return self.nickname if self.nickname.present?
     return self.user.comment_name if self.user.present? && self.user.nickname.present?
