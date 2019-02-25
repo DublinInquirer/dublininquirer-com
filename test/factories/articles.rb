@@ -7,9 +7,5 @@ FactoryBot.define do
     content { Faker::Books::Lovecraft.paragraph(2) }
     template { 'standard' }
     category { 'city-desk' }
-
-    after(:create) do |article|
-      article.author_ids << create(:author).id
-    end
   end
 end

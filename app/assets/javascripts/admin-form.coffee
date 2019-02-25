@@ -1,6 +1,8 @@
 $(document).on 'ready turbolinks:load', ->
   'use strict'
 
+  $('[data-behaviour="token"]').select2()
+
   $('select#article_tag_ids').select2 ajax:
     url: '/admin/tags/autocomplete'
     processResults: (data) ->

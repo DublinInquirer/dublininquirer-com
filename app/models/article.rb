@@ -12,6 +12,9 @@ class Article < ApplicationRecord
   has_many :artworks, dependent: :nullify
   has_many :comments, dependent: :delete_all
 
+  has_many :article_authors, dependent: :destroy
+  has_many :authors, through: :article_authors
+
   after_initialize :clean_text_fields
   before_validation :sanitize_html, :uniq_tags
   after_validation :generate_slug, :generate_text, :uniq_slugs
@@ -42,20 +45,26 @@ class Article < ApplicationRecord
     self.issue.articles.where.not(id: self.id)
   end
 
-  def authors
-    @authors ||= Author.where(id: author_ids)
-  end
-
   def author
     @author ||= authors.last
   end
 
-  def author_id
-    self.author.try(:id)
+  def authors_ids
+    self.authors.map(&:id)
   end
 
-  def author_id=(author_id)
-    self.author_ids << author_id
+  def authors_ids=(a_ids)
+    a_ids = a_ids.compact.reject(&:blank?)
+
+    article_authors.each do |article_author|
+      if a_ids.include?(article_author.author.id)
+        a_ids.delete(article_author.author.id)
+      else
+        article_author.destroy!
+      end
+    end
+
+    a_ids.each { |a_id| article_authors.create!(author_id: a_id) }
   end
 
   def excerpt_markdown

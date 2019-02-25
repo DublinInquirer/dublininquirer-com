@@ -9,6 +9,7 @@
     = javascript_include_tag 'admin'
 
   %body.admin
+    .progress-bar.-fixed &nbsp;
     .admin{role: 'layout'}
       %header.admin-header
         = link_to 'Dashboard', admin_root_path, class: current_page?(admin_root_path) ? 'current' : nil
