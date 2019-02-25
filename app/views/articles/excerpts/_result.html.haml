@@ -10,7 +10,7 @@
 
       .more
         .meta
-          .byline #{ article.author.try(:full_name) }
+          .byline #{ article.authors.map(&:full_name).to_sentence }
           .category #{ display_category(article.category) }
           .dateline #{ article.issue_date.strftime("%-d %b '%y") }
 

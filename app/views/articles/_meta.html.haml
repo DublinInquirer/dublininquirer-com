@@ -1,5 +1,5 @@
 .meta
-  .byline= link_to article.author.full_name, article.author
+  .byline= raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence
 
   - if article.issue_date.present?
     .date

@@ -97,16 +97,26 @@
       left: 50%
       display: flex
       flex-direction: row
+      align-items: flex-end
       padding: 0
-      border: 1px solid var(--black)
       font-size: var(--b4)
       line-height: 1.2
 
       & > div
         padding: 0.25rem 0.75rem
+        border: 1px solid var(--black)
         background: var(--default)
+
+        &.bylines
+          padding: 0
+          .byline
+            padding: 0.25rem 0.75rem
+
+        & > div + div
+          border-top: 1px solid var(--black)
+
       & > div + div
-        border-left: 1px solid var(--black)
+        border-left: 0
         &:before
           content: none
 
