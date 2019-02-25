@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_05_210617) do
+ActiveRecord::Schema.define(version: 2019_02_25_202237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2019_02_05_210617) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "article_authors", force: :cascade do |t|
+    t.bigint "article_id"
+    t.bigint "author_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_article_authors_on_article_id"
+    t.index ["author_id"], name: "index_article_authors_on_author_id"
   end
 
   create_table "articles", force: :cascade do |t|
@@ -231,8 +240,10 @@ ActiveRecord::Schema.define(version: 2019_02_05_210617) do
     t.bigint "product_id"
     t.datetime "trial_ends_at"
     t.text "landing_page_slug"
+    t.bigint "parent_id"
     t.index ["current_period_ends_at"], name: "index_subscriptions_on_current_period_ends_at"
     t.index ["landing_page_slug"], name: "index_subscriptions_on_landing_page_slug"
+    t.index ["parent_id"], name: "index_subscriptions_on_parent_id"
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["product_id"], name: "index_subscriptions_on_product_id"
     t.index ["status"], name: "index_subscriptions_on_status"
@@ -314,6 +325,7 @@ ActiveRecord::Schema.define(version: 2019_02_05_210617) do
   add_foreign_key "invoices", "users"
   add_foreign_key "plans", "products"
   add_foreign_key "subscriptions", "plans"
+  add_foreign_key "subscriptions", "subscriptions", column: "parent_id"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "visitors", "users"
 end

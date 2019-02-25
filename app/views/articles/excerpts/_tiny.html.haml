@@ -6,7 +6,9 @@
           = image_tag article.featured_artwork.image.medium.url
 
       .meta
-        .byline #{ article.author.try(:full_name) }
+        .bylines
+          - article.authors.each do |author|
+            .byline #{ author.try(:full_name) }
         .category #{ display_category(article.category) }
 
     .content
@@ -15,7 +17,7 @@
 
       .more
         .meta
-          .byline #{ article.author.try(:full_name) }
+          .byline #{ article.authors.map(&:full_name).to_sentence }
           .category #{ display_category(article.category) }
 
         .text

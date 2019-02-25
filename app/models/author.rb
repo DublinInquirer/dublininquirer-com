@@ -1,6 +1,9 @@
 class Author < ApplicationRecord
   mount_uploader :portrait, PortraitUploader
 
+  has_many :article_authors, dependent: :destroy
+  has_many :articles, through: :article_authors
+
   validates :full_name, presence: true
   validates :slug, uniqueness: true
 
@@ -12,7 +15,7 @@ class Author < ApplicationRecord
     self.slug_was
   end
 
-  def articles
+  def authored_articles
     Article.by_author(self)
   end
 
