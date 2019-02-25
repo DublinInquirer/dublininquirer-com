@@ -18,7 +18,7 @@ cache ['feed', @articles] do
             else
               xml.title ""
             end
-            xml.author article.author.full_name
+            xml.author article.authors.map(&:full_name).to_sentence
             xml.pubDate article.issue_date.beginning_of_day.to_s(:rfc822)
             xml.link "https://www.dublininquirer.com" + article.path
             xml.guid article.id

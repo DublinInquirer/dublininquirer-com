@@ -8,4 +8,4 @@
       .caption
         %strong Cartoon of the week
         by
-        = link_to article.author.try(:full_name), article.author
+        = raw article.authors.map { |author| link_to(author.full_name, [:admin, author]) }.to_sentence
