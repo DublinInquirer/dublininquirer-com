@@ -33,21 +33,13 @@ class Article < ApplicationRecord
   scope :by_slug, -> (s) { where('former_slugs @> ?', "{#{ s.downcase }}") }
   scope :standard, -> { not_in_category('cover').not_in_category('cartoon') }
 
-  def path
-    self.slug_was
+  def path # it would be cool if this worked for unpersisted
+    @path ||= self.slug ? self.slug_was : self.slug_will_be
   end
 
   def from_the_same_issue
     return nil unless self.issue.present?
-    self.issue.articles.published.where.not(id: self.id)
-  end
-
-  def is_cover?
-    self.categories.map(&:downcase).include? 'cover'
-  end
-
-  def is_cartoon?
-    self.title.downcase.include? 'cartoon of the week'
+    self.issue.articles.where.not(id: self.id)
   end
 
   def authors
@@ -55,7 +47,7 @@ class Article < ApplicationRecord
   end
 
   def author
-    @author ||= authors.first
+    @author ||= authors.last
   end
 
   def author_id
@@ -84,7 +76,7 @@ class Article < ApplicationRecord
     self.content = Kramdown::Document.new(str).to_html
   end
 
-  def opinion_title # DEPRECATED
+  def opinion_title
     self.title.gsub(/(.+): /, '').strip
   end
 
@@ -107,10 +99,6 @@ class Article < ApplicationRecord
   def is_published?
     return false unless self.issue
     self.issue.published
-  end
-
-  def is_featured?
-    self.featured
   end
 
   def commentable?
@@ -140,6 +128,17 @@ class Article < ApplicationRecord
 
   def displayable_tags
     @displayable_tags ||= self.tags.where(displayable: true)
+  end
+
+  def slug_will_be
+    slug = title.downcase.parameterize
+    date_slug = if self.issue_date.present?
+      issue_date.strftime('%Y/%m/%d')
+    else
+      'drafts'
+    end
+
+    "/#{ date_slug }/#{ slug }"
   end
 
   def self.searchable_columns
@@ -204,13 +203,7 @@ class Article < ApplicationRecord
   end
 
   def generate_slug
-    slug = title.downcase.parameterize
-    date_slug = if self.issue_date.present?
-      issue_date.strftime('%Y/%m/%d')
-    else
-      'drafts'
-    end
-    self.slug = "/#{ date_slug }/#{ slug }"
+    self.slug = self.slug_will_be
   end
 
   def clean_text_fields

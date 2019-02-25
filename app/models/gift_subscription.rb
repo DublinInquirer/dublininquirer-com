@@ -38,7 +38,7 @@ class GiftSubscription < ApplicationRecord
 
   validate :user_is_not_subscribed
 
-  scope :by_date, -> { order('created_at asc') }
+  scope :by_date, -> { order('created_at desc') }
 
   def requires_address?
     return false unless self.plan.present?
