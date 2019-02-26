@@ -15,10 +15,6 @@ class Author < ApplicationRecord
     self.slug_was
   end
 
-  def authored_articles
-    Article.by_author(self)
-  end
-
   def given_name
     namae = Namae.parse(self.full_name).first
 

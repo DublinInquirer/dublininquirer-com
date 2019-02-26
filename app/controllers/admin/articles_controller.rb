@@ -76,7 +76,7 @@ class Admin::ArticlesController < Admin::ApplicationController
   private
 
   def meta_params
-    params.require(:article).permit(:title, :excerpt_markdown, :template, :category, :issue_id, :featured_artwork_id, authors_ids: [], tag_ids: [])
+    params.require(:article).permit(:title, :excerpt_markdown, :template, :category, :issue_id, :featured_artwork_id, author_ids: [], tag_ids: [])
   end
 
   def content_params

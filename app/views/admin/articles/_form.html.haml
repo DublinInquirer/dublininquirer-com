@@ -25,8 +25,8 @@
       = f.label :issue_id, 'Issue'
       .input= f.select :issue_id, Issue.order('issue_date desc').map { |i| [i.issue_date, i.id] }, include_blank: true
     .field
-      = f.label :authors_ids, 'Author'
-      .input= f.select :authors_ids, Author.order('full_name asc').map { |a| [a.full_name, a.id] }, {include_blank: true}, {multiple: true, 'data-behaviour': 'token'}
+      = f.label :author_ids, 'Author'
+      .input= f.select :author_ids, Author.order('full_name asc').map { |a| [a.full_name, a.id] }, {include_blank: true}, {multiple: true, 'data-behaviour': 'token'}
     .field
       = f.label :featured_artwork_id, 'Featured image'
       .input.-image-picker

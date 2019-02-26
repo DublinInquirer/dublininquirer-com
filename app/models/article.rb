@@ -26,8 +26,7 @@ class Article < ApplicationRecord
   scope :by_position, -> { order('position asc') }
   scope :by_date, -> { includes(:issue).order('issues.issue_date desc') }
 
-  scope :by_author, -> (a) { where('author_ids @> ?', "{#{ a.id }}") }
-  scope :not_by_author, -> (a) { where.not('author_ids @> ?', "{#{ a.id }}") }
+  scope :by_author, -> (a) { joins(:article_authors).merge(ArticleAuthor.where(author_id: a.id)) }
   scope :published, -> { joins(:issue).merge( Issue.published ).distinct }
   scope :in_category, -> (c) { where(category: c.downcase) }
   scope :not_in_category, -> (c) { where.not(category: c.downcase) }
@@ -49,11 +48,11 @@ class Article < ApplicationRecord
     @author ||= authors.last
   end
 
-  def authors_ids
+  def author_ids
     self.authors.map(&:id)
   end
 
-  def authors_ids=(a_ids)
+  def author_ids=(a_ids)
     a_ids = a_ids.compact.reject(&:blank?)
 
     article_authors.each do |article_author|
@@ -219,18 +218,5 @@ class Article < ApplicationRecord
     self.content = self.content.try(:strip)
     self.excerpt = self.excerpt.try(:strip)
     self.title = self.title.try(:strip)
-  end
-
-  def normalize_status
-    return true if self.status && ([:published, :draft, :private].include? self.status.to_sym)
-
-    case self.status.to_sym
-    when :publish
-      self.status = 'published'
-    when :private
-      then self.status = 'private'
-    else
-      raise self.status
-    end
   end
 end
