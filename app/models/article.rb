@@ -109,6 +109,10 @@ class Article < ApplicationRecord
     self.issue.published
   end
 
+  def status
+    is_published? ? 'published' : 'draft'
+  end
+
   def commentable?
     return false if (self.category == 'cartoon')
     return false if (self.category == 'cover')

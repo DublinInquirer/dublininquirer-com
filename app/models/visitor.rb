@@ -31,10 +31,6 @@ class Visitor < ApplicationRecord
   end
 
   def articles_array
-    if self.viewed_articles.present? && self.viewed_articles.is_a?(Array)
-      return self.viewed_articles
-    else
-      return []
-    end
+    viewed_articles.present? ? viewed_articles : []
   end
 end
