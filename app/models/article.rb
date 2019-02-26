@@ -178,7 +178,7 @@ class Article < ApplicationRecord
         'script' => %w(id src type),
         'artwork' => %w(id),
         'podcast' => %w(src),
-        'video' => %w(autoplay loop muted),
+        'video' => %w(autoplay loop muted controls),
         'source' => %w(src type),
         'p' => %w(id class),
         'ol' => %w(id class),
