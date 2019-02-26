@@ -32,5 +32,5 @@
       - cache ['admin', article, 'row'] do
         %tr
           %td= link_to truncate(article.title, length: 92), [:admin, article]
-          %td{width: '150'}= article.is_published? ? 'published' : article.status
+          %td{width: '150'}= article.status
           %td{width: '150'}= article.issue_date.present? ? article.issue_date.strftime('%e %b %Y') : '-'

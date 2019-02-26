@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_25_202237) do
+ActiveRecord::Schema.define(version: 2019_02_26_074324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,34 +51,23 @@ ActiveRecord::Schema.define(version: 2019_02_25_202237) do
     t.text "excerpt"
     t.text "content"
     t.text "text"
-    t.bigint "author_ids", default: [], array: true
-    t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "featured_artwork_id"
-    t.text "status"
-    t.bigint "wp_id"
     t.text "former_slugs", default: [], array: true
-    t.text "categories", default: [], array: true
     t.text "template"
     t.boolean "featured", default: false
     t.text "category"
     t.bigint "issue_id"
     t.integer "position"
-    t.jsonb "structured_content", default: []
     t.bigint "tag_ids", default: [], array: true
-    t.index ["author_ids"], name: "index_articles_on_author_ids"
-    t.index ["categories"], name: "index_articles_on_categories"
     t.index ["category"], name: "index_articles_on_category"
     t.index ["featured_artwork_id"], name: "index_articles_on_featured_artwork_id"
     t.index ["former_slugs"], name: "index_articles_on_former_slugs"
     t.index ["issue_id"], name: "index_articles_on_issue_id"
     t.index ["position"], name: "index_articles_on_position"
-    t.index ["published_at"], name: "index_articles_on_published_at"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
-    t.index ["status"], name: "index_articles_on_status"
     t.index ["tag_ids"], name: "index_articles_on_tag_ids"
-    t.index ["wp_id"], name: "index_articles_on_wp_id"
   end
 
   create_table "artworks", force: :cascade do |t|
@@ -87,15 +76,11 @@ ActiveRecord::Schema.define(version: 2019_02_25_202237) do
     t.text "hashed_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "wp_id"
-    t.text "wp_file"
     t.bigint "article_id"
     t.integer "width_px"
     t.integer "height_px"
     t.index ["article_id"], name: "index_artworks_on_article_id"
     t.index ["hashed_id"], name: "index_artworks_on_hashed_id", unique: true
-    t.index ["wp_file"], name: "index_artworks_on_wp_file", unique: true
-    t.index ["wp_id"], name: "index_artworks_on_wp_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -105,16 +90,13 @@ ActiveRecord::Schema.define(version: 2019_02_25_202237) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "portrait"
-    t.bigint "wp_id"
     t.index ["slug"], name: "index_authors_on_slug", unique: true
-    t.index ["wp_id"], name: "index_authors_on_wp_id"
   end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "article_id"
     t.bigint "parent_id"
-    t.text "wp_id"
     t.text "content"
     t.text "nickname"
     t.text "email_address"
@@ -129,7 +111,6 @@ ActiveRecord::Schema.define(version: 2019_02_25_202237) do
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["status"], name: "index_comments_on_status"
     t.index ["user_id"], name: "index_comments_on_user_id"
-    t.index ["wp_id"], name: "index_comments_on_wp_id"
   end
 
   create_table "gift_subscriptions", force: :cascade do |t|

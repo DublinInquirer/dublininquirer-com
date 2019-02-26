@@ -33,7 +33,6 @@ class Admin::ArticlesController < Admin::ApplicationController
 
   def create
     @article = Article.new(meta_params)
-    @article.status = 'draft'
     if @article.save
       redirect_to [:admin, @article]
     else
