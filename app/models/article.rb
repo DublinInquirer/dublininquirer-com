@@ -173,11 +173,13 @@ class Article < ApplicationRecord
 
   def sanitize_html
     self.content = Sanitize.fragment(content,
-      elements: %w(img h1 h2 h3 h4 h5 p ul ol li strong em b i a artwork podcast figure figcaption table thead tbody tr td th iframe hr script div),
+      elements: %w(img h1 h2 h3 h4 h5 p ul ol li strong em b i a artwork podcast video source figure figcaption table thead tbody tr td th iframe hr script div),
       attributes: {
         'script' => %w(id src type),
         'artwork' => %w(id),
         'podcast' => %w(src),
+        'video' => %w(autoplay loop muted controls),
+        'source' => %w(src type),
         'p' => %w(id class),
         'ol' => %w(id class),
         'ul' => %w(id class),
