@@ -16,8 +16,7 @@ class Article < ApplicationRecord
   has_many :authors, through: :article_authors
 
   after_initialize :clean_text_fields
-  before_validation :sanitize_html, :uniq_tags
-  after_validation :generate_slug, :generate_text, :uniq_slugs
+  before_validation :sanitize_html, :uniq_tags, :generate_slug, :generate_text, :uniq_slugs
   before_save :format_common_hacks
 
   paginates_per 8

@@ -7,7 +7,7 @@ class Author < ApplicationRecord
   validates :full_name, presence: true
   validates :slug, uniqueness: true
 
-  after_validation :generate_slug
+  before_validation :generate_slug
 
   scope :by_name, -> { order('full_name asc') }
 
