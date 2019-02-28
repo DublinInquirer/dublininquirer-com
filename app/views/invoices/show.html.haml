@@ -1,5 +1,5 @@
 .block.-my4
-  .wrapper.-small{role: 'layout'}
+  .wrapper.-medium{role: 'layout'}
     - if @invoice.paid?
       .row
         .col-xs-12
@@ -40,10 +40,10 @@
 
     .row
       .col-xs-12
-        .block.-py2
+        .block.-py4
           %table.invoice-table
             %thead
-              %tr.-hr
+              %tr
                 %th Service
                 %th Qty
                 %th VAT Rate
