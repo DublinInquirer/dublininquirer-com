@@ -1,4 +1,5 @@
 class SubscriptionsController < ApplicationController
+  before_action :require_login, only: [:upgrade, :thanks]
   layout 'modal', only: [:upgrade, :create, :thanks]
 
   def create # not for gifts

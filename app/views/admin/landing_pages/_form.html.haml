@@ -11,5 +11,9 @@
     .field
       = f.label :slug
       = f.text_field :slug
+    .field
+      = f.label :template
+      = f.text_field :template
+      .hint (Leave blank unless you're Brian.)
 
   .actions= f.submit 'Save', class: 'button'

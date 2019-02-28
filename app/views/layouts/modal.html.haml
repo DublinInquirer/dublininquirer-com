@@ -15,6 +15,7 @@
     %script{type: "text/javascript"}
       var stripe = Stripe('#{ Rails.application.config.stripe[:publishable_key] }');
     = javascript_include_tag 'application'
+    = render partial: 'layouts/snippets/fb'
 
   %body
     .modal{role: 'layout'}

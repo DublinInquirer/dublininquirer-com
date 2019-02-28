@@ -194,6 +194,6 @@ Rails.application.routes.draw do
   # landing pages catch-all
 
   get '/:id', to: 'landing_pages#show', constraints: {
-    id:       /[a-z0-9]+/
+    id:       /[a-z0-9-]+/
   }
 end

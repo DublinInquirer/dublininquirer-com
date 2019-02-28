@@ -3,6 +3,10 @@ class LandingPagesController < ApplicationController
     @landing_page = LandingPage.find_by!(slug: params[:id].try(:downcase))
     session[:landing_page] = @landing_page.slug
 
-    redirect_to product_path(id: 'digital')
+    if @landing_page.template.present?
+      render @landing_page.template
+    else
+      redirect_to product_path(id: 'digital')
+    end
   end
 end
