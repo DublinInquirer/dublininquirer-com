@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    @invoices = @user.invoices.where('created_at > ?', Date.new(2018,10,30).beginning_of_day).where('total > 0').order('created_on desc').limit(12)
+    @invoices = @user.invoices.where('created_at > ?', Date.new(2018,10,20).beginning_of_day).where('total > 0').order('created_on desc').limit(12)
   end
 
   def edit
