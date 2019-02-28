@@ -2,7 +2,7 @@
   .row
     .col-xs-6
       %h2 Current issue
-      - if @current_issue.any?
+      - if @current_issue.try(:any?)
         %table.admin-table
           - @current_issue.each do |article|
             %tr

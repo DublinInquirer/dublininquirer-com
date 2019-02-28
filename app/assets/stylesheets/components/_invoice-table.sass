@@ -1,0 +1,18 @@
+.invoice-table
+  width: 100%
+  border-top: 1px solid var(--black)
+  font-size: var(--b3)
+
+  td, th
+    padding: 0.5rem
+    text-align: left
+
+    &:last-child
+      text-align: right
+
+  tbody
+    tr:nth-child(odd)
+      background-color: var(--even)
+
+    tr
+      border-top: 1px solid var(--black)

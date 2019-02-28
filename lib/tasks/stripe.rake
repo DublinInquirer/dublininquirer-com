@@ -1,7 +1,6 @@
 namespace :stripe do
   task setup: :environment do
     StripeSetterUp.setup_products
-    StripeSetterUp.setup_plans
   end
 
   task import_all: :environment do
@@ -21,7 +20,6 @@ namespace :stripe do
   end
 
   task update_all: :environment do
-    Product.all.each { |pr| pr.update_from_stripe! }
     Plan.all.each { |pl| pl.update_from_stripe! }
     Subscription.all.each { |s| s.update_from_stripe! }
     User.all.each { |u| u.update_from_stripe! }

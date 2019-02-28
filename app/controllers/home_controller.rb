@@ -2,20 +2,16 @@ class HomeController < ApplicationController
   layout 'front', only: [:show]
 
   def show
-    if params['p'].present? && Article.where(wp_id: params['p']).any?
-      redirect_to(Article.find_by(wp_id: params['p']).path) && return
-    end
-
     @current_issue = Rails.cache.fetch("/home/issue_current", expires_in: 5.minutes) do
       Issue.current
     end
 
-    @cartoon = Rails.cache.fetch("/home/cartoon", expires_in: 5.minutes) do
-      Article.published.in_category('cartoon').by_date.first
+    @articles = Rails.cache.fetch("/home/articles", expires_in: 5.minutes) do
+      @current_issue ? @current_issue.articles.standard.by_position : Article.none
     end
 
-    @articles = Rails.cache.fetch("/home/articles", expires_in: 5.minutes) do
-      @current_issue.articles.standard.by_position
+    @cartoon = Rails.cache.fetch("/home/cartoon", expires_in: 5.minutes) do
+      @current_issue ? @current_issue.published.in_category('cartoon').first : Article.none
     end
 
     @cover = Rails.cache.fetch("/home/cover", expires_in: 5.minutes) do

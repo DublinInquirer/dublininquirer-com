@@ -1,16 +1,22 @@
-.invoice
-  .container
+.block.-my4
+  .wrapper.-small{role: 'layout'}
     - if @invoice.paid?
       .row
         .col-xs-12
-          .box.-padded.-set-apart
+          .block.-p2.-bg-faint
             .text.-centered <strong>Paid.</strong> Thank you for supporting Dublin Inquirer.
+    - else
+      .row
+        .col-xs-12
+          .block.-p2.-bg-faint
+            .text.-centered <strong>Invoice outstanding.</strong>
 
     .row
-      .col-xs-8
-        .box.-padded-v
+      .col-xs-6
+        .block.-py2
           %header
-            .logotype Dublin Inquirer
+            .logotype.-medium
+              = render partial: 'layouts/images/logo-horizontal'
 
           .text.-basic
             :markdown
@@ -20,8 +26,8 @@
 
               CRO #559820
 
-      .col-xs-4
-        .box.-padded-v
+      .col-xs-6
+        .block.-py2
           %div
             %h3 Billed To:
             %p #{ @invoice.user.full_name }
@@ -34,7 +40,7 @@
 
     .row
       .col-xs-12
-        .box.-padded-v
+        .block.-py2
           %table.invoice-table
             %thead
               %tr.-hr
@@ -52,7 +58,7 @@
 
     .row
       .col-xs-6.col-xs-offset-6
-        .box.-padded-v
+        .block.-py2
           %table.invoice-table
             %tbody
               %tr.-hr
@@ -70,5 +76,5 @@
 
     .row
       .col-xs-12
-        .box.-padded
+        .block.-py2
           .text.-centered Questions? Send us an email at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

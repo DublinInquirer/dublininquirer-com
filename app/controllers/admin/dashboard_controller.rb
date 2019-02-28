@@ -3,7 +3,7 @@ class Admin::DashboardController < Admin::ApplicationController
 
   def show
     @recent_split = Subscription.recent_split_percentage
-    @current_issue = Issue.current.articles
+    @current_issue = Issue.current.try(:articles)
     @unapproved_comments = Comment.not_approved.not_spam.created_since(2.weeks.ago)
   end
 
