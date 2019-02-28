@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     end
 
     @cartoon = Rails.cache.fetch("/home/cartoon", expires_in: 5.minutes) do
-      @current_issue ? @current_issue.published.in_category('cartoon').first : Article.none
+      @current_issue ? @current_issue.articles.published.in_category('cartoon').first : Article.none
     end
 
     @cover = Rails.cache.fetch("/home/cover", expires_in: 5.minutes) do
