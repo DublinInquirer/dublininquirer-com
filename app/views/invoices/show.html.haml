@@ -13,8 +13,8 @@
 
     .row
       .col-xs-6
-        .block.-py2
-          %header
+        .block.-pt2
+          %header.block.-pb1
             .logotype.-medium
               = render partial: 'layouts/images/logo-horizontal'
 
@@ -29,14 +29,18 @@
       .col-xs-6
         .block.-py2
           %div
-            %h3 Billed To:
-            %p #{ @invoice.user.full_name }
-            %p #{ raw @invoice.user.address_lines.join('<br>') }
+            .text
+              %p
+                %strong Billed To:<br>
+                #{ @invoice.user.full_name }<br>
+                #{ raw @invoice.user.address_lines.join('<br>') }
 
           %div
-            %h3 Payment Info:
-            %p Receipt ID: #{ @invoice.number }
-            %p Billed on #{ @invoice.created_on.strftime('%-d %b %Y') }
+            .text
+              %p
+                %strong Payment Info:<br>
+                Receipt ID: #{ @invoice.number }<br>
+                Billed on #{ @invoice.created_on.strftime('%-d %b %Y') }
 
     .row
       .col-xs-12
