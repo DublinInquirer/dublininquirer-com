@@ -9,9 +9,10 @@
   .frame{role: 'layout'}
     .meta-nav_content
       .left
-        .icons
-          %a{class: 'icon -hamburger', 'data-action': 'openOverlay', 'data-target': 'menu'}
-            = render partial: 'layouts/images/hamburger'
+        - unless (defined?(brief) && brief)
+          .icons
+            %a{class: 'icon -hamburger', 'data-action': 'openOverlay', 'data-target': 'menu'}
+              = render partial: 'layouts/images/hamburger'
 
       - if !(defined?(small) && small)
         .center
@@ -21,14 +22,19 @@
 
       .right
         .links
-          - if logged_in?
-            = link_to current_user.email_address, :user
+          - unless (defined?(brief) && brief) # if brief, only show log in
+            - if logged_in?
+              = link_to current_user.email_address, :user
+            - else
+              = link_to "Log in", login_path, class: 'button -nav'
+
+            - if !logged_in? or !current_user.subscriber?
+              = link_to 'Subscribe', :products, class: 'button -nav'
+
           - else
             = link_to "Log in", login_path, class: 'button -nav'
 
-          - if !logged_in? or !current_user.subscriber?
-            = link_to 'Subscribe', :products, class: 'button -nav'
-
-        .icons
-          %a{class: 'icon -search', 'data-action': 'openOverlay', 'data-target': 'search'}
-            = render partial: 'layouts/images/search'
+        - unless (defined?(brief) && brief)
+          .icons
+            %a{class: 'icon -search', 'data-action': 'openOverlay', 'data-target': 'search'}
+              = render partial: 'layouts/images/search'

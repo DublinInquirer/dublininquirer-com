@@ -1,4 +1,6 @@
 class LandingPagesController < ApplicationController
+  layout 'landing'
+
   def show
     @landing_page = LandingPage.find_by!(slug: params[:id].try(:downcase))
     session[:landing_page] = @landing_page.slug
