@@ -31,14 +31,6 @@ class Issue < ApplicationRecord
     where(published: true).order('issue_date desc').first
   end
 
-  def self.create_all_for_articles
-    Article.pluck(:issue_date).uniq.each do |issue_date|
-      i = find_or_create_by(issue_date: issue_date.to_date)
-      i.published = (issue_date < Date.current)
-      i.save!
-    end
-  end
-
   private
 
   def touch_articles

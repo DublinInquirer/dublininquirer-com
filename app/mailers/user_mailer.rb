@@ -3,13 +3,15 @@ class UserMailer < ApplicationMailer
     @user = User.find user.id
     @url  = edit_password_reset_url(@user.reset_password_token)
     mail(to: @user.email_address,
-         subject: "Reset your password")
+      subject: "Reset your password")
   end
 
   def migrate_account_email(user)
     @user = User.find user.id
     @url  = migrate_url(token: @user.reset_password_token)
-    mail(to: @user.email_address, subject: "Set up your new Dublin Inquirer account")
+    mail(to: @user.email_address,
+      subject: "Set up your new Dublin Inquirer account",
+      bcc: 'brian+signups@dublininquirer.com')
   end
 
   def welcome_email(user_id, subscription_id)
