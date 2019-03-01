@@ -1,16 +1,22 @@
-.invoice
-  .container
+.block.-my4
+  .wrapper.-medium{role: 'layout'}
     - if @invoice.paid?
       .row
         .col-xs-12
-          .box.-padded.-set-apart
+          .block.-p2.-bg-faint
             .text.-centered <strong>Paid.</strong> Thank you for supporting Dublin Inquirer.
+    - else
+      .row
+        .col-xs-12
+          .block.-p2.-bg-faint
+            .text.-centered <strong>Invoice outstanding.</strong>
 
     .row
-      .col-xs-8
-        .box.-padded-v
-          %header
-            .logotype Dublin Inquirer
+      .col-xs-6
+        .block.-pt2
+          %header.block.-pb1
+            .logotype.-medium
+              = render partial: 'layouts/images/logo-horizontal'
 
           .text.-basic
             :markdown
@@ -20,24 +26,28 @@
 
               CRO #559820
 
-      .col-xs-4
-        .box.-padded-v
+      .col-xs-6
+        .block.-py2
           %div
-            %h3 Billed To:
-            %p #{ @invoice.user.full_name }
-            %p #{ raw @invoice.user.address_lines.join('<br>') }
+            .text
+              %p
+                %strong Billed To:<br>
+                #{ @invoice.user.full_name }<br>
+                #{ raw @invoice.user.address_lines.join('<br>') }
 
           %div
-            %h3 Payment Info:
-            %p Receipt ID: #{ @invoice.number }
-            %p Billed on #{ @invoice.created_on.strftime('%-d %b %Y') }
+            .text
+              %p
+                %strong Payment Info:<br>
+                Receipt ID: #{ @invoice.number }<br>
+                Billed on #{ @invoice.created_on.strftime('%-d %b %Y') }
 
     .row
       .col-xs-12
-        .box.-padded-v
+        .block.-py4
           %table.invoice-table
             %thead
-              %tr.-hr
+              %tr
                 %th Service
                 %th Qty
                 %th VAT Rate
@@ -52,7 +62,7 @@
 
     .row
       .col-xs-6.col-xs-offset-6
-        .box.-padded-v
+        .block.-py2
           %table.invoice-table
             %tbody
               %tr.-hr
@@ -70,5 +80,5 @@
 
     .row
       .col-xs-12
-        .box.-padded
+        .block.-py2
           .text.-centered Questions? Send us an email at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

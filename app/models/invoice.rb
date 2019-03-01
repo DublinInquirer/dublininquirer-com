@@ -73,10 +73,10 @@ class Invoice < ApplicationRecord
   def line_item_for_digital(amount, quantity)
     {
       title: 'Digital access',
-      unit_price: VatCalculator.net_from_gross(amount,:digital),
+      unit_price: VatCalculator.net_from_gross(amount,:digital, created_at.strftime('%Y')),
       quantity: quantity,
-      vat_rate: VatCalculator.rate_for(:digital),
-      net: VatCalculator.net_from_gross(amount,:digital),
+      vat_rate: VatCalculator.rate_for(:digital, created_at.strftime('%Y')),
+      net: VatCalculator.net_from_gross(amount,:digital, created_at.strftime('%Y')),
       gross: amount
     }
   end
@@ -84,10 +84,10 @@ class Invoice < ApplicationRecord
   def line_item_for_print(amount, quantity)
     {
       title: 'Print edition',
-      unit_price: VatCalculator.net_from_gross(amount,:print),
+      unit_price: VatCalculator.net_from_gross(amount,:print, created_at.strftime('%Y')),
       quantity: quantity,
-      vat_rate: VatCalculator.rate_for(:print),
-      net: VatCalculator.net_from_gross(amount,:print),
+      vat_rate: VatCalculator.rate_for(:print, created_at.strftime('%Y')),
+      net: VatCalculator.net_from_gross(amount,:print, created_at.strftime('%Y')),
       gross: amount
     }
   end

@@ -4,7 +4,10 @@
       .links
         %span
           %em Issue for
-          #{ @current_issue.issue_date.strftime("%-d %b '%y") }
+          - if @current_issue
+            #{ @current_issue.issue_date.strftime("%-d %b '%y") }
+          - else
+            &mdash;
     .center
       .links.-main
         = link_to "City Desk", category_path('city-desk')

@@ -8,12 +8,6 @@ class Product < ApplicationRecord
   scope :active, -> { where(name: ['Digital + Print subscription', 'Digital subscription']) }
   scope :includes_print, -> { where('name ILIKE ?', '%print%') }
 
-  def update_from_stripe!
-    str_product = self.stripe_product
-    self.name = str_product['name']
-    self.save!
-  end
-
   def requires_address?
     self.name.downcase.include?('print')
   end
@@ -39,7 +33,7 @@ class Product < ApplicationRecord
   end
 
   def base_plan
-    self.plans.find_or_create_by(amount: self.base_price, interval: 'month')
+    self.plans.find_or_create_by!(amount: self.base_price, interval: 'month', interval_count: 1)
   end
 
   def slug

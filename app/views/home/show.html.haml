@@ -10,27 +10,29 @@
     .fixed{role: 'layout'}
       %main
         .row
-          .col-xs-12.col-lg-8.col.flex
-            - @articles.first(1).each_with_index do |article, i|
-              = render partial: 'articles/excerpts/half', locals: {article: article, odd: i.odd?}
-              %hr.-stroke
-          .col-xs-12.col-lg-4
-            - @articles.first(2).drop(1).each do |article|
-              = render partial: 'articles/excerpts/small', locals: {article: article}
-              %hr.-stroke
-
-            .hidden.lg-show= render partial: 'home/tiny-box', locals: {articles: @articles}
-
-        .row
-          - cache ['home', 'secondary', @articles] do
-            - @articles.drop(2).each do |article|
-              .col-xs-12.col-lg-6.col.flex
-                = render partial: 'articles/excerpts/half', locals: {article: article}
+          - if @articles.any?
+            .col-xs-12.col-lg-8.col.flex
+              - @articles.first(1).each_with_index do |article, i|
+                = render partial: 'articles/excerpts/half', locals: {article: article, odd: i.odd?}
+                %hr.-stroke
+            .col-xs-12.col-lg-4
+              - @articles.first(2).drop(1).each do |article|
+                = render partial: 'articles/excerpts/small', locals: {article: article}
                 %hr.-stroke
 
-            .col-xs-12.col-lg-6.col.flex
-              = render partial: 'articles/excerpts/cover', locals: {article: @cover}
-              %hr.-stroke
+              .hidden.lg-show= render partial: 'home/tiny-box', locals: {articles: @articles}
+
+        .row
+          - if @articles.any?
+            - cache ['home', 'secondary', @articles] do
+              - @articles.drop(2).each do |article|
+                .col-xs-12.col-lg-6.col.flex
+                  = render partial: 'articles/excerpts/half', locals: {article: article}
+                  %hr.-stroke
+
+              .col-xs-12.col-lg-6.col.flex
+                = render partial: 'articles/excerpts/cover', locals: {article: @cover}
+                %hr.-stroke
 
       %aside.sidebar
         = render partial: 'home/sidebar'
