@@ -1,22 +1,22 @@
-.wrapper.-contained{role: 'layout'}
-  %header.header.-category
-    %h1.heading
-      Past issues of Dublin Inquirer
+%header.page-header
+  %h1.heading Past issues of Dublin Inquirer
 
-  - @issues.each do |issue|
-    - cache([issue, 'partial']) do
-      .block.-my4
-        .row
-          .col-xs-12.col-md-7
-            %header.-issue
-              %h2.heading= link_to issue.issue_date.strftime('%-d %B %Y'), issue
-            .article
-              %ol.list.-articles
-                - issue.articles.standard.by_position.each do |article|
-                  %li= link_to article.title, article.path
-          .col-xs-12.col-md-3.col-md-offset-2
-            = link_to issue do
-              %figure.artwork= image_tag issue.featured_article.featured_artwork.image.large.url
-      %hr.-stroke
+.block.-p2.-pb4
+  .wrapper.-contained{role: 'layout'}
+    - @issues.each do |issue|
+      - cache([issue, 'partial']) do
+        .block.-my4
+          .row
+            .col-xs-12.col-md-7
+              %header.-issue
+                %h2.heading= link_to issue.issue_date.strftime('%-d %B %Y'), issue
+              .article
+                %ol.list.-articles
+                  - issue.articles.standard.by_position.each do |article|
+                    %li= link_to article.title, article.path
+            .col-xs-12.col-md-3.col-md-offset-2
+              = link_to issue do
+                %figure.artwork= image_tag issue.featured_article.featured_artwork.image.large.url
+        %hr.-stroke
 
-  = render partial: 'layouts/pagination', locals: {page: @page, collection: @issues}
+    = render partial: 'layouts/pagination', locals: {page: @page, collection: @issues}
