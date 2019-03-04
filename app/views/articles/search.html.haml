@@ -6,12 +6,11 @@
     %code.-quote #{ params[:q] }
 
 .block.-p2.-pb4
-  .wrapper.-contained{role: 'layout'}
-    - @articles.in_groups_of(4, false).each do |group|
-      .row
-        - group.each do |article|
-          .col-xs-12.col-lg-3.col.flex
-            = render partial: 'articles/excerpts/result', locals: { article: article }
-            %hr.-stroke
+  - if @articles.any?
+    .wrapper.-contained{role: 'layout'}
+      = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {q: @query}}
 
-    = render partial: 'layouts/pagination', locals: {page: @page, collection: @articles, query_params: {q: @query}}
+  - else
+    .text.-centered
+      :markdown
+        We couldn't find any articles matching your search terms.

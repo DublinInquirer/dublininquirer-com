@@ -31,8 +31,9 @@
                   %hr.-stroke
 
               .col-xs-12.col-lg-6.col.flex
-                = render partial: 'articles/excerpts/cover', locals: {article: @cover}
-                %hr.-stroke
+                - if @cover
+                  = render partial: 'articles/excerpts/cover', locals: {article: @cover}
+                  %hr.-stroke
 
       %aside.sidebar
         = render partial: 'home/sidebar'

@@ -24,11 +24,11 @@
   .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
 
 - if @article.tags.any?
-  .block.-mt4.-mb4.-bt.-pt4
+  .block.-mt4.-mb4.-bt.-px2.-pt4
     %header.header.-issue
       %h3.heading Filed under
 
-    .block.-mt4.p.-b2
+    .block.-mt2.p.-b2
       %ul.list.-tags
         - @article.displayable_tags.each do |tag|
           %li= link_to tag.name, tag_path(id: tag.slug)
