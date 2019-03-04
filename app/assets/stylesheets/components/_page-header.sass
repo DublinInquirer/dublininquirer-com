@@ -1,28 +1,17 @@
 .page-header
   border-bottom: 1px solid var(--black)
-  padding: 2rem
+  padding: 2.25rem 2rem 1.75rem
   position: relative
 
   .heading
-    font-size: var(--h1)
+    font-size: var(--h2)
     letter-spacing: -0.025em
     line-height: 1.1
-    font-weight: 300
+    font-weight: 600
     margin-bottom: var(--baseline)
 
   .illustration
-    position: absolute
-    right: 2rem
-    top: 2rem
-    bottom: 2rem
-    width: 40%
-
-    img
-      display: block
-      width: 100%
-      height: 100%
-      object-fit: contain
-      object-position: right center
+    display: none
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
@@ -31,4 +20,21 @@
     padding-right: 50%
 
     .heading
+      font-size: var(--h1)
+      font-weight: 300
       margin-bottom: 5vh
+
+    .illustration
+      display: block
+      position: absolute
+      right: 2rem
+      top: 2rem
+      bottom: 2rem
+      width: 40%
+
+      img
+        display: block
+        width: 100%
+        height: 100%
+        object-fit: contain
+        object-position: right center

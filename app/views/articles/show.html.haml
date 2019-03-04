@@ -18,9 +18,9 @@
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
 
-= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
+.block.-px2.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block.-py4
+.block.-px2.-py4
   - if @article.commentable?
     .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
 
@@ -48,7 +48,7 @@
 - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
   = render partial: 'user_sessions/paywall'
 
-= render partial: 'products/enticement'
+.block.-px2.-pb2.-bt= render partial: 'products/enticement'
 
 - if @limited
   = render partial: 'user_sessions/limited'
