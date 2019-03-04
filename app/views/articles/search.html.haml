@@ -1,17 +1,16 @@
 - title "Search results for #{ params[:q] }"
 
-.wrapper.-vertical{role: 'layout'}
-  .wrapper{role: 'layout'}
-    %header.header.-category
-      %h1.heading
-        Search results for
-        %code.-quote #{ params[:q] }
-    .container
-      - @articles.in_groups_of(4, false).each do |group|
-        .row
-          - group.each do |article|
-            .col-xs-12.col-lg-3.col.flex
-              = render partial: 'articles/excerpts/result', locals: { article: article }
-              %hr.-stroke
+%header.page-header
+  %h1.heading
+    Search results for
+    %code.-quote #{ params[:q] }
 
-    = render partial: 'layouts/pagination', locals: {page: @page, collection: @articles, query_params: {q: @query}}
+.block.-p2.-pb4
+  - if @articles.any?
+    .wrapper.-contained{role: 'layout'}
+      = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {q: @query}}
+
+  - else
+    .text.-centered
+      :markdown
+        We couldn't find any articles matching your search terms.

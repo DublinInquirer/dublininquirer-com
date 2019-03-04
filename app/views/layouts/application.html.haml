@@ -31,7 +31,7 @@
     = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 
     .frame.sub-omnipresent{role: 'layout'}
-      .block.-p2= yield
+      = yield
 
     .block.-bt
       .frame{role: 'layout'}

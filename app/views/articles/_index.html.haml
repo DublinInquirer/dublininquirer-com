@@ -1,0 +1,8 @@
+- articles.in_groups_of(4, false).each do |group|
+  .row
+    - group.each do |article|
+      .col-xs-12.col-lg-3.col.flex
+        = render partial: 'articles/excerpts/result', locals: { article: article }
+        %hr.-stroke
+
+= render partial: 'layouts/pagination', locals: {page: page, collection: articles, query_params: query_params}

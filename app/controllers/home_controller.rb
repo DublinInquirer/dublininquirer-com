@@ -40,27 +40,27 @@ class HomeController < ApplicationController
     @staff = Rails.cache.fetch("/imprint/staff", expires_in: 1.day) do
       [
         {
-          author: Author.find_by(full_name: 'Lois Kapila'),
+          author: Author.find_or_create_by!(full_name: 'Lois Kapila'),
           title: 'Managing editor',
           email_address: 'info@dublininquirer.com'
         },
         {
-          author: Author.find_by(full_name: 'Sam Tranum'),
+          author: Author.find_or_create_by!(full_name: 'Sam Tranum'),
           title: 'Deputy editor',
           email_address: 'sam@dublininquirer.com'
         },
         {
-          author: Author.find_by(full_name: 'Brian Flanagan'),
+          author: Author.find_or_create_by!(full_name: 'Brian Flanagan'),
           title: 'Web & strategy',
           email_address: 'brian@dublininquirer.com'
         },
         {
-          author: Author.find_by(full_name: 'Sean Finnan'),
+          author: Author.find_or_create_by!(full_name: 'Sean Finnan'),
           title: 'City reporter',
           email_address: 'sfinnan@dublininquirer.com'
         },
         {
-          author: Author.find_by(full_name: 'Erin McGuire'),
+          author: Author.find_or_create_by!(full_name: 'Erin McGuire'),
           title: 'City reporter',
           email_address: 'erin@dublininquirer.com'
         }

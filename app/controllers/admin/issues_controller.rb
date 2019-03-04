@@ -6,7 +6,7 @@ class Admin::IssuesController < Admin::ApplicationController
   end
 
   def create
-    next_wednesday = Issue.maximum(:issue_date).next_week.advance(days: 2)
+    next_wednesday = (Issue.maximum(:issue_date) || Date.current).next_week.advance(days: 2)
     Issue.create! issue_date: next_wednesday
     redirect_to [:admin, :issues]
   end
