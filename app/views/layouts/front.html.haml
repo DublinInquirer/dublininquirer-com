@@ -30,8 +30,7 @@
     = render partial: 'layouts/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/primary-flag'
 
-    .frame{role: 'layout'}
-      .block.-px2.-pb2= yield
+    = yield
 
     .block.-bt
       .frame{role: 'layout'}

@@ -48,7 +48,7 @@
 - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
   = render partial: 'user_sessions/paywall'
 
-.block.-px2.-pb2.-bt= render partial: 'products/enticement'
+= render partial: 'products/enticement'
 
 - if @limited
   = render partial: 'user_sessions/limited'
