@@ -17,24 +17,25 @@
   @media screen and (min-width: $medium)
     padding-top: 17.5vh
     padding-bottom: 7.5vh
-    padding-right: 50%
 
     .heading
       font-size: var(--h1)
       font-weight: 300
       margin-bottom: 5vh
 
-    .illustration
-      display: block
-      position: absolute
-      right: 2rem
-      top: 2rem
-      bottom: 2rem
-      width: 40%
-
-      img
+    &.-illustrated
+      padding-right: 50%
+      .illustration
         display: block
-        width: 100%
-        height: 100%
-        object-fit: contain
-        object-position: right center
+        position: absolute
+        right: 2rem
+        top: 2rem
+        bottom: 2rem
+        width: 40%
+
+        img
+          display: block
+          width: 100%
+          height: 100%
+          object-fit: contain
+          object-position: right center
