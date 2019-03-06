@@ -3,32 +3,33 @@
 - set_meta_tags canonical: "https://www.dublininquirer.com/imprint"
 
 - cache ['imprint', 'v1'] do
-  .wrapper.-contained{role: 'layout'}
-    %header.-static
-      %h1.heading
-        About us
-      %p.p.-b1
-        Dublin Inquirer is an independent newspaper launched in June 2015 to provide quality coverage of city affairs. It is published online weekly (on Wednesday mornings) and in print monthly (mid month) from our office in Crumlin.
+  %header.page-header
+    %h1.heading
+      About us
+    %p.p.-b1
+      Dublin Inquirer is an independent newspaper launched in June 2015 to provide quality coverage of city affairs. It is published online weekly (on Wednesday mornings) and in print monthly (mid month) from our office in Crumlin.
 
-    %header.header.-modal
-      %h2.heading Staff
+  .block.-p2.-pb4
+    .wrapper.-small{role: 'layout'}
+      %header.header.-modal
+        %h2.heading Staff
 
-    - @staff.each do |staff|
-      = render partial: 'authors/staff', locals: {staff: staff}
-      %hr.-stroke
+      - @staff.each do |staff|
+        = render partial: 'authors/staff', locals: {staff: staff}
+        %hr.-stroke
 
-    %header.header.-modal
-      %h2.heading Columnists
+      %header.header.-modal
+        %h2.heading Columnists
 
-    - @columnists.each do |author|
-      = render partial: 'authors/author', locals: {author: author}
-      %hr.-stroke
+      - @columnists.each do |author|
+        = render partial: 'authors/author', locals: {author: author}
+        %hr.-stroke
 
-    %header.header.-modal
-      %h2.heading Regular contributors
+      %header.header.-modal
+        %h2.heading Regular contributors
 
-    - @contributors.each do |author|
-      = render partial: 'authors/author', locals: {author: author}
-      %hr.-stroke
+      - @contributors.each do |author|
+        = render partial: 'authors/author', locals: {author: author}
+        %hr.-stroke
 
 = render partial: 'products/enticement'

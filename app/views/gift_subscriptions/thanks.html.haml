@@ -1,21 +1,17 @@
+- title 'Give a subscription'
+- noindex true
+
 - content_for :breadcrumbs do
   .current Give a subscription
 
-%header.header.-section
+%header.header.-modal
   %h1.heading Thanks
 
-.box.-padded-v
-  .text.-static
-    :markdown
-      Your gift subscription is confirmed. Thank you. We'll send a little card so you'll have something to give in person.
+.text.-article
+  :markdown
+    Your gift subscription is confirmed. Thank you. We'll send a little card so you'll have something to give in person.
 
-      If you have any problems, story suggestions, or just want to talk: email us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>. We like talking to our readers!
+    If you have any problems, story suggestions, or just want to talk: email us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>. We like talking to our readers!
 
 %nav.box.-padded-v
   = link_to "Go to the home page", :root, class: 'button -big'
-
-:javascript
-  fbq('track', 'Subscribe', {
-    value: 50,
-    currency: 'eur'
-  });

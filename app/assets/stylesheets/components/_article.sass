@@ -72,6 +72,17 @@
     margin-top: 1em
     margin-bottom: 1em
 
+  ul
+    padding-left: 3rem
+    font-family: $sans
+    li
+      &:before
+        content: '— '
+
+  ol
+    padding-left: 3rem
+    list-style: decimal inside
+
   .section-separator
     text-align: center
     color: var(--black)
