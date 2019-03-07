@@ -34,7 +34,9 @@
             #{ current_user.subscription.plan.product.name }:
 
           %code #{ number_to_currency((current_user.subscription.plan.amount/100.0), unit: '€') }/#{ current_user.subscription.plan.interval }
-        %p Next billing date is <code>#{ current_user.subscription.current_period_ends_at.strftime('%-d %B') }</code>.
+
+        - if current_user.subscription.current_period_ends_at.present?
+          %p Next billing date is <code>#{ current_user.subscription.current_period_ends_at.strftime('%-d %B') }</code>.
 
 - if current_user.requires_address?
   .box
