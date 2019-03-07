@@ -43,17 +43,15 @@ gem 'upmark'
 gem 'bcrypt', '~> 3.1.7'
 gem 'browser'
 gem 'kaminari'
-gem 'skylight'
 gem 'pretender'
 gem 'reverse_markdown'
 gem 'scout_apm'
 gem 'plyr-rails'
 gem 'rinku'
+gem 'fog-aws', group: :production
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
-gem 'fog-aws', group: :production
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

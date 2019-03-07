@@ -6,13 +6,17 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
     - set_meta_tags site: 'Dublin Inquirer'
-    - set_meta_tags og: { title: :title, site_name: :site, image: :image_src }
+    - set_meta_tags og: {site_name: :site}
     - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
     = display_meta_tags reverse: true, separator: '|'
 
     = csrf_meta_tags
     = csp_meta_tag
+    = stylesheet_link_tag 'audio', media: 'all'
     = stylesheet_link_tag 'application', media: 'all'
+    <script src="https://js.stripe.com/v3/"></script>
+    %script{type: "text/javascript"}
+      var stripe = Stripe('#{ Rails.application.config.stripe[:publishable_key] }');
     = javascript_include_tag 'application'
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -24,7 +28,30 @@
     <meta name="theme-color" content="#ff0000">
     = render partial: 'layouts/snippets/fb'
 
-  %body.-plain
-    = yield
+  %body
+    = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false, brief: true }
 
+    .frame.sub-omnipresent{role: 'layout'}
+      = yield
+
+    .block.-bt
+      .frame{role: 'layout'}
+        = render partial: 'layouts/primary-footer'
+
+    .block.-bt
+      .frame{role: 'layout'}
+        .block.-py4
+          &nbsp;
+
+    = render partial: 'user_sessions/cookies'
+
+    - if permission_for_cookie?
+      = render partial: 'user_sessions/delinquent'
+
+    - if current_user != true_user
+      = render partial: 'user_sessions/impersonating'
+
+    = render partial: 'layouts/search'
+    = render partial: 'layouts/expansive-nav'
+    = auto_discovery_link_tag(:rss, feed_url(format: :xml))
     = render partial: 'layouts/analytics'

@@ -1,10 +1,19 @@
 .block
+  &.-pull-up
+    margin-top: -4rem
+  &.-pull-down
+    margin-bottom: -4rem
+    z-index: 99
+    position: relative
   &.-bg-black
     color: var(--default)
     background-color: var(--black)
   &.-bg-blue
     color: var(--default)
     background-color: var(--blue)
+  &.-bg-default
+    color: var(--black)
+    background-color: var(--default)
   &.-bg-faint
     color: var(--black)
     background-color: var(--faint)
@@ -211,6 +220,13 @@
     border-left: 1px solid var(--black)
   &.-br
     border-right: 1px solid var(--black)
+
+  &.-b-highlight
+    border-radius: 1.25px
+    border: 3px solid var(--blue)
+
+  &.-shadow
+    box-shadow: 0 0.5rem 1rem rgba(#000,0.175)
 
 .flex
   display: flex

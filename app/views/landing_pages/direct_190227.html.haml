@@ -1,0 +1,65 @@
+.block.-py4
+  .text.-centered
+    %h1.h.-h2 Help our reporters<br>cover the important stories.
+
+    %p.p.-b2 Subscribe now and get your first month free.
+
+.block.-pull-down.-px2
+  .wrapper.-medium{role: 'layout'}
+    .block.-bg-default.-b-highlight.-shadow
+      .row
+        .col-xs-12.col-sm-8
+          .block.-p2
+            %h3 Basic digital subscription
+            .p.-b2
+              :markdown
+                Unlimited access to our online digital edition.
+
+                One month free, and then only €5 per month.
+
+        .col-xs-12.col-sm-4.col.flex
+          %nav.-centered
+            = link_to "Subscribe", product_path(:digital), class: 'button -big'
+
+      .block.-p2.-bt
+        .p.-b4
+          .row
+            .col-xs-12.col-md-6
+              .text
+                :markdown
+                  ##### Unlimited access
+
+                  Read unlimited articles on **dublininquirer.com** and our mobile-optimised site. This includes access to the full archive of everything we've ever published.
+
+            .col-xs-12.col-md-6
+              .text
+                :markdown
+                  ##### Events & community
+
+                  We also run occasional events, from pub quizzes to talks and debates. Subscribers usually get first dibs on tickets, or discounts, or both.
+
+.block.-bt.-px2.-py4.-bg-faint
+  .wrapper.-small{role: 'layout'}
+    .block.-py4
+      .box.-tight.block.-bg-default
+        %header.-box.-tight
+          .heading Frequently Asked Questions
+
+        .block.-p1
+          .text
+            :markdown
+              #### What does 'independent' and 'reader-funded' mean?
+
+              _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
+
+              _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers. If we're doomed to be beholden to our funders, we'd prefer those funders be Dubliners.
+
+              #### Is there a student/unwaged rate?
+
+              Nobody will be turned away for want of funds. If you're a student, not working, or otherwise unable to afford a subscription, send [us an email](mailto:brian@dublininquirer.com) and we'll see if we can work something out.
+
+              #### What is the cancellation policy?
+
+              You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.
+
+= render partial: 'products/enticement'

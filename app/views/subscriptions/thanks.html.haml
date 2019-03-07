@@ -21,3 +21,9 @@
 
 %nav.box.-invisible.-tight.-other
   = link_to "Go to the home page", :root, class: 'button -big'
+
+:javascript
+  fbq('track', 'Subscribe', {
+    value: #{ ((@subscription.plan.try(:amount)/100.0) * 12).round },
+    currency: 'eur'
+  });
