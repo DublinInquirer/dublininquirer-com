@@ -1,8 +1,12 @@
 .text
   strong
     font-weight: 600
-    font-family: $sans
-    font-size: 1.1em
+
+  h5 + p
+    margin-top: 0.5rem
+
+  h5
+    font-weight: 600
 
   p, ul, ol, blockquote
     margin: var(--baseline) 0
@@ -34,6 +38,9 @@
   font-size: var(--b2)
   line-height: calc(1.5 * var(--b2)) // 2.4rem
   font-family: $serif
+  strong
+    font-family: $sans
+    font-size: 1.1em
 
 .text.-small
   font-size: var(--b4)
@@ -116,21 +123,22 @@
     font-size: 1.6vw
     line-height: 1.4
 
-.p.-b1
-  font-size: var(--b1)
-  line-height: 1.4
-.p.-b2
-  font-size: var(--b2)
-  line-height: 1.4
-.p.-b3
-  font-size: var(--b3)
-  line-height: 1.4
-.p.-b4
-  font-size: var(--b4)
-  line-height: 1.4
-.p.-b5
-  font-size: var(--b5)
-  line-height: 1.4
+.p
+  &.-b1
+    font-size: var(--b1)
+    line-height: 1.4
+  &.-b2
+    font-size: var(--b2)
+    line-height: 1.4
+  &.-b3
+    font-size: var(--b3)
+    line-height: 1.4
+  &.-b4
+    font-size: var(--b4)
+    line-height: 1.4
+  &.-b5
+    font-size: var(--b5)
+    line-height: 1.4
 
 .p.-category
   font-weight: 400
