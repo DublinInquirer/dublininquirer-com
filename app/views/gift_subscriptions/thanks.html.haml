@@ -15,3 +15,9 @@
 
 %nav.box.-padded-v
   = link_to "Go to the home page", :root, class: 'button -big'
+
+:javascript
+  fbq('track', 'Subscribe', {
+    value: 30,
+    currency: 'EUR'
+  });
