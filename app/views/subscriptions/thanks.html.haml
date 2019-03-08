@@ -25,5 +25,5 @@
 :javascript
   fbq('track', 'Subscribe', {
     value: #{ ((@subscription.plan.try(:amount)/100.0) * 12).round },
-    currency: 'eur'
+    currency: 'EUR'
   });

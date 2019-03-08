@@ -124,3 +124,10 @@
 
     %div.actions
       = f.submit 'Subscribe', class: 'button -big'
+
+:javascript
+  fbq('track', 'InitiateCheckout', {
+    value: #{ ((@plan.try(:amount)/100.0) * 12).round },
+    currency: 'EUR',
+  });
+
