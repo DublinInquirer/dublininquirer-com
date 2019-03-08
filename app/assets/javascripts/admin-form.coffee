@@ -5,6 +5,7 @@ $(document).on 'ready turbolinks:load', ->
 
   $('select#article_tag_ids').select2 ajax:
     url: '/admin/tags/autocomplete'
+    minimumInputLength: 2
     processResults: (data) ->
       tags = []
       for tag in data
@@ -13,6 +14,7 @@ $(document).on 'ready turbolinks:load', ->
 
   $('select#merge_tag_id').select2 ajax:
     url: '/admin/tags/autocomplete'
+    minimumInputLength: 2
     processResults: (data) ->
       tags = []
       for tag in data
