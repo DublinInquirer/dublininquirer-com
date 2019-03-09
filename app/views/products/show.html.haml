@@ -4,13 +4,13 @@
 %header.header.-modal
   %h1.heading
     - if @plan.is_base_plan?
-      #{ @plan.product.name }
+      Basic #{ @plan.product.name.downcase }
     - elsif @plan.is_friend?
       'Friend' subscription
     - elsif @plan.is_patron?
       'Patron' subscription
     - else # discount
-      #{ @plan.product.name }
+      Basic #{ @plan.product.name }
 
   - if @landing_page
     .text.-article
@@ -29,101 +29,102 @@
       :markdown
         Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-= form_for @subscription, url: subscriptions_path, method: :post, html: {class: 'subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
-  .error{style: 'display:none;'}
-    .message &nbsp;
+.block.-mt4
+  = form_for @subscription, url: subscriptions_path, method: :post, html: {class: 'subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
+    .error{style: 'display:none;'}
+      .message &nbsp;
 
-  = f.hidden_field :landing_page_slug
+    = f.hidden_field :landing_page_slug
 
-  .box.-tight
-    %header.header.-box.-tight
-      %h2.heading Subscriber details
-
-    .box-form
-      - if @user && @user.errors.any?
-        %ul.modal-form_errors
-          - @user.errors.full_messages.each do |message|
-            %li= message
-
-      .field
-        = f.label :given_name, 'Name'
-        .twofer
-          = f.text_field :given_name, placeholder: 'First'
-          = f.text_field :surname, placeholder: 'Surname'
-
-      - if !(@subscription.user.present? && @subscription.user.persisted?)
-        .field
-          = f.label :email_address
-          = f.email_field :email_address, placeholder: 'aoife@example.ie'
-
-        .field
-          = f.label :password
-          = f.password_field :password, placeholder: 'password123'
-
-  - if @subscription.requires_address?
     .box.-tight
       %header.header.-box.-tight
-        %h2.heading Subscription address
+        %h2.heading Subscriber details
+
+      .box-form
+        - if @user && @user.errors.any?
+          %ul.modal-form_errors
+            - @user.errors.full_messages.each do |message|
+              %li= message
+
+        .field
+          = f.label :given_name, 'Name'
+          .twofer
+            = f.text_field :given_name, placeholder: 'First'
+            = f.text_field :surname, placeholder: 'Surname'
+
+        - if !(@subscription.user.present? && @subscription.user.persisted?)
+          .field
+            = f.label :email_address
+            = f.email_field :email_address, placeholder: 'aoife@example.ie'
+
+          .field
+            = f.label :password
+            = f.password_field :password, placeholder: 'password123'
+
+    - if @subscription.requires_address?
+      .box.-tight
+        %header.header.-box.-tight
+          %h2.heading Subscription address
+        .box-form
+          .field
+            = f.label :address_line_1
+            = f.text_field :address_line_1
+          .field
+            = f.label :address_line_2
+            = f.text_field :address_line_2
+          .field
+            = f.label :city
+            = f.text_field :city
+          .field.twofer
+            .field
+              = f.label :county
+              = f.text_field :county
+            .field
+              = f.label :post_code
+              = f.text_field :post_code
+          .field.-select
+            = f.label :country_code, 'Country'
+            = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+
+    .box.-tight
+      %header.header.-box.-tight
+        %h2.heading Credit/debit card details
+
+        - if @landing_page
+          .text.-tiny
+            :markdown
+              You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
+
       .box-form
         .field
-          = f.label :address_line_1
-          = f.text_field :address_line_1
-        .field
-          = f.label :address_line_2
-          = f.text_field :address_line_2
-        .field
-          = f.label :city
-          = f.text_field :city
-        .field.twofer
+          %label Card number
+          #stripe-form_card-number.field.empty
+
+        .twofer
           .field
-            = f.label :county
-            = f.text_field :county
+            %label Expiration date
+            #stripe-form_card-expiry.field.empty
           .field
-            = f.label :post_code
-            = f.text_field :post_code
-        .field.-select
-          = f.label :country_code, 'Country'
-          = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+            %label Security code
+            #stripe-form_card-cvc.field.empty
 
-  .box.-tight
-    %header.header.-box.-tight
-      %h2.heading Credit/debit card details
+    .box.-tight.-horizontal
+      %div.content
+        .text.-small
+          - if @landing_page
+            %ul.list.-em
+              %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
+              %li Cancel any time.
+          - else
+            %ul.list.-em
+              %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly.
+              %li Subscriptions renew automatically.
+              %li Cancel any time.
 
-      - if @landing_page
-        .text.-tiny
-          :markdown
-            You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
+        = f.hidden_field :plan_id
 
-    .box-form
-      .field
-        %label Card number
-        #stripe-form_card-number.field.empty
-
-      .twofer
-        .field
-          %label Expiration date
-          #stripe-form_card-expiry.field.empty
-        .field
-          %label Security code
-          #stripe-form_card-cvc.field.empty
-
-  .box.-tight.-horizontal
-    %div.content
-      .text.-small
-        - if @landing_page
-          %ul.list.-em
-            %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
-            %li Cancel any time.
-        - else
-          %ul.list.-em
-            %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly.
-            %li Subscriptions renew automatically.
-            %li Cancel any time.
-
-      = f.hidden_field :plan_id
-
-    %div.actions
-      = f.submit 'Subscribe', class: 'button -big'
+      %div.actions
+        = f.submit 'Subscribe', class: 'button -big'
 
 :javascript
   fbq('track', 'InitiateCheckout', {

@@ -52,12 +52,12 @@ class Admin::TagsController < Admin::ApplicationController
 
   def merge
     @tag = Tag.find_by(slug: params[:id])
-    if request.method.downcase.to_sym == :post
-      @destination_tag = Tag.find(params[:destination_id])
+    @destination_tag = Tag.find(params[:destination_id])
+    if (request.method.downcase.to_sym != :post)
+      render :merge
+    else
       @tag.merge_into!(@destination_tag)
       redirect_to [:admin, @destination_tag]
-    else
-      render :merge
     end
   end
 
