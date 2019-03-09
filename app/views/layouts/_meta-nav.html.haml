@@ -30,11 +30,13 @@
             - else
               = link_to "Log in", login_path, class: 'button -nav'
 
-            - if !logged_in? or !current_user.subscriber?
-              = link_to 'Subscribe', :products, class: 'button -nav'
-
           - else
             = link_to "Log in", login_path, class: 'button -nav'
+
+
+
+        - if !logged_in? or !current_user.subscriber?
+          .subscribe= link_to 'Subscribe', :products
 
         - unless (defined?(brief) && brief)
           .icons
