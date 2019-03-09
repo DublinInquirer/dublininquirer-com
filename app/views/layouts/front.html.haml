@@ -13,9 +13,6 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all'
-    <script src="https://js.stripe.com/v3/"></script>
-    %script{type: "text/javascript"}
-      var stripe = Stripe('#{ Rails.application.config.stripe[:publishable_key] }');
     = javascript_include_tag 'application'
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

@@ -24,6 +24,8 @@
         .links
           - unless (defined?(brief) && brief) # if brief, only show log in
             - if logged_in?
+              - if current_user.is_admin?
+                = link_to "admin", [:admin, :root]
               = link_to current_user.email_address, :user
             - else
               = link_to "Log in", login_path, class: 'button -nav'
