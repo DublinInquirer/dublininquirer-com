@@ -29,7 +29,7 @@ class Admin::TagsController < Admin::ApplicationController
   end
 
   def create
-    @tag = Tag.new(tag_params)
+    @tag = Tag.find_or_initialize_by(name: tag_params[:name]) # because it often exists
     if @tag.save
       redirect_to [:admin, @tag]
     else
@@ -53,7 +53,7 @@ class Admin::TagsController < Admin::ApplicationController
   def merge
     @tag = Tag.find_by(slug: params[:id])
     @destination_tag = Tag.find(params[:destination_id])
-    if (request.method.downcase.to_sym != :post)
+    if (request.method.downcase.to_sym != :post) # if it's a get request, render the form
       render :merge
     else
       @tag.merge_into!(@destination_tag)
@@ -82,7 +82,7 @@ class Admin::TagsController < Admin::ApplicationController
   end
 
   def tag_params
-    params.require(:tag).permit(:name, :displayable)
+    params.require(:tag).permit(:name)
   end
 end
 
