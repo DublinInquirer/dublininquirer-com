@@ -9,10 +9,11 @@
       .block.-bg-default.-b-highlight.-shadow
         .row
           .col-xs-12.col-sm-8
-            .block.-p2
-              %h3 Basic digital subscription
+            .block.-px2.-py4
               .p.-b2
                 :markdown
+                  ### Basic digital subscription
+
                   Unlimited access to our online digital edition.
 
                   One month free, and then only €5 per month.
@@ -22,7 +23,7 @@
               %nav.-centered
                 = link_to "Subscribe", product_path(:digital), class: 'button -big'
 
-        .block.-p2.-bt
+        .block.-px2.-py3.-bt
           .p.-b4
             .row
               .col-xs-12.col-md-6
@@ -62,5 +63,3 @@
               #### What is the cancellation policy?
 
               You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.
-
-= render partial: 'products/enticement'

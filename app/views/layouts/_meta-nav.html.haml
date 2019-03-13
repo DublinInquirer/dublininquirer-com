@@ -10,9 +10,8 @@
     .meta-nav_content
       .left
         - unless (defined?(brief) && brief)
-          .icons
-            %a{class: 'icon -hamburger', 'data-action': 'openOverlay', 'data-target': 'menu'}
-              = render partial: 'layouts/images/hamburger'
+          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
+            .icon= render partial: 'layouts/images/hamburger'
 
       - if !(defined?(small) && small)
         .center
@@ -21,24 +20,27 @@
               = render partial: 'layouts/images/logo-horizontal'
 
       .right
-        .links
-          - unless (defined?(brief) && brief) # if brief, only show log in
-            - if logged_in?
-              - if current_user.is_admin?
-                = link_to "admin", [:admin, :root]
-              = link_to current_user.email_address, :user
-            - else
-              = link_to "Log in", login_path, class: 'button -nav'
+        - unless (defined?(brief) && brief) # if brief, only show log in
+          - if logged_in?
+            - if current_user.is_admin?
+              = link_to [:admin, :root], class: 'meta-nav_item' do
+                %span admin panel
+
+            = link_to :user, class: 'meta-nav_item' do
+              %span= current_user.email_address
 
           - else
-            = link_to "Log in", login_path, class: 'button -nav'
+            = link_to login_path, class: 'meta-nav_item' do
+              %span Log in
 
-
+        - else
+          = link_to login_path, class: 'meta-nav_item' do
+            %span Log in
 
         - if !logged_in? or !current_user.subscriber?
-          .subscribe= link_to 'Subscribe', :products
+          = link_to :products, class: 'meta-nav_item -subscribe' do
+            Subscribe
 
         - unless (defined?(brief) && brief)
-          .icons
-            %a{class: 'icon -search', 'data-action': 'openOverlay', 'data-target': 'search'}
-              = render partial: 'layouts/images/search'
+          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'search'}
+            .icon= render partial: 'layouts/images/search'

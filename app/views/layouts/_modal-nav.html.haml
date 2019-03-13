@@ -1,9 +1,10 @@
 %div.progress-bar.-fixed &nbsp;
 %nav.meta-nav.-fixed.-omnipresent
   .frame{role: 'layout'}
-    .left
-      .icons
-        = link_to :root, class: 'icon -home' do
-          %svg{'width': "250px", 'height': "250px", 'viewBox': "0 0 250 250"}
-            <polygon points="127.725586 0.13671875 0.12890625 124.378775 40.8476563 125.152174 40.8476563 244.988073 108.880037 245.519269 108.880037 175.487649 145.784969 175.487649 145.784969 244.988073 214.224502 244.988073 213.595596 124.804687 255.986328 125.152174"></polygon>
-      .breadcrumbs= yield :breadcrumbs
+    .meta-nav_content
+      .left
+        = link_to :root, class: 'meta-nav_item' do
+          .icon
+            %svg{'width': "250px", 'height': "250px", 'viewBox': "0 0 250 250"}
+              <polygon points="127.725586 0.13671875 0.12890625 124.378775 40.8476563 125.152174 40.8476563 244.988073 108.880037 245.519269 108.880037 175.487649 145.784969 175.487649 145.784969 244.988073 214.224502 244.988073 213.595596 124.804687 255.986328 125.152174"></polygon>
+        .meta-nav_item.breadcrumbs= yield :breadcrumbs

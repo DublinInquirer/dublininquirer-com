@@ -1,120 +1,101 @@
 .meta-nav
   border-bottom: 1px solid var(--black)
-  transition: top 0.5s ease
+  transition: top 2s ease
+  font-size: var(--b4)
 
   .meta-nav_content
     display: flex
     flex-direction: row
     justify-content: space-between
+    align-items: stretch
 
-  .right, .left
-    display: flex
-    flex-direction: row
-    flex-basis: calc(50vw - 18rem)
+  .meta-nav_item
     flex-grow: 0
     flex-shrink: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    padding: 0.4rem 0.75rem
+    border-width: 0
+    border-style: solid
+    border-color: var(--black)
+
+    &.-subscribe
+      background-color: var(--yellow)
+      border-left-width: 1px
+      color: var(--black)
+      &:hover
+        background-color: var(--yellow)
+        color: var(--red)
+
+    span
+
+  .right, .left, .center
+    display: flex
+    flex-direction: row
+    flex-grow: 0
+    flex-shrink: 0
+    align-items: stretch
+
+  .left, .right
+    flex-basis: calc(50% - 12rem)
 
   .left
     justify-content: flex-start
-    .links, .breadcrumbs
-      justify-content: flex-start
+    .meta-nav_item:first-child
+      border-right-width: 1px
 
   .right
     justify-content: flex-end
-    .links, .breadcrumbs
-      justify-content: flex-end
+    .meta-nav_item:last-child
+      border-left-width: 1px
 
   .center
-    display: flex
-    flex-direction: row
     justify-content: center
-    align-items: stretch
-
-    a, a:link, a:visited
-      display: flex
-      flex-direction: row
-      justify-content: center
-      align-items: center
+    align-items: center
+    flex-basis: calc(12rem * 2)
 
     .logotype
-
-  .links, .breadcrumbs
-    display: none
-    flex-direction: row
-    align-items: center
-    padding: 0 1rem
-
-    a + a
-      margin-left: 1rem
-
-  .subscribe
-    border-left: 1px solid var(--black)
-    display: flex
-    flex-direction: column
-    justify-content: stretch
-    a, a:link, a:visited
-      flex: 1
-      display: flex
-      flex-direction: column
-      justify-content: center
-      display: block
-      line-height: 3rem
-      vertical-align: center
-      background: var(--yellow)
-      color: var(--black)
-      padding: 0.1rem 1rem 0
-      font-weight: 600
-      &:hover
-        color: var(--red)
+      flex: 0
 
   .breadcrumbs
+    display: flex
+    flex-direction: row
+    flex-grow: 0
+    flex-shrink: 0
+    align-items: center
+    justify-content: flex-start
+    a, .current
+      display: inline
+      flex-shrink: 0
+      flex-grow: 0
     a + a, a + .current
       &:before
         color: var(--grey)
         content: ' / '
 
-  .left
-    .icons
-      border-right: 1px solid var(--black)
-
-  .right
-    .icons
-      border-left: 1px solid var(--black)
-
   &.-small
-    font-size: var(--b4)
-    .icons
-      .icon
-        width: 3rem
-        height: 3rem
 
   &.-fixed
     position: fixed
     left: 0
     right: 0
-    top: -4.32rem
+    top: -100%
     border-top: 0.75rem solid var(--black)
     background-color: var(--default)
     z-index: 9999
-    height: 4.32rem
     overflow: hidden
 
-    .subscribe
-      a, a:link, a:visited
-        line-height: 3.5rem
-
     .center
-      min-height: 3.5rem
 
     &.-omnipresent
       top: 0
 
     &.-open
       top: 0
+      transition: top 0.5s ease
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
   @media screen and (min-width: $large)
-    .right, .left
-      .links, .breadcrumbs
-        display: flex
