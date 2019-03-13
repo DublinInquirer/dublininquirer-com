@@ -43,7 +43,11 @@ class Admin::TagsController < Admin::ApplicationController
 
   def update
     @tag = Tag.find_by(slug: params[:id])
-    if @tag.update(tag_params)
+    @destination_tag = Tag.find_by(slug: tag_params[:name].try(:parameterize)) # find a tag that matches the new name if it exists
+    if @destination_tag
+      @tag.merge_into!(@destination_tag)
+      redirect_to [:admin, @destination_tag]
+    elsif @tag.update(tag_params)
       redirect_to [:admin, @tag]
     else
       render :edit
