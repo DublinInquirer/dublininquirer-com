@@ -10,9 +10,8 @@
     .block.-bb
       .meta-nav_content
         .left
-          - unless (defined?(brief) && brief)
-            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
-              .icon= render partial: 'layouts/images/hamburger'
+          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
+            .icon= render partial: 'layouts/images/hamburger'
 
         - if !(defined?(small) && small)
           .center

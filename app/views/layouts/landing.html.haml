@@ -26,13 +26,14 @@
     = render partial: 'layouts/snippets/fb'
 
   %body
-    = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false, brief: true }
+    .wrapper.-container{role: 'layout'}
+      = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false, brief: true }
 
-    .sub-omnipresent
-      = yield
+      .sub-omnipresent
+        = yield
 
-    .block.-bt
-      = render partial: 'layouts/primary-footer'
+      .block.-bt
+        = render partial: 'layouts/primary-footer'
 
     - if current_user != true_user
       = render partial: 'user_sessions/impersonating'
