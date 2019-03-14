@@ -54,8 +54,8 @@
         %h3.h.-h3 Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
 
       .row
-        - @article.from_the_same_issue.by_position.first(6).each do |article|
-          .col-xs-12.col-md-4.col-lg-2.col.flex
+        - @article.from_the_same_issue.by_position.first(4).each do |article|
+          .col-xs-12.col-md-3.col.flex
             = render partial: 'articles/excerpts/tiny', locals: { article: article }
 
 - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
