@@ -20,11 +20,8 @@
       =render partial: 'layouts/modal-nav'
       %main.modal-main
         .modal-content
-          = yield
-
-        .block.-bt
-          .block.-py4
-            &nbsp;
+          .wrapper.-container{role: 'layout'}
+            .wrapper.-small{role: 'layout'}= yield
 
       - if content_for(:illustration)
         = yield :illustration

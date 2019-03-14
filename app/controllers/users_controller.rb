@@ -85,6 +85,7 @@ class UsersController < ApplicationController
     when :put
       @user.stripe_token = payment_params[:stripe_token]
       if @user.save
+        @user.update_from_stripe!
         redirect_to :user
       else
         render :payment
