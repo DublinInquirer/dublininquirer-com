@@ -61,7 +61,7 @@ class HomeController < ApplicationController
         },
         {
           author: Author.find_or_create_by!(full_name: 'Brian Flanagan'),
-          title: 'CTO',
+          title: 'Web & strategy',
           email_address: 'brian@dublininquirer.com'
         }
       ]

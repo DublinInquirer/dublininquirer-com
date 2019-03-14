@@ -5,39 +5,38 @@
 - set_meta_tags og: {image:  'https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg'}
 - set_meta_tags twitter: {image: {'_':  'https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg'}}
 
-.frame{role: 'layout'}
-  - cache ['home', (logged_in? ? current_user.id.to_s : 'logged_out' ), @articles] do
-    .block.-px2.-pb2
-      .wrapper.-contained{role: 'layout'}
-        .fixed{role: 'layout'}
-          %main
-            .row
-              - if @articles.any?
-                .col-xs-12.col-lg-8.col.flex
-                  - @articles.first(1).each_with_index do |article, i|
-                    = render partial: 'articles/excerpts/half', locals: {article: article, odd: i.odd?}
-                    %hr.-stroke
-                .col-xs-12.col-lg-4
-                  - @articles.first(2).drop(1).each do |article|
-                    = render partial: 'articles/excerpts/small', locals: {article: article}
-                    %hr.-stroke
+- cache ['home', (logged_in? ? current_user.id.to_s : 'logged_out' ), @articles] do
+  .block.-px2.-pb2
+    .wrapper.-contained{role: 'layout'}
+      .fixed{role: 'layout'}
+        %main
+          .row
+            - if @articles.any?
+              .col-xs-12.col-lg-8.col.flex
+                - @articles.first(1).each_with_index do |article, i|
+                  = render partial: 'articles/excerpts/half', locals: {article: article, odd: i.odd?}
+                  %hr.-stroke
+              .col-xs-12.col-lg-4
+                - @articles.first(2).drop(1).each do |article|
+                  = render partial: 'articles/excerpts/small', locals: {article: article}
+                  %hr.-stroke
 
-                  .hidden.lg-show= render partial: 'home/tiny-box', locals: {articles: @articles}
+                .hidden.lg-show= render partial: 'home/tiny-box', locals: {articles: @articles}
 
-            .row
-              - if @articles.any?
-                - cache ['home', 'secondary', @articles] do
-                  - @articles.drop(2).each do |article|
-                    .col-xs-12.col-lg-6.col.flex
-                      = render partial: 'articles/excerpts/half', locals: {article: article}
-                      %hr.-stroke
-
+          .row
+            - if @articles.any?
+              - cache ['home', 'secondary', @articles] do
+                - @articles.drop(2).each do |article|
                   .col-xs-12.col-lg-6.col.flex
-                    - if @cover
-                      = render partial: 'articles/excerpts/cover', locals: {article: @cover}
-                      %hr.-stroke
+                    = render partial: 'articles/excerpts/half', locals: {article: article}
+                    %hr.-stroke
 
-          %aside.sidebar
-            = render partial: 'home/sidebar'
+                .col-xs-12.col-lg-6.col.flex
+                  - if @cover
+                    = render partial: 'articles/excerpts/cover', locals: {article: @cover}
+                    %hr.-stroke
 
-  = render partial: 'products/enticement'
+        %aside.sidebar
+          = render partial: 'home/sidebar'
+
+= render partial: 'products/enticement'

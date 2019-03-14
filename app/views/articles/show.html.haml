@@ -57,7 +57,6 @@
         - @article.from_the_same_issue.by_position.first(6).each do |article|
           .col-xs-12.col-md-4.col-lg-2.col.flex
             = render partial: 'articles/excerpts/tiny', locals: { article: article }
-            %hr.-stroke
 
 - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
   = render partial: 'user_sessions/paywall'

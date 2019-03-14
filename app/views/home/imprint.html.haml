@@ -16,20 +16,17 @@
 
       - @staff.each do |staff|
         = render partial: 'authors/staff', locals: {staff: staff}
-        %hr.-stroke
 
       %header.header.-modal
         %h2.heading Columnists
 
       - @columnists.each do |author|
         = render partial: 'authors/author', locals: {author: author}
-        %hr.-stroke
 
       %header.header.-modal
         %h2.heading Regular contributors
 
       - @contributors.each do |author|
         = render partial: 'authors/author', locals: {author: author}
-        %hr.-stroke
 
 = render partial: 'products/enticement'
