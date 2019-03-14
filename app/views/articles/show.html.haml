@@ -20,30 +20,44 @@
 
 .block.-px2.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block.-px2.-py4
-  - if @article.commentable?
-    .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
+.block.-px2
+  .block.-py4
+    - if @article.commentable?
+      .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
 
-- if @article.tags.any?
-  .block.-bt.-py4.-px2
-    %header.header.-issue
-      %h3.heading Filed under
+  - if @article.tags.any?
+    .block.-bt.-pt1.-my2
+      .row
+        .col-xs-12.col-md-4
+          %header
+            %h3 Filed under:
 
-    .block.-mt2.p.-b2
-      %ul.list.-tags
-        - @article.displayable_tags.each do |tag|
-          %li= link_to tag.name, tag_path(id: tag.slug)
+          .block
+            %ul.list.-sentence
+              - @article.displayable_tags.each do |tag|
+                %li= link_to tag.name, tag_path(id: tag.slug)
 
-- if @article.from_the_same_issue.by_position.any?
-  .block.-bt.-py4.-px2
-    %header.header.-issue
-      %h4.heading Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+        .col-xs-12.col-md-4
+          %header
+            %h3 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
-    .row
-      - @article.from_the_same_issue.by_position.first(6).each do |article|
-        .col-xs-12.col-md-4.col-lg-2.col.flex
-          = render partial: 'articles/excerpts/tiny', locals: { article: article }
-          %hr.-stroke
+          .block
+            - @article.authors.each do |author|
+              :markdown
+                _#{ author.full_name }_
+
+                #{ author.bio }
+
+  - if @article.from_the_same_issue.by_position.any?
+    .block.-pt4.-mb4
+      %header.text.-centered
+        %h3 Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+
+      .row
+        - @article.from_the_same_issue.by_position.first(6).each do |article|
+          .col-xs-12.col-md-4.col-lg-2.col.flex
+            = render partial: 'articles/excerpts/tiny', locals: { article: article }
+            %hr.-stroke
 
 - if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
   = render partial: 'user_sessions/paywall'

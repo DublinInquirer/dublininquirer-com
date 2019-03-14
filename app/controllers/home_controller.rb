@@ -50,11 +50,6 @@ class HomeController < ApplicationController
           email_address: 'sam@dublininquirer.com'
         },
         {
-          author: Author.find_or_create_by!(full_name: 'Brian Flanagan'),
-          title: 'Web & strategy',
-          email_address: 'brian@dublininquirer.com'
-        },
-        {
           author: Author.find_or_create_by!(full_name: 'Sean Finnan'),
           title: 'City reporter',
           email_address: 'sfinnan@dublininquirer.com'
@@ -63,6 +58,11 @@ class HomeController < ApplicationController
           author: Author.find_or_create_by!(full_name: 'Erin McGuire'),
           title: 'City reporter',
           email_address: 'erin@dublininquirer.com'
+        },
+        {
+          author: Author.find_or_create_by!(full_name: 'Brian Flanagan'),
+          title: 'CTO',
+          email_address: 'brian@dublininquirer.com'
         }
       ]
     end
