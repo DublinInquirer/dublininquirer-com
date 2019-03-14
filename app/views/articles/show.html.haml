@@ -46,7 +46,7 @@
             .p.-b2
               - @article.authors.each do |author|
                 :markdown
-                  _#{ author.full_name }:_ #{ author.bio }
+                  _#{ link_to author.full_name, author }:_ #{ author.bio }
 
   - if @article.from_the_same_issue.by_position.any?
     .block.-mt4.-pt4.-mb2
