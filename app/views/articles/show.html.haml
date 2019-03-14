@@ -33,25 +33,25 @@
             %h3 Filed under:
 
           .block
-            %ul.list.-sentence
-              - @article.displayable_tags.each do |tag|
-                %li= link_to tag.name, tag_path(id: tag.slug)
+            .p.-b2
+              %ul.list.-sentence
+                - @article.displayable_tags.each do |tag|
+                  %li= link_to tag.name, tag_path(id: tag.slug)
 
         .col-xs-12.col-md-4
           %header
             %h3 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
           .block
-            - @article.authors.each do |author|
-              :markdown
-                _#{ author.full_name }_
-
-                #{ author.bio }
+            .p.-b2
+              - @article.authors.each do |author|
+                :markdown
+                  _#{ author.full_name }:_ #{ author.bio }
 
   - if @article.from_the_same_issue.by_position.any?
-    .block.-pt4.-mb4
+    .block.-mt4.-pt4.-mb2
       %header.text.-centered
-        %h3 Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+        %h3.h.-h3 Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
 
       .row
         - @article.from_the_same_issue.by_position.first(6).each do |article|
