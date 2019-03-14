@@ -227,7 +227,7 @@ class User < ApplicationRecord
     c.translations['en']
   end
 
-  def pay_outstanding_invoice
+  def pay_outstanding_invoice # TODO: forgive all previous invoices
     return unless self.stripe_customer.present?
     return unless self.delinquent?
 
