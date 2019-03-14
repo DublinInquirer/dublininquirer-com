@@ -1,7 +1,7 @@
 = render partial: 'layouts/meta-nav', locals: { fixed: false, small: true}
 
-.block.-bb
-  .frame{role: 'layout'}
+.wrapper.-container{role: 'layout'}
+  .block.-bb
     .flag-ears
       .ear
         .block.-b.-py1
@@ -30,5 +30,5 @@
               .action
                 %input{type: 'submit', value: 'Subscribe', class: 'text-button'}
 
-.block.-hr
-  = render partial: 'layouts/content-nav'
+  .block.-hr
+    = render partial: 'layouts/content-nav'

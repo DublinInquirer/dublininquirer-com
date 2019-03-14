@@ -1,64 +1,64 @@
 %div{role: 'overlay', id: 'menu', style: 'display: none'}
   %div.progress-bar.-fixed &nbsp;
   %nav.meta-nav.-fixed.-omnipresent
-    .frame{role: 'layout'}
-      .meta-nav_content
-        .left
-          %a{class: 'meta-nav_item -close', 'data-action': 'closeOverlay'}
-            .icon
-              %svg{width: "242px", height: "242px", viewBox: "0 0 242 242"}
-                <rect transform="translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) " x="-38.7918472" y="111.208153" width="320" height="20"></rect>
-                <rect transform="translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) " x="-39" y="111" width="320" height="20"></rect>
+    .wrapper.-container{role: 'layout'}
+      .block.-bb
+        .meta-nav_content
+          .left
+            %a{class: 'meta-nav_item -close', 'data-action': 'closeOverlay'}
+              .icon
+                %svg{width: "242px", height: "242px", viewBox: "0 0 242 242"}
+                  <rect transform="translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) " x="-38.7918472" y="111.208153" width="320" height="20"></rect>
+                  <rect transform="translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) " x="-39" y="111" width="320" height="20"></rect>
 
-  %main.sub-omnipresent.content.block.-bb
-    .frame.flex.-cy{role: 'layout'}
-      .block.-p2
-        .wrapper.-contained{role: 'layout'}
-          .p.-scale
-            .row
-              .col-xs-12.col-md-3
-                .block.-py2.-bt
-                  %h3 Dublin Inquirer
-                %ul.block.-mb2
-                  %li= link_to "Current issue", :root
-                  %li= link_to "Past issues", :issues
-                  %li= link_to "About us", :imprint
-                  %li= link_to "Contact us", :contact
-                  %li= link_to "Stockists", :stockists
+  %main.sub-omnipresent
+    .flex.-cy
+      .wrapper.-container{role: 'layout'}
+        .block.-p2
+          .wrapper.-contained{role: 'layout'}
+            .p.-scale
+              .row
+                .col-xs-12.col-md-3
+                  .block.-pt1.-mb2.-bt
+                    %h3 Dublin Inquirer
+                  %ul.block.-mb2
+                    %li= link_to "Current issue", :root
+                    %li= link_to "Past issues", :issues
+                    %li= link_to "About us", :imprint
+                    %li= link_to "Contact us", :contact
+                    %li= link_to "Stockists", :stockists
 
-              .col-xs-12.col-md-3
-                .block.-py2.-bt
-                  %h3 Sections
-                %ul.block.-mb2
-                  %li= link_to "City Desk", category_path('city-desk')
-                  %li= link_to "Unreal Estate", category_path('unreal-estate')
-                  %li= link_to "Culture Desk", category_path('culture-desk')
-                  %li= link_to "The Dish", category_path('the-dish')
-                  %li= link_to "Opinion", category_path('opinion')
-                  %li= link_to "Podcast", category_path('podcast')
+                .col-xs-12.col-md-3
+                  .block.-pt1.-mb2.-bt
+                    %h3 Sections
+                  %ul.block.-mb2
+                    %li= link_to "City Desk", category_path('city-desk')
+                    %li= link_to "Unreal Estate", category_path('unreal-estate')
+                    %li= link_to "Culture Desk", category_path('culture-desk')
+                    %li= link_to "The Dish", category_path('the-dish')
+                    %li= link_to "Opinion", category_path('opinion')
+                    %li= link_to "Podcast", category_path('podcast')
 
-              .col-xs-12.col-md-3
-                .block.-py2.-bt
-                  %h3 Subscriptions
-                %ul.block.-mb2
-                  - if !logged_in?
-                    %li= link_to "Log in", :login
-                  - if logged_in?
-                    %li= link_to "Account details", :user
-                  - if !(logged_in? and current_user.subscriber?)
-                    %li= link_to "Subscribe", :products
-                  - if logged_in? and current_user.subscriber?
-                    %li= link_to "Manage subscription", :user
-                  %li= link_to "Give a subscription", :gift_subscriptions
+                .col-xs-12.col-md-3
+                  .block.-pt1.-mb2.-bt
+                    %h3 Subscriptions
+                  %ul.block.-mb2
+                    - if !logged_in?
+                      %li= link_to "Log in", :login
+                    - if logged_in?
+                      %li= link_to "Account details", :user
+                    - if !(logged_in? and current_user.subscriber?)
+                      %li= link_to "Subscribe", :products
+                    - if logged_in? and current_user.subscriber?
+                      %li= link_to "Manage subscription", :user
+                    %li= link_to "Give a subscription", :gift_subscriptions
 
-              .col-xs-12.col-md-3
-                .block.-py2.-bt
-                  %h3 Elsewhere
-                %ul.block.-mb2
-                  %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
-                  %li= link_to "Facebook", "https://www.facebook.com/dublininquirer"
-                  %li= link_to "Instagram", "https://www.instagram.com/dublininquirer"
+                .col-xs-12.col-md-3
+                  .block.-pt1.-mb2.-bt
+                    %h3 Elsewhere
+                  %ul.block.-mb2
+                    %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
+                    %li= link_to "Facebook", "https://www.facebook.com/dublininquirer"
+                    %li= link_to "Instagram", "https://www.instagram.com/dublininquirer"
 
-  %footer.footer
-    .frame{role: 'layout'}
-      %p &nbsp;
+  %footer.footer &nbsp;

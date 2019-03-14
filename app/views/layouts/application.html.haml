@@ -26,19 +26,14 @@
     = render partial: 'layouts/snippets/fb'
 
   %body
-    = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
+    .wrapper.-container{role: 'layout'}
+      = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 
-    .frame.sub-omnipresent{role: 'layout'}
-      = yield
+      .sub-omnipresent{role: 'layout'}
+        = yield
 
-    .block.-bt
-      .frame{role: 'layout'}
+      .block.-bt
         = render partial: 'layouts/primary-footer'
-
-    .block.-bt
-      .frame{role: 'layout'}
-        .block.-py4
-          &nbsp;
 
     = render partial: 'user_sessions/cookies'
 

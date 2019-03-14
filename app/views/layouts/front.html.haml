@@ -28,20 +28,15 @@
     = render partial: 'layouts/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/primary-flag'
 
-    = yield
+    .wrapper.-container{role: 'layout'}
+      = yield
 
-    .block.-bt
-      .frame{role: 'layout'}
+      .block.-bt
         = render partial: 'layouts/primary-footer'
 
-    .block.-bt
-      .frame{role: 'layout'}
-        .block.-py4
-          &nbsp;
-
-    = render partial: 'user_sessions/cookies'
-    - if permission_for_cookie?
-      = render partial: 'user_sessions/delinquent'
+      = render partial: 'user_sessions/cookies'
+      - if permission_for_cookie?
+        = render partial: 'user_sessions/delinquent'
 
     = render partial: 'layouts/search'
     = render partial: 'layouts/expansive-nav'

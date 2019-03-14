@@ -6,7 +6,7 @@
 - set_meta_tags twitter: {image: {'_':  'https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg'}}
 
 - cache ['home', (logged_in? ? current_user.id.to_s : 'logged_out' ), @articles] do
-  .block.-px2.-pb2
+  .block.-pb2
     .wrapper.-contained{role: 'layout'}
       .fixed{role: 'layout'}
         %main

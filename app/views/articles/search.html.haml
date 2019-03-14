@@ -5,7 +5,7 @@
     Search results for
     %code.-quote #{ params[:q] }
 
-.block.-p2.-pb4
+.block.-pt2.-pb4
   - if @articles.any?
     .wrapper.-contained{role: 'layout'}
       = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {q: @query}}

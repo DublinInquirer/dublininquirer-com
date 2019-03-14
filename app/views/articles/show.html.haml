@@ -18,9 +18,9 @@
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
 
-.block.-px2.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
+.block.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block.-px2
+.block
   .block.-py4
     - if @article.commentable?
       .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }

@@ -17,6 +17,6 @@
     - if @author.portrait.present?
       = image_tag @author.portrait.url
 
-.block.-p2.-pb4
+.block.-pt2.-pb4
   .wrapper.-contained{role: 'layout'}
     = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {}}

@@ -6,41 +6,42 @@
 
 %div.progress-bar.-fixed &nbsp;
 %nav.meta-nav{class: css_classes}
-  .frame{role: 'layout'}
-    .meta-nav_content
-      .left
-        - unless (defined?(brief) && brief)
-          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
-            .icon= render partial: 'layouts/images/hamburger'
+  .wrapper.-container{role: 'layout'}
+    .block.-bb
+      .meta-nav_content
+        .left
+          - unless (defined?(brief) && brief)
+            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
+              .icon= render partial: 'layouts/images/hamburger'
 
-      - if !(defined?(small) && small)
-        .center
-          = link_to root_path do
-            .logotype.-small
-              = render partial: 'layouts/images/logo-horizontal'
+        - if !(defined?(small) && small)
+          .center
+            = link_to root_path do
+              .logotype.-small
+                = render partial: 'layouts/images/logo-horizontal'
 
-      .right
-        - unless (defined?(brief) && brief) # if brief, only show log in
-          - if logged_in?
-            - if current_user.is_admin?
-              = link_to [:admin, :root], class: 'meta-nav_item' do
-                %span admin panel
+        .right
+          - unless (defined?(brief) && brief) # if brief, only show log in
+            - if logged_in?
+              - if current_user.is_admin?
+                = link_to [:admin, :root], class: 'meta-nav_item' do
+                  %span admin panel
 
-            = link_to :user, class: 'meta-nav_item' do
-              %span= current_user.email_address
+              = link_to :user, class: 'meta-nav_item' do
+                %span= current_user.email_address
+
+            - else
+              = link_to login_path, class: 'meta-nav_item' do
+                %span Log in
 
           - else
             = link_to login_path, class: 'meta-nav_item' do
               %span Log in
 
-        - else
-          = link_to login_path, class: 'meta-nav_item' do
-            %span Log in
+          - if !logged_in? or !current_user.subscriber?
+            = link_to :products, class: 'meta-nav_item -subscribe' do
+              Subscribe
 
-        - if !logged_in? or !current_user.subscriber?
-          = link_to :products, class: 'meta-nav_item -subscribe' do
-            Subscribe
-
-        - unless (defined?(brief) && brief)
-          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'search'}
-            .icon= render partial: 'layouts/images/search'
+          - unless (defined?(brief) && brief)
+            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'search'}
+              .icon= render partial: 'layouts/images/search'

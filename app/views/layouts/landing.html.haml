@@ -28,17 +28,11 @@
   %body
     = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false, brief: true }
 
-    .frame.sub-omnipresent{role: 'layout'}
+    .sub-omnipresent
       = yield
 
     .block.-bt
-      .frame{role: 'layout'}
-        = render partial: 'layouts/primary-footer'
-
-    .block.-bt
-      .frame{role: 'layout'}
-        .block.-py4
-          &nbsp;
+      = render partial: 'layouts/primary-footer'
 
     - if current_user != true_user
       = render partial: 'user_sessions/impersonating'
