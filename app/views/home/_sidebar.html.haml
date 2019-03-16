@@ -1,28 +1,25 @@
 .content
   - if !logged_in? or !current_user.subscriber?
-    %section.section.-subscribe.box
-      %header.-tiny
-        %h4.heading Support local journalism
+    %section.block.-py2.-px1.-mb1.-bg-blue
+      %h4.c.-w8 Support local journalism
+
+      .block.-my1
         :markdown
           Dublin Inquirer is funded by its readers, not advertisers.
 
-      %nav.-tiny.-centered= link_to "Subscribe", :products, class: 'button -cta -small'
+      .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
 
-  %section.section.-sidebar.box.-tight
-    %header.-box.-tight
-      %h4.heading The Podcast
+  %section.block.-py1
+    .block.-bb
+      %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
 
-    .content
+    .block.-my1
       = render partial: 'recent_podcasts'
 
-    %nav.-box.-tight
-      = link_to raw("More episodes &rarr;"), category_path('podcast'), class: 'p -b5'
-
-  %section.section.-sidebar.box.-tight
-    %header.-box.-tight
-      %h4.heading Council Tracker
-
-    .content
+  %section.block.-py1
+    .block.-bb
+      %h4.c.-w8= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
+    .block.-my1
       %ol.list.-delineated
         - @recent_motions.each do |motion|
           %li
@@ -30,6 +27,3 @@
               = truncate(motion['title'], length: 34)
               %em.c.-grey
                 &ndash; #{ motion['result'] }ed
-
-    %nav.-box.-tight
-      = link_to raw("Visit Council Tracker &rarr;"), 'https://www.counciltracker.ie', class: 'p -b5'

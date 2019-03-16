@@ -1,11 +1,11 @@
 = render partial: 'layouts/meta-nav', locals: { fixed: false, small: true}
 
 .wrapper.-container{role: 'layout'}
-  .block.-bb
+  .block
     .flag-ears
       .ear
-        .block.-b.-py1
-          .text.-tiny.-centered
+        .block.-bg-faint.-py1
+          .p.-t5.-centered
             %h5 Follow us on
             %ul.list.-nav
               %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
@@ -21,8 +21,8 @@
           %span Different
 
       .ear
-        .block.-b.-py1
-          .text.-tiny.-centered
+        .block.-bg-faint.-py1
+          .p.-t5.-centered
             %h5 Get our weekly newsletter
             %form.tiny-form{action: "https://tinyletter.com/DublinInquirer", method: "post", onsubmit: "window.open('https://tinyletter.com/DublinInquirer', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", target: "popupwindow"}
               .field
@@ -30,5 +30,5 @@
               .action
                 %input{type: 'submit', value: 'Subscribe', class: 'text-button'}
 
-  .block.-hr
+  .block.-bb
     = render partial: 'layouts/content-nav'

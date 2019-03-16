@@ -1,25 +1,21 @@
 - cache [article, 'half'] do
-  = link_to article.path, class: ['excerpt', '-half'] do
-    .illustration
-      %figure.artwork
-        - if article.featured_artwork.image.present?
-          = image_tag article.featured_artwork.image.large.url
+  = link_to article.path, class: ['block', '-my2', '-p2', '-b'] do
+    .row
 
-      .meta
-        .bylines
-          - article.authors.each do |author|
-            .byline #{ author.try(:full_name) }
-        .category #{ display_category(article.category) }
+      .col-xs-12.col-lg-6
+        %figure.artwork
+          - if article.featured_artwork.image.present?
+            = image_tag article.featured_artwork.image.large.url
 
-    .content
-      %header
-        %h3.headline= article.title
+      .col-xs-12.col-lg-6
+        .p.-centered
+          .p.-t5= display_category(article.category)
+          .block.-my1
+            %h3.h.-h2= article.title
 
-      .more
-        .meta
-          .byline #{ article.authors.map(&:full_name).to_sentence }
-          .category #{ display_category(article.category) }
+          .p.-t5 by #{ article.authors.map(&:full_name).to_sentence }
 
-        .text
-          :markdown
-            #{ raw article.excerpt }
+        .block.-mt1
+          .p.-t3
+            :markdown
+              #{ raw article.excerpt }

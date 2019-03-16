@@ -9,13 +9,15 @@
 
 %header.page-header.-illustrated
   %h1.heading= @author.full_name
-  .p.-b1
-    :markdown
-      #{ raw @author.bio }
 
-  .illustration
-    - if @author.portrait.present?
+  - if @author.portrait.present?
+    .illustration
       = image_tag @author.portrait.url
+
+  - if @author.bio.present?
+    .p.-b2
+      :markdown
+        #{ raw @author.bio }
 
 .block.-pt2.-pb4
   .wrapper.-contained{role: 'layout'}

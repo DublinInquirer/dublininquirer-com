@@ -30,28 +30,28 @@
       .row
         .col-xs-12.col-md-4
           %header
-            %h3 Filed under:
+            %h3.p.-t3 Filed under:
 
           .block
-            .p.-b2
+            .p.-t3
               %ul.list.-sentence
                 - @article.displayable_tags.each do |tag|
                   %li= link_to tag.name, tag_path(id: tag.slug)
 
         .col-xs-12.col-md-4
           %header
-            %h3 #{ @article.authors.many? ? 'Authors' : 'Author' }:
+            %h3.p.-t3 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
           .block
-            .p.-b2
+            .p.-t3
               - @article.authors.each do |author|
                 :markdown
                   _#{ link_to author.full_name, author }:_ #{ author.bio }
 
   - if @article.from_the_same_issue.by_position.any?
     .block.-mt4.-pt4.-mb2
-      %header.text.-centered
-        %h3.h.-h3 Also in the #{ @article.issue_date.strftime('%-d %B %Y') } issue
+      %header.p.-centered
+        %h3.h.-h3 Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
 
       .row
         - @article.from_the_same_issue.by_position.first(4).each do |article|
