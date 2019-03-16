@@ -1,6 +1,6 @@
 - cache [article, 'tiny'] do
-  .block
-    .block.-mb1
+  .block.-pb4
+    .block.-mb2
       .block.-bb
         .p.-t5= display_category(article.category)
 
@@ -11,7 +11,7 @@
             = image_tag article.featured_artwork.image.large.url
 
       .p.-centered
-        %h3.h.-h3= article.title
-        - if article.authors.any?
-          .block.-mt1
-            %p.p.-t5 by #{ article.authors.map(&:full_name).to_sentence }
+        %span.p.-t4
+          %span.c.-w8= article.title
+          - if article.authors.any?
+            %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }

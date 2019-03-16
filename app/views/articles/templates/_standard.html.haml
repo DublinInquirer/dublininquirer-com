@@ -1,6 +1,14 @@
-%header.header.-article.-standard
-  .p.-category= link_to display_category(@article.category), category_path(@article.category)
-  %h1.headline= raw article.title
+.block.-py4
+  .wrapper.-medium{role: 'layout'}
+    .block.-my2
+      .p.-t4= link_to display_category(@article.category), category_path(@article.category)
+
+  .p.-centered
+    %h1.h.-h1= raw article.title
+
+    - if article.authors.any?
+      .block.-mt1
+        .p.t.t4 by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
 
   = render partial: 'articles/meta', locals: {article: article}
 

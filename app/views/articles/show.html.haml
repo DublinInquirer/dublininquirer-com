@@ -49,9 +49,9 @@
                   _#{ link_to author.full_name, author }:_ #{ author.bio }
 
   - if @article.from_the_same_issue.by_position.any?
-    .block.-mt4.-pt4.-mb2
-      %header.p.-centered
-        %h3.h.-h3 Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
+    .block.-mt4.-pt4
+      .block.-mb3
+        %h3.h.-h3.p.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
 
       .row
         - @article.from_the_same_issue.by_position.first(4).each do |article|

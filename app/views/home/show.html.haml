@@ -19,10 +19,10 @@
             - if @articles.any?
               - cache ['home', 'secondary', @articles] do
                 - @articles.drop(1).each do |article|
-                  .col-xs-12.col-lg-4
+                  .col-xs-12.col-lg-6
                     = render partial: 'articles/excerpts/small', locals: {article: article}
 
-                .col-xs-12.col-lg-4
+                .col-xs-12.col-lg-6
                   - if @cover
                     = render partial: 'articles/excerpts/cover', locals: {article: @cover}
 

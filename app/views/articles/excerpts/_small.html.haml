@@ -1,20 +1,20 @@
 - cache [article, 'small'] do
-  = link_to article.path, class: ['block', '-my2'] do
-    .block.-mb1
+  = link_to article.path, class: ['block', '-my2', '-p4', '-bg-faint'] do
+    .block.-mb2
       .block.-bb
         .p.-t5= display_category(article.category)
+
+    .block.-mb1
+      %span.h.-h2= article.title
+      - if article.authors.any?
+        %span.p.-t4.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
 
     .block.-mb1
       %figure.artwork
         - if article.featured_artwork.image.present?
           = image_tag article.featured_artwork.image.large.url
 
-    .p.-centered
-      %h3.h.-h3= article.title
-      .block.-mt1
-        %p.p.-t5 by #{ article.authors.map(&:full_name).to_sentence }
-
-    .block.-mt1
+    .block
       .p.-t4
         :markdown
           #{ raw article.excerpt }
