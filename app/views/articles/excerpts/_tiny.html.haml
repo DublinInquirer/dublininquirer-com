@@ -1,17 +1,15 @@
 - cache [article, 'tiny'] do
-  .block.-pb4
-    .block.-mb2
-      .block.-bb
-        .p.-t5= display_category(article.category)
-
+  .block.-pb4.-my2
     = link_to article.path do
       .block.-mb1
         %figure.artwork
+          .overlay.block.-b.-bg-default.-px1
+            .p.-t5.c.-w4= display_category(article.category)
+
           - if article.featured_artwork.image.present?
             = image_tag article.featured_artwork.image.large.url
 
-      .p.-centered
-        %span.p.-t4
-          %span.c.-w8= article.title
-          - if article.authors.any?
-            %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
+      .p.-t4.-centered
+        %h3.inline.c.-w8= article.title
+        - if article.authors.any?
+          .inline-block.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }

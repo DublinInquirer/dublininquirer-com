@@ -8,14 +8,15 @@
   - set_meta_tags twitter: {image: {'_': @author.portrait.url}}
 
 %header.page-header.-illustrated
-  %h1.heading= @author.full_name
+  %h1.h.-h2= @author.full_name
 
   - if @author.portrait.present?
-    .illustration
-      = image_tag @author.portrait.url
+    .block.-mt1
+      .illustration
+        = image_tag @author.portrait.url
 
   - if @author.bio.present?
-    .p.-b2
+    .block.-mt1.p.-t3
       :markdown
         #{ raw @author.bio }
 

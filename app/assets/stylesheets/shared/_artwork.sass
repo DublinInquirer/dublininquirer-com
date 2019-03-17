@@ -2,6 +2,13 @@
   width: 100%
   display: block
   margin: 0
+  position: relative
+
+  & > .overlay
+    position: absolute
+    top: 1.5rem
+    left: 1.5rem
+    padding: 0.25rem 0.5rem
 
   & > img
     width: 100%
@@ -9,3 +16,10 @@
     display: block
     margin: 0
     padding: 0
+
+  figcaption
+    font-family: $sans
+    font-size: var(--t4)
+    line-height: 1.4
+    padding-top: 0.5rem
+    text-align: center

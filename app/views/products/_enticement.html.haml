@@ -1,13 +1,13 @@
-.block.-pb2.-bt
+.block.-bg-black
   .wrapper.-contained{role: 'layout'}
-    .block.-mt2.-bg-black
+    .block.-my4
       - if logged_in? and current_user.subscriber? and current_user.patron?
         .enticement
           %figure.artwork= image_tag "ads/meath-street.jpg"
           .text
             %header.-issue
               %h3.heading Give a subscription
-            .p.-t3.c.-serif
+            .p.-t3.-serif
               :markdown
                 A subscription to Dublin Inquirer is the perfect gift for the inquisitive Dubliner in your life.
           %nav.options
@@ -21,7 +21,7 @@
             .flex.-cy.block.-pr4
               .block.-mb2
                 %h3.h.-h2 Support our work
-              .p.-t4.c.-serif
+              .p.-t3.-serif
                 :markdown
                   In-depth, original local reporting is time consuming and expensive. But we think it's important.
 
@@ -38,7 +38,7 @@
             .flex.-cy.block.-pr4
               .block.-mb2
                 %h3.h.-h2 Understand your city
-              .p.-t4.c.-serif
+              .p.-t3.-serif
                 :markdown
                   We do in-depth, shoe-leather reporting about the issues that shape Dublin. We're not funded by advertisers. We're funded by readers like you.
 

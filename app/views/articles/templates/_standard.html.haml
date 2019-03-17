@@ -1,20 +1,22 @@
 .block.-py4
-  .wrapper.-medium{role: 'layout'}
-    .block.-my2
-      .p.-t4= link_to display_category(@article.category), category_path(@article.category)
-
   .p.-centered
-    %h1.h.-h1= raw article.title
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4= link_to display_category(@article.category), category_path(@article.category)
 
-    - if article.authors.any?
-      .block.-mt1
-        .p.t.t4 by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
+    .wrapper.-medium{role: 'layout'}
+      %h1.inline.p.-t1.-w4.c.-serif= raw article.title
 
-  = render partial: 'articles/meta', locals: {article: article}
+      - if article.authors.any?
+        .inline-block.p.-t3 &nbsp;by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
+
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
 
 %article.article.-standard{lang: 'en'}
   - if article.featured_artwork.present?
     %figure.artwork.-featured
       = image_tag article.featured_artwork.image.large.url
       %figcaption= article.featured_artwork.caption
+
   = raw render_content(article.content)

@@ -2,7 +2,7 @@
 - description "Articles from Dublin Inquirer's #{ @issue.issue_date.strftime('%-d %B %Y') } issue"
 
 %header.page-header
-  %h1.heading From the <br>#{ @issue.issue_date.strftime('%-d %B %Y') } issue
+  %h1.h.-h2 From the <br>#{ @issue.issue_date.strftime('%-d %B %Y') } issue
 
 .block.-pt2.-pb4
   - @articles.in_groups_of(4, false).each do |group|

@@ -1,15 +1,15 @@
 - query_params = (defined?(query_params) && query_params.present?) ? query_params : {}
 
 .block.-mt2.-mb4
-  .box.-pagination
-    %section
+  .p.-t3.-centered
+    .inline-block
       - if page > 1
         = link_to raw("&larr;"), query_params.merge({p: (page - 1)})
       - else
         %a.-disabled &larr;
-    %section
+    .inline-block
       %span #{ page }/#{ collection.total_pages }
-    %section
+    .inline-block
       - if page < collection.total_pages
         = link_to raw("&rarr;"), query_params.merge({p: (page + 1)})
       - else

@@ -1,7 +1,7 @@
 .content
   - if !logged_in? or !current_user.subscriber?
     %section.block.-py2.-px1.-mb1.-bg-blue
-      %h4.c.-w8 Support local journalism
+      %h4.c.-w6 Support local journalism
 
       .block.-my1
         :markdown
@@ -9,17 +9,17 @@
 
       .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
 
-  %section.block.-py1
-    .block.-bb
-      %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
+  %section.block.-b.-mb1
+    .block.-bb.-p1
+      %h4.c.-w6= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
 
-    .block.-my1
+    .block.-my1.-p1
       = render partial: 'recent_podcasts'
 
-  %section.block.-py1
-    .block.-bb
-      %h4.c.-w8= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
-    .block.-my1
+  %section.block.-b
+    .block.-bb.-p1
+      %h4.c.-w6= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
+    .block.-p1
       %ol.list.-delineated
         - @recent_motions.each do |motion|
           %li

@@ -1,19 +1,17 @@
 - cache [article, 'result'] do
-  = link_to article.path, class: ['excerpt', '-result'] do
-    .illustration
-      %figure.artwork
-        = image_tag article.featured_artwork.image.large.url
+  .block.-pb4
+    .block.-mb2
+      .block.-bb
+        .p.-t5= display_category(article.category)
 
-    .content
-      %header
-        %h3.headline= article.title
+    = link_to article.path do
+      .block.-mb1
+        %figure.artwork
+          - if article.featured_artwork.image.present?
+            = image_tag article.featured_artwork.image.large.url
 
-      .more
-        .meta
-          .byline #{ article.authors.map(&:full_name).to_sentence }
-          .category #{ display_category(article.category) }
-          .dateline #{ article.issue_date.strftime("%-d %b '%y") }
-
-        .text
-          :markdown
-            #{ raw article.excerpt }
+      .p.-centered
+        %span.p.-t4
+          %span.c.-w8= article.title
+          - if article.authors.any?
+            %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
