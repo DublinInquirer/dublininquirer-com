@@ -1,6 +1,6 @@
 .content
   - if !logged_in? or !current_user.subscriber?
-    %section.block.-py2.-px1.-mb1.-bg-blue
+    %section.block.-py2.-px1.-mb2.-bg-blue
       %h4.c.-w6 Support local journalism
 
       .block.-my1
@@ -8,18 +8,29 @@
           Dublin Inquirer is funded by its readers, not advertisers.
 
       .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
+  - else
+    .block.-bg-faint.-b.-py2.-px1.-mb2
+      .p.-t5
+        %h3.c.-w6 Give a subscription
+        .block.-mt1
+          :markdown
+            The perfect gift for the inquisitive Dubliner in your life.
 
-  %section.block.-b.-mb1
-    .block.-bb.-p1
+        %nav.block.-mt2
+          #{ link_to "See options", :gift_subscriptions, class: 'button -yellow p -t5' }
+
+  %section.block.-mb2
+    .block.-pb1.-bb
       %h4.c.-w6= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
 
-    .block.-my1.-p1
+    .block.-mt1
       = render partial: 'recent_podcasts'
 
-  %section.block.-b
-    .block.-bb.-p1
+  %section.block
+    .block.-pb1.-bb
       %h4.c.-w6= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
-    .block.-p1
+
+    .block.-mt1
       %ol.list.-delineated
         - @recent_motions.each do |motion|
           %li

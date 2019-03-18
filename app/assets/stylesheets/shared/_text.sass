@@ -10,6 +10,10 @@
   &.-w8
     font-weight: 800
 
+
+  &.-i
+    font-style: italic
+
   &.-serif
     font-family: $serif
 
@@ -72,6 +76,19 @@
       font-size: calc(var(--t5) * 0.869)
       line-height: calc(var(--t5) * 1.4)
       font-family: $serif
+
+  &.-sf
+    a, a:link, a:visited
+      border-bottom: 1px solid var(--black)
+      &:hover
+        color: var(--blue)
+        border-bottom-color: var(--blue)
+    p, ul, ol
+      margin: 1em 0
+      &:first-child
+        margin-top: 0
+      &:last-child
+        margin-bottom: 0
 
   &.-serif
     font-family: $serif

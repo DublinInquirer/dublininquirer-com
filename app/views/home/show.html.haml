@@ -20,10 +20,7 @@
                 .block
                   - @articles.first(2).drop(1).each do |article|
                     = render partial: 'articles/excerpts/small', locals: {article: article}
-                  .block.-b.-p1
-                    .p.-t5
-                      :markdown
-                        Also this week:
+                  = render partial: 'home/tiny-box', locals: {articles: @articles}
           .row
             - if @articles.any?
               - cache ['home', 'secondary', @articles] do

@@ -1,16 +1,17 @@
 - cache [article, 'small'] do
   .block.-my2
-    = link_to article.path do
+    = link_to article.path, class: 'excerpt' do
       .block.-mb1
         %figure.artwork
           .overlay.block.-b.-bg-default
             .p.-t5.c.-w4= display_category(article.category)
+
           - if article.featured_artwork.image.present?
             = image_tag article.featured_artwork.image.large.url
 
       .p.-t4
         .block
-          %span.c.-w4.-serif= article.title
+          %h2.headline.inline.c.-w4.-serif= article.title
           - if article.authors.any?
             %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
 

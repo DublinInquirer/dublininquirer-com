@@ -2,7 +2,9 @@
   .p.-centered
     .wrapper.-small{role: 'layout'}
       .block.-my2
-        .p.-t4= link_to display_category(@article.category), category_path(@article.category)
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
 
     .wrapper.-medium{role: 'layout'}
       %h1.inline.p.-t1.-w4.c.-serif= raw article.title

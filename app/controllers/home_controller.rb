@@ -23,7 +23,11 @@ class HomeController < ApplicationController
     end
 
     @recent_motions = Rails.cache.fetch("/home/motions", expires_in: 1.hour) do
-      Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+      begin
+        Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+      rescue HTTP::ConnectionError
+        []
+      end
     end
   end
 

@@ -1,5 +1,5 @@
 - cache [article, 'half'] do
-  = link_to article.path, class: ['block', '-my2', '-pb2'] do
+  = link_to article.path, class: ['block', '-my2', '-pb2', 'excerpt'] do
     .block.-mb1
       %figure.artwork
         .overlay.block.-b.-bg-default.-px1
@@ -12,7 +12,7 @@
         .block
           .block.-my1
             .p.-left
-              %h2.inline.c.-w4.-serif= article.title
+              %h2.headline.inline.c.-w4.-serif= article.title
 
               - if article.authors.any?
                 %span.inline.p.-t4.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
