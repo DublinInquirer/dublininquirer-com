@@ -1,7 +1,7 @@
 - cache [article, 'half'] do
   = link_to article.path, class: ['block', '-my2', '-pb2', 'excerpt'] do
     .block.-mb1
-      %figure.artwork
+      %figure.artwork.-landscape
         .overlay.block.-b.-bg-default.-px1
           .p.-t5.c.-w4= display_category(article.category)
         - if article.featured_artwork.image.present?

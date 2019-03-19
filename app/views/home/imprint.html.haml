@@ -8,64 +8,64 @@
 
   .block.-p2.-pb4
     .wrapper.-small{role: 'layout'}
-      %header.header.-modal
+      .article.-formatted.p.-t3.-serif
         %h3.h.-h3 Staff
 
-      - @staff.each do |staff|
-        .block.-my2
-          .details
-            .portrait
-              - if staff[:author].portrait.present?
-                = image_tag staff[:author].portrait.url
+        - @staff.each do |staff|
+          .block.-my2
+            .details
+              .portrait
+                - if staff[:author].portrait.present?
+                  = image_tag staff[:author].portrait.url
 
-            .bio.text
-              :markdown
-                #{ staff[:author].full_name }, #{ staff[:title] }
-
-                #{ raw staff[:author].bio }
-
-              - if staff[:author].articles.published.any?
+              .bio.text
                 :markdown
-                  _#{ link_to raw("Articles by #{ staff[:author].full_name } &rarr;"), staff[:author] }_
+                  #{ staff[:author].full_name }, #{ staff[:title] }
 
-      %header.header.-modal
-        %h3.h.-h3 Columnists
+                  #{ raw staff[:author].bio }
 
-      - @columnists.each do |author|
-        .block.-my2
-          .details
-            .portrait
-              - if author.portrait.present?
-                = image_tag author.portrait.url
+                - if staff[:author].articles.published.any?
+                  :markdown
+                    _#{ link_to raw("Articles by #{ staff[:author].full_name } &rarr;"), staff[:author] }_
 
-            .bio.text
-              :markdown
-                #{ author.full_name }
+        %header.header.-modal
+          %h3.h.-h3 Columnists
 
-                #{ raw author.bio }
+        - @columnists.each do |author|
+          .block.-my2
+            .details
+              .portrait
+                - if author.portrait.present?
+                  = image_tag author.portrait.url
 
-              - if author.articles.published.any?
+              .p.-
                 :markdown
-                  _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
+                  #{ author.full_name }
 
-      %header.header.-modal
-        %h3.h.-h3 Regular contributors
+                  #{ raw author.bio }
 
-      - @contributors.each do |author|
-        .block.-my2
-          .details
-            .portrait
-              - if author.portrait.present?
-                = image_tag author.portrait.url
+                - if author.articles.published.any?
+                  :markdown
+                    _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
 
-            .bio.text
-              :markdown
-                #{ author.full_name }
+        %header.header.-modal
+          %h3.h.-h3 Regular contributors
 
-                #{ raw author.bio }
+        - @contributors.each do |author|
+          .block.-my2
+            .details
+              .portrait
+                - if author.portrait.present?
+                  = image_tag author.portrait.url
 
-              - if author.articles.published.any?
+              .bio.text
                 :markdown
-                  _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
+                  #{ author.full_name }
+
+                  #{ raw author.bio }
+
+                - if author.articles.published.any?
+                  :markdown
+                    _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
 
 = render partial: 'products/enticement'

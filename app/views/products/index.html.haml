@@ -1,62 +1,52 @@
 - content_for :breadcrumbs do
   .current Subscribe
 
-%header.header.-modal
-  %h1.heading Subscribe
+%header.block.-mt4.-mb2
+  %h2.h.-h2  Subscribe
 
-  .text.-article
-    :markdown
-      Dublin Inquirer is funded mainly by its subscribers, rather than advertisers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that you won’t find anywhere else.
+  .block.-mt2
+    .article.-formatted.p.-t3.-serif
+      :markdown
+        Dublin Inquirer is funded by its subscribers, rather than advertisers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that you won’t find anywhere else.
 
-      We also run occasional events, from pub quizzes to talks and debates. Subscribers often get first dibs on tickets, or discounts, or both.
+        We also run occasional events, from pub quizzes to talks and debates. Subscribers often get first dibs on tickets, or discounts, or both.
 
-%header.header.-section
-  %h2.heading Subscription options
+%header.block.-mt4.-mb2
+  %h2.p.-t3.c.-w6 Subscription options
 
-.container
-  .row
-    .col-xs-12
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital
+.p.-t4
+  .container
+    .row
+      .col-xs-12
+        .block.-my1.-b.-p1
+          %h3.inline.c.p.-t4.-w4.-serif Digital
+          %p.inline
+            &mdash; Unlimited digital access to <strong>DublinInquirer.com</strong>, including our full archive, optimised for desktop and mobile.
 
-        .content
-          :markdown
-            Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+          %nav.block.-mt1.-py1
+            = link_to raw("Subscribe &mdash; €5/month"), product_path(id: 'digital'), class: 'button -yellow'
 
-        %nav.-box.-actions.-tight.-full
-          = link_to raw("<span>Subscribe</span><span class='figure'>€5/month</span>"), product_path(id: 'digital'), class: 'button -price'
+        .block.-my1.-b.-p1
+          %h3.inline.c.p.-t4.-w4.-serif Digital + Monthly print
+          %p.inline
+            &mdash; The <strong>monthly print edition</strong> features a selection of our favourite online articles delivered to your door. Comes with unlimited <strong>digital access</strong>.
 
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital + Monthly print
+          %nav.block.-mt1.-py1
+            = link_to raw("Subscribe &mdash; €8/month"), product_path(id: 'print'), class: 'button -yellow'
 
-        .content
-          :markdown
-            The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
+        .block.-my1.-b.-p1
+          %h3.inline.c.p.-t4.-w4.-serif Friends & Patrons
+          %p.inline
+            &mdash; Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the <strong>monthly print edition</strong>, unlimited <strong>digital access</strong>, and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting you support.
 
-        %nav.-box.-actions.-tight.-full
-          = link_to raw("<span>Subscribe</span><span class='figure'>€8/month</span>"), product_path(id: 'print'), class: 'button -price'
+          %nav.block.-mt1.-py1
+            = link_to raw("Friend &mdash; €20/month"), product_path(id: 'friend'), class: 'button -yellow'
+            = link_to raw("Patron &mdash; €50/month"), product_path(id: 'patron'), class: 'button -yellow'
 
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Friends & Patrons
+        .block.-my1.-b.-p1
+          %h3.inline.c.p.-t4.-w4.-serif Student? Unwaged?
+          %p.inline
+            &mdash; We believe everybody deserves access to good journalism about their city: if you're unable to afford the subscription options above, send us an email and we'll work something out. Nobody will be turned away at the door, so to speak.
 
-        .content
-          :markdown
-            Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the **monthly print edition**, unlimited **digital access**, and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting you support.
-
-        %nav.-box.-actions.-tight.-full
-          = link_to raw("<span>Friend</span><span class='figure -lg'>€20/month</span>"), product_path(id: 'friend'), class: 'button -price'
-          = link_to raw("<span>Patron</span><span class='figure -lg'>€50/month</span>"), product_path(id: 'patron'), class: 'button -price'
-
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Student? Unwaged?
-
-        .content
-          :markdown
-            We believe everybody deserves access to good journalism about their city: if you're unable to afford the subscription options above, send us an email and we'll work something out.
-
-        %nav.-box.-actions.-tight.-right
-          = link_to "Email us", 'mailto:brian@dublininquirer.com', class: 'button -standard'
+          %nav.block.-mt1.-py1
+            = link_to "Email us", 'mailto:brian@dublininquirer.com', class: 'button -standard'

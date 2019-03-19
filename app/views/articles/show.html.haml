@@ -20,36 +20,36 @@
 
 .block.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block
-  .block.-py4
-    - if @article.commentable?
-      .wrapper.-small{role: 'layout'}= render partial: 'comments/comments', locals: { article: @article }
-
+.block.-bt.-py4
   - if @article.tags.any?
-    .block.-bt.-pt1.-my2
-      .row
-        .col-xs-12.col-md-4
-          %header
-            %h3.p.-t4.c.-w6 Filed under:
+    .row
+      .col-xs-12.col-md-4
+        %header
+          %h3.p.-t4.c.-w6 Filed under:
 
-          .block
-            .p.-t3
-              %ul.list.-sentence
-                - @article.displayable_tags.each do |tag|
-                  %li= link_to tag.name, tag_path(id: tag.slug)
+        .block
+          .p.-t3
+            %ul.list.-sentence
+              - @article.displayable_tags.each do |tag|
+                %li= link_to tag.name, tag_path(id: tag.slug)
 
-        .col-xs-12.col-md-4
-          %header
-            %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
+      .col-xs-12.col-md-4
+        %header
+          %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
-          .block
-            .p.-t3
-              - @article.authors.each do |author|
-                :markdown
-                  _#{ link_to author.full_name, author }:_ #{ author.bio }
+        .block
+          .p.-t3
+            - @article.authors.each do |author|
+              :markdown
+                _#{ link_to author.full_name, author }:_ #{ author.bio }
 
+.block.-bt.-py4
+  - if @article.commentable?
+    = render partial: 'comments/comments', locals: { article: @article }
+
+.block.-bt.-py4
   - if @article.from_the_same_issue.by_position.any?
-    .block.-mt4.-pt4
+    .block
       .block.-mb3
         %h3.h.-h3.p.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
 

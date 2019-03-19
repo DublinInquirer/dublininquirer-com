@@ -3,12 +3,14 @@
   display: block
   margin: 0
   position: relative
+  background: var(--faint)
 
   & > .overlay
     position: absolute
     top: 1.5rem
     left: 1.5rem
     padding: 0.25rem 0.5rem
+    z-index: 1
 
   & > img
     width: 100%
@@ -24,8 +26,18 @@
     padding-top: 0.5rem
     text-align: center
 
-  &.-featured
+  &.-landscape
+    width: 100%
+    padding-top: 66.666%
+    overflow: hidden
     img
-      display: absolute
+      z-index: 0
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      position: absolute
+      object-fit: cover
+      object-position: center center
 
   &.-square

@@ -1,8 +1,9 @@
 .block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
-  .text.-centered
-    %h1.h.-h2 Help our reporters<br>cover the important stories.
+  .p.-centered
+    .block.-pt4
+      %h1.inline.p.-t1.-w4.c.-serif Help our reporters<br>cover the important stories.
 
-    %p.p.-t3 Subscribe now and get your first month free.
+      .block.-mt2.p.-t3 Subscribe now and get your first month free.
 
   .block.-mt4.-pull-down
     .wrapper.-medium{role: 'layout'}
@@ -10,7 +11,7 @@
         .row
           .col-xs-12.col-sm-8
             .block.-px2.-py4
-              .p.-b2
+              .p.-t3
                 :markdown
                   ### Basic digital subscription
 
@@ -21,20 +22,20 @@
           .col-xs-12.col-sm-4.col.flex
             .block.-px2.-py1.col.flex
               %nav.-centered
-                = link_to "Subscribe", product_path(:digital), class: 'button -big'
+                = link_to "Subscribe now", product_path(:digital), class: 'button -yellow'
 
-        .block.-px2.-py3.-bt
-          .p.-b4
+        .block.-px2.-py3.-bt.-bg-faint
+          .p.-t4
             .row
               .col-xs-12.col-md-6
-                .text
+                .p.-sf
                   :markdown
                     ##### Unlimited access
 
                     Read unlimited articles on **dublininquirer.com** and our mobile-optimised site. This includes access to the full archive of everything we've ever published.
 
               .col-xs-12.col-md-6
-                .text
+                .p.-sf
                   :markdown
                     ##### Events & community
 
@@ -48,7 +49,7 @@
           .heading Frequently Asked Questions
 
         .block.-p1
-          .text
+          .p.-sf
             :markdown
               #### What does 'independent' and 'reader-funded' mean?
 

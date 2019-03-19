@@ -1,4 +1,18 @@
 .button, a.button, a.button:link, a.button:visited, input.button
+  font-family: $sans
+
+  &:hover
+    cursor: pointer
+
+  &.-standard
+    background: var(--blue)
+    color: var(--white)
+    border-radius: 1.5px
+    padding: 0.675rem 1.25rem
+    border: 0
+    transition: 0.25s ease all
+    &:hover
+      background: var(--blue)
 
   &.-yellow
     background: var(--yellow)
