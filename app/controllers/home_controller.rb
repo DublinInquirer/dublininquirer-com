@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     @recent_motions = Rails.cache.fetch("/home/motions", expires_in: 1.hour) do
       begin
         Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
-      rescue HTTP::ConnectionError
+      rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError
         []
       end
     end
