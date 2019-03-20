@@ -5,15 +5,18 @@
 
     .block.-my2
       .box
-        .portrait
+        .row
           - if article.author.portrait.present?
-            = image_tag article.author.portrait.url
+            .col-xs-4
+              .portrait.artwork
+                = image_tag article.author.portrait.url
 
-        .text
-          :markdown
-            **#{ link_to article.author.full_name, article.author }**
+          .col-xs-8
+            .text
+              :markdown
+                **#{ link_to article.author.full_name, article.author }**
 
-            #{ raw article.author.bio }
+                #{ raw article.author.bio }
 
     .meta.-small
       - if article.issue_date.present?
