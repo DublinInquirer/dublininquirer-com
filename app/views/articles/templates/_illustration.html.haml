@@ -1,18 +1,28 @@
-.wrapper.-small{role: 'layout'}
-  %article.article.-illustration{lang: 'en'}
-    - if article.featured_artwork.present?
-      %figure.artwork.-featured
-        = image_tag article.featured_artwork.image.massive.url
-        %figcaption= article.featured_artwork.caption
+.block.-py4
+  .p.-centered
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
 
-    %main
-      %header
+    .wrapper.-medium{role: 'layout'}
+      %h1.block.h.-h2.-w4.c.-serif
         - if article.category.downcase == 'cover'
-          %h1.headline Print edition cover
+          Print edition cover
         - elsif article.category.downcase != 'cartoon'
-          %h1.headline= raw article.title
+          = raw article.title
 
-        = render partial: 'articles/meta', locals: {article: article}
+      - if article.authors.any?
+        .block.p.-t3 &nbsp;by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
 
-      .description
-        = raw render_content(article.content)
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
+
+%article.article.-formatted.-standard{lang: 'en'}
+  - if article.featured_artwork.present?
+    %figure.artwork.-featured
+      = image_tag article.featured_artwork.image.large.url
+      %figcaption= article.featured_artwork.caption
+
+  = raw render_content(article.content)

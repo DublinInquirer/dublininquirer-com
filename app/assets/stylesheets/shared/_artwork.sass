@@ -20,15 +20,15 @@
     padding: 0
 
   figcaption
+    display: block
     font-family: $sans
     font-size: var(--t4)
     line-height: 1.4
-    padding-top: 0.5rem
+    padding: 1rem 0 0.5rem
     text-align: center
+    background: var(--default)
 
-  &.-landscape
-    width: 100%
-    padding-top: 66.666%
+  &.-landscape, &.-square, &.-portrait
     overflow: hidden
     img
       z-index: 0
@@ -40,4 +40,14 @@
       object-fit: cover
       object-position: center center
 
+  &.-portrait
+    border-radius: 1.5px
+    width: 8rem
+    height: 8rem
+    margin: 0 auto
+
+  &.-landscape
+    padding-top: 66.666%
+
   &.-square
+    padding-top: 100%

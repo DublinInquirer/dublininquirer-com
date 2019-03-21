@@ -43,15 +43,19 @@
 
   .left, .right
     flex-basis: calc(50% - 12rem)
+    .meta-nav_item
+      display: none
 
   .left
     justify-content: flex-start
     .meta-nav_item:first-child
+      display: flex
       border-right-width: 1px
 
   .right
     justify-content: flex-end
     .meta-nav_item:last-child
+      display: flex
       border-left-width: 1px
 
   .center
@@ -101,4 +105,8 @@
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
+    .left, .right
+      flex-basis: calc(50% - 12rem)
+      .meta-nav_item
+        display: flex
   @media screen and (min-width: $large)

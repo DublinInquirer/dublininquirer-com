@@ -2,29 +2,42 @@
 
 
 .article.-standard
+
+.article.-formatted
   font-size: 20px
   line-height: 30px
   font-family: $serif
 
-section.content
-  max-width: 68rem
-  margin: 0 auto
+  // handle block-level spacing here
+  section.content
+    max-width: 68rem
+    margin: 0 auto
 
-.article.-formatted
-  & > *:first-child
-    margin-top: 0
-    padding-top: 0
+    & > *:first-child
+      margin-top: 0
+      padding-top: 0
 
-  p, ul, ol, blockquote
-    margin-top: 2rem
-    margin-bottom: 2rem
+    &.-p, &.-ul, &.-ol, &.-blockquote
+      margin-top: 2rem
+      margin-bottom: 2rem
+
+    &.-h3, &.-h4
+      margin-top: 4em
+      padding-left: 2em
+
+      & + .-p, & + .-ul, & + .-ol, & + .-blockquote
+        margin-top: 1rem
+        padding-top: 0
 
   h3, h4
-    margin-top: 2em
-    margin-bottom: -0.5em
-    padding-left: 2em
     font-family: $sans
     font-size: 27px
     line-height: 1
     font-weight: 600
     letter-spacing: -0.0325em
+
+  ul, ol
+    padding-left: 4rem
+    padding-right: 10%
+
+  ul

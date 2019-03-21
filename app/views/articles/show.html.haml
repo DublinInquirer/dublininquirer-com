@@ -58,10 +58,9 @@
           .col-xs-12.col-md-3
             = render partial: 'articles/excerpts/tiny', locals: { article: article }
 
-- if permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
-  = render partial: 'user_sessions/paywall'
-
 = render partial: 'products/enticement'
 
 - if @limited
   = render partial: 'user_sessions/limited'
+- elsif permission_for_cookie? and @article.paywalled? # yes cookie, and yes paywalled
+  = render partial: 'user_sessions/paywall'

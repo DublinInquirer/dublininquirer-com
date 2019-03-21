@@ -15,7 +15,7 @@
   .wrapper.-small{role: 'layout'}
     = render partial: 'articles/meta', locals: {article: article}
 
-%article.article.-standard{lang: 'en'}
+%article.article.-formatted.-standard{lang: 'en'}
   - if article.featured_artwork.present?
     %figure.artwork.-featured
       = image_tag article.featured_artwork.image.large.url
