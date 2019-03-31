@@ -1,52 +1,116 @@
-- content_for :breadcrumbs do
-  .current Subscribe
+.block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
+  .p.-centered
+    .block.-pt2
+      %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories.
 
-%header.block.-mt4.-mb2
-  %h2.h.-h2  Subscribe
+      .block.-mt2.p.-t3 Subscribe now and get your first month for as low as €1
 
-  .block.-mt2
-    .article.-formatted.p.-t3.-serif
-      :markdown
-        Dublin Inquirer is funded by its subscribers, rather than advertisers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that you won’t find anywhere else.
+  .block.-mt4.-pull-down
+    .wrapper.-medium{role: 'layout'}
+      .row
+        .col-xs-12.col-md-6.flex
+          .block.-bg-default.-b.-b-r.flex.-c.-sb
+            .block.-p2.p.-t4
+              %h3.inline.p.-t4.c.-w8.-serif Digital
+              %p.inline
+                &mdash; €5/month &mdash; Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-        We also run occasional events, from pub quizzes to talks and debates. Subscribers often get first dibs on tickets, or discounts, or both.
+            .block.-px2.-py3.-bg-faint
+              .p.-t4.-centered
+                = link_to raw("Try for 1 month for €1"), product_path(:digital), class: 'button -yellow -big'
 
-%header.block.-mt4.-mb2
-  %h2.p.-t3.c.-w6 Subscription options
+        .col-xs-12.col-md-6.flex
+          .block.-bg-default.-b.-b-r.flex.-c.-sb
+            .block.-p2.p.-t4
+              %h3.inline.p.-t4.c.-w8.-serif Digital + Monthly print
+              %p.inline
+                &mdash; €8/month &mdash; The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-.p.-t4
-  .container
-    .row
-      .col-xs-12
-        .block.-my1.-b.-p1
-          %h3.inline.c.p.-t4.-w4.-serif Digital
-          %p.inline
-            &mdash; Unlimited digital access to <strong>DublinInquirer.com</strong>, including our full archive, optimised for desktop and mobile.
+            .block.-px2.-py3.-bg-faint
+              .p.-t4.-centered
+                = link_to raw("Subscribe for €8/month"), product_path(:print), class: 'button -yellow -big'
 
-          %nav.block.-mt1.-py1
-            = link_to raw("Subscribe &mdash; €5/month"), product_path(id: 'digital'), class: 'button -yellow'
+.block.-bt.-bg-default.-py4
+  .block.-my4.-pt4
+    .wrapper.-small{role: 'layout'}
+      .p.-t3
+        :markdown
+          **Dublin Inquirer** is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
 
-        .block.-my1.-b.-p1
-          %h3.inline.c.p.-t4.-w4.-serif Digital + Monthly print
-          %p.inline
-            &mdash; The <strong>monthly print edition</strong> features a selection of our favourite online articles delivered to your door. Comes with unlimited <strong>digital access</strong>.
+  .wrapper.-large{role: 'layout'}
+    .block.-my4
+      .row
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/c9d12d29a59b2ae8/large_image.jpg"
 
-          %nav.block.-mt1.-py1
-            = link_to raw("Subscribe &mdash; €8/month"), product_path(id: 'print'), class: 'button -yellow'
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif  A giant illegal waste dump has been growing for years in the north of the city.
 
-        .block.-my1.-b.-p1
-          %h3.inline.c.p.-t4.-w4.-serif Friends & Patrons
-          %p.inline
-            &mdash; Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the <strong>monthly print edition</strong>, unlimited <strong>digital access</strong>, and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting you support.
+              :markdown
+                For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste. _[Read this story →](/2019/02/27/for-years-an-illegal-dump-has-been-growing-in-a-north-dublin-neighbourhood)_
 
-          %nav.block.-mt1.-py1
-            = link_to raw("Friend &mdash; €20/month"), product_path(id: 'friend'), class: 'button -yellow'
-            = link_to raw("Patron &mdash; €50/month"), product_path(id: 'patron'), class: 'button -yellow'
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/49b678399185e22b/large_image.jpg"
 
-        .block.-my1.-b.-p1
-          %h3.inline.c.p.-t4.-w4.-serif Student? Unwaged?
-          %p.inline
-            &mdash; We believe everybody deserves access to good journalism about their city: if you're unable to afford the subscription options above, send us an email and we'll work something out. Nobody will be turned away at the door, so to speak.
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif FOI Chief Overrules Government Refusal to Release Fire-Safety Reports
 
-          %nav.block.-mt1.-py1
-            = link_to "Email us", 'mailto:brian@dublininquirer.com', class: 'button -standard'
+              :markdown
+                We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry. _[Read this story →](/2017/08/16/foi-chief-overrules-government-refusal-to-release-fire-safety-reports)_
+
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/626e4eb64db850b4/large_image.jpg"
+
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif Should Homeless Families Have to Use the Side Door?
+
+              :markdown
+                We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation. _[Read this story →](/2015/08/12/should-homeless-families-have-to-use-the-side-door)_
+
+  .wrapper.-small{role: 'layout'}
+    .block.-my4
+      .p.-t3
+        The work we do is regularly picked up by newspapers, blogs, and radio stations, but without our on-the-ground reporting, these stories wouldn't be covered. And that wouldn't be possible without the support of readers like you.
+
+  %hr.-separator
+
+  .block.-my4
+    .block.-mb2
+      .h.-h3.-centered Become a subscriber
+    .p.-t4.-centered
+      = link_to raw("Digital &mdash; first month for €1"), product_path(:digital), class: 'button -yellow'
+      = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'button -yellow'
+
+.block.-bt.-py4.-bg-faint
+  .wrapper.-small{role: 'layout'}
+    .block.-p4.-b.-bg-default
+      %header.block.-mb4
+        %h3.p.-t3.-centered.c.-w8 Frequently Asked Questions
+
+      .p.-t4.-sf
+        :markdown
+          #### What does 'independent' and 'reader-funded' mean?
+
+          _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
+
+          _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers. If we're doomed to be beholden to our funders, we'd prefer those funders be our readers.
+
+          #### Is there a student/unwaged rate?
+
+          Nobody will be turned away for want of funds. If you're a student, not working, or otherwise unable to afford a subscription, send [us an email](mailto:brian@dublininquirer.com) and we'll see if we can work something out.
+
+          #### What is the cancellation policy?
+
+          You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.

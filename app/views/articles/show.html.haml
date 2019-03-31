@@ -18,9 +18,9 @@
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
 
-.block.-pb2= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
+.block.-pb4= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block.-bt.-py4
+.block.-bt.-py4.-mt4
   - if @article.tags.any?
     .row
       .col-xs-12.col-md-4

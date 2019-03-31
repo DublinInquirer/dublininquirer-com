@@ -10,6 +10,6 @@
 
       .p.-centered
         %span.p.-t4
-          %h3.headline.inline.c.-w8= article.title
+          %h3.headline.inline.c.-w4.-serif= article.title
           - if article.authors.any?
             %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }

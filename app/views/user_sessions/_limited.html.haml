@@ -1,21 +1,21 @@
 %div{role: 'overlay', class: '-limited', id: 'limited'}
-  .content.block.-bg-default
-    .block.-bb.-p2
+  .content.block.-bt.-bg-default
+    .block.-py1.-bg-faint
       .p.-centered.-t4.-sf
         :markdown
           I’m afraid you’ve reached your limit of free articles this month. If you’re a subscriber, #{ link_to "log in", :login } and keep reading!
 
-    .block.-bb.-p2
+    .block.-p2
       .wrapper.-small{role: 'layout'}
         .p.-centered
-          .block.-mb1
-            %h2.h.-h2.c.-w4.-serif Thoughtful, independent,<br> local journalism.
+          .block.-my4
+            %h2.h.-h2.c.-serif Thoughtful, independent,<br> local journalism.
 
-          .p.-t4.-sf
+          .p.-t3.-sf
             :markdown
               Our readers give us the resources and space to do our reporting. Thanks to them, we can keep focused on accurate and compelling reporting, and telling stories about the city that you can’t get anywhere else.
 
-    .block.-bb.-p2
+    .block.-my4
       .p.-t3.-centered= link_to "See subscription options", :products, class: 'button -yellow'
 
 :coffeescript

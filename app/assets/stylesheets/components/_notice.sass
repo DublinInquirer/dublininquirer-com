@@ -1,65 +1,25 @@
 .notice.-fixed
   position: fixed
-  left: calc(var(--gutter)/4)
-  right: calc(var(--gutter)/4)
-  bottom: 0
+  left: 2rem
+  right: 2rem
+  bottom: 2rem
   z-index: 999
-  border: 1px solid var(--black)
-  border-bottom: 0
-  background: var(--default)
   padding: 0
-  display: flex
-  flex-direction: column
-  justify-content: space-between
+  nav
+    position: absolute
+    left: 1rem
+    top: 1rem
 
-  nav.close
-    width: 4.25rem
-    height: 4.25rem
-    flex: none
-    display: flex
-    justify-content: center
-    align-items: center
-    border-right: 1px solid var(--black)
-
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-    flex-direction: row
-
-.notice.-paywall
-  nav.close
-    position: fixed
-
-  .content
-    flex: 1
-    display: flex
-    flex-direction: row
-    justify-content: flex-start
-    align-items: center
-    padding: 0 1rem
-    padding-left: calc(4.25rem + 1rem)
-    min-height: 4.25rem
-    border-bottom: 1px solid var(--black)
-
-  .actions
-    flex: none
-    padding: 0.5rem 1rem
-    display: flex
-    flex-direction: row
-    align-items: center
-    justify-content: stretch
-
-    .button
-      flex: 1
-
-    .button + .button
-      margin-left: 1rem
+    a, a:link, a:visited
+      &.icon
+        width: 2.25rem
+        height: 2.25rem
+        &:hover
+          background-color: transparent
+          svg
+            rect
+              fill: var(--blue)
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
-    .content
-      border-bottom: 0
-
-    .actions
-      .button
-        flex: none
-  @media screen and (min-width: $large)
+    flex-direction: row

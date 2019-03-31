@@ -1,6 +1,6 @@
 %header.block.-pb4
-  %h3.p.-t4.c.-w6{title: 'comments', id: 'comments'}
-    Reader responses:
+  .block.-mb3{title: 'comments', id: 'comments'}
+    %h3.h.-h3.p.-centered Reader responses:
 
 .wrapper.-small{role: 'layout'}
   .block.-b
@@ -26,7 +26,7 @@
 
     - else
       .form-overlay
-        .text.-centered
+        .p.-sf
           :markdown
             #{ link_to "Log in", :login } to write a response.
 

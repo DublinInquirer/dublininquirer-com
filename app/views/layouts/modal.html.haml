@@ -4,31 +4,54 @@
     %meta{charset: "utf-8"}/
     %meta{'http-equiv': 'x-ua-compatible', content: 'ie=edge'}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{name: 'viewport', content: "width=device-width, initial-scale=1"}/
-
-    = display_meta_tags site: 'Dublin Inquirer', og: { title: :title, site_name: :site }, twitter: { title: :title, site_name: :site }, reverse: true, separator: '|'
+    %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
+    - set_meta_tags site: 'Dublin Inquirer'
+    - set_meta_tags og: {site_name: :site}
+    - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
+    = display_meta_tags reverse: true, separator: '|'
 
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag 'audio', media: 'all'
+    = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4000ff">
+    <meta name="msapplication-TileColor" content="#4000ff">
+    <meta name="theme-color" content="#ff0000">
     = render partial: 'layouts/snippets/fb'
     = render partial: 'layouts/snippets/stripe'
 
   %body
-    .modal{role: 'layout'}
-      =render partial: 'layouts/modal-nav'
-      %main.modal-main
-        .modal-content
-          .wrapper.-container{role: 'layout'}
-            .wrapper.-small{role: 'layout'}= yield
+    .wrapper.-container{role: 'layout'}
+      = render partial: 'layouts/modal-nav'
 
-      - if content_for(:illustration)
-        = yield :illustration
-      - else
-        %aside.modal-aside.illustration
-          %header
-            .logotype.-stacked Dublin InQuirer
-            %p Reader supported.
+      = yield
 
+      .block.-bt.-py4
+        .p.-centered.-t4.-sf
+          :markdown
+            &copy; 2015&ndash;#{ Date.current.year }
+
+            Dublin Inquirer<br>
+            Parkview House<br>
+            65 Crumlin Rd<br>
+            Dublin 12
+
+            CRO #559820
+
+    = render partial: 'user_sessions/cookies'
+
+    - if permission_for_cookie?
+      = render partial: 'user_sessions/delinquent'
+
+    - if current_user != true_user
+      = render partial: 'user_sessions/impersonating'
+
+    = render partial: 'layouts/search'
+    = render partial: 'layouts/expansive-nav'
     = render partial: 'layouts/snippets/analytics'

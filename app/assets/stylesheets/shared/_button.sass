@@ -13,6 +13,23 @@
     transition: 0.25s ease all
     &:hover
       background: var(--blue)
+      color: var(--white)
+
+    &.-big
+      padding: 1.5rem 3rem
+
+  &.-red
+    background: var(--red)
+    color: var(--white)
+    border-radius: 1.5px
+    padding: 0.675rem 1.25rem
+    transition: 0.25s ease all
+    &:hover
+      color: var(--yellow)
+
+    &.-big
+      padding: 1.5rem 3rem
+      font-weight: 600
 
   &.-yellow
     background: var(--yellow)
@@ -23,6 +40,10 @@
     transition: 0.25s ease all
     &:hover
       color: var(--red)
+
+    &.-big
+      padding: 1.5rem 3rem
+      font-weight: 600
 
   &.-white
     background: var(--white)
@@ -43,11 +64,9 @@
   margin: 0
   font-family: $sans
   font-weight: 400
-  line-height: var(--baseline)
   color: var(--black)
   border: 0
   background-color: transparent
-  border-bottom: 1px solid var(--blue)
   &:hover
     color: var(--blue)
     border-color: transparent

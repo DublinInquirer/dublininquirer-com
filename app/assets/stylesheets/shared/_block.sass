@@ -18,6 +18,9 @@
   &.-bg-black
     color: var(--default)
     background-color: var(--black)
+    a, a:link, a:visited
+      color: var(--default)
+
   &.-bg-blue
     color: var(--default)
     background-color: var(--blue)
@@ -236,13 +239,11 @@
     border-left: 1px solid var(--black)
   &.-br
     border-right: 1px solid var(--black)
+  &.-b-r
+    border-radius: 1.5px
 
   &.-hr
     border-bottom: calc(0.75rem/2) solid var(--black)
-
-  &.-b-highlight
-    border-radius: 1.25px
-    border: 3px solid var(--blue)
 
   &.-shadow
     box-shadow: 0 0.5rem 1rem rgba(#000,0.175)
