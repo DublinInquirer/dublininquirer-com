@@ -7,11 +7,11 @@
           .text
             %header.-issue
               %h3.heading Give a subscription
-            .p.-t3.-serif
+            .p.-t3.-serif.-sf
               :markdown
                 A subscription to Dublin Inquirer is the perfect gift for the inquisitive Dubliner in your life.
-          %nav.options
-            = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -yellow'
+          %nav.block.-mt4
+            = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -standard -big'
 
       - elsif logged_in? and current_user.subscriber?
         .row
@@ -27,8 +27,8 @@
 
                   If you value our work, consider becoming a _Friend_ or _Patron_ level subscriber.
 
-              %nav.block.-mt2
-                = link_to raw("Become a patron &rarr;"), [:upgrade, :subscriptions], class: 'button -yellow'
+              %nav.block.-mt4
+                = link_to raw("Become a patron &rarr;"), [:upgrade, :subscriptions], class: 'button -standard -big'
 
       - else
         .row
@@ -42,5 +42,5 @@
                 :markdown
                   We do in-depth, shoe-leather reporting about the issues that shape Dublin. We're not funded by advertisers. We're funded by readers like you.
 
-              %nav.block.-mt2
-                = link_to raw("Become a subscriber &rarr;"), :products, class: 'button -yellow'
+              %nav.block.-mt4
+                = link_to raw("Become a subscriber &rarr;"), :products, class: 'button -standard -big'

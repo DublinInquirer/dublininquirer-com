@@ -1,7 +1,7 @@
 .block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
   .p.-centered
     .block.-pt2
-      %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories.
+      %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories
 
       .block.-mt2.p.-t3 Subscribe now and get your first month for as low as €1
 
@@ -9,31 +9,33 @@
     .wrapper.-medium{role: 'layout'}
       .row
         .col-xs-12.col-md-6.flex
-          .block.-bg-default.-b.-b-r.flex.-c.-sb
+          .block.-bg-default.-b.flex.-c.-sb
             .block.-p2.p.-t4
               %h3.inline.p.-t4.c.-w8.-serif Digital
               %p.inline
                 &mdash; €5/month &mdash; Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-            .block.-px2.-py3.-bg-faint
+            .block.-px2.-pt2.-pb3
               .p.-t4.-centered
                 = link_to raw("Try for 1 month for €1"), product_path(:digital), class: 'button -yellow -big'
 
         .col-xs-12.col-md-6.flex
-          .block.-bg-default.-b.-b-r.flex.-c.-sb
+          .block.-bg-default.-b.flex.-c.-sb
             .block.-p2.p.-t4
               %h3.inline.p.-t4.c.-w8.-serif Digital + Monthly print
               %p.inline
                 &mdash; €8/month &mdash; The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-            .block.-px2.-py3.-bg-faint
+            .block.-px2.-pt2.-pb3
               .p.-t4.-centered
                 = link_to raw("Subscribe for €8/month"), product_path(:print), class: 'button -yellow -big'
 
 .block.-bt.-bg-default.-py4
   .block.-my4.-pt4
     .wrapper.-small{role: 'layout'}
-      .p.-t3
+      .block.-mb1
+        %h3.h.-h2.-centered Independent, important, impactful
+      .p.-t3.-centered
         :markdown
           **Dublin Inquirer** is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
 
@@ -51,7 +53,7 @@
                 %h3.c.-w4.-serif  A giant illegal waste dump has been growing for years in the north of the city.
 
               :markdown
-                For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste. _[Read this story →](/2019/02/27/for-years-an-illegal-dump-has-been-growing-in-a-north-dublin-neighbourhood)_
+                For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste.
 
         .col-xs-12.col-md-4.flex
           .block.-p2.-bg-faint.-b
@@ -64,7 +66,7 @@
                 %h3.c.-w4.-serif FOI Chief Overrules Government Refusal to Release Fire-Safety Reports
 
               :markdown
-                We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry. _[Read this story →](/2017/08/16/foi-chief-overrules-government-refusal-to-release-fire-safety-reports)_
+                We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry.
 
         .col-xs-12.col-md-4.flex
           .block.-p2.-bg-faint.-b
@@ -77,21 +79,21 @@
                 %h3.c.-w4.-serif Should Homeless Families Have to Use the Side Door?
 
               :markdown
-                We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation. _[Read this story →](/2015/08/12/should-homeless-families-have-to-use-the-side-door)_
+                We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation.
 
   .wrapper.-small{role: 'layout'}
     .block.-my4
-      .p.-t3
+      .p.-t3.-centered
         The work we do is regularly picked up by newspapers, blogs, and radio stations, but without our on-the-ground reporting, these stories wouldn't be covered. And that wouldn't be possible without the support of readers like you.
 
   %hr.-separator
 
   .block.-my4
-    .block.-mb2
+    .block.-mb4
       .h.-h3.-centered Become a subscriber
     .p.-t4.-centered
-      = link_to raw("Digital &mdash; first month for €1"), product_path(:digital), class: 'button -yellow'
-      = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'button -yellow'
+      = link_to raw("Digital &mdash; first month for €1"), product_path(:digital), class: 'button -standard -big'
+      = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'button -standard -big'
 
 .block.-bt.-py4.-bg-faint
   .wrapper.-small{role: 'layout'}
@@ -105,7 +107,7 @@
 
           _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
 
-          _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers. If we're doomed to be beholden to our funders, we'd prefer those funders be our readers.
+          _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers, rather than those of advertisers.
 
           #### Is there a student/unwaged rate?
 

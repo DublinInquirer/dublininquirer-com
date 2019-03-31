@@ -5,15 +5,14 @@
     cursor: pointer
 
   &.-standard
-    background: var(--blue)
-    color: var(--white)
-    border-radius: 1.5px
+    background: var(--default)
+    color: var(--black)
     padding: 0.675rem 1.25rem
-    border: 0
-    transition: 0.25s ease all
+    border: 1px solid var(--black)
+    transition: 0.125s ease all
     &:hover
-      background: var(--blue)
-      color: var(--white)
+      background: var(--yellow)
+      color: var(--black)
 
     &.-big
       padding: 1.5rem 3rem
@@ -21,7 +20,6 @@
   &.-red
     background: var(--red)
     color: var(--white)
-    border-radius: 1.5px
     padding: 0.675rem 1.25rem
     transition: 0.25s ease all
     &:hover
@@ -34,7 +32,6 @@
   &.-yellow
     background: var(--yellow)
     color: var(--black)
-    border-radius: 1.5px
     padding: 0.675rem 1.25rem
     border: 1px solid var(--black)
     transition: 0.25s ease all
@@ -50,11 +47,8 @@
     color: var(--black)
     padding: 0.5rem 1rem
     transition: 0.25s ease all
-    border-radius: 1.5px
-    box-shadow: 0 0.125rem 0.325rem rgba(#000,0.125)
     transition: ease all 0.5s
     &:hover
-      box-shadow: 0 0.125rem 0.125rem rgba(#000,0.5)
       color: var(--blue)
 
 .text-button

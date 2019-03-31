@@ -12,13 +12,13 @@
 
     - if @landing_page
       .block.-mt2
-        .p.-t3.-serif.-sf
+        .p.-t3.-sf
           :markdown
             As a special offer, subscribe now and you'll receive a **free month** of digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
     - elsif @subscription.requires_address?
       .block.-mt2
-        .p.-t3.-serif.-sf
+        .p.-t3.-sf
           :markdown
             **Monthly print edition** featuring a selection of our favourite online articles delivered to your door, in addition to unlimited **digital access**, including our full archive.
           - if @plan.is_friend? or @plan.is_patron?
@@ -26,7 +26,7 @@
               Thank you so much for your generosity in supporting us. We depend on readers like you.
     - else
       .block.-mt2
-        .p.-t3.-serif.-sf
+        .p.-t3.-sf
           :markdown
             Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
@@ -40,7 +40,7 @@
       .block
         %h3 Subscriber details
 
-        .box-form
+        .box-form.block.-b
           - if @user && @user.errors.any?
             %ul.modal-form_errors
               - @user.errors.full_messages.each do |message|
@@ -65,7 +65,7 @@
         .block
           %h3 Subscription address
 
-          .box-form
+          .box-form.block.-b
             .field
               = f.label :address_line_1
               = f.text_field :address_line_1
@@ -86,16 +86,15 @@
               = f.label :country_code, 'Country'
               = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
 
-      .box.-tight
-        %header.header.-box.-tight
-          %h2.heading Credit/debit card details
+      .block
+        %h3 Credit/debit card details
 
-          - if @landing_page
-            .text.-tiny
-              :markdown
-                You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
+        - if @landing_page
+          .text.-tiny
+            :markdown
+              You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
 
-        .box-form
+        .box-form.block.-b
           .field
             %label Card number
             #stripe-form_card-number.field.empty
