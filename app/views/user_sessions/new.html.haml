@@ -1,35 +1,31 @@
 - title 'Log in'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Log in
+.wrapper.-tiny{role: 'layout'}
+  %header.block.-mt4.-mb2
+    %h2.h.-h4.-centered
+      Sign in to access the digital archive, respond to articles, manage your details.
 
-%header.header.-modal
-  %h1.heading Welcome back
+  .block.-my4.p.-t3
+    = form_tag user_sessions_path, method: :post, class: 'box-form' do
+      .block.-b
+        .field
+          = label_tag :email_address
+          = email_field_tag :email_address, nil, placeholder: 'sean@example.ie'
 
-.box.-tight
-  %header.-box.-tight
-    .heading Log in to an existing account
+        .field
+          = label_tag :password
+          = password_field_tag :password, nil, placeholder: 'password123'
 
-  = form_tag user_sessions_path, method: :post, class: 'box-form' do
-    .field
-      = label_tag :email_address
-      = email_field_tag :email_address, nil, placeholder: 'sean@example.ie'
+      %nav.block.-mt2.-mb4.p.-centered
+        - if @failure
+          .error This email address or password is incorrect.
+        = submit_tag "Log in", class: 'button -standard -big'
 
-    .field
-      = label_tag :password
-      = password_field_tag :password, nil, placeholder: 'password123'
-
-    %nav.actions
-      - if @failure
-        .error This email address or password is incorrect.
-      = submit_tag "Log in", class: 'button -standard -big'
-
-.box.-other
-  %header.-box
-    .heading Other options
-  .content
-    %ul.list.-options
-      %li= link_to "Register for a free account", :register, class: 'button -standard'
-      %li= link_to "Reset your password", [:new, :password_reset], class: 'button -standard'
-      %li= link_to "Migrate an account from the old (pre August 2018) site", '/migrate', class: 'button -standard'
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %h3.c.-w8 Other options
+      %ul
+        %li= link_to "Don't have an account? Sign up", :register
+        %li= link_to "Forgot your password? Reset it", [:new, :password_reset]
+        %li= link_to "Had an account before 2018? Migrate it", '/migrate'

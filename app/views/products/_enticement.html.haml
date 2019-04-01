@@ -1,6 +1,6 @@
-.block.-bg-black
+.block.-bg-black.-my4
   .wrapper.-contained{role: 'layout'}
-    .block.-my4
+    .block
       - if logged_in? and current_user.subscriber? and current_user.patron?
         .enticement
           %figure.artwork= image_tag "ads/meath-street.jpg"

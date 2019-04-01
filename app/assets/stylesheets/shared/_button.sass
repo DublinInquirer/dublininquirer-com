@@ -15,7 +15,10 @@
       color: var(--black)
 
     &.-big
-      padding: 1.5rem 3rem
+      font-size: var(--t3)
+      line-height: 1.5
+      padding: 1.75rem 3.25rem
+      font-weight: 800
 
   &.-red
     background: var(--red)
@@ -43,12 +46,14 @@
       font-weight: 600
 
   &.-white
-    background: var(--white)
+    background: var(--default)
     color: var(--black)
-    padding: 0.5rem 1rem
-    transition: 0.25s ease all
-    transition: ease all 0.5s
+    padding: 0.575rem 1rem
+    border: 1px solid var(--black)
+    transition: 0.125s ease all
+    font-weight: 600
     &:hover
+      background: var(--white)
       color: var(--blue)
 
 .text-button

@@ -1,42 +1,37 @@
 - title 'Register'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Register
+.wrapper.-tiny{role: 'layout'}
+  %header.block.-mt4.-mb2
+    %h2.h.-h4.-centered
+      Sign up for a free account
 
-%header.header.-modal
-  %h1.heading Create a free account
+  .block.-my4.p.-t3
+    = form_for @user, html: {class: 'box-form'} do |f|
+      .block.-b
+        .field
+          = f.label :given_name, 'Name'
+          .twofer
+            = f.text_field :given_name, placeholder: 'First'
+            = f.text_field :surname, placeholder: 'Surname'
+        .field
+          = f.label :email_address
+          = f.email_field :email_address, placeholder: 'sean@example.ie'
+        .field
+          = f.label :password
+          = f.password_field :password, placeholder: 'password123'
 
-  .text.-article
-    :markdown
-      Sign up for a free account to read up to four articles each month, comment on articles, and get our (optional) newsletter, with reminders of events, updates from the newsroom, and the pick of the week’s stories.
+        .field.-check
+          = f.label :subscribed_weekly do
+            = f.check_box :subscribed_weekly
+            Get our free weekly email newsletter?
 
-.box.-tight
-  = form_for @user, html: {class: 'box-form'} do |f|
-    .field
-      = f.label :given_name, 'Name'
-      .twofer
-        = f.text_field :given_name, placeholder: 'First'
-        = f.text_field :surname, placeholder: 'Surname'
-    .field
-      = f.label :email_address
-      = f.email_field :email_address, placeholder: 'sean@example.ie'
-    .field
-      = f.label :password
-      = f.password_field :password, placeholder: 'password123'
+      %nav.block.-mt2.-mb4.p.-centered
+        = f.submit 'Register', class: 'button -standard -big'
 
-    .field.-check
-      = f.label :subscribed_weekly do
-        = f.check_box :subscribed_weekly
-        Subscribe to our free weekly email newsletter?
-
-    %nav.actions
-      = f.submit 'Register', class: 'button -standard -big'
-
-.box.-other
-  %header.-box
-    .heading Other options
-  .content
-    %ul.list.-options
-      %li= link_to "Log in to an existing account", :login, class: 'button -standard'
-      %li= link_to "Migrate an account from the old (pre August 2018) site", '/migrate', class: 'button -standard'
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %h3.c.-w8 Other options
+      %ul
+        %li= link_to "Log in to an existing account", :login
+        %li= link_to "Had an account before 2018? Migrate it", '/migrate'

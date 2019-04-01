@@ -24,8 +24,7 @@
   - if @article.tags.any?
     .row
       .col-xs-12.col-md-4
-        %header
-          %h3.p.-t4.c.-w6 Filed under:
+        %h3.p.-t4.c.-w6 Filed under:
 
         .block
           .p.-t3
@@ -34,8 +33,7 @@
                 %li= link_to tag.name, tag_path(id: tag.slug)
 
       .col-xs-12.col-md-4
-        %header
-          %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
+        %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
         .block
           .p.-t3
@@ -51,7 +49,7 @@
   - if @article.from_the_same_issue.by_position.any?
     .block
       .block.-mb3
-        %h3.h.-h3.p.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
+        %h3.h.-h4.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
 
       .row
         - @article.from_the_same_issue.by_position.first(4).each do |article|

@@ -1,11 +1,10 @@
-%header.block.-pb4
-  .block.-mb3{title: 'comments', id: 'comments'}
-    %h3.h.-h3.p.-centered Reader responses:
+.block.-mb4{title: 'comments', id: 'comments'}
+  %h3.h.-h4.-centered Reader responses
 
 .wrapper.-small{role: 'layout'}
   .block.-b
     %header.block.-p1.-bb
-      %h4.heading Write a response to the article
+      %h4.heading Respond to the article
 
     - if logged_in?
       = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {class: 'box-form', remote: true} do |f|

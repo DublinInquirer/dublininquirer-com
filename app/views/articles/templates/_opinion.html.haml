@@ -11,20 +11,12 @@
         %h1.h.-h2.-w4.c.-serif= raw article.title
 
       - article.authors.each do |author|
-        .author.block.-mb1
-          .block
-            .artwork.-portrait
-              - if author.portrait.present?
-                = image_tag author.portrait.url
-              - else
-                &nbsp;
-
-          .block.-pl2
-            .p.-t5.-left
-              .c.-w6= author.full_name
-              .p.-sf
-                :markdown
-                  #{ raw author.bio }
+        .block.-mb4.-px2
+          .p.-t4.-centered.-sf
+            %p.c.-w8= link_to author.full_name, author
+            .p
+              :markdown
+                #{ raw author.bio }
 
         %hr.-separator
 

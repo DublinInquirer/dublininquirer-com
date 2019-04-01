@@ -22,4 +22,6 @@
 
 .block.-pt2.-pb4
   .wrapper.-contained{role: 'layout'}
+    .block.-my2
+      %h3.h.-h4.-centered Articles by #{ @author.full_name }
     = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {}}

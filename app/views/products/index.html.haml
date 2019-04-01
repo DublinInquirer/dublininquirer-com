@@ -3,47 +3,47 @@
     .block.-pt2
       %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories
 
-      .block.-mt2.p.-t3 Subscribe now and get your first month for as low as €1
+      .block.-mt2.p.-t3 Subscribe now for as little as €5 per month
 
   .block.-mt4.-pull-down
     .wrapper.-medium{role: 'layout'}
       .row
         .col-xs-12.col-md-6.flex
           .block.-bg-default.-b.flex.-c.-sb
-            .block.-p2.p.-t4
-              %h3.inline.p.-t4.c.-w8.-serif Digital
-              %p.inline
-                &mdash; €5/month &mdash; Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
+            .block.-p2.p.-t4.-centered
+              %h3.p.-t3.-centered.c.-w8.block.-mb1 Digital
+              :markdown
+                Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-            .block.-px2.-pt2.-pb3
+            .block.-px2.-pt3.-pb3.-bg-faint
               .p.-t4.-centered
-                = link_to raw("Try for 1 month for €1"), product_path(:digital), class: 'button -yellow -big'
+                = link_to raw("Subscribe for €5/month"), product_path(:digital), class: 'button -standard -big'
 
         .col-xs-12.col-md-6.flex
           .block.-bg-default.-b.flex.-c.-sb
-            .block.-p2.p.-t4
-              %h3.inline.p.-t4.c.-w8.-serif Digital + Monthly print
-              %p.inline
-                &mdash; €8/month &mdash; The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
+            .block.-p2.p.-t4.-centered
+              %h3.p.-t3.-centered.c.-w8.block.-mb1 Digital + Print
+              :markdown
+                The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-            .block.-px2.-pt2.-pb3
+            .block.-px2.-pt3.-pb3.-bg-faint
               .p.-t4.-centered
-                = link_to raw("Subscribe for €8/month"), product_path(:print), class: 'button -yellow -big'
+                = link_to raw("Subscribe for €8/month"), product_path(:print), class: 'button -standard -big'
 
 .block.-bt.-bg-default.-py4
   .block.-my4.-pt4
     .wrapper.-small{role: 'layout'}
       .block.-mb1
-        %h3.h.-h2.-centered Independent, important, impactful
+        %h3.h.-h2.-centered Independent, impactful
       .p.-t3.-centered
         :markdown
-          **Dublin Inquirer** is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
+          Dublin Inquirer is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
 
   .wrapper.-large{role: 'layout'}
-    .block.-my4
+    .block.-mt4.-mb2
       .row
         .col-xs-12.col-md-4.flex
-          .block.-p2.-bg-faint.-b
+          .block.-p2.-bg-faint.-b.-mb2
             .block.-mb2
               %figure.artwork.-landscape
                 = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/c9d12d29a59b2ae8/large_image.jpg"
@@ -56,7 +56,7 @@
                 For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste.
 
         .col-xs-12.col-md-4.flex
-          .block.-p2.-bg-faint.-b
+          .block.-p2.-bg-faint.-b.-mb2
             .block.-mb2
               %figure.artwork.-landscape
                 = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/49b678399185e22b/large_image.jpg"
@@ -69,7 +69,7 @@
                 We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry.
 
         .col-xs-12.col-md-4.flex
-          .block.-p2.-bg-faint.-b
+          .block.-p2.-bg-faint.-b.-mb2
             .block.-mb2
               %figure.artwork.-landscape
                 = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/626e4eb64db850b4/large_image.jpg"
@@ -82,24 +82,26 @@
                 We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation.
 
   .wrapper.-small{role: 'layout'}
-    .block.-my4
+    .block.-mb4
       .p.-t3.-centered
         The work we do is regularly picked up by newspapers, blogs, and radio stations, but without our on-the-ground reporting, these stories wouldn't be covered. And that wouldn't be possible without the support of readers like you.
 
   %hr.-separator
 
   .block.-my4
-    .block.-mb4
-      .h.-h3.-centered Become a subscriber
-    .p.-t4.-centered
-      = link_to raw("Digital &mdash; first month for €1"), product_path(:digital), class: 'button -standard -big'
-      = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'button -standard -big'
+    .wrapper.-small{role: 'layout'}
+      .block.-px4
+        .block.-mb2
+          %h3.h.-h3.-centered Become a subscriber:
+        .p.-t4.-centered
+          = link_to raw("Digital &mdash; €5/month"), product_path(:digital), class: 'block -mb1 button -standard -big'
+          = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'block button -standard -big'
 
 .block.-bt.-py4.-bg-faint
   .wrapper.-small{role: 'layout'}
     .block.-p4.-b.-bg-default
       %header.block.-mb4
-        %h3.p.-t3.-centered.c.-w8 Frequently Asked Questions
+        %h3.h.-h4.-centered Frequently asked questions
 
       .p.-t4.-sf
         :markdown

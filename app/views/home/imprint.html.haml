@@ -7,65 +7,34 @@
     %h1.h.-h2 Dublin Inquirer is an independent newspaper launched in June 2015 to provide quality coverage of city affairs.
 
   .block.-p2.-pb4
-    .wrapper.-small{role: 'layout'}
-      .article.-formatted.p.-t3.-serif
-        %h3.h.-h3 Staff
+    .p.-t3.-centered
+      .wrapper.-small{role: 'layout'}
+        .block.-my2
+          %h4.h.-h4 Managing editor
+          %p #{ link_to @staff[:editor].full_name, @staff[:editor] }
 
-        - @staff.each do |staff|
-          .block.-my2
-            .details
-              .portrait
-                - if staff[:author].portrait.present?
-                  = image_tag staff[:author].portrait.url
+        .block.-my2
+          %h4.h.-h4 Deputy editor
+          %p #{ link_to @staff[:deputy].full_name, @staff[:deputy] }
 
-              .bio.text
-                :markdown
-                  #{ staff[:author].full_name }, #{ staff[:title] }
+        .block.-my2
+          %h4.h.-h4 City reporters
+          - @staff[:reporters].each do |reporter|
+            %p #{ link_to reporter.full_name, reporter }
 
-                  #{ raw staff[:author].bio }
+        .block.-my2
+          %h4.h.-h4 Web &amp; strategy
+          %p #{ link_to @staff[:cto].full_name, @staff[:cto] }
 
-                - if staff[:author].articles.published.any?
-                  :markdown
-                    _#{ link_to raw("Articles by #{ staff[:author].full_name } &rarr;"), staff[:author] }_
+        .block.-my2
+          %h4.h.-h4.-centered Columnists
+          - @columnists.each do |author|
+            %p #{ author.full_name }
 
-        %header.header.-modal
-          %h3.h.-h3 Columnists
-
-        - @columnists.each do |author|
-          .block.-my2
-            .details
-              .portrait
-                - if author.portrait.present?
-                  = image_tag author.portrait.url
-
-              .p.-
-                :markdown
-                  #{ author.full_name }
-
-                  #{ raw author.bio }
-
-                - if author.articles.published.any?
-                  :markdown
-                    _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
-
-        %header.header.-modal
-          %h3.h.-h3 Regular contributors
-
-        - @contributors.each do |author|
-          .block.-my2
-            .details
-              .portrait
-                - if author.portrait.present?
-                  = image_tag author.portrait.url
-
-              .bio.text
-                :markdown
-                  #{ author.full_name }
-
-                  #{ raw author.bio }
-
-                - if author.articles.published.any?
-                  :markdown
-                    _#{ link_to raw("Articles by #{ author.full_name } &rarr;"), author }_
+        .block.-my2
+          %h4.h.-h4.-centered Regular contributors
+          - @contributors.each do |author|
+            .block.-my2.p.-t3.-centered
+              %p #{ author.full_name }
 
 = render partial: 'products/enticement'

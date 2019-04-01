@@ -16,9 +16,6 @@
       - if article.authors.any?
         .block.p.-t3 &nbsp;by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
 
-  .wrapper.-small{role: 'layout'}
-    = render partial: 'articles/meta', locals: {article: article}
-
 %article.article.-formatted.-standard{lang: 'en'}
   - if article.featured_artwork.present?
     %figure.artwork.-featured

@@ -2,132 +2,130 @@
   %header.block.-mt4.-mb2
     %h2.h.-h2.-centered
       - if @plan.is_base_plan?
-        Basic #{ @plan.product.name.downcase }
+        #{ @plan.product.name }
       - elsif @plan.is_friend?
         'Friend' subscription
       - elsif @plan.is_patron?
         'Patron' subscription
       - else # discount
-        Basic #{ @plan.product.name }
+        #{ @plan.product.name }
 
-    - if @landing_page
-      .block.-mt2
-        .p.-t3.-sf
+    .p.-t3.-sf.-centered
+      - if @landing_page
+        .block.-mt2
           :markdown
             As a special offer, subscribe now and you'll receive a **free month** of digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-    - elsif @subscription.requires_address?
-      .block.-mt2
-        .p.-t3.-sf
+      - elsif @subscription.requires_address?
+        .block.-mt2
           :markdown
             **Monthly print edition** featuring a selection of our favourite online articles delivered to your door, in addition to unlimited **digital access**, including our full archive.
           - if @plan.is_friend? or @plan.is_patron?
             :markdown
               Thank you so much for your generosity in supporting us. We depend on readers like you.
-    - else
-      .block.-mt2
-        .p.-t3.-sf
+
+      - else
+        .block.-mt2
           :markdown
             Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-  .block.-my4
+  .block.-my4.p.-t3
     = form_for @subscription, url: subscriptions_path, method: :post, html: {class: 'subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
       .error{style: 'display:none;'}
         .message &nbsp;
+      - if @user && @user.errors.any?
+        %ul.modal-form_errors
+          - @user.errors.full_messages.each do |message|
+            %li= message
 
       = f.hidden_field :landing_page_slug
 
-      .block
-        %h3 Subscriber details
+      .block.-mt4.-mb2.p.-t3.-centered
+        %h3.c.-w8 Subscriber details
 
-        .box-form.block.-b
-          - if @user && @user.errors.any?
-            %ul.modal-form_errors
-              - @user.errors.full_messages.each do |message|
-                %li= message
+      .box-form.block.-b
+
+        .field
+          = f.label :given_name, 'Name'
+          .twofer
+            = f.text_field :given_name, placeholder: 'First'
+            = f.text_field :surname, placeholder: 'Surname'
+
+        - if !(@subscription.user.present? && @subscription.user.persisted?)
+          .field
+            = f.label :email_address
+            = f.email_field :email_address, placeholder: 'aoife@example.ie'
 
           .field
-            = f.label :given_name, 'Name'
-            .twofer
-              = f.text_field :given_name, placeholder: 'First'
-              = f.text_field :surname, placeholder: 'Surname'
-
-          - if !(@subscription.user.present? && @subscription.user.persisted?)
-            .field
-              = f.label :email_address
-              = f.email_field :email_address, placeholder: 'aoife@example.ie'
-
-            .field
-              = f.label :password
-              = f.password_field :password, placeholder: 'password123'
+            = f.label :password
+            = f.password_field :password, placeholder: 'password123'
 
       - if @subscription.requires_address?
-        .block
-          %h3 Subscription address
+        .block.-mt4.-mb2.p.-t3.-centered
+          %h3.c.-w8.-centered Subscription address
 
-          .box-form.block.-b
+        .box-form.block.-b
+          .field
+            = f.label :address_line_1
+            = f.text_field :address_line_1
+          .field
+            = f.label :address_line_2
+            = f.text_field :address_line_2
+          .field
+            = f.label :city
+            = f.text_field :city
+          .field.twofer
             .field
-              = f.label :address_line_1
-              = f.text_field :address_line_1
+              = f.label :county
+              = f.text_field :county
             .field
-              = f.label :address_line_2
-              = f.text_field :address_line_2
-            .field
-              = f.label :city
-              = f.text_field :city
-            .field.twofer
-              .field
-                = f.label :county
-                = f.text_field :county
-              .field
-                = f.label :post_code
-                = f.text_field :post_code
-            .field.-select
-              = f.label :country_code, 'Country'
-              = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+              = f.label :post_code
+              = f.text_field :post_code
+          .field.-select
+            = f.label :country_code, 'Country'
+            = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
 
-      .block
-        %h3 Credit/debit card details
+      .block.-mt4.-mb2.p.-t3.-centered
+        %h3.c.-w8 Credit/debit card details
 
         - if @landing_page
           .text.-tiny
             :markdown
               You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
 
-        .box-form.block.-b
+      .box-form.block.-b
+        .field
+          %label Card number
+          #stripe-form_card-number.field.empty
+
+        .twofer
           .field
-            %label Card number
-            #stripe-form_card-number.field.empty
+            %label Expiration date
+            #stripe-form_card-expiry.field.empty
+          .field
+            %label Security code
+            #stripe-form_card-cvc.field.empty
 
-          .twofer
-            .field
-              %label Expiration date
-              #stripe-form_card-expiry.field.empty
-            .field
-              %label Security code
-              #stripe-form_card-cvc.field.empty
+      .block.-my4.p.-centered.-pb4
+        = f.hidden_field :plan_id
 
-      .box.-tight.-horizontal
-        %div.content
-          .text.-small
-            - if @landing_page
-              %ul.list.-em
-                %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
-                %li Cancel any time.
-            - else
-              %ul.list.-em
-                %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly.
-                %li Subscriptions renew automatically.
-                %li Cancel any time.
+        .p.-t4
+          - if @landing_page
+            %ul.list.-nav
+              %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }
+              %li Cancel any time
+          - else
+            %ul.list.-nav
+              %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly
+              %li Subscription renews automatically
+              %li Cancel any time
 
-          = f.hidden_field :plan_id
+        .block.-mt2.-mb4
+          = f.submit 'Subscribe', class: 'button -standard -big'
 
-        %div.actions
-          = f.submit 'Subscribe', class: 'button -big'
-
-  :javascript
-    fbq('track', 'InitiateCheckout', {
-      value: #{ ((@plan.try(:amount)/100.0) * 12).round },
-      currency: 'EUR',
-    });
+:javascript
+  fbq('track', 'InitiateCheckout', {
+    value: #{ ((@plan.try(:amount)/100.0) * 12).round },
+    currency: 'EUR',
+  });
 

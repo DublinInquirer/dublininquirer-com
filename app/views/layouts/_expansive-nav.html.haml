@@ -15,9 +15,8 @@
     .block.-py4
       .wrapper.-container{role: 'layout'}
         .p.-t3.-centered
-          .block.-mb4
-            .block.-mb1
-              %h3.h.-h2 Dublin Inquirer
+          .block.-my4
+            %h3.h.-h4.-centered Dublin Inquirer
             %ul
               %li= link_to "Current issue", :root
               %li= link_to "Past issues", :issues
@@ -26,8 +25,7 @@
               %li= link_to "Stockists", :stockists
 
           .block.-mb4
-            .block.-mb1
-              %h3.h.-h2 Sections
+            %h3.h.-h4.-centered Sections
             %ul
               %li= link_to "City Desk", category_path('city-desk')
               %li= link_to "Unreal Estate", category_path('unreal-estate')
@@ -37,8 +35,7 @@
               %li= link_to "Podcast", category_path('podcast')
 
           .block.-mb4
-            .block.-mb1
-              %h3.h.-h2 Subscriptions
+            %h3.h.-h4.-centered Subscriptions
             %ul
               - if !logged_in?
                 %li= link_to "Log in", :login
@@ -51,8 +48,7 @@
               %li= link_to "Give a subscription", :gift_subscriptions
 
           .block.-mb4
-            .block.-mb1
-              %h3.h.-h2 Elsewhere
+            %h3.h.-h4.-centered Elsewhere
             %ul
               %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
               %li= link_to "Facebook", "https://www.facebook.com/dublininquirer"
