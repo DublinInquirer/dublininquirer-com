@@ -17,7 +17,8 @@
           = f.label :response
           = f.text_area :content
 
-        %nav.actions= f.submit 'Submit response', class: 'button -standard'
+        %nav.p.-centered.block.-p2.-bt
+          = f.submit 'Submit response', class: 'button -standard -big'
 
         .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
           :markdown

@@ -4,9 +4,6 @@
   right: 0
   top: 0
   bottom: 0
-  backdrop-filter: blur(0.0125rem)
-  background-color: rgba(#fafafa,0.95)
-  z-index: 9998
   opacity: 0
   transition: 0.25s all ease
   pointer-events: none
@@ -17,14 +14,6 @@
   &.-open
     pointer-events: auto
     opacity: 1
-    backdrop-filter: blur(0.325rem)
-
-    &.-limited
-      backdrop-filter: blur(0.5rem)
-      background-color: transparent
-      background-image: linear-gradient(rgba(#000,0.775) 0%, rgba(#000,0.925) 100%)
-      .paywall-content
-        top: 40vh
 
 .paywall-content
   transition: top 1s ease

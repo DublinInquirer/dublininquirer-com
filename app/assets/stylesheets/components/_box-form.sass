@@ -1,12 +1,9 @@
-.box-form
+.box-fields
   position: relative
   display: flex
   flex-direction: column
   justify-content: stretch
-  padding-bottom: 1px
-
-  .field + .actions
-    margin-top: 1px
+  border: 1px solid var(--black)
 
   .field + .field, .field + .twofer
     border-top: 1px solid var(--black)
@@ -67,18 +64,6 @@
         top: 0
         left: 0
         font-size: var(--t5)
-
-  .actions
-    padding: var(--baseline)
-    border-top: 1px solid var(--black)
-    display: flex
-    flex-direction: row
-    justify-content: flex-end
-    align-items: center
-
-    .error
-      color: var(--red)
-      justify-self: start
 
   .submitted-overlay
     position: absolute

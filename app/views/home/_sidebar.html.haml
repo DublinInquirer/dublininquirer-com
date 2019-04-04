@@ -1,7 +1,7 @@
 .content
   - if !logged_in? or !current_user.subscriber?
     %section.block.-py2.-px1.-mb2.-bg-blue
-      %h4.c.-w6 Support local journalism
+      %h4.c.-w8 Support local journalism
 
       .block.-my1
         :markdown
@@ -11,24 +11,24 @@
   - else
     .block.-bg-faint.-b.-py2.-px1.-mb2
       .p.-t5
-        %h3.c.-w6 Give a subscription
+        %h3.c.-w8 Give a subscription
         .block.-mt1
           :markdown
             The perfect gift for the inquisitive Dubliner in your life.
 
         %nav.block.-mt2
-          #{ link_to "See options", :gift_subscriptions, class: 'button -yellow p -t5' }
+          #{ link_to "See options", :gift_subscriptions, class: 'button -standard p -t5' }
 
   %section.block.-mb2
     .block.-pb1.-bb
-      %h4.c.-w6= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
+      %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
 
     .block.-mt1
       = render partial: 'recent_podcasts'
 
   %section.block
     .block.-pb1.-bb
-      %h4.c.-w6= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
+      %h4.c.-w8= link_to 'Council Tracker', 'https://www.counciltracker.ie', class: 'a -elsewhere'
 
     .block.-mt1
       %ol.list.-delineated

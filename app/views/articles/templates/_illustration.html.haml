@@ -7,7 +7,7 @@
           #{ link_to display_category(@article.category), category_path(@article.category) }
 
     .wrapper.-medium{role: 'layout'}
-      %h1.block.h.-h2.-w4.c.-serif
+      %h1.block.p.-t1.c.-w4.-serif
         - if article.category.downcase == 'cover'
           Print edition cover
         - elsif article.category.downcase != 'cartoon'

@@ -20,6 +20,11 @@
   &.-grey
     color: var(--grey)
 
+    a, a:link, a:visited
+      color: var(--grey)
+      font-weight: 800
+      border-color: var(--grey)
+
 .a
   &.-elsewhere
     &:after
@@ -34,8 +39,9 @@
         margin-left: 0
 
 .code
-  font-family: $sans
-  background: var(--faint)
+  font-family: $mono
+  font-weight: 400
+  font-style: normal
 
   &.-quote
     &:before
@@ -120,7 +126,7 @@
     font-size: var(--t2)
     letter-spacing: -0.0325em
     line-height: 1.2
-    font-weight: 400
+    font-weight: 800
   &.-h3
     font-size: var(--t3)
     line-height: 1.2

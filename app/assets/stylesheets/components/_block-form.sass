@@ -1,0 +1,80 @@
+.block.-form
+  .hint, .error
+    font-size: var(--t5)
+
+  .hint
+    color: var(--grey)
+
+  .error
+    color: var(--red)
+
+  .actions
+    [type='submit']
+      width: 100%
+      text-align: center
+
+  .twofer
+    display: flex
+    flex-direction: row
+    justify-content: stretch
+    padding-bottom: 1rem
+
+    .field
+      border: 0
+      flex: 1
+      margin-bottom: 0
+      padding-right: 1rem
+
+      [type='text'], [type='email'], [type='password'], textarea, .StripeElement
+        padding-bottom: 0
+
+    .field + .field
+      padding-right: 0
+      padding-left: 1rem
+      border-left: 1px solid var(--black)
+
+      label
+        left: 1rem
+
+  .field
+    margin-bottom: 1rem
+    border-bottom: 1px solid var(--black)
+    position: relative
+
+    .hint, .error
+      position: absolute
+      top: 0
+      right: var(--baseline)
+
+    label
+      position: absolute
+      top: 0
+      left: 0
+      font-size: var(--t5)
+
+    .StripeElement
+      padding: 3rem 0 1rem
+
+    [type='text'], [type='email'], [type='password'], textarea
+      padding: 3rem 0 1rem
+      width: 100%
+      margin: 0
+      border: 0
+      background-color: var(--faint)
+      resize: none
+      font-size: var(--t3)
+
+    &.-select
+      padding: 3rem 0 1rem
+      select
+        width: 100%
+
+    &.-check
+      padding: var(--baseline)
+      input, label
+        display: inline
+      label
+        position: relative
+        top: 0
+        left: 0
+        font-size: var(--t5)

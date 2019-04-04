@@ -1,32 +1,33 @@
-- content_for :breadcrumbs do
-  = link_to "Account", :user
-  .current Update your address
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Update your address
 
-%header.header.-modal
-  %h1.heading Update your address
-
-.box.-tight
   = form_for @user, url: [:address, :user], html: {method: :put, class: 'box-form'} do |f|
-    .field
-      = f.label :address_line_1
-      = f.text_field :address_line_1
-    .field
-      = f.label :address_line_2
-      = f.text_field :address_line_2
-    .field
-      = f.label :city
-      = f.text_field :city
-    .field.twofer
+    .block.-form.-b.-p2.-bg-faint
       .field
-        = f.label :county
-        = f.text_field :county
+        = f.label :address_line_1
+        = f.text_field :address_line_1
       .field
-        = f.label :post_code
-        = f.text_field :post_code
-    .field.-select
-      = f.label :country_code, 'Country'
-      = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+        = f.label :address_line_2
+        = f.text_field :address_line_2
+      .field
+        = f.label :city
+        = f.text_field :city
+      .field.twofer
+        .field
+          = f.label :county
+          = f.text_field :county
+        .field
+          = f.label :post_code
+          = f.text_field :post_code
+      .field.-select
+        = f.label :country_code, 'Country'
+        = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
 
-    %nav.actions
-      %p.status
-      = f.submit 'Save changes', class: 'button -standard'
+      %nav.block.-mt2.actions
+        = f.submit 'Save changes', class: 'button -standard -big'
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %ul
+        %li= link_to raw("&larr; Go back without saving changes"), :user

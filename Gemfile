@@ -21,7 +21,6 @@ gem 'meta-tags'
 gem 'sitemap_generator'
 gem 'mini_racer', platforms: :ruby
 gem 'redis', '~> 4.0'
-gem 'aws-sdk-s3', require: false
 gem 'webpacker', '~> 3.5'
 gem 'nokogiri'
 gem 'carrierwave', '~> 1.0'
@@ -47,7 +46,9 @@ gem 'pretender'
 gem 'scout_apm'
 gem 'plyr-rails'
 gem 'rinku'
+gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
+gem 'formtastic', '~> 3.0'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
