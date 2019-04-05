@@ -1,21 +1,20 @@
-- content_for :breadcrumbs do
-  .current Become a Patron
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2
+      Become a Friend or Patron
 
-%header.header.-modal
-  %h1.heading Become a Friend or Patron
+  .block.-form.-b.-p2.-bg-faint.-mb2
+    .p.-t3.-sf
+      :markdown
+        Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the **monthly print edition**, unlimited **digital access** (including our complete, searchable archive), and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting your generosity supports.
 
-  .text.-article
-    :markdown
-      Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the **monthly print edition**, unlimited **digital access** (including our complete, searchable archive), and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting your generosity supports.
+    %nav.block.-mt4.-mb2
+      = link_to raw("Friend &mdash; €20/month"), upgrade_subscriptions_path(id: 'friend'), class: 'button -standard -big', method: :put
+      = link_to raw("Patron &mdash; €50/month"), upgrade_subscriptions_path(id: 'patron'), class: 'button -standard -big', method: :put
 
-%header.header.-section
-  %h2.heading Subscription options
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      :markdown
+        **Questions?**
 
-.container
-  .row
-    .col-xs-12.col-lg-6
-      .block.-my1
-        = link_to raw("<span>Friend</span><span class='figure -lg'>€20/month</span>"), upgrade_subscriptions_path(id: 'friend'), class: 'button -price', method: :put
-    .col-xs-12.col-lg-6
-      .block.-my1
-        = link_to raw("<span>Patron</span><span class='figure -lg'>€50/month</span>"), upgrade_subscriptions_path(id: 'patron'), class: 'button -price', method: :put
+        If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

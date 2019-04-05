@@ -2,33 +2,34 @@
   %h3.h.-h4.-centered Reader responses
 
 .wrapper.-small{role: 'layout'}
-  .block.-b
-    %header.block.-p1.-bb
-      %h4.heading Respond to the article
+  - if logged_in?
+    = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {remote: true} do |f|
+      .block.-form
+        .block.-b.-p2.-my2.-bg-faint
+          .block.-mb2.-pb1.-bb
+            %h3.c.-w8 Respond to the article
+            = f.hidden_field :article_id
 
-    - if logged_in?
-      = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {class: 'box-form', remote: true} do |f|
-        .field
-          = f.label :nickname
-          = f.text_field :nickname
+          .field
+            = f.label :nickname
+            = f.text_field :nickname
 
-        .field
-          = f.hidden_field :article_id
-          = f.label :response
-          = f.text_area :content
+          .field
+            = f.label :response
+            = f.text_area :content
 
-        %nav.p.-centered.block.-p2.-bt
-          = f.submit 'Submit response', class: 'button -standard -big'
+          %nav.p.-centered.block.-pt1.actions
+            = f.submit 'Submit response', class: 'button -standard -big'
 
-        .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
-          :markdown
-            Thanks for your response. Your response is in moderation.
+      .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
+        :markdown
+          Thanks for your response. Your response is in moderation.
 
-    - else
-      .form-overlay
-        .p.-sf
-          :markdown
-            #{ link_to "Log in", :login } to write a response.
+  - else
+    .form-overlay
+      .p.-sf
+        :markdown
+          #{ link_to "Log in", :login } to write a response.
 
   - cache [article.comments.order('published_at asc').approved] do
     - article.comments.order('published_at asc').approved.each do |comment|

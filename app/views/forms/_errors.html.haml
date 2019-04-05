@@ -1,2 +1,2 @@
-- if record.errors[attribute.to_sym].any?
+- if record && record.errors[attribute.to_sym].any?
   .error #{ record.errors[attribute.to_sym].first }.

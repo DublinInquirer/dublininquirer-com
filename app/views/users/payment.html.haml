@@ -2,8 +2,9 @@
   %header.page-header
     %h1.h.-h2 Update your payment method
 
-    - if current_user.delinquent?
-      .block.-mt2.p.-t3.-centered.-sf
+  - if current_user.delinquent? or true
+    .block.-mb4
+      .p.-t3.-sf
         :markdown
           We're having trouble charging your account. Please enter your credit or debit card details below to avoid an interruption in your subscription.
 
