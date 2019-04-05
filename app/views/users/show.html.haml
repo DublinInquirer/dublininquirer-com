@@ -55,9 +55,8 @@
                   %label.c.-w8 Payment method
                   - if current_user.stripe_default_source.present?
                     %p
-                      #{ current_user.stripe_default_source['brand'] }:
-                      #{ '···· ' * 3 }#{ current_user.stripe_default_source['last4'] } &nbsp;
-                      (Expires #{ current_user.stripe_default_source['exp_month'].to_s.rjust(2, '0') }/#{ current_user.stripe_default_source['exp_year'] })
+                      #{ current_user.stripe_default_source['brand'] }
+                      (exp #{ current_user.stripe_default_source['exp_month'].to_s.rjust(2, '0') }/#{ current_user.stripe_default_source['exp_year'] })
                   - else
                     :markdown
                       We don't have a working payment method on file for you. Can you supply one?

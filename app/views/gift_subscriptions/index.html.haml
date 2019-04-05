@@ -1,48 +1,42 @@
-- content_for :breadcrumbs do
-  .current Give a subscription
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2
+      Give the gift of local journalism
 
-%header.header.-modal
-  %h1.heading Give the gift of local journalism
+  .block.-mb4
+    .p.-t3.-sf
+      :markdown
+        **Give the gift of local, reader-supported journalism** to the inquistive Dubliner in your life. Dublin Inquirer is funded mainly by its subscribers, rather than advertisers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that you won’t find anywhere else.
 
-  .text.-article
-    :markdown
-      **Give the gift of local, reader-supported journalism** to the inquistive Dubliner in your life. Dublin Inquirer is funded mainly by its subscribers, rather than advertisers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that you won’t find anywhere else.
+        We'll email you a certificate you can print out or forward on to the recipient.
 
-      We'll email you a certificate you can print out or forward on to the recipient.
+  .block.-form.-b.-p2.-bg-faint.-mb2
+    .block.-pb1.-bb.-mb2
+      %h3.c.-w8 Digital
 
-%header.header.-section
-  %h2.heading Gift options
+    .p.-t4.-sf
+      :markdown
+        Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-.container
-  .row
-    .col-xs-12
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital-only
+    %nav.block.-mt2.-mb1
+      = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard'
+      = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard'
 
-        .content
-          :markdown
-            Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+  .block.-form.-b.-p2.-bg-faint
+    .block.-pb1.-bb.-mb2
+      %h3.c.-w8 Digital + Print
 
-        %nav.-box.-actions.-tight.-full
-          = link_to raw("<span>One year</span><span class='figure'>€60</span>"), gift_subscription_path(id: 'digital-full'), class: 'button -price'
-          = link_to raw("<span>Half year</span><span class='figure'>€30</span>"), gift_subscription_path(id: 'digital-half'), class: 'button -price'
+    .p.-t4.-sf
+      :markdown
+        The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
 
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital + Monthly print
+    %nav.block.-mt2.-mb1
+      = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard'
+      = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard'
 
-        .content
-          :markdown
-            The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      :markdown
+        **Questions?**
 
-        %nav.-box.-actions.-tight.-full
-          = link_to raw("<span>One year</span><span class='figure'>€96</span>"), gift_subscription_path(id: 'print-full'), class: 'button -price'
-          = link_to raw("<span>Half year</span><span class='figure'>€48</span>"), gift_subscription_path(id: 'print-half'), class: 'button -price'
-
-
-      .box.-roomy
-        %header.header.-box
-          %h3.heading Questions?
-        .text
-          If you have any questions or special requests, you can reach us anytime at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.
+        If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

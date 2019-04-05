@@ -13,14 +13,13 @@
         %label Card number
         #stripe-form_card-number
 
-      .field
-        .twofer
-          .field
-            %label Expiration date
-            #stripe-form_card-expiry
-          .field
-            %label Security code
-            #stripe-form_card-cvc
+      .field.twofer
+        .field
+          %label Expiration date
+          #stripe-form_card-expiry
+        .field
+          %label Security code
+          #stripe-form_card-cvc
 
       %nav.block.-mt2.actions
         = f.submit 'Save changes', class: 'button -standard -big'
@@ -28,7 +27,7 @@
       .block.-mt2
         .p.-t4.-centered.c.-grey.-sf
           :markdown
-            We use <a href="https://www.stripe.com" target="_blank">Stripe</a> to securely process your payment.
+            We use <a href="https://www.stripe.com" target="_blank">Stripe</a> to securely handle payment details.
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered
