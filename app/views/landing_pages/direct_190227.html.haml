@@ -1,66 +1,109 @@
 .block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
   .p.-centered
-    .block.-pt4
-      %h1.inline.p.-t1.-w4.c.-serif Help our reporters<br>cover the important stories.
-
+    .block.-pt2
+      %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories.
       .block.-mt2.p.-t3 Subscribe now and get your first month free.
 
   .block.-mt4.-pull-down
     .wrapper.-medium{role: 'layout'}
-      .block.-bg-default.-b-highlight.-shadow
-        .row
-          .col-xs-12.col-sm-8
-            .block.-px2.-py4
-              .p.-t3
-                :markdown
-                  ### Basic digital subscription
+      .row
+        .col-xs-12.col-md-6.col-md-offset-3
+          .block.-bg-default.-b.flex.-c.-sb
+            .block.-p2.p.-t4.-centered
+              %h3.p.-t3.-centered.c.-w8.block.-mb1 Basic digital subscription
+              :markdown
+                Unlimited access to our online digital edition.
 
-                  Unlimited access to our online digital edition.
+                One month free, and then only €5 per month.
 
-                  One month free, and then only €5 per month.
+            .block.-px2.-pt3.-pb3.-bg-faint
+              .p.-t4.-centered
+                = link_to "Subscribe now", product_path(:digital), class: 'button -standard -big'
 
-          .col-xs-12.col-sm-4.col.flex
-            .block.-px2.-py1.col.flex
-              %nav.-centered
-                = link_to "Subscribe now", product_path(:digital), class: 'button -yellow'
+.block.-bt.-bg-default.-py4
+  .block.-my4.-pt4
+    .wrapper.-small{role: 'layout'}
+      .block.-mb1
+        %h3.h.-h2.-centered Independent, impactful
+      .p.-t3.-centered
+        :markdown
+          Dublin Inquirer is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
 
-        .block.-px2.-py3.-bt.-bg-faint
-          .p.-t4
-            .row
-              .col-xs-12.col-md-6
-                .p.-sf
-                  :markdown
-                    ##### Unlimited access
+  .wrapper.-large{role: 'layout'}
+    .block.-mt4.-mb2
+      .row
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/c9d12d29a59b2ae8/large_image.jpg"
 
-                    Read unlimited articles on **dublininquirer.com** and our mobile-optimised site. This includes access to the full archive of everything we've ever published.
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif  A giant illegal waste dump has been growing for years in the north of the city.
 
-              .col-xs-12.col-md-6
-                .p.-sf
-                  :markdown
-                    ##### Events & community
+              :markdown
+                For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste.
 
-                    We also run occasional events, from pub quizzes to talks and debates. Subscribers usually get first dibs on tickets, or discounts, or both.
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/49b678399185e22b/large_image.jpg"
 
-.block.-bt.-px2.-py4.-bg-default
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif FOI Chief Overrules Government Refusal to Release Fire-Safety Reports
+
+              :markdown
+                We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry.
+
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/626e4eb64db850b4/large_image.jpg"
+
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif Should Homeless Families Have to Use the Side Door?
+
+              :markdown
+                We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation.
+
   .wrapper.-small{role: 'layout'}
-    .block.-py4
-      .box.-tight.block.-bg-default
-        %header.-box.-tight
-          .heading Frequently Asked Questions
+    .block.-mb4
+      .p.-t3.-centered
+        The work we do is regularly picked up by newspapers, blogs, and radio stations, but without our on-the-ground reporting, these stories wouldn't be covered. And that wouldn't be possible without the support of readers like you.
 
-        .block.-p1
-          .p.-sf
-            :markdown
-              #### What does 'independent' and 'reader-funded' mean?
+  %hr.-separator
 
-              _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
+  .block.-my4
+    .wrapper.-small{role: 'layout'}
+      .block.-px4
+        .block.-mb2
+          %h3.h.-h3.-centered Become a subscriber:
+        .p.-t4.-centered
+          = link_to raw("Subscribe now &mdash; first month free"), product_path(:digital), class: 'block -mb1 button -standard -big'
 
-              _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers. If we're doomed to be beholden to our funders, we'd prefer those funders be Dubliners.
+.block.-bt.-py4.-bg-faint
+  .wrapper.-small{role: 'layout'}
+    .block.-p4.-b.-bg-default
+      %header.block.-mb4
+        %h3.h.-h4.-centered Frequently asked questions
 
-              #### Is there a student/unwaged rate?
+      .p.-t4.-sf
+        :markdown
+          #### What does 'independent' and 'reader-funded' mean?
 
-              Nobody will be turned away for want of funds. If you're a student, not working, or otherwise unable to afford a subscription, send [us an email](mailto:brian@dublininquirer.com) and we'll see if we can work something out.
+          _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
 
-              #### What is the cancellation policy?
+          _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers, rather than those of advertisers.
 
-              You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.
+          #### Is there a student/unwaged rate?
+
+          Nobody will be turned away for want of funds. If you're a student, not working, or otherwise unable to afford a subscription, send [us an email](mailto:brian@dublininquirer.com) and we'll see if we can work something out.
+
+          #### What is the cancellation policy?
+
+          You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.
