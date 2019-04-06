@@ -37,10 +37,10 @@
             = link_to login_path, class: 'meta-nav_item' do
               %span Log in
 
-          - if !logged_in? or !current_user.subscriber?
-            = link_to :products, class: 'meta-nav_item -subscribe' do
-              Subscribe
-
           - unless (defined?(brief) && brief)
+            - if !logged_in? or !current_user.subscriber?
+              = link_to :products, class: 'meta-nav_item -subscribe' do
+                Subscribe
+
             %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'search'}
               .icon= render partial: 'layouts/images/search'

@@ -26,6 +26,7 @@
       margin-right: -0.25rem
 
     &.-subscribe
+      display: none !important
       background-color: var(--yellow)
       border-left-width: 1px
       color: var(--black)
@@ -107,6 +108,6 @@
   @media screen and (min-width: $medium)
     .left, .right
       flex-basis: calc(50% - 12rem)
-      .meta-nav_item
-        display: flex
+      .meta-nav_item, .meta-nav_item.-subscribe
+        display: flex !important
   @media screen and (min-width: $large)
