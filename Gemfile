@@ -48,7 +48,7 @@ gem 'plyr-rails'
 gem 'rinku'
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
-gem 'formtastic', '~> 3.0'
+gem 'reverse_markdown'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

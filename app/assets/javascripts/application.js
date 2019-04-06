@@ -16,7 +16,6 @@
 //= require payment
 //= require sticky
 //= require overlay
-//= require micromodal.min
 //= require cookie
 //= require notice
 //= require front

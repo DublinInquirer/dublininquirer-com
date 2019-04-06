@@ -151,8 +151,6 @@ GEM
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
     formatador (0.2.5)
-    formtastic (3.1.5)
-      actionpack (>= 3.2.13)
     get_process_mem (0.2.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -320,6 +318,8 @@ GEM
       ffi (~> 1.0)
     redis (4.1.0)
     regexp_parser (1.3.0)
+    reverse_markdown (1.1.0)
+      nokogiri
     rinku (2.0.5)
     rubocop (0.65.0)
       jaro_winkler (~> 1.5.1)
@@ -444,7 +444,6 @@ DEPENDENCIES
   factory_bot_rails
   faker
   fog-aws
-  formtastic (~> 3.0)
   haml
   http
   jbuilder (~> 2.5)
@@ -472,6 +471,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 5.2.2)
   redis (~> 4.0)
+  reverse_markdown
   rinku
   rubocop
   sanitize

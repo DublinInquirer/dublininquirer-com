@@ -11,10 +11,13 @@
   align-items: stretch
   padding-top: 0.75rem
   overflow-y: auto
-  background-color: rgba(#000,0.875)
+  background-color: var(--default)
 
   & > .content
     position: absolute
     bottom: 0
     left: 0
     right: 0
+
+  &.-limited
+    background-color: rgba(#000,0.875)
