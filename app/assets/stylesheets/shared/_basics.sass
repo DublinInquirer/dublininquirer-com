@@ -1,7 +1,8 @@
 html
-  font-size: 10px
+  font-size: 9px
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
+    font-size: 10px
   @media screen and (min-width: $large)
   @media screen and (min-width: $max)
 
@@ -45,16 +46,16 @@ h1, h2, h3, h4, h5, h6, big, strong, b
 .hidden
   display: none
 
-.hidden.md-show
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-    display: block
-  @media screen and (min-width: $large)
-  @media screen and (min-width: $max)
+  &.-md-show
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+      display: block
+    @media screen and (min-width: $large)
+    @media screen and (min-width: $max)
 
-.hidden.lg-show
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-  @media screen and (min-width: $large)
-    display: block
-  @media screen and (min-width: $max)
+  &.-lg-show
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+    @media screen and (min-width: $large)
+      display: block
+    @media screen and (min-width: $max)

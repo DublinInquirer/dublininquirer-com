@@ -18,9 +18,11 @@
         = password_field_tag :password, nil, placeholder: 'password123'
 
       %nav.block.-mt2.actions
-        - if @failure
-          .error This email address or password is incorrect.
         = submit_tag "Log in", class: 'button -standard -big'
+
+        - if @failure
+          .block.-mt2
+            .p.-centered.-t5.c.-red This email address or password is incorrect.
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered
