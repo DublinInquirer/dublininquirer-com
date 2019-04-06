@@ -4,9 +4,16 @@
 .article.-standard
 
 .article.-formatted
-  font-size: 20px
-  line-height: 30px
+  font-size: 15px
+  line-height: 23px
   font-family: $serif
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    font-size: 20px
+    line-height: 30px
+  @media screen and (min-width: $large)
+  @media screen and (min-width: $max)
 
   // handle block-level spacing here
   section.content
