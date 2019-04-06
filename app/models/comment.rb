@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
   validates :nickname, presence: true, unless: :user_id?
   validates :email_address, presence: true, unless: :user_id?
-  validates :content, presence: true
+  validates :content, presence: true, length: {maximum: 1000}
 
   belongs_to :user, optional: true
   belongs_to :article
@@ -14,6 +14,7 @@ class Comment < ApplicationRecord
   scope :approved, -> { where(status: 'approved') }
   scope :not_approved, -> { where(published_at: nil) }
   scope :created_since, -> (t) { where('created_at > ?', t) }
+  scope :by_user, -> (u) { where(user_id: u.id) }
 
   def display_name
     return self.nickname if self.nickname.present?

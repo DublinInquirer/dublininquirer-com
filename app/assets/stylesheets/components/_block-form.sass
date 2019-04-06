@@ -1,4 +1,9 @@
 .block.-form
+  position: relative
+
+  .block
+    position: relative
+
   .hint, .error
     font-size: var(--t5)
 
@@ -78,3 +83,15 @@
         top: 0
         left: 0
         font-size: var(--t5)
+
+  .block.-form-overlay
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    background-color: var(--default)
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center

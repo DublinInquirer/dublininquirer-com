@@ -2,13 +2,14 @@
   %h3.h.-h4.-centered Reader responses
 
 .wrapper.-small{role: 'layout'}
-  - if logged_in?
+  - if logged_in? && current_user.can_comment?(article)
     = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {remote: true} do |f|
       .block.-form
         .block.-b.-p2.-my2.-bg-faint
           .block.-mb2.-pb1.-bb
             %h3.c.-w8 Respond to the article
-            = f.hidden_field :article_id
+
+          = f.hidden_field :article_id
 
           .field
             = f.label :nickname
@@ -21,13 +22,13 @@
           %nav.p.-centered.block.-pt1.actions
             = f.submit 'Submit response', class: 'button -standard -big'
 
-      .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
-        :markdown
-          Thanks for your response. Your response is in moderation.
+  - elsif logged_in? && article.comments.by_user(current_user).not_approved.any?
+    .block.-b.-py4.-my2.-bg-faint
+      .p.-sf.-centered Your response is in moderation.
 
   - else
-    .form-overlay
-      .p.-sf
+    .block.-b.-py4.-my2.-bg-faint
+      .p.-sf.-centered
         :markdown
           #{ link_to "Log in", :login } to write a response.
 
