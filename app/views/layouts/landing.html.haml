@@ -32,8 +32,17 @@
       .sub-omnipresent
         = yield
 
-      .block.-bt
-        = render partial: 'layouts/primary-footer'
+      .block.-bt.-py4
+        .p.-centered.-t4.-sf
+          :markdown
+            &copy; 2015&ndash;#{ Date.current.year }
+
+            Dublin Inquirer<br>
+            Parkview House<br>
+            65 Crumlin Rd<br>
+            Dublin 12
+
+            CRO #559820
 
     - if current_user != true_user
       = render partial: 'user_sessions/impersonating'

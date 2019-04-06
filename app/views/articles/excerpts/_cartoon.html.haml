@@ -1,11 +1,14 @@
 - cache [article, 'cartoon'] do
-  .excerpt.-cartoon
-    .content
-      .illustration
-        %figure.artwork
-          = link_to article.path do
+  .block
+    = link_to article.path, class: ['block', '-my2', '-p2', '-b', '-bg-faint', 'excerpt'] do
+      .block.-mb1
+        %figure.artwork.-square
+          - if article.featured_artwork.image.present?
             = image_tag article.featured_artwork.image.large.url
-      .caption
-        %strong Cartoon of the week
-        by
-        = raw article.authors.map { |author| link_to(author.full_name, [:admin, author]) }.to_sentence
+
+      .p.-centered
+        %span.p.-t4
+          %h3.headline.inline.c.-w4.-serif Cartoon of the week
+
+          :markdown
+            <em>by #{ article.authors.map(&:full_name).to_sentence } &rarr;</em>

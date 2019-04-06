@@ -1,20 +1,18 @@
 - title 'Give a subscription'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Give a subscription
+.wrapper.-small{role: 'layout'}
+  .block.-my4.-py4
+    %header.block.-mt4.-mb2
+      %h2.h.-h4.-centered Thanks
 
-%header.header.-modal
-  %h1.heading Thanks
+    .p.-t3.-sf
+      :markdown
+        Your gift subscription is confirmed. Thank you. We'll send a little card so you'll have something to give in person.
 
-.text.-article
-  :markdown
-    Your gift subscription is confirmed. Thank you. We'll send a little card so you'll have something to give in person.
+        If you have any problems, story suggestions, or just want to talk: email us at [info@dublininquirer.com](mailto:info@dublininquirer.com). We like talking to our readers!
 
-    If you have any problems, story suggestions, or just want to talk: email us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>. We like talking to our readers!
-
-%nav.box.-invisible.-tight.-other
-  = link_to "Go to the home page", :root, class: 'button -big'
+      = link_to raw("Go to the home page &rarr;"), :root, class: 'button -big'
 
 :javascript
   fbq('track', 'Purchase', {

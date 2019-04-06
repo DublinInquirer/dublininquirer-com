@@ -1,41 +1,33 @@
-.wrapper.-small{role: 'layout'}
-  %header.header.-article.-small
-    .p.-category= link_to display_category(article.category), category_path(article.category)
-    %h1.headline #{ raw article.opinion_title }
+.block.-py4
+  .p.-centered
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
 
-    .block.-my2
-      .box
-        .row
-          - if article.author.portrait.present?
-            .col-xs-4
-              .portrait.artwork
-                = image_tag article.author.portrait.url
+    .wrapper.-small{role: 'layout'}
+      .block.-mb2
+        %h1.h.-h2.-w4.c.-serif= raw article.title
 
-          .col-xs-8
-            .text
+      - article.authors.each do |author|
+        .block.-mb4.-px2
+          .p.-t4.-centered.-sf
+            %p.c.-w8= link_to author.full_name, author
+            .p
               :markdown
-                **#{ link_to article.author.full_name, article.author }**
+                #{ raw author.bio }
 
-                #{ raw article.author.bio }
+        %hr.-separator
 
-    .meta.-small
-      - if article.issue_date.present?
-        .date
-          #{ link_to article.issue_date.strftime('%e %B %Y'), article.issue }
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
 
-      .share
-        %ul.list.-nav
-          %li= link_to "Facebook", "http://www.facebook.com/share.php?u=#{ "https://www.dublininquirer.com#{ article.path }" }"
-          %li= link_to "Twitter", "https://twitter.com/intent/tweet?text=#{ article.title }&url=#{ "https://www.dublininquirer.com#{ article.path }" }"
-          - if article.commentable?
-            %li= link_to "Respond", "#comments", 'data-behaviour': 'scroll'
+%article.article.-formatted.-standard{lang: 'en'}
+  - if article.featured_artwork.present?
+    %section.content.-artwork
+      %figure.artwork.-featured
+        = image_tag article.featured_artwork.image.large.url
+        %figcaption= article.featured_artwork.caption
 
-
-  %article.article.-standard{lang: 'en'}
-    - if article.featured_artwork.present?
-      %section.content
-        %figure.artwork.-featured
-          = image_tag article.featured_artwork.image.large.url
-          %figcaption= article.featured_artwork.caption
-
-    = raw render_content(article.content)
+  = raw render_content(article.content)

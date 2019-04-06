@@ -12,24 +12,25 @@
         %main
           .row
             - if @articles.any?
-              .col-xs-12.col-lg-8
-                - @articles.first(1).each_with_index do |article, i|
-                  = render partial: 'articles/excerpts/half', locals: {article: article, odd: i.odd?}
-              .col-xs-12.col-lg-4
-                - @articles.first(2).drop(1).each do |article|
-                  = render partial: 'articles/excerpts/small', locals: {article: article}
-
-                .hidden.lg-show= render partial: 'home/tiny-box', locals: {articles: @articles}
-
+              .col-xs-12.col-lg-8.flex
+                - @articles.first(1).each do |article|
+                  = render partial: 'articles/excerpts/half', locals: {article: article}
+                %hr.-stroke
+              .col-xs-12.col-lg-4.flex
+                .block
+                  - @articles.first(2).drop(1).each do |article|
+                    = render partial: 'articles/excerpts/small', locals: {article: article}
+                  = render partial: 'home/tiny-box', locals: {articles: @articles}
           .row
             - if @articles.any?
               - cache ['home', 'secondary', @articles] do
                 - @articles.drop(2).each do |article|
-                  .col-xs-12.col-lg-6
+                  .col-xs-12.col-lg-6.flex
                     = render partial: 'articles/excerpts/half', locals: {article: article}
+                    %hr.-stroke
 
-                .col-xs-12.col-lg-6
-                  - if @cover
+                - if @cover
+                  .col-xs-12.col-lg-6
                     = render partial: 'articles/excerpts/cover', locals: {article: @cover}
 
         %aside.sidebar

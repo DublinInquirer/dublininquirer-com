@@ -1,31 +1,21 @@
 - unless logged_in? and current_user.subscriber?
-  - if defined?(limited) && limited
-    .notice.-paywall.-fixed
-      .content
-        .message
-          Limited
+  .notice.-paywall.-fixed.block.-bg-black
+    %nav.close
+      %a.icon{'data-action': 'closeNotice'}
+        %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
+          %rect{fill: "#fafafa", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
+          %rect{fill: "#fafafa", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
 
-      .actions
-        = link_to "Log in", :login, class: 'button -standard'
-        = link_to "Subscribe to Dublin Inquirer", :products, class: 'button -standard'
+    .block.-p1
+      .p.-centered.-t4
+        - if remaining_reads > 0
+          :markdown
+            You can read #{ pluralize remaining_reads, 'more free article' } this month.
+        - else
+          :markdown
+            This is your last free article this month.
 
-  - else
-    .notice.-paywall.-fixed
-      %nav.close
-        %a.icon{'data-action': 'closeNotice'}
-          %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
-            %rect{fill: "#070707", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
-            %rect{fill: "#070707", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
-
-      .content
-        .message
-          - if remaining_reads > 0
-            :markdown
-              You can read #{ pluralize remaining_reads, 'more free article' } this month.
-          - else
-            :markdown
-              This is your last free article this month.
-
-      .actions
-        = link_to "Log in", :login, class: 'button -standard'
-        = link_to "Subscribe", :products, class: 'button -standard'
+        .block.-my1
+          #{ link_to "Log in", :login, class: 'button -white' }
+          or
+          #{ link_to "Subscribe", :products, class: 'button -white' }

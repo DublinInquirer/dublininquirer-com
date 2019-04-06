@@ -1,6 +1,7 @@
 .meta-nav
   transition: top 2s ease
-  font-size: var(--b4)
+  font-size: var(--t4)
+  font-weight: 400
 
   .meta-nav_content
     display: flex
@@ -15,7 +16,7 @@
     flex-direction: column
     align-items: center
     justify-content: center
-    padding: 0.625rem 1rem
+    padding: 0.75rem 1rem
     border-width: 0
     border-style: solid
     border-color: var(--black)
@@ -28,7 +29,7 @@
       background-color: var(--yellow)
       border-left-width: 1px
       color: var(--black)
-      font-weight: 600
+      font-weight: 800
       &:hover
         background-color: var(--yellow)
         color: var(--red)
@@ -42,15 +43,19 @@
 
   .left, .right
     flex-basis: calc(50% - 12rem)
+    .meta-nav_item
+      display: none
 
   .left
     justify-content: flex-start
     .meta-nav_item:first-child
+      display: flex
       border-right-width: 1px
 
   .right
     justify-content: flex-end
     .meta-nav_item:last-child
+      display: flex
       border-left-width: 1px
 
   .center
@@ -60,6 +65,8 @@
 
     .logotype
       flex: 0
+      margin-top: 0.25rem
+      margin-bottom: -0.25rem
 
   .breadcrumbs
     display: flex
@@ -98,4 +105,8 @@
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
+    .left, .right
+      flex-basis: calc(50% - 12rem)
+      .meta-nav_item
+        display: flex
   @media screen and (min-width: $large)

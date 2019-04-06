@@ -1,16 +1,14 @@
 - cache [article, 'cover'] do
-  = link_to article.path, class: ['excerpt', '-cover'] do
-    .illustration
-      %figure.artwork
-        = image_tag article.featured_artwork.image.medium.url
+  .block
+    = link_to article.path, class: ['block', '-my2', '-p2', '-b', '-bg-faint', 'excerpt'] do
+      .block.-mb1
+        %figure.artwork.-square
+          - if article.featured_artwork.image.present?
+            = image_tag article.featured_artwork.image.large.url
 
-    .content
-      %header
-        %h3.headline Print edition cover
+      .p.-centered
+        %span.p.-t4
+          %h3.headline.inline.c.-w4.-serif #{ article.title }
 
-      .more
-        .text
           :markdown
-            #{ raw article.excerpt }
-
             <em>Read about this month&rsquo;s cover by #{ article.authors.map(&:full_name).to_sentence } &rarr;</em>

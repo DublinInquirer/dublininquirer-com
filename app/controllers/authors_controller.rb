@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
     @page = [params[:p].to_i, 1].compact.max
     @articles = @author.articles.published.by_date.page(@page)
 
-    if !@author or !@articles.any?
+    if !@author
       raise ActiveRecord::RecordNotFound
     end
   end

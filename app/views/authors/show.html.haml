@@ -8,15 +8,20 @@
   - set_meta_tags twitter: {image: {'_': @author.portrait.url}}
 
 %header.page-header.-illustrated
-  %h1.heading= @author.full_name
-  .p.-b1
-    :markdown
-      #{ raw @author.bio }
+  %h1.h.-h2= @author.full_name
 
-  .illustration
-    - if @author.portrait.present?
-      = image_tag @author.portrait.url
+  - if @author.portrait.present?
+    .block.-mt1
+      .illustration
+        = image_tag @author.portrait.url
+
+  - if @author.bio.present?
+    .block.-mt1.p.-t3
+      :markdown
+        #{ raw @author.bio }
 
 .block.-pt2.-pb4
   .wrapper.-contained{role: 'layout'}
+    .block.-my2
+      %h3.h.-h4.-centered Articles by #{ @author.full_name }
     = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {}}

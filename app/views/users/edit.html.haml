@@ -1,34 +1,36 @@
-- content_for :breadcrumbs do
-  = link_to "Account", :user
-  .current Change details
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Change account details
 
-%header.header.-modal
-  %h1.heading Change account details
+  = form_for @user do |f|
+    .block.-form.-b.-p2.-bg-faint
+      .field
+        .twofer
+          .field
+            = f.label :given_name, 'First name'
+            = f.text_field :given_name, placeholder: 'First'
+          .field
+            = f.label :given_name, 'Surname'
+            = f.text_field :surname, placeholder: 'Surname'
 
-.box.-tight
-  = form_for @user, html: {class: 'box-form'} do |f|
-    .field
-      = f.label :given_name, 'Name'
-      .twofer
-        = f.text_field :given_name, placeholder: 'First'
-        = f.text_field :surname, placeholder: 'Surname'
-      - if @user.errors[:given_name].any? or @user.errors[:surname].any?
-        .error Nickname #{ (@user.errors[:given_name] + @user.errors[:surname]).first }.
+      .field
+        = f.label :email_address
+        = f.email_field :email_address, placeholder: 'aoife@example.ie'
+        - if @user.errors[:email_address].any?
+          .error Email address #{ @user.errors[:email_address].first }.
 
-    .field
-      = f.label :email_address
-      = f.email_field :email_address, placeholder: 'aoife@example.ie'
-      - if @user.errors[:email_address].any?
-        .error Email address #{ @user.errors[:email_address].first }.
+      .field
+        = f.label :nickname, 'Nickname for comments'
+        = f.text_field :nickname
+        - if @user.errors[:nickname].any?
+          .error Nickname #{ @user.errors[:nickname].first }.
+        - else
+          .hint This will be displayed publicly when you comment on articles.
 
-    .field
-      = f.label :nickname, 'Nickname for comments'
-      = f.text_field :nickname
-      - if @user.errors[:nickname].any?
-        .error Nickname #{ @user.errors[:nickname].first }.
-      - else
-        .hint This will be displayed publicly when you comment on articles.
+      %nav.block.-mt2.actions
+        = f.submit 'Save changes', class: 'button -standard -big'
 
-    %nav.actions
-      %p.status
-      = f.submit 'Save changes', class: 'button -standard'
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %ul
+        %li= link_to raw("&larr; Go back without saving changes"), :user

@@ -1,35 +1,28 @@
 - title 'Migrate account'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Migrate
+.block.-my4
+  %header.header.-modal
+    %h1.heading Setup your new account
 
-%header.header.-modal
-  %h1.heading Setup your new account
+    .text.-article
+      :markdown
+        If you're already a subscriber, just enter your email address below to set up your account on the new site.
 
-  .text.-article
-    :markdown
-      If you're already a subscriber, just enter your email address below to set up your account on the new site.
+    = form_tag migration_path, method: :post, class: 'box-form' do
+      .field
+        = label_tag :email_address
+        .input= email_field_tag :email_address, nil, placeholder: "#{ %w(aoife sean ).sample }@example.ie"
 
-.box.-tight
-  %header.-box.-tight
-    .heading Log in to an existing account
+      %nav.actions
+        - if @failure
+          .error No subscription account associated with that email address was found.
+        = submit_tag "Set up account", class: 'button -standard -big'
 
-  = form_tag migration_path, method: :post, class: 'box-form' do
-    .field
-      = label_tag :email_address
-      .input= email_field_tag :email_address, nil, placeholder: "#{ %w(aoife sean ).sample }@example.ie"
-
-    %nav.actions
-      - if @failure
-        .error No subscription account associated with that email address was found.
-      = submit_tag "Set up account", class: 'button -standard -big'
-
-.box.-other
-  %header.-box
-    .heading Other options
-  .content
-    %ul.list.-options
-      %li= link_to "Register for a free account", :register, class: 'button -standard'
-      %li= link_to "Log in to an existing account", :login, class: 'button -standard'
-      %li= link_to "Reset your password", [:new, :password_reset], class: 'button -standard'
+.block.-mt2
+  .p.-t3.-sf.-centered
+    %h3.c.-w8 Other options
+    %ul
+      %li= link_to "Register for a free account", :register
+      %li= link_to "Log in to an existing account", :login
+      %li= link_to "Reset your password", [:new, :password_reset]

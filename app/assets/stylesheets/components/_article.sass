@@ -1,146 +1,67 @@
-.header.-article
-  padding: var(--gutter) 0
-  margin: 0 10vw
-  display: flex
-  flex-direction: column
-  justify-content: center
-  align-items: center
-  text-align: center
+.article-header
 
-  .meta
-    border-width: 1px 0
-    border-style: solid
-    border-color: var(--black)
-    padding: calc(var(--baseline)/1.5) 0
-    margin-bottom: 1rem
 
-    &.-small
-      border-top: 0
-      margin-top: calc(var(--gutter)/2)
-      max-width: auto
-      width: 100%
-      display: flex
-      flex-direction: row
-      justify-content: space-between
-      align-items: flex-end
+.article.-standard
 
-      & > div
-        margin: 0
-        font-size: var(--b4)
-        line-height: 1.4
-
-  .share
-    margin-top: 1rem
-    font-size: var(--b4)
-
-  &.-small
-    text-align: left
-    margin: 0
-    padding-bottom: 1rem
-    align-items: flex-start
-
-    .headline, .heading
-      font-size: var(--h2)
-      letter-spacing: -0.025em
-      line-height: 1.1
-      font-weight: 300
-      text-align: left
-      margin: calc(var(--gutter)/2) 0
-
-      & + .meta
-        margin-top: 0
-
-    @media screen and (min-width: $small)
-    @media screen and (min-width: $medium)
-      .headline, .heading
-    @media screen and (min-width: $large)
-      margin: 0
-      .headline, .heading
-        margin: calc(var(--gutter)/2) 0
-
-.article
-  font-size: var(--b3)
-  line-height: 1.5 // 2.4rem
+.article.-formatted
+  font-size: 20px
+  line-height: 30px
   font-family: $serif
 
-  strong
-    font-weight: 600
-    font-family: $sans
-    font-size: 1.1em
+  // handle block-level spacing here
+  section.content
+    max-width: 68rem
+    margin: 0 auto
 
-  p, ul, ol, blockquote, h3, h4
-    margin-top: 1em
-    margin-bottom: 1em
-
-  ul
-    padding-left: 3rem
-    font-family: $sans
-    li
-      &:before
-        content: '— '
-
-  ol
-    padding-left: 3rem
-    list-style: decimal inside
-
-  .section-separator
-    text-align: center
-    color: var(--black)
-
-  .artwork
-    font-family: $sans
-    font-size: var(--b4)
-    color: var(--grey)
-
-    figcaption
-      text-align: right
-      margin-top: var(--baseline)
-
-  h3, h4, h5
-    font-size: var(--h3)
-    font-weight: 800
-    font-family: $sans
-    margin-left: var(--gutter)
-    margin-top: var(--gutter)
-    margin-bottom: 0
-
-    a, a:link, a:visited
-      border: 0
-
-    & + *
+    & > *:first-child
       margin-top: 0
+      padding-top: 0
 
-    &:last-child
-      margin-bottom: -0.5rem
+    &.-p, &.-ul, &.-ol, &.-blockquote
+      margin-top: 2rem
+      margin-bottom: 2rem
 
-  a, a:link, a:visited
-    color: var(--black)
-    text-shadow: 2px 0 0 var(--default), -2px 0 0 var(--default)
-    border-bottom: 1px solid var(--blue)
-    &:hover
-      color: var(--blue)
+    &.-h3, &.-h4
+      margin-top: 4em
+      padding-left: 2em
 
-  video
+      & + .-p, & + .-ul, & + .-ol, & + .-blockquote
+        margin-top: 1rem
+        padding-top: 0
+
+  h3, h4
+    font-family: $sans
+    font-size: 27px
+    line-height: 1
+    font-weight: 800
+    letter-spacing: -0.0325em
+
+  ul, ol
+    padding-left: 4rem
+    padding-right: 10%
+
+  video, figure, iframe
     width: 100%
     height: auto
 
-  iframe
-    width: 100%
-    height: 36rem
+  // this should mirror the above
+  &.-constrained
+    & > *:first-child
+      margin-top: 0
+      padding-top: 0
 
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-    font-size: var(--b2)
-    line-height: 1.5 // 2.4rem
-  @media screen and (min-width: $large)
+    p, ul, ol, blockquote
+      margin-top: 2rem
+      margin-bottom: 2rem
 
-.article
-  section:first-of-type p:first-child
-    text-indent: var(--gutter)
+    h3, h4
+      margin-top: 4em
+      padding-left: 2em
 
-.wrapper.-small .article .artwork
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-  @media screen and (min-width: $large)
-    max-width: 100%
+      & + p, & + ul, & + ol, & + blockquote
+        margin-top: 1rem
+        padding-top: 0
 
+      &.-plain
+        margin-top: 0
+        padding-left: 0

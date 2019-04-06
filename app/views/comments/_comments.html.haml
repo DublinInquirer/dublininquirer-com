@@ -1,34 +1,37 @@
-%header.block.-bt.-pt1.-my2
-  %h3{title: 'comments', id: 'comments'}
-    Reader responses
+.block.-mb4{title: 'comments', id: 'comments'}
+  %h3.h.-h4.-centered Reader responses
 
-.box.-tight
-  %header.-box
-    %h4.heading Write a response to the article
+.wrapper.-small{role: 'layout'}
+  - if logged_in? && current_user.can_comment?(article)
+    = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {remote: true} do |f|
+      .block.-form
+        .block.-b.-p2.-my2.-bg-faint
+          .block.-mb2.-pb1.-bb
+            %h3.c.-w8 Respond to the article
 
-  - if logged_in?
-    = form_for article.comments.new(user: current_user, nickname: current_user.comment_name), html: {class: 'box-form', remote: true} do |f|
-      .field
-        = f.label :nickname
-        = f.text_field :nickname
+          = f.hidden_field :article_id
 
-      .field
-        = f.hidden_field :article_id
-        = f.label :response
-        = f.text_area :content
+          .field
+            = f.label :nickname
+            = f.text_field :nickname
 
-      %nav.actions= f.submit 'Submit response', class: 'button -standard'
+          .field
+            = f.label :response
+            = f.text_area :content
 
-      .submitted-overlay{style: current_user.can_comment?(article) ? nil : 'display:none'}
-        :markdown
-          Thanks for your response. Your response is in moderation.
+          %nav.p.-centered.block.-pt1.actions
+            = f.submit 'Submit response', class: 'button -standard -big'
+
+  - elsif logged_in? && article.comments.by_user(current_user).not_approved.any?
+    .block.-b.-py4.-my2.-bg-faint
+      .p.-sf.-centered Your response is in moderation.
 
   - else
-    .form-overlay
-      .text.-centered
+    .block.-b.-py4.-my2.-bg-faint
+      .p.-sf.-centered
         :markdown
           #{ link_to "Log in", :login } to write a response.
 
-- cache [article.comments.order('published_at asc').approved] do
-  - article.comments.order('published_at asc').approved.each do |comment|
-    = render partial: 'comments/comment', locals: {comment: comment}
+  - cache [article.comments.order('published_at asc').approved] do
+    - article.comments.order('published_at asc').approved.each do |comment|
+      = render partial: 'comments/comment', locals: {comment: comment}

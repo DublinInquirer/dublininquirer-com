@@ -1,4 +1,14 @@
+.inline-block
+  display: inline-block
+
+.inline
+  display: inline
+
 .block
+  display: block
+
+  &.-omega
+    margin-bottom: 30vh
   &.-pull-up
     margin-top: -4rem
   &.-pull-down
@@ -8,6 +18,9 @@
   &.-bg-black
     color: var(--default)
     background-color: var(--black)
+    a, a:link, a:visited
+      color: var(--default)
+
   &.-bg-blue
     color: var(--default)
     background-color: var(--blue)
@@ -230,16 +243,11 @@
   &.-hr
     border-bottom: calc(0.75rem/2) solid var(--black)
 
-  &.-b-highlight
-    border-radius: 1.25px
-    border: 3px solid var(--blue)
-
   &.-shadow
     box-shadow: 0 0.5rem 1rem rgba(#000,0.175)
 
 .flex
   display: flex
-  flex: 1
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
     &.-cy

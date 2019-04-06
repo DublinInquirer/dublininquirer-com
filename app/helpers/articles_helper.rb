@@ -13,7 +13,7 @@ module ArticlesHelper
 
     # wrapper
     ng_content.css('p, ul, ol, blockquote, iframe, h3, h4, h5, podcast, video, hr, script').each do |wrapped_el|
-      wrapped_el.replace "<section class='content'>#{ wrapped_el }</section>"
+      wrapped_el.replace "<section class='content -#{ wrapped_el.name.downcase }'>#{ wrapped_el }</section>"
     end
 
     # podcasts

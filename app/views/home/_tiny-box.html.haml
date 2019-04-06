@@ -1,19 +1,7 @@
-- if logged_in? && current_user.subscriber?
-  .block.-mt1.-bg-faint.-p2
-    .text.-tiny.-centered
-      :markdown
-        **Give a subscription**
-
-        A Dublin Inquirer subscription is the perfect gift for the inquisitive Dubliner in your life.
-
-        #{ link_to "Take a look at the options", :gift_subscriptions }
-
-- else
-  .block.-mt1
-    .text.-small
-      :markdown
-        **Also this week:**
-
+.block.-bt.-pt1
+  .p.-t5
+    %h3.c.-w8 Also this week
+    .p.-sf
       %ul.list.-sentence
         - articles.drop(2).reverse.first(4).each do |article|
           %li= link_to article.title.strip, article.path

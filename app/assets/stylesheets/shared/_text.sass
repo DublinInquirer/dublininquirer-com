@@ -1,157 +1,147 @@
-.text
-  strong
+.c
+  &.-w3
+    font-weight: 300
+  &.-w4
+    font-weight: 400
+  &.-w5
+    font-weight: 500
+  &.-w6
     font-weight: 600
+  &.-w8
+    font-weight: 800
 
-  h5 + p
-    margin-top: 0.5rem
 
-  h5
-    font-weight: 600
+  &.-i
+    font-style: italic
 
-  p, ul, ol, blockquote
-    margin: var(--baseline) 0
-
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
-
-  a, a:link, a:visited
-    color: var(--black)
-    border-bottom: 1px solid var(--blue)
-    &:hover
-      border-bottom-color: transparent
-      color: var(--blue)
-
-  form
-    margin: calc(var(--baseline)/2) 0 var(--baseline)
-
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
-
-  &.-centered
-    text-align: center
-
-.text.-article
-  font-size: var(--b2)
-  line-height: calc(1.5 * var(--b2)) // 2.4rem
-  font-family: $serif
-  strong
-    font-family: $sans
-    font-size: 1.1em
-
-.text.-small
-  font-size: var(--b4)
-  line-height: 1.4
-
-  p, ul, ol, blockquote
-    margin: calc(var(--baseline)/2) 0
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
-
-  form
-    margin: calc(var(--baseline)/4) 0 var(--baseline)
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
-
-  &.-fancy
+  &.-serif
     font-family: $serif
-    font-size: var(--h3)
-    line-height: 1.4
-    text-align: center
 
-    @media screen and (min-width: $small)
-    @media screen and (min-width: $medium)
-    @media screen and (min-width: $large)
-      font-size: var(--h2)
+  &.-grey
+    color: var(--grey)
 
-.text.-tiny
-  font-size: var(--b5)
-  line-height: 1.25
+    &.-sf
+      a, a:link, a:visited
+        color: var(--grey)
+        font-weight: 400
+        border-color: var(--grey)
 
-  p, ul, ol, blockquote
-    margin: calc(var(--baseline)/2) 0
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
+.a
+  &.-elsewhere
+    &:after
+      font-weight: 400
+      content: " \2192"
+      opacity: 0
+      margin-left: -0.5rem
+      transition: 0.25s all ease
+    &:hover
+      &:after
+        opacity: 1
+        margin-left: 0
 
-  form
-    margin: calc(var(--baseline)/4) 0 var(--baseline)
-    &:first-child
-      margin-top: 0
-    &:last-child
-      margin-bottom: 0
+.code
+  font-family: $mono
+  font-weight: 400
+  font-style: normal
 
-.c.-grey
-  color: var(--grey)
-
-.h.-h1
-  font-size: var(--h1)
-  letter-spacing: -0.025em
-  line-height: 1.1
-  font-weight: 300
-  margin-bottom: var(--baseline)
-.h.-h2
-  font-size: var(--h2)
-  letter-spacing: -0.025em
-  line-height: 1.2
-  font-weight: 300
-  margin-bottom: var(--baseline)
-.h.-h3
-  font-size: var(--b1)
-  line-height: 1.3
-  font-weight: 800
-  margin-bottom: var(--baseline)
-
-.p.-serif
-  font-family: $serif
-
-.p.-scale
-  font-size: var(--b2)
-  line-height: calc(1.5 * var(--b2)) // 2.4rem
-  h3
-    font-weight: 600
-  @media screen and (min-width: $small)
-  @media screen and (min-width: $medium)
-    font-size: 1.6vw
-    line-height: 1.4
+  &.-quote
+    &:before
+      content: '‘'
+    &:after
+      content: '’'
 
 .p
-  &.-b1
-    font-size: var(--b1)
-    line-height: 1.4
-  &.-b2
-    font-size: var(--b2)
-    line-height: 1.4
-  &.-b3
-    font-size: var(--b3)
-    line-height: 1.4
-  &.-b4
-    font-size: var(--b4)
-    line-height: 1.4
-  &.-b5
-    font-size: var(--b5)
+  // font size
+  &.-t1
+    font-size: var(--t1)
+    line-height: 1.1
+
+  &.-t2
+    font-size: var(--t2)
+    line-height: 1.2
+
+    &.-serif
+      font-size: calc(var(--t2) * 0.869)
+      line-height: calc(var(--t2) * 1.4)
+      font-family: $serif
+
+  &.-t3
+    font-size: var(--t3)
     line-height: 1.4
 
-.p.-category
-  font-weight: 400
-  text-align: left
-  a, a:link, a:visited
-    color: var(--black)
-    background-color: var(--default)
-    border: 1px solid var(--black)
-    display: inline-block
-    font-size: var(--b4)
-    line-height: 1.4em
-    padding: 0.25rem 0.5rem 0.175rem
-    &:hover
-      color: var(--blue)
-      background-color: var(--default)
-      border-color: var(--blue)
+    &.-serif
+      font-size: calc(var(--t3) * 0.869)
+      line-height: calc(var(--t3) * 1.4)
+      font-family: $serif
+
+  &.-t4
+    font-size: var(--t4)
+    line-height: 1.4
+
+    &.-serif
+      font-size: calc(var(--t4) * 0.869)
+      line-height: calc(var(--t4) * 1.4)
+      font-family: $serif
+
+  &.-t5
+    font-size: var(--t5)
+    line-height: 1.4
+
+    &.-serif
+      font-size: calc(var(--t5) * 0.869)
+      line-height: calc(var(--t5) * 1.4)
+      font-family: $serif
+
+  &.-sf
+    a, a:link, a:visited
+      border-bottom: 1px solid var(--black)
+      &:hover
+        color: var(--blue)
+        border-bottom-color: var(--blue)
+    p, ul, ol
+      margin: 1em 0
+      &:first-child
+        margin-top: 0
+      &:last-child
+        margin-bottom: 0
+
+  &.-serif
+    font-family: $serif
+
+  // alignment
+  &.-centered
+    text-align: center
+  &.-left
+    text-align: left
+  &.-right
+    text-align: right
+
+.h
+  // font size
+  &.-h1
+    font-size: var(--t1)
+    letter-spacing: -0.0325em
+    line-height: 1.1
+    font-weight: 400
+  &.-h2
+    font-size: var(--t2)
+    letter-spacing: -0.0325em
+    line-height: 1.2
+    font-weight: 800
+  &.-h3
+    font-size: var(--t3)
+    line-height: 1.2
+    font-weight: 400
+  &.-h4
+    font-family: $sans
+    font-size: var(--t3)
+    line-height: 1.2
+    font-weight: 800
+
+  // alignment
+  &.-centered
+    text-align: center
+  &.-left
+    text-align: left
+  &.-right
+    text-align: right

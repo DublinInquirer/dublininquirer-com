@@ -23,7 +23,11 @@ class HomeController < ApplicationController
     end
 
     @recent_motions = Rails.cache.fetch("/home/motions", expires_in: 1.hour) do
-      Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+      begin
+        Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+      rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError
+        []
+      end
     end
   end
 
@@ -38,33 +42,15 @@ class HomeController < ApplicationController
 
   def imprint
     @staff = Rails.cache.fetch("/imprint/staff", expires_in: 1.day) do
-      [
-        {
-          author: Author.find_or_create_by!(full_name: 'Lois Kapila'),
-          title: 'Managing editor',
-          email_address: 'info@dublininquirer.com'
-        },
-        {
-          author: Author.find_or_create_by!(full_name: 'Sam Tranum'),
-          title: 'Deputy editor',
-          email_address: 'sam@dublininquirer.com'
-        },
-        {
-          author: Author.find_or_create_by!(full_name: 'Sean Finnan'),
-          title: 'City reporter',
-          email_address: 'sfinnan@dublininquirer.com'
-        },
-        {
-          author: Author.find_or_create_by!(full_name: 'Erin McGuire'),
-          title: 'City reporter',
-          email_address: 'erin@dublininquirer.com'
-        },
-        {
-          author: Author.find_or_create_by!(full_name: 'Brian Flanagan'),
-          title: 'Web & strategy',
-          email_address: 'brian@dublininquirer.com'
-        }
-      ]
+      {
+        editor: Author.find_or_create_by!(full_name: 'Lois Kapila'),
+        deputy: Author.find_or_create_by!(full_name: 'Sam Tranum'),
+        reporters: [
+          Author.find_or_create_by!(full_name: 'Sean Finnan'),
+          Author.find_or_create_by!(full_name: 'Erin McGuire')
+        ],
+        cto: Author.find_or_create_by!(full_name: 'Brian Flanagan')
+      }
     end
 
     @columnists = Rails.cache.fetch("/imprint/columnists", expires_in: 1.day) do

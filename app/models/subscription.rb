@@ -6,10 +6,6 @@ class Subscription < ApplicationRecord
 
   has_many :invoices
 
-  validates :subscription_type, presence: true
-  validates :stripe_id, uniqueness: true, allow_blank: true
-  # validates :stripe_id, presence: true, if: { is_stripe? } // rejigger sub creation sequence to do this
-
   attribute :given_name, :string
   attribute :surname, :string
   attribute :email_address, :string
@@ -18,6 +14,7 @@ class Subscription < ApplicationRecord
   attribute :price, :integer
   attribute :interval, :string
 
+  # request address only
   attribute :address_line_1, :string
   attribute :address_line_2, :string
   attribute :city, :string
@@ -29,6 +26,10 @@ class Subscription < ApplicationRecord
 
   # fixed only:
   attribute :duration_months, :integer
+
+  validates :subscription_type, presence: true
+  validates :stripe_id, uniqueness: true, allow_blank: true
+  # validates :stripe_id, presence: true, if: -> { is_stripe? } // rejigger sub creation sequence to do this
 
   after_validation :sync_stripe_subscription, :set_status
   before_validation :set_ended_at_for_fixed, if: -> (s) { s.is_fixed? && s.duration_months.present? }

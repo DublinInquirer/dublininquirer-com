@@ -1,25 +1,15 @@
 - cache [article, 'tiny'] do
-  = link_to article.path, class: ['excerpt', '-tiny'] do
-    .illustration
-      %figure.artwork
-        - if article.featured_artwork.image.present?
-          = image_tag article.featured_artwork.image.medium.url
+  .block.-pb4.-my2
+    = link_to article.path, class: 'excerpt' do
+      .block.-mb1
+        %figure.artwork.-landscape
+          .overlay.block.-b.-bg-default
+            .p.-t5.c.-w4= display_category(article.category)
 
-      .meta
-        .bylines
-          - article.authors.each do |author|
-            .byline #{ author.try(:full_name) }
-        .category #{ display_category(article.category) }
+          - if article.featured_artwork.image.present?
+            = image_tag article.featured_artwork.image.large.url
 
-    .content
-      %header
-        %h3.headline= article.title
-
-      .more
-        .meta
-          .byline #{ article.authors.map(&:full_name).to_sentence }
-          .category #{ display_category(article.category) }
-
-        .text
-          :markdown
-            #{ raw article.excerpt }
+      .p.-t4.-centered
+        %h3.headline.inline.c.-w4.-serif= article.title
+        - if article.authors.any?
+          .inline-block.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }

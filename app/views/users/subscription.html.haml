@@ -1,37 +1,36 @@
-- content_for :breadcrumbs do
-  = link_to "Account", :user
-  .current Change subscription plan
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Change subscription plan
 
-%header.header.-modal
-  %h1.heading Change subscription
+  .block.-form.-b.-p2.-bg-faint.-mb2
+    .block.-pb1.-bb.-mb2
+      %h3.c.-w8 Digital
 
-.container
-  .row
-    .col-xs-12
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital
+    .p.-t4.-sf
+      :markdown
+        Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-        .content
-          :markdown
-            Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+    %nav.block.-mt2.-mb1
+      - if @subscription.requires_address?
+        = link_to raw("Subscribe &mdash; €5/month"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
+      - else
+        = link_to raw("<span>Keep Digital-only</span>"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
 
-        %nav.-box.-actions.-tight.-full
-          - if @subscription.requires_address?
-            = link_to raw("<span>Subscribe</span><span class='figure'>€5/month</span>"), subscription_user_path(plan: 'digital'), class: 'button -price', method: 'put'
-          - else
-            = link_to raw("<span>Keep Digital-only</span>"), subscription_user_path(plan: 'digital'), class: 'button -price', method: 'put'
+  .block.-form.-b.-p2.-bg-faint
+    .block.-pb1.-bb.-mb2
+      %h3.c.-w8 Digital + Print
 
-      .box.-tight.-roomy
-        %header.header.-box.-tight
-          %h3.heading Digital + Monthly print
+    .p.-t4.-sf
+      :markdown
+        The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
 
-        .content
-          :markdown
-            The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
+    %nav.block.-mt2.-mb1
+      - if @subscription.requires_address?
+        = link_to raw("<span>Keep Digital + Print</span>"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
+      - else
+        = link_to raw("Subscribe &mdash; €8/month"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
 
-        %nav.-box.-actions.-tight.-full
-          - if @subscription.requires_address?
-            = link_to raw("<span>Keep Digital + print</span>"), subscription_user_path(plan: 'print'), class: 'button -price', method: 'put'
-          - else
-            = link_to raw("<span>Subscribe</span><span class='figure'>€8/month</span>"), subscription_user_path(plan: 'print'), class: 'button -price', method: 'put'
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %ul
+        %li= link_to raw("&larr; Go back without saving changes"), :user

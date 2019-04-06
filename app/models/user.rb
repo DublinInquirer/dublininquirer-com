@@ -69,7 +69,8 @@ class User < ApplicationRecord
   end
 
   def can_comment?(article)
-    article.comments.where(user: self).not_approved.any?
+    return true if is_staff?
+    return !(article.comments.by_user(self).not_approved.any?)
   end
 
   def has_address?

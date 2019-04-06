@@ -2,7 +2,9 @@
   display: none
   flex-direction: row
   justify-content: space-between
-  padding: 0.5rem 0
+  padding: 0 0 0.25rem
+  font-size: var(--t4)
+  line-height: 1.4
 
   & > div
     flex-grow: 1
@@ -10,7 +12,6 @@
     &.left, &.right
       display: none
       flex-basis: 0
-      font-size: var(--b4)
 
     &.left
       .links
@@ -24,6 +25,9 @@
     color: var(--black)
     &:hover
       color: var(--blue)
+
+  a, span
+    padding: 0.5rem 0
 
   .links
     display: flex

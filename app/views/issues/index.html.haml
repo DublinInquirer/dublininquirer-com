@@ -1,7 +1,7 @@
 - title 'Past issues of Dublin Inquirer'
 
 %header.page-header
-  %h1.heading Past issues
+  %h1.h.-h2 Past issues
 
 .block.-pt2.-pb4
   .wrapper.-contained{role: 'layout'}
@@ -10,9 +10,9 @@
         .block.-my4
           .row
             .col-xs-12.col-md-7
-              %header.-issue
-                %h2.heading= link_to issue.issue_date.strftime('%-d %B %Y'), issue
-              .article
+              %header.block.-mb1.-pl4
+                %h2.h.-h4= link_to issue.issue_date.strftime('%-d %B %Y'), issue
+              .p.-t3.c.-serif
                 %ol.list.-articles
                   - issue.articles.standard.by_position.each do |article|
                     %li= link_to article.title, article.path

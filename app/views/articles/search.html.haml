@@ -1,9 +1,9 @@
 - title "Search results for #{ params[:q] }"
 
 %header.page-header
-  %h1.heading
+  %h1.h.-h2
     Search results for
-    %code.-quote #{ params[:q] }
+    %code.code.-quote #{ params[:q] }
 
 .block.-pt2.-pb4
   - if @articles.any?
@@ -11,6 +11,7 @@
       = render partial: 'articles/index', locals: {page: @page, articles: @articles, query_params: {q: @query}}
 
   - else
-    .text.-centered
-      :markdown
-        We couldn't find any articles matching your search terms.
+    .block.-py4
+      .p.-t3.-centered
+        :markdown
+          We couldn't find any articles matching your search terms.

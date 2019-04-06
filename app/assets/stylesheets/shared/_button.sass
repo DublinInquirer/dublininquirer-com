@@ -1,104 +1,60 @@
 .button, a.button, a.button:link, a.button:visited, input.button
+  font-family: $sans
+
+  &:hover
+    cursor: pointer
+
   &.-standard
-    border: 0
-    background: var(--black)
-    color: var(--default)
-    padding: 0.5rem 1rem
+    background: var(--default)
+    color: var(--black)
+    padding: 0.675rem 1.25rem
+    border: 1px solid var(--black)
+    transition: 0.125s ease all
     &:hover
-      cursor: pointer
-      background: var(--blue)
-      color: var(--default)
-
-  &.-price
-    display: flex
-    flex-direction: row
-    justify-content: space-between
-    border: 1px solid var(--blue)
-    background-color: var(--default)
-    box-shadow: 0.2rem 0.2rem 0 var(--blue)
-    color: var(--blue)
-    transition: 0.25s ease box-shadow
-    font-size: var(--b3)
-    line-height: 1.5
-    span
-      padding: 0.75rem 1.5rem 0.675rem
-      font-weight: 600
-      &.figure
-        font-weight: 400
-        background-color: var(--faint)
-    &:hover
-      box-shadow: 0.075rem 0.075rem 0 var(--blue)
-      cursor: pointer
-
-  &.-big
-    border: 0
-    font-size: var(--b2)
-    line-height: 1.5
-    background: var(--black)
-    color: var(--default)
-    padding: 1rem 2rem
-    text-align: center
-    &:hover
-      cursor: pointer
-      background: var(--blue)
-
-  &.-blue
-    background: var(--blue)
-
-  &.-white
-    background-color: var(--default)
-    color: var(--blue)
-    font-weight: 600
-    padding: 1rem 2rem
-    text-align: center
-    box-shadow: 0.25rem 0.25rem 0 var(--blue)
-
-    &:hover
-      cursor: pointer
-      background-color: var(--default)
-      color: var(--blue)
-      border-color: var(--blue)
-
-  &.-small
-    padding: 0.675rem 1rem
-
-  &.-tiny
-    padding: 0.25rem 0.75rem
-
-  &.-massive
-    padding: 1.5rem 3rem
-    font-size: var(--b1)
-
-  &.-full
-    display: block
-
-  &.-cta
-    border: 1px solid var(--blue)
-    background-color: var(--default)
-    box-shadow: 0.5rem 0.5rem 0 var(--blue)
-    color: var(--blue)
-    transition: 0.25s ease all
-    &:hover
-      box-shadow: 0.25rem 0.25rem 0 var(--blue)
-
-    &.-small
-      box-shadow: 0.325rem 0.325rem 0 var(--blue)
-      &:hover
-        box-shadow: 0.125rem 0.125rem 0 var(--blue)
+      background: var(--yellow)
+      color: var(--black)
 
     &.-big
-      &:hover
-        color: var(--blue)
-        background-color: var(--default)
+      font-size: var(--t3)
+      line-height: 1.5
+      padding: 1.75rem 3.25rem
+      font-weight: 800
+
+  &.-red
+    background: var(--red)
+    color: var(--white)
+    padding: 0.675rem 1.25rem
+    transition: 0.25s ease all
+    &:hover
+      color: var(--yellow)
+
+    &.-big
+      padding: 1.5rem 3rem
+      font-weight: 600
 
   &.-yellow
     background: var(--yellow)
     color: var(--black)
-    padding: 0.5rem 1rem
+    padding: 0.675rem 1.25rem
     border: 1px solid var(--black)
     transition: 0.25s ease all
     &:hover
       color: var(--red)
+
+    &.-big
+      padding: 1.5rem 3rem
+      font-weight: 600
+
+  &.-white
+    background: var(--default)
+    color: var(--black)
+    padding: 0.575rem 1rem
+    border: 1px solid var(--black)
+    transition: 0.125s ease all
+    font-weight: 600
+    &:hover
+      background: var(--white)
+      color: var(--blue)
 
 .text-button
   -webkit-appearance: none
@@ -107,11 +63,9 @@
   margin: 0
   font-family: $sans
   font-weight: 400
-  line-height: var(--baseline)
   color: var(--black)
   border: 0
   background-color: transparent
-  border-bottom: 1px solid var(--blue)
   &:hover
     color: var(--blue)
     border-color: transparent
