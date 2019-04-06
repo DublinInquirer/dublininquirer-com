@@ -4,7 +4,6 @@
     %meta{charset: "utf-8"}/
     %meta{'http-equiv': 'x-ua-compatible', content: 'ie=edge'}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
     - set_meta_tags site: 'Dublin Inquirer'
     - set_meta_tags og: { title: :title, site_name: :site, image: :image_src }
     - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
@@ -23,6 +22,7 @@
     <meta name="msapplication-TileColor" content="#4000ff">
     <meta name="theme-color" content="#ff0000">
     = render partial: 'layouts/snippets/fb'
+    %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
 
   %body
     = render partial: 'layouts/meta-nav', locals: { fixed: true, small: false}

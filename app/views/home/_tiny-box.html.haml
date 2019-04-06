@@ -1,7 +1,8 @@
-.block.-bt.-pt1.hidden.-md-show
-  .p.-t5
-    %h3.c.-w8 Also this week
-    .p.-sf
-      %ul.list.-sentence
-        - articles.drop(2).reverse.first(4).each do |article|
-          %li= link_to article.title.strip, article.path
+.hidden.-md-show
+  .block.-bt.-pt1
+    .p.-t5
+      %h3.c.-w8 Also this week
+      .p.-sf
+        %ul.list.-sentence
+          - articles.drop(2).reverse.first(4).each do |article|
+            %li= link_to article.title.strip, article.path
