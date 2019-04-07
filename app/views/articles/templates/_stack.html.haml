@@ -23,11 +23,6 @@
   .wrapper.-small{role: 'layout'}
     = render partial: 'articles/meta', locals: {article: article}
 
-%article.article.-formatted.-standard{lang: 'en'}
-  - if article.featured_artwork.present?
-    %section.content.-artwork
-      %figure.artwork.-featured
-        = image_tag article.featured_artwork.image.large.url
-        %figcaption= article.featured_artwork.caption
-
-  = raw render_content(article.content)
+.wrapper.-small{role: 'layout'}
+  %article.article.-formatted.-standard{lang: 'en'}
+    = raw render_content(article.content)
