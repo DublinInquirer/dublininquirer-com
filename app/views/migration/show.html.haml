@@ -1,34 +1,28 @@
 - title 'Set a password'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Migrate
+.wrapper.-tiny{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Set a password
 
-%header.header.-section
-  %h1.heading Set a password
+  .block.-mb4
+    .p.-t3.-sf
+      :markdown
+        To set up your new **DublinInquirer.com** account, we need you to set a password.
 
-.box.-padded-v
-  .text.-static
-    :markdown
-      To set up your new **DublinInquirer.com** account, we need you to set a password. You'll use your email address and password to log in to manage your subscription and place comments in the future.
+  = form_for @user, url: migrate_set_password_path(token: @token), html: {method: :put} do |f|
+    .block.-form.-b.-p2.-bg-faint
+      .field
+        = f.label :email_address
+        = f.email_field :email_address, placeholder: 'sean@example.ie', disabled: true
 
-.box.-padded-v
-  .box.-padded.-apart
-    = form_for @user, url: migrate_set_password_path(token: @token), html: {method: :put, class: 'modal-form'} do |f|
+      .field
+        = f.label :password, 'Set a password'
+        = f.password_field :password
+        = render_errors_for(@user, :password)
 
-      - if @user.errors.any?
-        %ul.modal-form_errors
-          - @user.errors.full_messages.each do |message|
-            %li= message
+      %nav.block.-mt2.actions
+        = f.submit 'Save', class: 'button -standard -big'
 
-      .modal-form_fields
-        .modal-form_field
-          = f.label :email_address
-          = f.email_field :email_address, disabled: true
-
-        .modal-form_field
-          = f.label :password
-          = f.password_field :password
-
-      .modal-form_actions
-        = f.submit 'Save', class: 'button'
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered &nbsp;

@@ -29,11 +29,11 @@
         .block.-my2
           %h4.h.-h4 Columnists
           - @columnists.each do |author|
-            %p #{ author.full_name }
+            %p #{ link_to author.full_name, author }
 
         .block.-my2
           %h4.h.-h4 Regular contributors
           - @contributors.each do |author|
-            %p #{ author.full_name }
+            %p #{ link_to author.full_name, author }
 
 = render partial: 'products/enticement'

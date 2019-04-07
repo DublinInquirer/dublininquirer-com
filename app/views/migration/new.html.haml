@@ -1,28 +1,30 @@
-- title 'Migrate account'
+- title 'Set up account'
 - noindex true
 
-.block.-my4
-  %header.header.-modal
-    %h1.heading Setup your new account
+.wrapper.-tiny{role: 'layout'}
+  %header.page-header
+    %h2.h.-h4.-centered
+      If you're already a subscriber, just enter your email address below to set up your account on the new site.
 
-    .text.-article
-      :markdown
-        If you're already a subscriber, just enter your email address below to set up your account on the new site.
-
-    = form_tag migration_path, method: :post, class: 'box-form' do
+  = form_tag migration_path, method: :post do
+    .block.-form.-b.-p2.-bg-faint
       .field
         = label_tag :email_address
-        .input= email_field_tag :email_address, nil, placeholder: "#{ %w(aoife sean ).sample }@example.ie"
+        = email_field_tag :email_address, nil, placeholder: %w(sean@example.ie aoife@example.ie).sample
 
-      %nav.actions
-        - if @failure
-          .error No subscription account associated with that email address was found.
+      %nav.block.-mt2.actions
         = submit_tag "Set up account", class: 'button -standard -big'
 
-.block.-mt2
-  .p.-t3.-sf.-centered
-    %h3.c.-w8 Other options
-    %ul
-      %li= link_to "Register for a free account", :register
-      %li= link_to "Log in to an existing account", :login
-      %li= link_to "Reset your password", [:new, :password_reset]
+        - if @failure
+          .block.-mt2
+            .p.-centered.-t5.c.-red.-sf
+              :markdown
+                We were unable to find an account with that email address. If you're not sure what email address you signed up with, [get in touch](mailto:brian@dublininquirer.com) and we can help.
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %h3.c.-w8 Other options
+      %ul
+        %li= link_to "Register for a free account", :register
+        %li= link_to "Log in to an existing account", :login
+        %li= link_to "Reset your password", [:new, :password_reset]

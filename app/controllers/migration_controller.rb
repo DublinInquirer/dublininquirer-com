@@ -8,7 +8,7 @@ class MigrationController < ApplicationController
   def create
     @legacy_user = User.find_by(email_address: params[:email_address].strip.downcase)
 
-    if !@legacy_user || @legacy_user.has_password?
+    if !@legacy_user
       @failure = true
       render :new
     else
