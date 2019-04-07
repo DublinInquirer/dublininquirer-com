@@ -12,7 +12,7 @@
 
   - if @author.portrait.present?
     .block.-mt1
-      .illustration
+      %figure.artwork.-face
         = image_tag @author.portrait.url
 
   - if @author.bio.present?
