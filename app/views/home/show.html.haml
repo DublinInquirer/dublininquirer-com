@@ -20,7 +20,7 @@
                 .block
                   - @articles.first(2).drop(1).each do |article|
                     = render partial: 'articles/excerpts/small', locals: {article: article}
-
+                  %hr.-stroke
                   = render partial: 'home/tiny-box', locals: {articles: @articles}
           .row
             - if @articles.any?
