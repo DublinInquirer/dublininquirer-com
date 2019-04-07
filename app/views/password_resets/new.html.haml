@@ -1,30 +1,25 @@
 - title 'Reset password'
 - noindex true
 
-- content_for :breadcrumbs do
-  .current Reset password
-
-%header.header.-modal
-  %h1.heading Reset your password
-
-  .text.-article
-    :markdown
+.wrapper.-tiny{role: 'layout'}
+  %header.page-header
+    %h2.h.-h4.-centered
       Enter the email address linked to your account below, and we’ll send you an email to reset your password.
 
-.box.-tight
-  = form_tag password_resets_path, method: :post, class: 'box-form' do
-    .field
-      = label_tag :email_address
-      .input= email_field_tag :email_address, nil, placeholder: %w(sean@example.ie aoife@example.ie).sample
 
-    %nav.actions
-      = submit_tag "Reset", class: 'button -standard -big'
+  = form_tag password_resets_path, method: :post do
+    .block.-form.-b.-p2.-bg-faint
+      .field
+        = label_tag :email_address
+        = email_field_tag :email_address, nil, placeholder: %w(sean@example.ie aoife@example.ie).sample
 
-.box.-other
-  %header.-box
-    .heading Other options
-  .content
-    %ul.list.-options
-      %li= link_to "Register for a free account", :register, class: 'button -standard'
-      %li= link_to "Log in to an existing account", :login, class: 'button -standard'
-      %li= link_to "Migrate an account from the old site", '/migrate', class: 'button -standard'
+      %nav.block.-mt2.actions
+        = submit_tag "Reset", class: 'button -standard -big'
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %h3.c.-w8 Other options
+      %ul
+        %li= link_to "Don't have an account? Sign up", :register
+        %li= link_to "Remembered your password? Log in", :login
+        %li= link_to "Had an account before 2018? Migrate it", '/migrate'

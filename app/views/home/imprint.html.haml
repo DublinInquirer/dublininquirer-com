@@ -33,7 +33,7 @@
 
         .block.-my2
           %h4.h.-h4 Regular contributors
-          - @contributor.each do |author|
+          - @contributors.each do |author|
             %p #{ author.full_name }
 
 = render partial: 'products/enticement'
