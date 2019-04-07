@@ -41,7 +41,7 @@ class HomeController < ApplicationController
   end
 
   def imprint
-    @staff = Rails.cache.fetch("/imprint/staff", expires_in: 1.day) do
+    @staff = Rails.cache.fetch("/imprint/ft", expires_in: 1.day) do
       {
         editor: Author.find_or_create_by!(full_name: 'Lois Kapila'),
         deputy: Author.find_or_create_by!(full_name: 'Sam Tranum'),
