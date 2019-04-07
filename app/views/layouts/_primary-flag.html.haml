@@ -1,34 +1,34 @@
-= render partial: 'layouts/meta-nav', locals: { fixed: false, small: true}
+.primary-flag
+  = render partial: 'layouts/meta-nav', locals: { fixed: false, small: true}
+  .wrapper.-container{role: 'layout'}
+    .block
+      .flag-ears
+        .ear
+          .block.-bg-faint.-b.-py1
+            .p.-t5.-centered
+              %h5 Follow us on
+              %ul.list.-nav
+                %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
+                %li= link_to "Facebook", "https://www.facebook.com/dublininquirer"
+                %li= link_to "Instagram", "https://www.instagram.com/dublininquirer"
+        .flag
+          = link_to root_path do
+            .logotype.-large
+              = render partial: 'layouts/images/logo-horizontal'
+          .strapline
+            %span Local
+            %span Independent
+            %span Different
 
-.wrapper.-container{role: 'layout'}
-  .block
-    .flag-ears
-      .ear
-        .block.-bg-faint.-b.-py1
-          .p.-t5.-centered
-            %h5 Follow us on
-            %ul.list.-nav
-              %li= link_to "Twitter", "https://www.twitter.com/dublininquirer"
-              %li= link_to "Facebook", "https://www.facebook.com/dublininquirer"
-              %li= link_to "Instagram", "https://www.instagram.com/dublininquirer"
-      .flag
-        = link_to root_path do
-          .logotype.-large
-            = render partial: 'layouts/images/logo-horizontal'
-        .strapline
-          %span Local
-          %span Independent
-          %span Different
+        .ear
+          .block.-bg-faint.-b.-py1
+            .p.-t5.-centered
+              %h5 Get our weekly newsletter
+              %form.tiny-form{action: "https://tinyletter.com/DublinInquirer", method: "post", onsubmit: "window.open('https://tinyletter.com/DublinInquirer', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", target: "popupwindow"}
+                .field
+                  %input{name: 'email', type: 'email', placeholder: 'Enter your email'}
+                .action
+                  %input{type: 'submit', value: 'Subscribe', class: 'text-button'}
 
-      .ear
-        .block.-bg-faint.-b.-py1
-          .p.-t5.-centered
-            %h5 Get our weekly newsletter
-            %form.tiny-form{action: "https://tinyletter.com/DublinInquirer", method: "post", onsubmit: "window.open('https://tinyletter.com/DublinInquirer', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", target: "popupwindow"}
-              .field
-                %input{name: 'email', type: 'email', placeholder: 'Enter your email'}
-              .action
-                %input{type: 'submit', value: 'Subscribe', class: 'text-button'}
-
-  .block.-hr
-    = render partial: 'layouts/content-nav'
+    .block.-hr
+      = render partial: 'layouts/content-nav'

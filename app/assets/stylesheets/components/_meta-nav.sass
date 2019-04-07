@@ -89,7 +89,6 @@
     position: fixed
     left: 0
     right: 0
-    top: -100%
     border-top: 0.75rem solid var(--black)
     background-color: var(--default)
     z-index: 9999
@@ -103,6 +102,10 @@
     &.-open
       top: 0
       transition: top 0.5s ease
+
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+      top: -100%
 
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)

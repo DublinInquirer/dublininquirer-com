@@ -10,7 +10,6 @@
   &.-w8
     font-weight: 800
 
-
   &.-i
     font-style: italic
 
@@ -29,6 +28,13 @@
         font-weight: 400
         border-color: var(--grey)
 
+  &.-quote
+    background: var(--faint)
+    &:before
+      content: '‘'
+    &:after
+      content: '’'
+
 .a
   &.-elsewhere
     &:after
@@ -46,12 +52,6 @@
   font-family: $mono
   font-weight: 400
   font-style: normal
-
-  &.-quote
-    &:before
-      content: '‘'
-    &:after
-      content: '’'
 
 .p
   // font size
