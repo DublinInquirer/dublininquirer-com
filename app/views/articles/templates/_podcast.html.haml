@@ -1,25 +1,29 @@
-.wrapper.-small{role: 'layout'}
-  %header.header.-article.-small
-    .p.-category= link_to display_category(@article.category), category_path(@article.category)
-    %h1.headline #{ raw article.title }
-    .meta.-small
-      .author
-        .byline= link_to article.author.full_name, article.author
-        - if article.issue_date.present?
-          .date
-            #{ link_to article.issue_date.strftime('%e %B %Y'), article.issue }
+.block.-py4
+  .p.-centered
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
 
-      .share
-        %ul.list.-nav
-          %li= link_to "Facebook", "http://www.facebook.com/share.php?u=#{ "https://www.dublininquirer.com#{ article.path }" }"
-          %li= link_to "Twitter", "https://twitter.com/intent/tweet?text=#{ article.title }&url=#{ "https://www.dublininquirer.com#{ article.path }" }"
-          - if article.commentable?
-            %li= link_to "Respond", "#comments", 'data-behaviour': 'scroll'
+    .wrapper.-small{role: 'layout'}
+      .block.-mb2
+        %h1.h.-h2.-serif= raw article.title
+      .block.-mb2
+        .p.-t3.-centered
+          - if article.authors.any?
+            by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
 
-  %article.article.-standard{lang: 'en'}
-    - if article.featured_artwork.present?
+      %hr.-separator
+
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
+
+%article.article.-formatted.-standard{lang: 'en'}
+  - if article.featured_artwork.present?
+    %section.content.-artwork
       %figure.artwork.-featured
         = image_tag article.featured_artwork.image.large.url
         %figcaption= article.featured_artwork.caption
 
-    = raw render_content(article.content)
+  = raw render_content(article.content)
