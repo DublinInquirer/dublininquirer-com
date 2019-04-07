@@ -1,0 +1,33 @@
+.block.-py4
+  .p.-centered
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
+
+    .wrapper.-small{role: 'layout'}
+      .block.-mb2
+        %h1.h.-h2.-serif= raw article.title
+
+      - article.authors.each do |author|
+        .block.-mb4.-px2
+          .p.-t4.-centered.-sf
+            %p.c.-w8= link_to author.full_name, author
+            .p
+              :markdown
+                #{ raw author.bio }
+
+        %hr.-separator
+
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
+
+%article.article.-formatted.-standard{lang: 'en'}
+  - if article.featured_artwork.present?
+    %section.content.-artwork
+      %figure.artwork.-featured
+        = image_tag article.featured_artwork.image.large.url
+        %figcaption= article.featured_artwork.caption
+
+  = raw render_content(article.content)
