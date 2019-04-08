@@ -11,6 +11,9 @@ class MigrationController < ApplicationController
     if !@legacy_user
       @failure = true
       render :new
+    elsif @legacy_user.has_password?
+      @legacy_user.deliver_reset_password_instructions!
+      redirect_to(root_path, notice: 'Instructions have been sent to your email.')
     else
       setup_legacy_account(@legacy_user)
     end
