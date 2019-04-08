@@ -8,7 +8,7 @@ class ArticlesController < ApplicationController
     end
 
     @template = case @article.template.try(:downcase)
-    when 'airspace', 'illustration', 'opinion', 'podcast'
+    when 'airspace', 'illustration', 'opinion', 'podcast', 'stack'
       @article.template.downcase
     else
       'standard'
