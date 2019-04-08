@@ -7,12 +7,7 @@ class ArticlesController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
 
-    @template = case @article.template.try(:downcase)
-    when 'airspace', 'illustration', 'opinion', 'podcast', 'stack'
-      @article.template.downcase
-    else
-      'standard'
-    end
+    @template = @article.template.present? ? @article.template : 'standard'
 
     # if the article is paywalled, the user doesn't haven't permission, and the browser isn't a bot
     @limited = @article.paywalled? && !browser.bot? && !permission_for_article?(slug)
