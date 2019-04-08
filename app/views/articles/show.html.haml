@@ -18,43 +18,46 @@
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
 
-.block.-pb4= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
+- cache ['articles', @article, @template, @limited] do
+  .block.-pb4= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
-.block.-bt.-py4.-mt4
-  - if @article.tags.any?
-    .row
-      .col-xs-12.col-md-4
-        %h3.p.-t4.c.-w6 Filed under:
+- cache ['articles', @article, @article.authors, 'meta'] do
+  .block.-bt.-py4.-mt4
+    - if @article.tags.any?
+      .row
+        .col-xs-12.col-md-4
+          %h3.p.-t4.c.-w6 Filed under:
 
-        .block.-mb2
-          .p.-t3
-            %ul.list.-sentence
-              - @article.displayable_tags.each do |tag|
-                %li= link_to tag.name, tag_path(id: tag.slug)
+          .block.-mb2
+            .p.-t3
+              %ul.list.-sentence
+                - @article.displayable_tags.each do |tag|
+                  %li= link_to tag.name, tag_path(id: tag.slug)
 
-      .col-xs-12.col-md-4
-        %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
+        .col-xs-12.col-md-4
+          %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
-        .block.-mb2
-          .p.-t3
-            - @article.authors.each do |author|
-              :markdown
-                _#{ link_to author.full_name, author }:_ #{ author.bio }
+          .block.-mb2
+            .p.-t3
+              - @article.authors.each do |author|
+                :markdown
+                  _#{ link_to author.full_name, author }:_ #{ author.bio }
 
 .block.-bt.-py4
   - if @article.commentable?
     = render partial: 'comments/comments', locals: { article: @article }
 
-.block.-bt.-py4
-  - if @article.from_the_same_issue.by_position.any?
-    .block
-      .block.-mb3
-        %h3.h.-h4.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
+- cache ['articles', @article.from_the_same_issue, 'preview'] do
+  .block.-bt.-py4
+    - if @article.from_the_same_issue.by_position.any?
+      .block
+        .block.-mb3
+          %h3.h.-h4.-centered Also in the<br>#{ @article.issue_date.strftime('%-d %B %Y') } issue
 
-      .row
-        - @article.from_the_same_issue.by_position.first(4).each do |article|
-          .col-xs-12.col-md-3
-            = render partial: 'articles/excerpts/tiny', locals: { article: article }
+        .row
+          - @article.from_the_same_issue.by_position.first(4).each do |article|
+            .col-xs-12.col-md-3
+              = render partial: 'articles/excerpts/tiny', locals: { article: article }
 
 = render partial: 'products/enticement'
 
