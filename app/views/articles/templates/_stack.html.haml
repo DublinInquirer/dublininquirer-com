@@ -8,17 +8,13 @@
 
     .wrapper.-small{role: 'layout'}
       .block.-mb2
-        %h1.h.-h2.-serif= raw article.title
+        %h1.h.-h1.-serif= raw article.title
+      .block.-mb2
+        .p.-t3.-centered
+          - if article.authors.any?
+            by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
 
-      - article.authors.each do |author|
-        .block.-mb4.-px2
-          .p.-t4.-centered.-sf
-            %p.c.-w8= link_to author.full_name, author
-            .p
-              :markdown
-                #{ raw author.bio }
-
-        %hr.-separator
+      %hr.-separator
 
   .wrapper.-small{role: 'layout'}
     = render partial: 'articles/meta', locals: {article: article}

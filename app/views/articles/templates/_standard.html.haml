@@ -7,7 +7,7 @@
           #{ link_to display_category(@article.category), category_path(@article.category) }
 
     .wrapper.-medium{role: 'layout'}
-      %h1.inline.h.-h1.c.-serif= raw article.title
+      %h1.inline.h.-h1.-serif= raw article.title
 
       - if article.authors.any?
         .inline-block.p.-t3 &nbsp;by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
