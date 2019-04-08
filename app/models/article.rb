@@ -200,7 +200,9 @@ class Article < ApplicationRecord
   end
 
   def format_common_hacks
-    self.content = self.content.gsub('***','<p class="section-separator">***</p>').gsub('* * *','<p class="section-separator">***</p>')
+    self.content = self.content.gsub('***','<hr class="-separator"></hr>').
+                     gsub('* * *','<hr class="-separator"></hr>').
+                     gsub('<p class="section-separator">***</p>','<hr class="-separator"></hr>')
   end
 
   def uniq_categories
