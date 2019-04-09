@@ -1,0 +1,18 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Contact messages', [:admin, :contact_messages]
+      = link_to @contact_message.contacter_name, [:admin, @contact_message]
+
+    %nav
+      = link_to "Edit", [:edit, :admin, @contact_message], class: 'button'
+
+%dl.admin-data
+  %dt Name
+  %dd= @contact_message.full_name
+  %dt Email
+  %dd= @contact_message.email_address
+  %dt Regarding
+  %dd= @contact_message.regarding
+  %dt Question
+  %dd #{ simple_format raw @contact_message.body }

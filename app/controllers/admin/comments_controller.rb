@@ -1,8 +1,4 @@
 class Admin::CommentsController < Admin::ApplicationController
-  def index
-    @comments = Comment.all.order('created_at desc')
-  end
-
   def show
     @comment = Comment.find(params[:id])
   end

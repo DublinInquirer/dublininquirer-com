@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_184315) do
+ActiveRecord::Schema.define(version: 2019_04_09_183147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -111,6 +111,17 @@ ActiveRecord::Schema.define(version: 2019_02_27_184315) do
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["status"], name: "index_comments_on_status"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "contact_messages", force: :cascade do |t|
+    t.text "body"
+    t.text "regarding"
+    t.text "full_name"
+    t.text "email_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_contact_messages_on_email_address"
+    t.index ["regarding"], name: "index_contact_messages_on_regarding"
   end
 
   create_table "gift_subscriptions", force: :cascade do |t|

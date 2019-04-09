@@ -21,6 +21,7 @@
         = link_to 'Subscriptions', admin_subscriptions_path, class: current_page?(admin_subscriptions_path) ? 'current' : nil
         = link_to 'Gifts', admin_gift_subscriptions_path, class: current_page?(admin_gift_subscriptions_path) ? 'current' : nil
         = link_to 'Landing pages', admin_landing_pages_path, class: current_page?(admin_landing_pages_path) ? 'current' : nil
+        = link_to 'Contact', admin_contact_messages_path, class: current_page?(admin_contact_messages_path) ? 'current' : nil
 
       %main.admin-main
         - if content_for(:subheader_detail) && content_for(:subheader_list)
