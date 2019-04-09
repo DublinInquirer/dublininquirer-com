@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get 'feed', to: 'articles#feed', as: 'feed', format: 'xml'
 
   resources :comments, only: [:create]
+  resources :contact_messages, only: [:create]
 
   # misc pages
 
@@ -180,6 +181,7 @@ Rails.application.routes.draw do
         put :cancel
       end
     end
+    resources :contact_messages
     resources :comments do
       member do
         put :toggle

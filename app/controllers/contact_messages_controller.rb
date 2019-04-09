@@ -1,0 +1,2 @@
+class ContactMessagesController < ApplicationController
+end
