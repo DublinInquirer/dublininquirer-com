@@ -3,7 +3,11 @@
     .block.-mb2.-pb1.-bb
       %h3.c.-w4{id: "comment-#{ comment.id }"}
         .inline.c.-w8 #{ comment.display_name }
-        .inline at #{ comment.created_at.strftime('%e %B at %H:%M') }
+        .inline
+          - if comment.created_at < 6.months.ago
+            at #{ comment.created_at.strftime('%e %B %Y at %H:%M') }
+          - else
+            at #{ comment.created_at.strftime('%e %B at %H:%M') }
 
     .block
       .p.-t3.c.-serif
