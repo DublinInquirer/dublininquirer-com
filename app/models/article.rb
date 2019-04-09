@@ -184,7 +184,7 @@ class Article < ApplicationRecord
         'ul' => %w(id class),
         'a' => %w(id class href),
         'img' => %w(src alt width height class),
-        'iframe' => %w(src frameborder allowfullscreen id),
+        'iframe' => %w(src width height class frameborder allowfullscreen id),
         'div' => %w(id class data-src)
       }
     )
