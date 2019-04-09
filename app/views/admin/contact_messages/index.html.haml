@@ -26,6 +26,6 @@
   %tbody
     - @contact_messages.each do |contact_message|
       %tr
-        %td= link_to contact_message.user_name, [:admin, contact_message]
+        %td= link_to contact_message.contacter_name, [:admin, contact_message]
         %td= contact_message.regarding
         %td{width: '150'}= contact_message.created_at.strftime('%e %b %Y')

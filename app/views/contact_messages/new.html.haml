@@ -1,0 +1,31 @@
+- title "Contact Ebun"
+- noindex true
+
+.wrapper.-tiny{role: 'layout'}
+  %header.page-header
+    %h2.h.-h4.-centered
+      Been pondering questions about race and identity in contemporary Ireland, and want to ask Ebun?
+
+  = form_for @contact_message, remote: true do |f|
+    .block.-form.-b.-p2.-bg-faint
+      = f.hidden_field :regarding
+      .field
+        = f.label :full_name, 'Your name'
+        = f.text_field :full_name
+        = render_errors_for(@contact_message, :full_name)
+      .field
+        = f.label :email_address, 'Your email address'
+        = f.email_field :email_address
+        = render_errors_for(@contact_message, :email_address)
+      .field
+        = f.label :body, 'Your question'
+        = f.text_area :body
+        = render_errors_for(@contact_message, :body)
+
+      %nav.block.-mt2.actions
+        = f.submit 'Submit question', class: 'button -standard -big'
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %ul
+        %li= link_to raw("&larr; Go back without submitting your question changes"), :back

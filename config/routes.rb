@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:create]
   resources :contact_messages, only: [:create]
+  get '/contact/:regarding' => 'contact_messages#new', as: 'contact_form'
 
   # misc pages
 

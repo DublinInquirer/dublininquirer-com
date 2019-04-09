@@ -116,11 +116,12 @@ ActiveRecord::Schema.define(version: 2019_04_09_183147) do
   create_table "contact_messages", force: :cascade do |t|
     t.text "body"
     t.text "regarding"
-    t.bigint "user_id"
+    t.text "full_name"
+    t.text "email_address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_contact_messages_on_email_address"
     t.index ["regarding"], name: "index_contact_messages_on_regarding"
-    t.index ["user_id"], name: "index_contact_messages_on_user_id"
   end
 
   create_table "gift_subscriptions", force: :cascade do |t|
@@ -312,7 +313,6 @@ ActiveRecord::Schema.define(version: 2019_04_09_183147) do
   add_foreign_key "artworks", "articles"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
-  add_foreign_key "contact_messages", "users"
   add_foreign_key "gift_subscriptions", "subscriptions"
   add_foreign_key "invoices", "subscriptions"
   add_foreign_key "invoices", "users"

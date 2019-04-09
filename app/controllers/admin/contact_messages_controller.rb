@@ -3,6 +3,10 @@ class Admin::ContactMessagesController < Admin::ApplicationController
     @filter = {}
     @sort = nil
 
-    @contact_messages = ContactMessage.page(params[:p]).per(25)
+    @contact_messages = ContactMessage.order('created_at desc').page(params[:p]).per(25)
+  end
+
+  def show
+    @contact_message = ContactMessage.find(params[:id])
   end
 end
