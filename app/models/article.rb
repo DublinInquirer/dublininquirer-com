@@ -40,7 +40,7 @@ class Article < ApplicationRecord
 
   def from_the_same_issue
     return nil unless self.issue.present?
-    self.issue.articles.where.not(id: self.id)
+    @same_issue ||= self.issue.articles.includes(:authors).where.not(id: self.id)
   end
 
   def author
