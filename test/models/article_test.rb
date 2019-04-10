@@ -28,4 +28,23 @@ class ArticleTest < ActiveSupport::TestCase
 
     assert article1.from_the_same_issue.include?(article2)
   end
+
+  test "tag scopes" do
+    tag1 = create(:tag)
+    article1 = create(:article, tag_ids: [tag1.id])
+    article2 = create(:article, tag_ids: [])
+
+    assert Article.in_tag(tag1).include?(article1)
+    assert !Article.in_tag(tag1).include?(article2)
+    assert Article.not_in_tag(tag1).include?(article2)
+    assert !Article.not_in_tag(tag1).include?(article1)
+  end
+
+  test "nil tags" do
+    tag1 = create(:tag)
+    article1 = create(:article, tag_ids: [tag1.id])
+
+    assert_equal 0, Article.in_tag(nil).length
+    assert Article.not_in_tag(nil).include?(article1)
+  end
 end

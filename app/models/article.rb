@@ -29,8 +29,8 @@ class Article < ApplicationRecord
   scope :published, -> { joins(:issue).merge( Issue.published ).distinct }
   scope :in_category, -> (c) { where(category: c.downcase) }
   scope :not_in_category, -> (c) { where.not(category: c.downcase) }
-  scope :in_tag, -> (t) { where('tag_ids @> ?', "{#{ t.id }}") }
-  scope :not_in_tag, -> (t) { where.not('tag_ids @> ?', "{#{ t.id }}") }
+  scope :in_tag, -> (t) { t ? where('tag_ids @> ?', "{#{ t.id }}") : none }
+  scope :not_in_tag, -> (t) { t ? where.not('tag_ids @> ?', "{#{ t.id }}") : all }
   scope :by_slug, -> (s) { where('former_slugs @> ?', "{#{ s.downcase }}") }
   scope :standard, -> { not_in_category('cover').not_in_category('cartoon') }
 
