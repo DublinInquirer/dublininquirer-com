@@ -1,10 +1,9 @@
 .wrapper.-tiny{role: 'layout'}
-  .text.-fancy
-    %h1.heading 404
-
-  .text
+  .p.-t3.-sf
     :markdown
+      # 404
+
       The requested page could not be found. Either there's a typo in the URL, or the page has moved.
 
-  %nav.nav.-actions.-centered
-    = link_to "Return home", :root, class: 'button -standard'
+  %nav.block.-mt4
+    = link_to raw("&larr; Return home"), :root, class: 'button -standard'

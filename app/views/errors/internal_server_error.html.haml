@@ -1,10 +1,9 @@
 .wrapper.-tiny{role: 'layout'}
-  %header.header.-fancy
-    %h1.heading Error
-
-  .text
+  .p.-t3.-sf
     :markdown
+      # 500
+
       An error prevented the page from loading. We'll fix it.
 
-  %nav.nav.-actions.-centered
-    = link_to "Return home", :root, class: 'button -standard'
+  %nav.block.-mt4
+    = link_to raw("&larr; Return home"), :root, class: 'button -standard'
