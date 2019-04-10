@@ -41,11 +41,12 @@
 
   a, a:link, a:visited
     display: inline
-    font-weight: 800
     border-bottom: 1px solid var(--black)
     &:hover
       color: var(--blue)
       border-bottom-color: var(--blue)
+    &:after
+      content: ' '
 
   h3, h4
     font-family: $sans
