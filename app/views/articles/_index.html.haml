@@ -2,7 +2,7 @@
   - articles.in_groups_of(4, false).each do |group|
     .row
       - group.each do |article|
-        .col-xs-12.col-lg-3.flex
+        .col-xs-12.col-md-3.flex
           = render partial: 'articles/excerpts/result', locals: { article: article }
           %hr.-stroke
 

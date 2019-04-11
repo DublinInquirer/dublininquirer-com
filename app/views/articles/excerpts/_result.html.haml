@@ -1,12 +1,11 @@
 - cache [article, 'result'] do
-  .block.-pb4.-mt4
-    = link_to article.path, class: 'excerpt' do
-      .block.-mb1
-        %figure.artwork.-landscape
-          .overlay.block.-b.-bg-default
-            .p.-t5.c.-w4= display_category(article.category)
-          - if article.featured_artwork.image.present?
-            = image_tag article.featured_artwork.image.large.url
+  = link_to article.path, class: ['block', '-my2', '-pb2', 'excerpt'] do
+    .block.-mb1
+      %figure.artwork.-landscape
+        .overlay.block.-b.-bg-default
+          .p.-t5.c.-w4= display_category(article.category)
+        - if article.featured_artwork.image.present?
+          = image_tag article.featured_artwork.image.large.url
 
       .p.-centered
         %span.p.-t4
