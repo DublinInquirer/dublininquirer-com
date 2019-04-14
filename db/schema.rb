@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_103154) do
+ActiveRecord::Schema.define(version: 2019_04_14_103640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2019_04_14_103154) do
     t.bigint "issue_id"
     t.integer "position"
     t.bigint "tag_ids", default: [], array: true
+    t.index "to_tsvector('english'::regconfig, category)", name: "articles_category", using: :gin
     t.index "to_tsvector('english'::regconfig, excerpt)", name: "articles_excerpt", using: :gin
     t.index "to_tsvector('english'::regconfig, text)", name: "articles_text", using: :gin
     t.index "to_tsvector('english'::regconfig, title)", name: "articles_title", using: :gin
@@ -82,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_04_14_103154) do
     t.bigint "article_id"
     t.integer "width_px"
     t.integer "height_px"
+    t.index "to_tsvector('english'::regconfig, caption)", name: "artworks_caption", using: :gin
     t.index ["article_id"], name: "index_artworks_on_article_id"
     t.index ["hashed_id"], name: "index_artworks_on_hashed_id", unique: true
   end
@@ -93,6 +95,8 @@ ActiveRecord::Schema.define(version: 2019_04_14_103154) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "portrait"
+    t.index "to_tsvector('english'::regconfig, bio)", name: "authors_bio", using: :gin
+    t.index "to_tsvector('english'::regconfig, full_name)", name: "authors_full_name", using: :gin
     t.index ["slug"], name: "index_authors_on_slug", unique: true
   end
 
@@ -255,6 +259,7 @@ ActiveRecord::Schema.define(version: 2019_04_14_103154) do
     t.boolean "displayable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index "to_tsvector('english'::regconfig, name)", name: "tags_name", using: :gin
     t.index ["name"], name: "index_tags_on_name", unique: true
     t.index ["slug"], name: "index_tags_on_slug", unique: true
   end
@@ -289,6 +294,10 @@ ActiveRecord::Schema.define(version: 2019_04_14_103154) do
     t.jsonb "metadata"
     t.text "hub"
     t.datetime "banned_at"
+    t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
+    t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
+    t.index "to_tsvector('english'::regconfig, given_name)", name: "users_given_name", using: :gin
+    t.index "to_tsvector('english'::regconfig, surname)", name: "users_surname", using: :gin
     t.index ["banned_at"], name: "index_users_on_banned_at"
     t.index ["city"], name: "index_users_on_city"
     t.index ["country_code"], name: "index_users_on_country_code"
