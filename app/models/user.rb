@@ -241,9 +241,9 @@ class User < ApplicationRecord
       self.full_name = generate_full_name(self.given_name, self.surname)
     end
 
-    self.given_name = self.given_name.strip
-    self.surname = self.surname.strip
-    self.full_name = self.full_name.strip
+    self.given_name = self.given_name.try(:strip)
+    self.surname = self.surname.try(:strip)
+    self.full_name = self.full_name.try(:strip)
   end
 
   def generate_full_name(given, sur)
