@@ -1,10 +1,13 @@
 require 'sanitize'
 
 class Article < ApplicationRecord
+  TEMPLATES = %w(standard opinion illustration stack podcast legacy)
+  CATEGORIES = %w(the-dish unreal-estate city-desk culture-desk opinion fiction podcast cover cartoon a-quick-note)
+
   validates :title, presence: true, uniqueness: { scope: :issue }
   validates :slug, uniqueness: true
-  validates :template, inclusion: { in: %w(standard airspace opinion illustration stack podcast) }
-  validates :category, inclusion: { in: %w(the-dish unreal-estate city-desk culture-desk opinion fiction podcast cover cartoon a-quick-note) }, on: :create
+  validates :template, inclusion: { in: TEMPLATES }
+  validates :category, inclusion: { in: CATEGORIES }, on: :create
 
   belongs_to :issue, optional: true, touch: true
   belongs_to :featured_artwork, class_name: 'Artwork', foreign_key: 'featured_artwork_id', optional: true
@@ -157,11 +160,11 @@ class Article < ApplicationRecord
   end
 
   def self.template_options
-    %w(standard opinion illustration stack podcast)
+    TEMPLATES
   end
 
   def self.category_options
-    %w(the-dish unreal-estate city-desk culture-desk opinion fiction podcast cover cartoon a-quick-note)
+    CATEGORIES
   end
 
   private

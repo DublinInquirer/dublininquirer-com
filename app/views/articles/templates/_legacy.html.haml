@@ -1,0 +1,26 @@
+.block.-py4
+  .p.-centered
+    .wrapper.-small{role: 'layout'}
+      .block.-my2
+        .p.-t4
+          #{ link_to @article.issue.issue_date.strftime('%-d %B %Y'), @article.issue } &mdash;
+          #{ link_to display_category(@article.category), category_path(@article.category) }
+
+    .wrapper.-medium{role: 'layout'}
+      %h1.inline.h.-h1.-serif= raw article.title
+
+      - if article.authors.any?
+        .inline-block.p.-t3 &nbsp;by #{ raw article.authors.map { |author| link_to(author.full_name, author) }.to_sentence }
+
+  .wrapper.-small{role: 'layout'}
+    = render partial: 'articles/meta', locals: {article: article}
+
+.wrapper.-small{role: 'layout'}
+  %article.article.-formatted.-standard{lang: 'en'}
+    - if article.featured_artwork.present?
+      %figure.artwork.-featured
+        = image_tag article.featured_artwork.image.large.url
+        %figcaption= article.featured_artwork.caption
+
+    - if !@limited
+      = raw render_content(article.content)
