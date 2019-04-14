@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_183147) do
+ActiveRecord::Schema.define(version: 2019_04_14_103154) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 2019_04_09_183147) do
     t.bigint "issue_id"
     t.integer "position"
     t.bigint "tag_ids", default: [], array: true
+    t.index "to_tsvector('english'::regconfig, excerpt)", name: "articles_excerpt", using: :gin
+    t.index "to_tsvector('english'::regconfig, text)", name: "articles_text", using: :gin
+    t.index "to_tsvector('english'::regconfig, title)", name: "articles_title", using: :gin
     t.index ["category"], name: "index_articles_on_category"
     t.index ["featured_artwork_id"], name: "index_articles_on_featured_artwork_id"
     t.index ["former_slugs"], name: "index_articles_on_former_slugs"
