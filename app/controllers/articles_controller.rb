@@ -9,7 +9,7 @@ class ArticlesController < ApplicationController
     @template = @article.template.present? ? @article.template : 'standard'
 
     # if the article is paywalled, the user doesn't haven't permission, and the browser isn't a bot
-    @limited = @article.paywalled? && !browser.bot? && !permission_for_article?(slug)
+    @limited = @article.paywalled? && !browser.bot? && !permission_for_article?(internal_slug(params))
   end
 
   def feed
