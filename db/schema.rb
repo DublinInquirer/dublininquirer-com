@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_103640) do
+ActiveRecord::Schema.define(version: 2019_04_14_105508) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,8 +294,10 @@ ActiveRecord::Schema.define(version: 2019_04_14_103640) do
     t.jsonb "metadata"
     t.text "hub"
     t.datetime "banned_at"
+    t.text "full_name"
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
+    t.index "to_tsvector('english'::regconfig, full_name)", name: "users_full_name", using: :gin
     t.index "to_tsvector('english'::regconfig, given_name)", name: "users_given_name", using: :gin
     t.index "to_tsvector('english'::regconfig, surname)", name: "users_surname", using: :gin
     t.index ["banned_at"], name: "index_users_on_banned_at"

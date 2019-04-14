@@ -21,7 +21,7 @@ class User < ApplicationRecord
   before_save :create_stripe_customer, unless: :stripe_id?
   before_save :add_stripe_source, if: :stripe_token?
   before_save :reset_hub, if: :will_save_change_to_address?
-  before_validation :normalise_email, :figure_out_country_code
+  before_validation :normalise_email, :figure_out_country_code, :normalise_name
 
   before_destroy :orphan_comments
 
@@ -85,19 +85,6 @@ class User < ApplicationRecord
       "#{ self.county } #{ self.post_code }".strip,
       self.country
     ].compact.reject(&:blank?)
-  end
-
-  def full_name=(str)
-    namae = Namae.parse(str).first
-
-    return nil unless namae.present?
-
-    self.given_name = namae['given']
-    self.surname = namae['family']
-  end
-
-  def full_name
-    "#{ given_name } #{ surname }".strip
   end
 
   def comment_name
@@ -238,13 +225,35 @@ class User < ApplicationRecord
   end
 
   def self.searchable_columns
-    [:email_address, :given_name, :surname, :nickname, :stripe_id, :address_line_1, :address_line_2, :city, :county, :post_code, :country, :country_code, :hub]
+    [:email_address, :full_name, :nickname, :stripe_id, :address_line_1, :address_line_2, :city, :county, :post_code, :country, :country_code, :hub]
   end
 
   private
 
   def reset_hub
     self.hub = ''
+  end
+
+  def normalise_name
+    if will_save_change_to_full_name? # update name components
+      self.given_name, self.surname = generate_name_components(self.full_name)
+    elsif self.full_name.blank? or will_save_change_to_surname? or will_save_change_to_given_name?
+      self.full_name = generate_full_name(self.given_name, self.surname)
+    end
+
+    self.given_name = self.given_name.strip
+    self.surname = self.surname.strip
+    self.full_name = self.full_name.strip
+  end
+
+  def generate_full_name(given, sur)
+    "#{ given } #{ sur }".strip
+  end
+
+  def generate_name_components(name_str)
+    namae = Namae.parse(name_str).first
+    return '', '' unless namae.present?
+    return namae['given'], namae['family']
   end
 
   def will_save_change_to_address?

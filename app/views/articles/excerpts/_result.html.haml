@@ -7,8 +7,8 @@
         - if article.featured_artwork.image.present?
           = image_tag article.featured_artwork.image.large.url
 
-      .p.-centered
-        %span.p.-t4
-          %h3.headline.inline.c.-w4.-serif= article.title
-          - if article.authors.any?
-            %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
+    .p.-centered
+      %span.p.-t4
+        %h3.headline.inline.c.-w4.-serif= article.title
+        - if article.authors.any?
+          %span.c.-w4 by #{ article.authors.map(&:full_name).to_sentence }
