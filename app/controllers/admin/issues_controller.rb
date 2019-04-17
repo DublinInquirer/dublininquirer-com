@@ -33,12 +33,10 @@ class Admin::IssuesController < Admin::ApplicationController
   end
 
   def reorder
-    issue = Issue.find_by!(issue_date: params[:id])
-    position_params[:positions].each_with_index do |article_id, i|
-      article = issue.articles.find_by(id: article_id)
-      if article.present?
-        article.update(position: i)
-      end
+    Issue.includes(:articles).
+      find_by(issue_date: params[:id]).
+      articles.each do |a|
+      a.update!(position: position_params[:positions].index(a.id.to_s))
     end
 
     render plain: 'noted.'
