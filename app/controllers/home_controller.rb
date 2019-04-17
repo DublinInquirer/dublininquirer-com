@@ -23,11 +23,7 @@ class HomeController < ApplicationController
     end
 
     @recent_motions = Rails.cache.fetch("/home/motions", expires_in: 1.hour) do
-      begin
-        Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
-      rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError
-        []
-      end
+      get_recent_motions
     end
   end
 
@@ -59,6 +55,16 @@ class HomeController < ApplicationController
 
     @contributors = Rails.cache.fetch("/imprint/contributors", expires_in: 1.day) do
       Author.where(full_name: ['Martin Cook', 'Dan Grennan', 'Gary Ibbotson', 'Shrinidhi Kalwad', 'Haseena Manek', 'Luke Maxwell', 'David Monaghan', 'Laoise Neylon', 'Melatu Uche Okorie', 'Christine O\'Donnell', 'Daniel Seery'])
+    end
+  end
+
+  private
+
+  def get_recent_motions
+    begin
+      Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+    rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError, NoMethodError
+      []
     end
   end
 end
