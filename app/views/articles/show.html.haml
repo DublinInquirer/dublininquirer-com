@@ -17,6 +17,9 @@
     - set_meta_tags 'og:image:height': @article.featured_artwork.large_height_px
     - set_meta_tags 'og:image:type': @article.featured_artwork.file_type
 
+- content_for :admin_actions do
+  = link_to [:admin, @article], class: 'meta-nav_item' do
+    %span edit
 
 - cache ['articles', @article, @template, @limited] do
   .block.-pb4= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }

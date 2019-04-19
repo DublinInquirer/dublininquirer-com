@@ -23,6 +23,8 @@
           - unless (defined?(brief) && brief) # if brief, only show log in
             - if logged_in?
               - if current_user.is_admin?
+                - if content_for(:admin_actions)
+                  = yield :admin_actions
                 = link_to [:admin, :root], class: 'meta-nav_item' do
                   %span admin panel
 
