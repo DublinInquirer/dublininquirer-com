@@ -47,7 +47,7 @@ class Admin::ArticlesController < Admin::ApplicationController
   def update
     @article = Article.find(params[:id])
     if @article.update(meta_params)
-      redirect_to([:admin, @article]) && return
+      redirect_to([:admin, @article])
     else
       render :edit
     end
@@ -60,7 +60,7 @@ class Admin::ArticlesController < Admin::ApplicationController
   def update_content
     @article = Article.find(params[:id])
     if @article.update(content_params)
-      redirect_to([:admin, @article]) && return
+      redirect_to([:admin, @article])
     else
       render :edit_content
     end
