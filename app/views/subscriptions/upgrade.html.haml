@@ -9,8 +9,10 @@
         Some readers subscribe at a higher monthly rate to further support the work that we do. These subscription rates include the **monthly print edition**, unlimited **digital access** (including our complete, searchable archive), and an enormous amount of gratitude from all of us and from everybody else in Dublin who benefits from the reporting your generosity supports.
 
     %nav.block.-mt4.-mb2
-      = link_to raw("Friend &mdash; €20/month"), upgrade_subscriptions_path(id: 'friend'), class: 'button -standard -big', method: :put
-      = link_to raw("Patron &mdash; €50/month"), upgrade_subscriptions_path(id: 'patron'), class: 'button -standard -big', method: :put
+      .block
+        = link_to raw("Friend &mdash; €20/month"), upgrade_subscriptions_path(id: 'friend'), class: 'button -standard -big', method: :put
+      .block.-mt4
+        = link_to raw("Patron &mdash; €50/month"), upgrade_subscriptions_path(id: 'patron'), class: 'button -standard -big', method: :put
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered
