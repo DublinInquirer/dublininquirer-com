@@ -31,6 +31,5 @@
     - @tags.each do |tag|
       %tr
         %td= link_to truncate(tag.name, length: 92), [:admin, tag]
-        %td <code>/#{ tag.slug }</code>
-        %td= tag.displayable ? 'displayed' : 'hidden'
-        %td= pluralize tag.articles.count, 'article'
+        %td{width: '150'}= tag.displayable ? 'displayed' : 'hidden'
+        %td{width: '150'}= pluralize tag.articles.count, 'article'
