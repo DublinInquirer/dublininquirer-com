@@ -29,7 +29,7 @@ class Article < ApplicationRecord
   scope :by_date, -> { includes(:issue).order('issues.issue_date desc') }
 
   scope :by_author, -> (a) { joins(:article_authors).merge(ArticleAuthor.where(author_id: a.id)) }
-  scope :published, -> { joins(:issue).merge( Issue.published ).distinct }
+  scope :published, -> { joins(:issue).merge( Issue.published ) }
   scope :in_category, -> (c) { where(category: c.downcase) }
   scope :not_in_category, -> (c) { where.not(category: c.downcase) }
   scope :in_tag, -> (t) { t ? where('tag_ids @> ?', "{#{ t.id }}") : none }

@@ -1,7 +1,9 @@
 require 'test_helper'
 
 class AuthorsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  def test_show
+    author = create(:author)
+    get author_url(author.slug)
+    assert_response :success
+  end
 end
