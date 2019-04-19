@@ -5,6 +5,8 @@
       = link_to truncate(@article.title, length: 30), [:admin, @article]
 
     %nav
+      - if @article.is_published?
+        = link_to "View", @article.path, class: 'button'
       = link_to "Edit metadata", [:edit, :admin, @article], class: 'button'
       = link_to "Edit content", [:edit_content, :admin, @article], class: 'button'
       = link_to "Delete", [:admin, @article], class: 'button', 'data-confirm': "This can't be undone! Are you 100% sure?", method: 'delete'
