@@ -26,7 +26,7 @@
                 - if content_for(:admin_actions)
                   = yield :admin_actions
                 = link_to [:admin, :root], class: 'meta-nav_item' do
-                  %span admin panel
+                  %span admin
 
               = link_to :user, class: 'meta-nav_item' do
                 %span= current_user.email_address

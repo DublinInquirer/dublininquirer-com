@@ -119,7 +119,7 @@ Rails.application.routes.draw do
   get '/vacant_dwellings', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/vacant_dwellings/index.html')
   get '/vacant_dwellings_highres', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/vacant_dwellings_highres/index.html')
   get '/cycle-commuting', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/cycle-commuting/index.html')
-  get '/maps', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/maps/sdz.html')
+  get '/maps/sdz', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/maps/sdz.html')
   get '/bicycle-collisions/form/index.html', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/bicycle-collisions/form/index.html')
   get '/bicycle-collisions/visualisation/index.html', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/bicycle-collisions/visualisation/index.html')
   get '/vacant_sites', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/vacant_sites/index.html')
