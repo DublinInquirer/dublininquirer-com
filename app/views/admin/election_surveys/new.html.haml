@@ -1,0 +1,11 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Elections', [:admin, :election_surveys]
+      = link_to 'New election', [:new, :admin, :election_survey]
+
+    %nav
+      = link_to "Cancel without saving", [:admin, :election_surveys], class: 'button -cancel'
+      = link_to "Save", [:admin, :election_surveys], class: 'button', 'data-action': 'submitForm'
+
+= render partial: 'admin/election_surveys/form', locals: {election_survey: @election_survey}

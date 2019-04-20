@@ -12,16 +12,19 @@
     .progress-bar.-fixed &nbsp;
     .admin{role: 'layout'}
       %header.admin-header
-        = link_to 'Dashboard', admin_root_path, class: current_page?(admin_root_path) ? 'current' : nil
-        = link_to 'Issues', admin_issues_path, class: current_page?(admin_issues_path) ? 'current' : nil
-        = link_to 'Articles', admin_articles_path, class: current_page?(admin_articles_path) ? 'current' : nil
-        = link_to 'Tags', admin_tags_path, class: current_page?(admin_tags_path) ? 'current' : nil
-        = link_to 'Authors', admin_authors_path, class: current_page?(admin_authors_path) ? 'current' : nil
-        = link_to 'Users', admin_users_path, class: current_page?(admin_users_path) ? 'current' : nil
-        = link_to 'Subscriptions', admin_subscriptions_path, class: current_page?(admin_subscriptions_path) ? 'current' : nil
-        = link_to 'Gifts', admin_gift_subscriptions_path, class: current_page?(admin_gift_subscriptions_path) ? 'current' : nil
-        = link_to 'Landing pages', admin_landing_pages_path, class: current_page?(admin_landing_pages_path) ? 'current' : nil
-        = link_to 'Contact', admin_contact_messages_path, class: current_page?(admin_contact_messages_path) ? 'current' : nil
+        = link_to 'Dashboard', admin_root_path
+        = link_to 'Issues', admin_issues_path
+        = link_to 'Articles', admin_articles_path
+        = link_to 'Tags', admin_tags_path
+        = link_to 'Authors', admin_authors_path
+        = link_to 'Users', admin_users_path
+        = link_to 'Subscriptions', admin_subscriptions_path
+        = link_to 'Gifts', admin_gift_subscriptions_path
+        = link_to 'Landing pages', admin_landing_pages_path
+        = link_to 'Contact', admin_contact_messages_path
+        .block.-px1.-my1
+          .block.-bt
+        = link_to 'Elections', admin_election_surveys_path
 
       %main.admin-main
         - if content_for(:subheader_detail) && content_for(:subheader_list)

@@ -13,9 +13,13 @@ class ElectionSurvey < ApplicationRecord
     self.slug
   end
 
+  def title
+    [election_year.to_s, election_type.to_s.try(:capitalize)].compact.join(' ')
+  end
+
   private
 
   def generate_slug
-    self.slug = [election_year.to_s, election_type].compact.join.parameterize
+    self.slug = self.title.parameterize
   end
 end

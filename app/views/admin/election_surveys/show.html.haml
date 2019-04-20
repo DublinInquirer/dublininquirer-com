@@ -1,0 +1,10 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Elections', [:admin, :election_surveys]
+      = link_to @election_survey.title, [:admin, @election_survey]
+
+    %nav
+      = link_to "Edit", [:edit, :admin, @election_survey], class: 'button'
+
+forthcoming...
