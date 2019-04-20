@@ -24,11 +24,13 @@ class Comment < ApplicationRecord
   end
 
   def content_formatted
-    Formatter.remove_empty_paragraphs(self.content)
+    return nil unless self.content.present?
+    @content_formatted ||= Formatter.remove_empty_paragraphs(self.content)
   end
 
   def content_markdown
-    Upmark.convert(self.content_formatted)
+    return nil unless self.content_formatted.present?
+    @content_markdown ||= ReverseMarkdown.convert(self.content_formatted.strip)
   end
 
   def is_published?
