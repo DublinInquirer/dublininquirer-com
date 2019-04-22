@@ -40,11 +40,12 @@ gem 'country_select', '~> 3.1'
 gem 'reverse_markdown'
 gem 'bcrypt', '~> 3.1.7'
 gem 'browser'
-gem 'kaminari'
+gem 'kaminari' # pagination
 gem 'pretender'
 gem 'scout_apm'
 gem 'plyr-rails'
 gem 'rinku'
+gem 'roo' # CSV importing
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
 

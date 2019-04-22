@@ -1,6 +1,6 @@
 class ElectionCandidate < ApplicationRecord
   belongs_to :election_survey
-  has_many :election_survey_responses
+  has_many :election_survey_responses, dependent: :destroy
   has_many :election_survey_questions, through: :election_survey_responses
 
   validates :full_name, presence: true

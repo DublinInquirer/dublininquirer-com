@@ -4,6 +4,7 @@
 +reset
 
 @import 'shared/*'
+@import 'components/hr'
 @import 'components/progress-bar'
 @import 'admin/*'
 
@@ -11,19 +12,17 @@ body
   border-top: 0
 
 .button, a.button, a.button:link, a.button:visited, input.button
-  display: inline-block
+  font-family: $sans
+  -webkit-appearance: none
   background: var(--default)
-  color: var(--red)
-  border: 1px solid var(--red)
+  color: var(--black)
   padding: 0.5rem 1rem
-  font-size: var(--t5)
-  line-height: 1.3
-  transition: 0.25s ease all
+  border: 1px solid var(--black)
+  transition: 0.125s ease all
+  &:hover
+    cursor: pointer
+    background: var(--yellow)
+    color: var(--black)
 
   &.-small
     padding: 0 0.5rem
-
-  &:hover
-    cursor: pointer
-    color: var(--default)
-    background: var(--red)

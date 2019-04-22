@@ -1,6 +1,6 @@
 class ElectionSurvey < ApplicationRecord
-  has_many :election_candidates
-  has_many :election_survey_questions
+  has_many :election_candidates, dependent: :destroy
+  has_many :election_survey_questions, dependent: :destroy
   has_many :election_survey_responses, through: :election_survey_questions
 
   validates :slug, uniqueness: true
@@ -15,6 +15,10 @@ class ElectionSurvey < ApplicationRecord
 
   def title
     [election_year.to_s, election_type.to_s.try(:capitalize)].compact.join(' ')
+  end
+
+  def import_from_csv(file)
+    ElectionSurveyImporter.csv_to_params(self, file)
   end
 
   private

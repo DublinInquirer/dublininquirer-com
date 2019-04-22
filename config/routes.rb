@@ -195,7 +195,12 @@ Rails.application.routes.draw do
       end
     end
     resources :landing_pages
-    resources :election_surveys
+    resources :election_surveys, path: 'elections' do
+      member { post :import }
+      resources :election_candidates, path: 'candidates'
+      resources :election_survey_questions, path: 'questions'
+      resources :election_survey_responses, path: 'responses'
+    end
   end
 
   mount Sidekiq::Web => '/sidekiq'

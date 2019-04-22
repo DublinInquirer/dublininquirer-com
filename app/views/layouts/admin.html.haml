@@ -13,11 +13,15 @@
     .admin{role: 'layout'}
       %header.admin-header
         = link_to 'Dashboard', admin_root_path
+        = link_to 'Users', admin_users_path
+        .block.-px1.-my1
+          .block.-bt
         = link_to 'Issues', admin_issues_path
         = link_to 'Articles', admin_articles_path
-        = link_to 'Tags', admin_tags_path
         = link_to 'Authors', admin_authors_path
-        = link_to 'Users', admin_users_path
+        = link_to 'Tags', admin_tags_path
+        .block.-px1.-my1
+          .block.-bt
         = link_to 'Subscriptions', admin_subscriptions_path
         = link_to 'Gifts', admin_gift_subscriptions_path
         = link_to 'Landing pages', admin_landing_pages_path
