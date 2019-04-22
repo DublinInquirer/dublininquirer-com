@@ -1,0 +1,2 @@
+module ElectionSurveysHelper
+end

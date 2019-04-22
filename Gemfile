@@ -37,17 +37,17 @@ gem 'rack-mini-profiler'
 gem 'puma_worker_killer'
 gem 'countries'
 gem 'country_select', '~> 3.1'
-gem 'upmark'
+gem 'reverse_markdown'
 gem 'bcrypt', '~> 3.1.7'
 gem 'browser'
-gem 'kaminari'
+gem 'kaminari' # pagination
 gem 'pretender'
 gem 'scout_apm'
 gem 'plyr-rails'
 gem 'rinku'
+gem 'roo' # CSV importing
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
-gem 'reverse_markdown'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

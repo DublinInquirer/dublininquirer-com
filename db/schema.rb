@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_203112) do
+ActiveRecord::Schema.define(version: 2019_04_19_211818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,58 @@ ActiveRecord::Schema.define(version: 2019_04_14_203112) do
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_contact_messages_on_email_address"
     t.index ["regarding"], name: "index_contact_messages_on_regarding"
+  end
+
+  create_table "election_candidates", force: :cascade do |t|
+    t.text "full_name"
+    t.text "slug"
+    t.bigint "election_survey_id"
+    t.text "area_name"
+    t.text "party_name"
+    t.text "council_tracker_slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "to_tsvector('english'::regconfig, full_name)", name: "election_candidates_full_name", using: :gin
+    t.index ["area_name"], name: "index_election_candidates_on_area_name"
+    t.index ["council_tracker_slug"], name: "index_election_candidates_on_council_tracker_slug"
+    t.index ["election_survey_id"], name: "index_election_candidates_on_election_survey_id"
+    t.index ["party_name"], name: "index_election_candidates_on_party_name"
+    t.index ["slug", "election_survey_id"], name: "election_candidates_slug", unique: true
+  end
+
+  create_table "election_survey_questions", force: :cascade do |t|
+    t.bigint "election_survey_id"
+    t.text "slug"
+    t.text "body"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "to_tsvector('english'::regconfig, body)", name: "election_survey_questions_body", using: :gin
+    t.index ["election_survey_id"], name: "index_election_survey_questions_on_election_survey_id"
+    t.index ["position", "election_survey_id"], name: "election_survey_questions_position", unique: true
+    t.index ["slug", "election_survey_id"], name: "election_survey_questions_slug", unique: true
+  end
+
+  create_table "election_survey_responses", force: :cascade do |t|
+    t.bigint "election_survey_question_id"
+    t.text "body"
+    t.bigint "election_candidate_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index "to_tsvector('english'::regconfig, body)", name: "election_survey_responses_full_name", using: :gin
+    t.index ["election_candidate_id"], name: "index_election_survey_responses_on_election_candidate_id"
+    t.index ["election_survey_question_id"], name: "index_election_survey_responses_on_election_survey_question_id"
+  end
+
+  create_table "election_surveys", force: :cascade do |t|
+    t.text "slug"
+    t.text "election_type"
+    t.integer "election_year"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["election_type"], name: "index_election_surveys_on_election_type"
+    t.index ["election_year"], name: "index_election_surveys_on_election_year"
+    t.index ["slug"], name: "index_election_surveys_on_slug", unique: true
   end
 
   create_table "gift_subscriptions", force: :cascade do |t|
@@ -327,6 +379,10 @@ ActiveRecord::Schema.define(version: 2019_04_14_203112) do
   add_foreign_key "artworks", "articles"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "users"
+  add_foreign_key "election_candidates", "election_surveys"
+  add_foreign_key "election_survey_questions", "election_surveys"
+  add_foreign_key "election_survey_responses", "election_candidates"
+  add_foreign_key "election_survey_responses", "election_survey_questions"
   add_foreign_key "gift_subscriptions", "subscriptions"
   add_foreign_key "invoices", "subscriptions"
   add_foreign_key "invoices", "users"

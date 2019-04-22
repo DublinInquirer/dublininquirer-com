@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :tags, only: [:show]
   resources :authors, only: [:show, :index], path: 'contributors'
   resources :authors, only: [:show, :index], path: 'author'
+  resources :comments, only: [:create]
 
   get '/search' => 'articles#search', as: 'search'
 
@@ -24,6 +25,10 @@ Rails.application.routes.draw do
   resources :comments, only: [:create]
   resources :contact_messages, only: [:create]
   get '/contact/:regarding' => 'contact_messages#new', as: 'contact_form'
+
+  # elections
+
+  resources :election_surveys, only: [:show], path: 'elections'
 
   # misc pages
 
@@ -190,6 +195,12 @@ Rails.application.routes.draw do
       end
     end
     resources :landing_pages
+    resources :election_surveys, path: 'elections' do
+      member { post :import }
+      resources :election_candidates, path: 'candidates'
+      resources :election_survey_questions, path: 'questions'
+      resources :election_survey_responses, path: 'responses'
+    end
   end
 
   mount Sidekiq::Web => '/sidekiq'

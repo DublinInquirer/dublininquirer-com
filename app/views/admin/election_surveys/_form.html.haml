@@ -1,0 +1,15 @@
+= form_for [:admin, election_survey], html: { class: 'admin-form' } do |f|
+  - if election_survey.errors.any?
+    %ul.errors
+      - election_survey.errors.full_messages.each do |message|
+        %li= message
+
+  %fieldset
+    .field
+      = f.label :election_type
+      .input= f.select :election_type, %w(local european dail presidential referendum)
+    .field
+      = f.label :election_year
+      .input= f.select :election_year, election_year_options
+
+  %nav.actions= f.submit 'Save', class: 'button'
