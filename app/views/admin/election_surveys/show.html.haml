@@ -7,14 +7,15 @@
     %nav
       = link_to "Edit", [:edit, :admin, @election_survey], class: 'button'
 
-.block.-b.-p2.-bg-faint
+.block.-b.-p1.-bg-faint
   .block.-pb1.-mb2.-bb
     %h3 Import survey CSV
+    
   = form_tag [:import, :admin, :election_survey], multipart: true do
     = file_field_tag :file
     = submit_tag 'Import CSV', class: 'button'
 
-.block.-b.-p2.-my2
+.block.-b.-p1.-my2
   .block.-pb1.-mb2.-bb
     %h3 Questions
   %table.admin-table
@@ -24,7 +25,7 @@
           %td= link_to [election_survey_question.position, truncate(election_survey_question.body, length: 64)].join('. '), [:admin, @election_survey, election_survey_question]
           %td{width: '150'}= pluralize election_survey_question.election_survey_responses.count, 'response'
 
-.block.-b.-p2.-my2
+.block.-b.-p1.-my2
   .block.-pb1.-mb2.-bb
     %h3 Candidates
   %table.admin-table

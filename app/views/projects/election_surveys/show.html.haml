@@ -1,0 +1,8 @@
+- @areas.each do |area_name|
+  = link_to area_name, root_path
+
+- @parties.each do |party_name|
+  = link_to party_name, root_path
+
+- @candidates.each do |candidate|
+  = link_to candidate.full_name, [:projects, @survey, candidate]

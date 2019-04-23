@@ -5,12 +5,11 @@
       = link_to @election_survey.title, [:admin, @election_survey]
       = link_to @election_survey_question.slug, [:admin, @election_survey, @election_survey_question]
 
-    %nav
-      = link_to "Edit", [:edit, :admin, @election_survey, @election_survey_question], class: 'button'
-
+    %nav &nbsp;
+    
 .block.-pb1.-my2.-bb
   %h3 Responses
-  
+
 - @election_survey_responses.each do |response|
   .block.-my1.-p1.-b
     .p.-t5.-sf

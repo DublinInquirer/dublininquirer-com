@@ -1,2 +1,0 @@
-class ElectionSurveysController < ApplicationController
-end

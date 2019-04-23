@@ -1,0 +1,9 @@
+%h1= @candidate.full_name
+%h2 #{ @candidate.area_name }, #{ @candidate.party_name }
+
+- @questions.each do |question|
+  %p
+    %strong= question.body
+  %p
+    :markdown
+      #{ question.election_survey_responses.find_by(election_candidate: @candidate).body }

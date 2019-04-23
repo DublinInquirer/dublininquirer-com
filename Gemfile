@@ -55,7 +55,6 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
-  gem 'webmock'
   gem 'faker'
   gem 'database_cleaner'
   gem 'mocha'
@@ -69,14 +68,16 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'letter_opener_web'
   gem 'letter_opener'
+  gem 'letter_opener_web'
+  gem 'rubocop', require: false
+  gem 'squasher', require: false
 end
 
 group :test do
-  gem 'capybara', '>= 2.15', '< 4.0'
-  gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'capybara'
+  gem 'webmock'
+  gem 'webdrivers', '~> 3.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

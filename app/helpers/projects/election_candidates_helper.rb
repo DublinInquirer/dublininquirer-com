@@ -1,0 +1,2 @@
+module Projects::ElectionCandidatesHelper
+end
