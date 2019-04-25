@@ -1,8 +1,8 @@
 - @areas.each do |area_name|
-  = link_to area_name, root_path
+  = link_to area_name, area_projects_election_survey_election_candidates_path(election_survey_id: @survey.slug, id: area_name.parameterize)
 
 - @parties.each do |party_name|
-  = link_to party_name, root_path
+  = link_to party_name, party_projects_election_survey_election_candidates_path(election_survey_id: @survey.slug, id: party_name.parameterize)
 
 - @candidates.each do |candidate|
   = link_to candidate.full_name, [:projects, @survey, candidate]

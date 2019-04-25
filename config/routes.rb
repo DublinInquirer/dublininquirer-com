@@ -29,7 +29,12 @@ Rails.application.routes.draw do
 
   namespace :projects do
     resources :election_surveys, only: [:show], path: 'elections' do
-      resources :election_candidates, only: [:show], path: 'candidates'
+      resources :election_candidates, only: [:show], path: 'candidates' do
+        collection do
+          get '/areas/:id' => 'election_candidates#areas', as: 'area'
+          get '/parties/:id' => 'election_candidates#parties', as: 'party'
+        end
+      end
     end
   end
 

@@ -25,7 +25,7 @@ class ElectionSurveyImporter
   def self.create_candidates_from_sheet(survey, sheet)
     sheet.drop(1).each do |row|
       full_name, party_name, area_name = row[2..4]
-      c = survey.election_candidates.create!(full_name: full_name, area_name: area_name, party_name: party_name)
+      c = survey.election_candidates.create!(full_name: full_name, area_name: area_name.strip, party_name: party_name.strip)
     end
   end
 
