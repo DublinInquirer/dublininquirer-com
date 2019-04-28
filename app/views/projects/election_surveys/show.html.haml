@@ -11,7 +11,10 @@
 %h3 Candidates
 %ul
   - @candidates.each do |candidate|
-    = link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
+    %li
+      = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug) do
+        = image_tag "candidates/#{ candidate.slug }.jpg"
+        = candidate.name
 
 %h3 Questions
 %ul
