@@ -1,0 +1,14 @@
+%h1= @question.body
+
+%ul
+  - @responses.each do |response|
+    - candidate = @survey.find_candidate(response.candidate)
+    - party = @survey.find_party(candidate.party)
+
+    %li
+      %h3
+        #{ link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug) },
+        #{ link_to party.name, party_projects_election_survey_path(id: @survey.slug, party_id: party.slug) }
+      
+      :markdown
+        #{ response.body }

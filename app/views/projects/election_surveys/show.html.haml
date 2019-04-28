@@ -1,8 +1,19 @@
-- @areas.each do |area_name|
-  = link_to area_name, area_projects_election_survey_election_candidates_path(election_survey_id: @survey.slug, id: area_name.parameterize)
+%h3 Areas
+%ul
+  - @areas.each do |area|
+    %li= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
 
-- @parties.each do |party_name|
-  = link_to party_name, party_projects_election_survey_election_candidates_path(election_survey_id: @survey.slug, id: party_name.parameterize)
+%h3 Parties
+%ul
+  - @parties.each do |party|
+    %li= link_to party.name, party_projects_election_survey_path(id: @survey.slug, party_id: party.slug)
 
-- @candidates.each do |candidate|
-  = link_to candidate.full_name, [:projects, @survey, candidate]
+%h3 Candidates
+%ul
+  - @candidates.each do |candidate|
+    = link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
+
+%h3 Questions
+%ul
+  - @questions.each do |question|
+    %li= link_to question.body, question_projects_election_survey_path(id: @survey.slug, question_id: question.position)

@@ -29,11 +29,11 @@ Rails.application.routes.draw do
 
   namespace :projects do
     resources :election_surveys, only: [:show], path: 'elections' do
-      resources :election_candidates, only: [:show], path: 'candidates' do
-        collection do
-          get '/areas/:id' => 'election_candidates#areas', as: 'area'
-          get '/parties/:id' => 'election_candidates#parties', as: 'party'
-        end
+      member do
+        get 'areas/:area_id', to: 'election_surveys#area', as: :area
+        get 'parties/:party_id', to: 'election_surveys#party', as: :party
+        get 'questions/:question_id', to: 'election_surveys#question', as: :question
+        get 'candidates/:candidate_id', to: 'election_surveys#candidate', as: :candidate
       end
     end
   end
@@ -205,9 +205,6 @@ Rails.application.routes.draw do
     resources :landing_pages
     resources :election_surveys, path: 'elections' do
       member { post :import }
-      resources :election_candidates, path: 'candidates', only: [:show]
-      resources :election_survey_questions, path: 'questions', only: [:show]
-      resources :election_survey_responses, path: 'responses', only: [:show]
     end
   end
 
