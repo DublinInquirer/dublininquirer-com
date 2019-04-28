@@ -2,7 +2,6 @@ require 'sidekiq/web'
 
 Rails.application.routes.draw do
   # public stuff
-
   root to: 'home#show'
 
   resources :issues, only: [:index, :show]
@@ -26,9 +25,18 @@ Rails.application.routes.draw do
   resources :contact_messages, only: [:create]
   get '/contact/:regarding' => 'contact_messages#new', as: 'contact_form'
 
-  # elections
+  # projects
 
-  resources :election_surveys, only: [:show], path: 'elections'
+  namespace :projects do
+    resources :election_surveys, only: [:show], path: 'elections' do
+      member do
+        get 'areas/:area_id', to: 'election_surveys#area', as: :area
+        get 'parties/:party_id', to: 'election_surveys#party', as: :party
+        get 'questions/:question_id', to: 'election_surveys#question', as: :question
+        get 'candidates/:candidate_id', to: 'election_surveys#candidate', as: :candidate
+      end
+    end
+  end
 
   # misc pages
 
@@ -197,9 +205,6 @@ Rails.application.routes.draw do
     resources :landing_pages
     resources :election_surveys, path: 'elections' do
       member { post :import }
-      resources :election_candidates, path: 'candidates'
-      resources :election_survey_questions, path: 'questions'
-      resources :election_survey_responses, path: 'responses'
     end
   end
 
@@ -207,7 +212,5 @@ Rails.application.routes.draw do
 
   # landing pages catch-all
 
-  get '/:id', to: 'landing_pages#show', constraints: {
-    id:       /[a-z0-9-]+/
-  }
+  get '/:id', to: 'landing_pages#show', constraints: { id: /[a-z0-9-]+/ }
 end

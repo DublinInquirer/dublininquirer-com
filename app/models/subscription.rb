@@ -64,19 +64,19 @@ class Subscription < ApplicationRecord
     self.cancel_at_period_end = subs['cancel_at_period_end']
 
     self.current_period_ends_at = if subs['current_period_end'].present?
-      Time.at(subs['current_period_end'])
+      Time.zone.at(subs['current_period_end'])
     else
       nil
     end
 
     self.canceled_at = if subs['canceled_at'].present?
-      Time.at(subs['canceled_at'])
+      Time.zone.at(subs['canceled_at'])
     else
       nil
     end
 
     self.ended_at = if subs['ended_at'].present?
-      Time.at(subs['ended_at'])
+      Time.zone.at(subs['ended_at'])
     else
       nil
     end
@@ -335,7 +335,7 @@ class Subscription < ApplicationRecord
       )
     end
     self.stripe_id = subscription.id
-    self.current_period_ends_at = Time.at(subscription['current_period_end'])
+    self.current_period_ends_at = Time.zone.at(subscription['current_period_end'])
     self.status = subscription['status']
   end
 end

@@ -7,8 +7,6 @@ class Admin::ElectionSurveysController < Admin::ApplicationController
 
   def show
     @election_survey = ElectionSurvey.find_by(slug: params[:id])
-    @election_survey_questions = @election_survey.election_survey_questions.order('position asc')
-    @election_candidates = @election_survey.election_candidates.order('area_name asc')
   end
 
   def new

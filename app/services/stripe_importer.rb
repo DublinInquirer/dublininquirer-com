@@ -135,8 +135,8 @@ class StripeImporter
       full_name: customer['metadata']['Shipping Name'],
       stripe_id: customer['id'],
       set_password_at: nil,
-      created_at: Time.at(customer['created']),
-      updated_at: Time.at(customer['created'])
+      created_at: Time.zone.at(customer['created']),
+      updated_at: Time.zone.at(customer['created'])
     )
 
     if !u.valid?
@@ -163,26 +163,26 @@ class StripeImporter
     end
 
     canceled_at = if subscription['canceled_at'].present?
-      Time.at(subscription['canceled_at'])
+      Time.zone.at(subscription['canceled_at'])
     else
       nil
     end
 
     ended_at = if subscription['ended_at'].present?
-      Time.at(subscription['ended_at'])
+      Time.zone.at(subscription['ended_at'])
     else
       nil
     end
 
     s.assign_attributes(
       plan: plan,
-      current_period_ends_at: Time.at(subscription['current_period_end']),
+      current_period_ends_at: Time.zone.at(subscription['current_period_end']),
       status: subscription['status'],
       metadata: subscription['metadata'],
       canceled_at: canceled_at,
       ended_at: ended_at,
-      created_at: Time.at(subscription['created']),
-      updated_at: Time.at(subscription['start'])
+      created_at: Time.zone.at(subscription['created']),
+      updated_at: Time.zone.at(subscription['start'])
     )
 
     if !s.valid?
@@ -226,16 +226,16 @@ class StripeImporter
       paid: stripe_invoice['paid'],
       attempted: stripe_invoice['attempted'],
       forgiven: stripe_invoice['forgiven'],
-      created_on: Time.at(stripe_invoice['date']).to_date,
-      due_on: stripe_invoice['due_date'].present? ? Time.at(stripe_invoice['due_date']).to_date : nil,
-      period_starts_at: Time.at(stripe_invoice['period_start']),
-      period_ends_at: Time.at(stripe_invoice['period_end']),
-      next_payment_attempt_at: stripe_invoice['next_payment_attempt'].present? ? Time.at(stripe_invoice['next_payment_attempt']) : nil,
+      created_on: Time.zone.at(stripe_invoice['date']).to_date,
+      due_on: stripe_invoice['due_date'].present? ? Time.zone.at(stripe_invoice['due_date']).to_date : nil,
+      period_starts_at: Time.zone.at(stripe_invoice['period_start']),
+      period_ends_at: Time.zone.at(stripe_invoice['period_end']),
+      next_payment_attempt_at: stripe_invoice['next_payment_attempt'].present? ? Time.zone.at(stripe_invoice['next_payment_attempt']) : nil,
       lines: lines,
       user_id: user.try(:id),
       subscription_id: subscription.try(:id),
-      created_at: Time.at(stripe_invoice['date']),
-      updated_at: Time.at(stripe_invoice['date'])
+      created_at: Time.zone.at(stripe_invoice['date']),
+      updated_at: Time.zone.at(stripe_invoice['date'])
     }
   end
 end
