@@ -1,0 +1,22 @@
+.block.-bb.-py4
+  .wrapper.-container{role: 'layout'}
+    .wrapper.-large{role: 'layout'}
+      .block.-bb.-mb2.-pb2
+        .block.-mb1
+          %h3.h.-h2 All candidates
+
+        .p.-t4.-sf
+          :markdown
+            If we're missing a candidate, please let us know by sending an email to <a href="mailto:sam@dublininquirer.com">sam@dublininquirer.com</a>.
+
+      .row
+        - @survey.area_objects.each do |area|
+          - candidates = @survey.candidates_for_area(area)
+          .col-xs-12.col-md-3
+            .block.flex.-mb4
+              .block
+                .block.-mb1
+                  %h3.c.-w8= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
+                %ul.p.-t4
+                  - candidates.each do |candidate|
+                    %li= link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)

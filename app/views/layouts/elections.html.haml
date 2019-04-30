@@ -12,7 +12,8 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'elections', media: 'all'
+    = javascript_include_tag 'elections'
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,11 +25,24 @@
     = render partial: 'layouts/snippets/fb'
 
   %body.-project
-    %header
-      %h1
-        Citizens&rsquo; Agenda<br>
-        Local elections 2019
-      
-    = yield
+    %header.header.-elections{class: ((defined?(@blue) && @blue) ? '-blue' : nil)}
+      .logo
+        = link_to root_path, 'data-turbolinks': false do
+          .logotype.-small
+            = render partial: 'layouts/images/logo-left'
+      .title
+        = link_to '/projects/elections/2019-local' do
+          %strong Citizens&rsquo; agenda<br>
+          Local elections 2019
+    
+    %main.main.-elections
+      = yield
+
+    .wrapper.-container{role: 'layout'}
+      .block.-py4.-my4
+        .wrapper.-small{role: 'layout'}
+          .p.-centered.-t4.-sf.-mono
+            :markdown
+              This is a project by <a href="https://www.dublininquirer.com" data-turbolinks="false">Dublin Inquirer</a>, a reader-funded local newspaper covering Ireland's capital. You can support our work by <a href="https://www.dublininquirer.com/subscribe" data-turbolinks="false">becoming a subscriber</a>.
 
     = render partial: 'layouts/snippets/analytics'

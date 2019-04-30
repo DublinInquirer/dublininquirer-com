@@ -12,6 +12,7 @@ $(document).ready ->
 
   $('[data-behaviour="scroll"]').on 'click', (e) ->
     targetOffset = $($(e.currentTarget).attr('href')).offset().top
+    e.preventDefault()
     $('html, body').animate({scrollTop: (targetOffset - 80)});
 
 

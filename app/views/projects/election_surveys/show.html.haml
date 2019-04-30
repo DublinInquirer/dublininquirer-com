@@ -1,22 +1,39 @@
-%h3 Areas
-%ul
-  - @areas.each do |area|
-    %li= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
+- cache [@survey,"show"] do
+  .block.-bg-blue.-py4
+    .wrapper.-container{role: 'layout'}
+      .wrapper.-large{role: 'layout'}
+        .block.-py4
+          .row
+            .col-xs-12.col-md-9
+              .block.-pt4
+                %h1.h.-h1.-left
+                  :markdown
+                    What do the candidates for city council have to say about the issues that matter to you?
+                  
+                .block.-mt2
+                  .p.-t3
+                    :markdown
+                      We asked our readers what they want candidates in the upcoming elections to discuss as they compete for votes, and then posed those questions to the candidates for the 2019 local elections. These are their responses.
 
-%h3 Parties
-%ul
-  - @parties.each do |party|
-    %li= link_to party.name, party_projects_election_survey_path(id: @survey.slug, party_id: party.slug)
+  .block.-py4
+    .wrapper.-container{role: 'layout'}
+      .wrapper.-large{role: 'layout'}
+        .block.-py4
+          %h3.h.-h2 Choose your local electoral area:
+        .row
+          .col-xs-12.col-md-9
+            - @areas.each do |area|
+              - candidates = @survey.candidates_for_area(area)
+              = link_to area_projects_election_survey_path(id: @survey.slug, area_id: area.slug), class: 'block -py2 -bt' do
+                .p.-t4
+                  .c.-w6= area.name
+                  %p #{ pluralize candidates.count, 'candidate' } competing for #{ pluralize area.seats, 'seat' }.
 
-%h3 Candidates
-%ul
-  - @candidates.each do |candidate|
-    %li
-      = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug) do
-        = image_tag "candidates/#{ candidate.slug }.jpg"
-        = candidate.name
+          .col-xs-12.col-md-3
+            .block.-bg-faint.-p2
+              .p.-t4.-sf
+                :markdown
 
-%h3 Questions
-%ul
-  - @questions.each do |question|
-    %li= link_to question.body, question_projects_election_survey_path(id: @survey.slug, question_id: question.position)
+                  You can read more about this project and how we're covering the <a href="https://www.dublininquirer.com/2019/02/27/what-issues-do-you-want-local-elections-candidates-to-talk-about" data-turbolinks="false">2019 local election</a>.
+
+  = render partial: 'projects/election_surveys/footer'

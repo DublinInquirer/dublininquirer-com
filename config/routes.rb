@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       member do
         get 'areas/:area_id', to: 'election_surveys#area', as: :area
         get 'parties/:party_id', to: 'election_surveys#party', as: :party
-        get 'questions/:question_id', to: 'election_surveys#question', as: :question
         get 'candidates/:candidate_id', to: 'election_surveys#candidate', as: :candidate
       end
     end

@@ -1,1 +1,57 @@
-= @area.inspect
+- cache [@survey, "area", @area.slug] do
+  .block.-pt4.-pb2.-px2.-bg-blue
+    .row
+      .col-xs-12.col-md-9
+        %h1.h.-h2 #{ @area.name }
+        %p #{ pluralize @candidates.count, 'candidate' } competing for #{ pluralize @area.seats, 'seat' }
+      .col-xs-12.col-md-3.flex
+        .area-switcher
+          %label switch electoral area
+          %select{'data-behaviour': 'switchView', 'data-path': area_projects_election_survey_path(id: @survey.slug, area_id: '')}
+            %option Switch electoral area
+            <option disabled>──────────</option>
+            - @areas.each do |area|
+              %option{value: area.slug}= area.name
+
+  .block.-bg-faint.-pt4
+    - @questions.each do |question|
+      %a.question-anchor{id: "question-#{ question.position }"} &nbsp;
+      .question.block
+        .header
+          - if question.position > 1
+            %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
+
+          .wrapper.-small{role: 'layout'}
+            .block.-px2
+              .h.-h3.-centered
+                %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
+                  .c.-w8
+                    #{ question.position }.
+                    %br
+                    = question.body
+
+          - if question.position < 10
+            %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
+
+        .wrapper.-container{role: 'layout'}
+          .wrapper.-large{role: 'layout'}
+            - @candidates.each do |candidate|
+              - party = @survey.find_party(candidate.party)
+              - response = @survey.response_for(question, candidate)
+              - next unless response.present?
+              .response.block.-my4
+                .candidate
+                  .content
+                    = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug) do
+                      .block.-mb2
+                        .artwork.-portrait.-square= image_tag "candidates/#{ candidate.slug }.jpg"
+                        .speech-line
+                      .p.-centered
+                        %p.p.-t4.c.-w6= candidate.name
+                        %p.p.-t5.c.-w4= party.name
+
+                .body
+                  .block.-b.-bg-default.-p4
+                    .p.-serif.-sf.-t3
+                      :markdown
+                        #{ response.body }
