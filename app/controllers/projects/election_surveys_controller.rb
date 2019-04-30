@@ -20,21 +20,19 @@ class Projects::ElectionSurveysController < ApplicationController
 
   def party
     @survey = ElectionSurvey.find_by!(slug: params[:id])
+    @parties = @survey.party_objects
     @party = @survey.find_party(params[:party_id])
     @candidates = @survey.candidates_for_party(@party)
+    @questions = @survey.question_objects
+    @blue = true
   end
 
   def candidate
     @survey = ElectionSurvey.find_by!(slug: params[:id])
     @candidate = @survey.find_candidate(params[:candidate_id])
+    @questions = @survey.question_objects
     @party = @survey.find_party(@candidate.party)
     @area = @survey.find_area(@candidate.area)
-    @responses = @survey.responses_for_candidate(@candidate)
-  end
-
-  def question
-    @survey = ElectionSurvey.find_by!(slug: params[:id])
-    @question = @survey.find_question(params[:question_id])
-    @responses = @survey.responses_for_question(@question)
+    @blue = true
   end
 end

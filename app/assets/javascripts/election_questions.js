@@ -9,4 +9,15 @@ $(document).on('ready turbolinks:load', function() {
       scrollTop: targetOffset - 0
     }, 1000);
   });
+
+  $('[data-behaviour="switchView"]').on('change', function(e) {
+    var selectEl;
+    var path;
+
+    selectEl = $(e.currentTarget);
+    path = selectEl.data('path') + selectEl.val();
+    e.stopImmediatePropagation();
+
+    Turbolinks.visit(path);
+  });
 });
