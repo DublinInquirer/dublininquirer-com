@@ -1,49 +1,50 @@
-.block.-pt4.-pb2.-px2.-bg-blue
-  .row
-    .col-xs-12.col-md-8
-      %h1.h.-h2 #{ @candidate.name }
-      %p.p.-t4.-sf
-        #{ link_to @party.name, party_projects_election_survey_path(id: @survey.slug, party_id: @party.slug) }
-        candidate for
-        #{ link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug) }
+- cache [@survey, "candidate", @candidate.slug] do
+  .block.-pt4.-pb2.-px2.-bg-blue
+    .row
+      .col-xs-12.col-md-8
+        %h1.h.-h2 #{ @candidate.name }
+        %p.p.-t4.-sf
+          #{ link_to @party.name, party_projects_election_survey_path(id: @survey.slug, party_id: @party.slug) }
+          candidate for
+          #{ link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug) }
 
-    .col-xs-12.col-md-4
+      .col-xs-12.col-md-4
 
-.block.-bg-faint
-  - @questions.each do |question|
-    - response = @survey.response_for(question,@candidate)
-    %a.question-anchor{id: "question-#{ question.position }"} &nbsp;
-    .question.block.-bb{style: 'position: relative'}
-      .header
-        - if question.position > 1
-          %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
+  .block.-bg-faint.-pt4
+    - @questions.each do |question|
+      - response = @survey.response_for(question,@candidate)
+      %a.question-anchor{id: "question-#{ question.position }"} &nbsp;
+      .question.block.-brief
+        .header
+          - if question.position > 1
+            %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
 
-        .wrapper.-small{role: 'layout'}
-          .h.-h3.-centered
-            %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
-              .c.-w8
-                #{ question.position }.
-                %br
-                = question.body
+          .wrapper.-small{role: 'layout'}
+            .h.-h3.-centered
+              %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
+                .c.-w8
+                  #{ question.position }.
+                  %br
+                  = question.body
 
-        - if question.position < 10
-          %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
+          - if question.position < 10
+            %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
 
-      .wrapper.-container{role: 'layout'}
-        .wrapper.-large{role: 'layout'}
-          .response.block.-my4
-            .candidate
-              .content
-                = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: @candidate.slug) do
-                  .block.-mb2
-                    .artwork.-portrait.-square= image_tag "candidates/#{ @candidate.slug }.jpg"
-                    .speech-line
-                  .p.-centered
-                    %p.p.-t4.c.-w6= @candidate.name
-                    %p.p.-t5.c.-w4= @party.name
+        .wrapper.-container{role: 'layout'}
+          .wrapper.-large{role: 'layout'}
+            .response.block.-my4
+              .candidate
+                .content
+                  = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: @candidate.slug) do
+                    .block.-mb2
+                      .artwork.-portrait.-square= image_tag "candidates/#{ @candidate.slug }.jpg"
+                      .speech-line
+                    .p.-centered
+                      %p.p.-t4.c.-w6= @candidate.name
+                      %p.p.-t5.c.-w4= @party.name
 
-            .body
-              .block.-b.-bg-default.-p4.-mb2
-                .p.-serif.-sf.-t3
-                  :markdown
-                    #{ response.body }
+              .body
+                .block.-b.-bg-default.-p4.-mb2
+                  .p.-serif.-sf.-t3
+                    :markdown
+                      #{ response.body }
