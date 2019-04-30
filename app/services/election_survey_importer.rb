@@ -49,6 +49,7 @@ class ElectionSurveyImporter
       {
         name: full_name.strip,
         sort_name: sort_name_for_name(full_name.strip),
+        email_address: row[1],
         slug: full_name.strip.parameterize,
         party: party_name.strip.parameterize,
         area: area_name.strip.parameterize

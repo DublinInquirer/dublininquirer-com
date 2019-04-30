@@ -5,6 +5,14 @@ class ElectionSurvey < ApplicationRecord
 
   before_save :generate_slug
 
+  def self.filter_nonresponders(survey, candidates)
+    candidates.reject do |c|
+      survey.responses_for_candidate(c).reject do |r|
+        r.body.strip.blank?
+      end.any?
+    end
+  end
+
   def to_param
     self.slug
   end

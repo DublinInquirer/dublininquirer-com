@@ -67,24 +67,48 @@ body
   display: flex
   flex-direction: row
   position: relative
+
   .candidate
-    flex-basis: 14rem
-    padding-right: 2rem
+    flex-basis: 12rem
+    padding-right: 1.5rem
+    position: relative
     & > .content
-      position: -webkit-sticky
       top: 14rem
+      position: sticky
+      position: -webkit-sticky
       z-index: 999
       .speech-line
         display: block
         position: absolute
         top: 6rem
-        width: 1.5rem
+        width: 1rem
         height: 1px
-        right: -2rem
+        right: -1.5rem
         background: var(--black)
 
   .body
     flex: 1
+
+    .response-body
+      padding: 2rem
+      background-color: var(--default)
+      border: 1px solid var(--black)
+      overflow: hidden
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    .candidate
+      flex-basis: 14rem
+      padding-right: 2rem
+      & > .content
+        .speech-line
+          top: 6rem
+          width: 1.5rem
+          right: -2rem
+
+    .body
+      .response-body
+        padding: 4rem
 
 .area-switcher
   margin-top: 2rem
@@ -201,7 +225,6 @@ body
 
   .illustration
     display: none
-
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
     padding: 7.5rem calc(50% - 30rem) 6.75rem

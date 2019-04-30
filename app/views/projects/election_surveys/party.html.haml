@@ -1,10 +1,15 @@
 - cache [@survey, "party", @party.slug] do
   .block.-pt4.-pb2.-px2.-bg-blue
     .row
-      .col-xs-12.col-md-9
+      .col-xs-12.col-md-8
         %h1.h.-h2 #{ @party.name }
-        %p #{ pluralize @candidates.count, 'candidate' }
-      .col-xs-12.col-md-3
+        .p.-t4.block.-mt1
+          - if @party.note.present?
+            :markdown
+              #{ @party.note }
+          - else
+            %p #{ pluralize @candidates.count, 'candidate' }
+      .col-xs-12.col-md-3.col-md-offset-1.flex
         .area-switcher
           %label switch party
           %select{'data-behaviour': 'switchView', 'data-path': party_projects_election_survey_path(id: @survey.slug, party_id: '')}
@@ -51,7 +56,7 @@
                         %p.p.-t5.c.-w4= area.name
 
                 .body
-                  .block.-b.-bg-default.-p4
+                  .response-body
                     .p.-serif.-sf.-t3
                       :markdown
                         #{ response.body }
