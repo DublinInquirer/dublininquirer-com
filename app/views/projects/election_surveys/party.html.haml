@@ -5,8 +5,10 @@
       %p #{ pluralize @candidates.count, 'candidate' }
     .col-xs-12.col-md-3
       .area-switcher
-        %label Change party
-        %select
+        %label switch party
+        %select{'data-behaviour': 'switchView', 'data-path': party_projects_election_survey_path(id: @survey.slug, party_id: '')}
+          %option Switch party
+          <option disabled>──────────</option>
           - @parties.each do |party|
             %option{value: party.slug}= party.name
 
