@@ -14,6 +14,7 @@ class Projects::ElectionSurveysController < ApplicationController
     @areas = @survey.area_objects
     @area = @survey.find_area(params[:area_id])
     @candidates = @survey.candidates_for_area(@area)
+    @nonresponders = ElectionSurvey.filter_nonresponders(@survey, @candidates)
     @questions = @survey.question_objects
     @blue = true
   end
