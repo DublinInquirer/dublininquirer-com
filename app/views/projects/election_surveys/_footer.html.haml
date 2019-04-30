@@ -3,15 +3,15 @@
     .wrapper.-large{role: 'layout'}
       .row
         .col-xs-12.col-md-8
-          .block.-bt
+          .block
             - @survey.area_objects.each do |area|
               - candidates = @survey.candidates_for_area(area)
-              .block.-py2.-bb
+              .block.-py2.-bt
                 .block.-mb1
                   %h3= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
                 .row
                   - candidates.each do |candidate|
-                    .col-xs-12.col-md-4
+                    .col-xs-6.col-md-4
                       .candidate-partial
                         = link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
 

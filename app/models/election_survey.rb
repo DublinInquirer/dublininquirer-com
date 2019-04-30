@@ -26,6 +26,12 @@ class ElectionSurvey < ApplicationRecord
     self.save!
   end
   
+  def has_responses_from?(candidate)
+    responses_for_candidate(candidate).reject do |r|
+      r.body.strip.blank?
+    end.any?
+  end
+  
   # children
 
   def candidate_objects
