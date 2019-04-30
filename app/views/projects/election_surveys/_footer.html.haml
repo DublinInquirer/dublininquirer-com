@@ -1,22 +1,26 @@
 .block.-bb.-py4
   .wrapper.-container{role: 'layout'}
     .wrapper.-large{role: 'layout'}
-      .block.-bb.-mb2.-pb2
-        .block.-mb1
-          %h3.h.-h2 All candidates
-
-        .p.-t4.-sf
-          :markdown
-            If we're missing a candidate, please let us know by sending an email to <a href="mailto:sam@dublininquirer.com">sam@dublininquirer.com</a>.
-
       .row
-        - @survey.area_objects.each do |area|
-          - candidates = @survey.candidates_for_area(area)
-          .col-xs-12.col-md-3
-            .block.flex.-mb4
-              .block
+        .col-xs-12.col-md-8
+          .block.-bt
+            - @survey.area_objects.each do |area|
+              - candidates = @survey.candidates_for_area(area)
+              .block.-py2.-bb
                 .block.-mb1
-                  %h3.c.-w8= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
-                %ul.p.-t4
+                  %h3= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
+                .row
                   - candidates.each do |candidate|
-                    %li= link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
+                    .col-xs-12.col-md-4
+                      .candidate-partial
+                        = link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
+
+        .col-xs-12.col-md-4
+          .block.-p2.-bg-faint
+            .p.-t4.-sf
+              :markdown
+                **We’ve had loads of help** putting together this voter’s guide – it's really been a community effort. Some 200 of our readers told us what issues they'd like us to ask candidates about, 11 readers helped us by finding contact details for candidates in their areas and getting in touch and asking them to answer our questions.
+
+                So, a big thank-you – we couldn’t have done it without them. If you're interested in helping us with this kind of civic journalism projects in the future, please fill out <a href="https://docs.google.com/forms/d/e/1FAIpQLScQaR88UbjXw3cQMwoq4rBF5BJ_xuSc9NzGsOdQqK50WQQoHw/viewform" data-turbolinks="false">this little form</a> so we know who you are and how to reach you.
+
+                If we're missing anything or you have correction to submit, <a href="mailto:sam@dublininquirer.com" data-turbolinks="false">send us an email</a>.

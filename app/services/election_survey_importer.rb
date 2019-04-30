@@ -30,7 +30,7 @@ class ElectionSurveyImporter
       { name: area_name,
         slug: area_name.parameterize,
         seats: seats_for_area(area_name.parameterize) }
-    end
+    end.sort_by { |q| q[:area_name] }
   end
 
   def self.update_parties_from_sheet(survey, sheet)
@@ -38,8 +38,9 @@ class ElectionSurveyImporter
       drop(1).to_a.
       map(&:strip).uniq.map do |party_name|
       { name: party_name,
-        slug: party_name.parameterize }
-    end
+        slug: party_name.parameterize,
+        note: note_for_party(party_name.parameterize)}
+    end.sort_by { |q| q[:party_name] }
   end
 
   def self.update_candidates_from_sheet(survey, sheet)
@@ -47,11 +48,12 @@ class ElectionSurveyImporter
       full_name, party_name, area_name = row[2..4]
       {
         name: full_name.strip,
+        sort_name: sort_name_for_name(full_name.strip),
         slug: full_name.strip.parameterize,
         party: party_name.strip.parameterize,
         area: area_name.strip.parameterize
       }
-    end
+    end.sort_by { |q| q[:sort_name] }
   end
 
   def self.update_questions_from_sheet(survey, sheet)
@@ -66,17 +68,31 @@ class ElectionSurveyImporter
 
   def self.update_responses_from_sheet(survey, sheet)
     survey.responses = sheet.drop(1).map do |row|
-      candidate = row[2].strip.parameterize
+      sort_name = sort_name_for_name(row[2].strip)
+      candidate_slug = row[2].strip.parameterize
       row.drop(5).each_with_index.map do |response, i|
         next if response.nil? or response.strip.blank?
         pos = sheet.row(1).drop(5)[i].scan(/(\d+). (.+?)$/).first.first.to_i
         {
-          candidate: candidate,
+          sort_name: sort_name,
+          candidate: candidate_slug,
           question: pos,
           body: response
         }
       end.compact
-    end.flatten.sort_by { |r| [r[:question], r[:candidate]] }
+    end.flatten.sort_by { |r| [r[:question], r[:sort_name]] }
+  end
+
+  def self.note_for_party(slug)
+    case slug
+    when 'republican-sinn-fein' then "Note: Republican Sinn Féin (RSF) is a different organisation to Sinn Féin, and it is the political wing of the Continuity IRA."
+    else
+      nil
+    end
+  end
+
+  def self.sort_name_for_name(name)
+    [*name.split(' ')[1..-1], name.split(' ').first].join(' ').downcase
   end
 
   def self.seats_for_area(slug)
