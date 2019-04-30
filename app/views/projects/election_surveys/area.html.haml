@@ -1,1 +1,45 @@
-= @area.inspect
+.block.-pt4.-pb2.-px2.-bg-blue
+  .row
+    .col-xs-12.col-md-9
+      %h1.h.-h2 #{ @area.name }
+    .col-xs-12.col-md-3
+      .block.-b.-p1
+        %p.p.-t4
+          Change electoral area
+          - if false
+            %select
+              - @areas.each do |area|
+                %option{value: area.slug}= area.name
+
+- @questions.each do |question|
+  .question.block.-py4.-bb{style: 'position: relative'}
+    .block.-bg-default.-bb.-py2{style: 'position: -webkit-sticky; top: 0; z-index: 9999'}
+      .wrapper.-small{role: 'layout'}
+        .h.-h3.-centered
+          .c.-w8
+            #{ question.position }.
+            %br
+            = question.body
+
+    .wrapper.-container{role: 'layout'}
+      .wrapper.-large{role: 'layout'}
+        - @candidates.each do |candidate|
+          - party = @survey.find_party(candidate.party)
+          - response = @survey.response_for(question, candidate)
+          - next unless response.present?
+          .response.block.-my2{style: 'position: relative'}
+            .block.-pb2
+              .row
+                .col-md-2
+                  .block{style: 'position: -webkit-sticky; top: 14rem; z-index: 999'}
+                    = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug) do
+                      .block.-mb2
+                        .artwork.-portrait.-square= image_tag "candidates/#{ candidate.slug }.jpg"
+                      %p.c.-w6= candidate.name
+                      %p.c.-w4= party.name
+
+                .col-md-10
+                  .block.-bl.-pl4
+                    .p.-t3.-serif.-sf
+                      :markdown
+                        #{ response.body }

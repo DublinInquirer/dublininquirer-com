@@ -28,7 +28,8 @@ class ElectionSurveyImporter
       drop(1).to_a.
       map(&:strip).uniq.map do |area_name|
       { name: area_name,
-        slug: area_name.parameterize }
+        slug: area_name.parameterize,
+        seats: seats_for_area(area_name.parameterize) }
     end
   end
 
@@ -76,6 +77,24 @@ class ElectionSurveyImporter
         }
       end.compact
     end.flatten.sort_by { |r| [r[:question], r[:candidate]] }
+  end
+
+  def self.seats_for_area(slug)
+    case slug
+    when 'artane-whitehall' then 6
+    when 'ballyfermot-drimnagh' then 5
+    when 'ballymun-finglas' then 6
+    when 'cabra-glasnevin' then 7
+    when 'clontarf' then 6
+    when 'donaghmede' then 5
+    when 'kimmage-rathmines' then 6
+    when 'north-inner-city' then 7
+    when 'pembroke' then 5
+    when 'south-east-inner-city' then 5
+    when 'south-west-inner-city' then 5
+    else
+      raise "Invalid LEA in CSV: #{ slug }"
+    end
   end
 
   def self.errors_from_csv?(sheet)

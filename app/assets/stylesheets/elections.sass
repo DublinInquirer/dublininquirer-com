@@ -1,0 +1,96 @@
+@import 'modules/variables'
+@import 'modules/*'
+
++reset
+
+@import 'shared/*'
+@import 'layouts/*'
+
+body
+  font-size: var(--t4)
+  line-height: 1.4
+
+.turbolinks-progress-bar
+  height: 0.75rem
+  background-color: var(--faint)
+
+.header.-elections
+  padding: 2rem
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  align-items: center
+
+  .logo
+    margin-right: 2rem
+
+  .title
+    padding-left: 2rem
+    border-left: 1px solid var(--black)
+
+  &.-blue
+    background-color: var(--blue)
+    color: var(--default)
+    a, a:link, a:visited
+      color: var(--default)
+      &:hover
+        color: var(--default)
+    .logo
+      .logotype
+        svg g
+          fill: var(--default)
+    .title
+      border-left-color: var(--default)
+
+.logotype
+  display: block
+  text-indent: -9999px
+  overflow: hidden
+  height: 4.5rem
+  width: calc(4.5rem * 2.45)
+
+  svg
+    display: block
+    object-fit: contain
+    object-position: left bottom
+    width: 100%
+    height: 100%
+
+.artwork.-portrait
+  img
+    filter: grayscale(1)
+
+.candidate-byline
+  padding: 1rem 0
+  display: block
+  .artwork.-portrait.-square
+    padding-top: 0
+    float: left
+    width: 5rem
+    height: 5rem
+    margin-right: 1rem
+
+.page-header
+  padding: 5rem 0 4rem
+  position: relative
+  text-align: center
+
+  &.-left
+    text-align: center
+
+  .illustration
+    display: none
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    padding: 7.5rem calc(50% - 30rem) 6.75rem
+
+    .illustration
+      display: block
+      width: 16rem
+      height: 16rem
+      margin: 0 auto
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover

@@ -1,1 +1,8 @@
-= @party.inspect
+%h1= @party.name
+
+.candidates-list
+  - @candidates.each do |candidate|
+    .candidate
+      = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug), class: 'block -m1 -mb2' do
+        .artwork.-square= image_tag "candidates/#{ candidate.slug }.jpg"
+        .block.-mt1= candidate.name

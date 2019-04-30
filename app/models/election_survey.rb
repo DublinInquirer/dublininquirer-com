@@ -42,7 +42,7 @@ class ElectionSurvey < ApplicationRecord
 
   def area_objects
     @area_objects ||= self.areas.to_a.
-      map { |h| OpenStruct.new(h) }
+      map { |h| OpenStruct.new(h) }.sort_by(&:name)
   end
 
   # finders
@@ -85,11 +85,15 @@ class ElectionSurvey < ApplicationRecord
     self.response_objects.reject { |r| r.candidate != candidate.slug }
   end
 
+  def response_for(question, candidate)
+    (self.responses_for_question(question) & self.responses_for_candidate(candidate)).first
+  end
+
   def candidates_for_area(area)
     self.candidate_objects.reject { |c| c.area != area.slug }
   end
 
-  def candidates_for_party(candidate)
+  def candidates_for_party(party)
     self.candidate_objects.reject { |c| c.party != party.slug }
   end
 

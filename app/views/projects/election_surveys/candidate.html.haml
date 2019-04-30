@@ -1,1 +1,9 @@
-= @candidate.inspect
+.artwork.-square= image_tag "candidates/#{ @candidate.slug }.jpg"
+%h1= @candidate.name
+%p= link_to @party.name, party_projects_election_survey_path(id: @survey.slug, party_id: @party.slug)
+%p= link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug)
+
+- @responses.each do |response|
+  - question = @survey.find_question(response.question)
+  %h3 #{ question.position }. #{ question.body }
+  %p= response.body
