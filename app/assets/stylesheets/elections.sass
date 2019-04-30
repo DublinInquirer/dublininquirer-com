@@ -173,15 +173,22 @@ body
 .question
   position: relative
   padding-bottom: 8rem
+  margin-bottom: 4rem
+  border-bottom: 1px solid var(--black)
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
     padding-bottom: 12rem
 
   &.-brief
     padding-bottom: 0
+    margin-bottom: 0
+    border-bottom: 0
     .header
       .next, .back
         display: none
+    
+    &:last-child
+      padding-bottom: 8rem
 
   .header
     position: relative
@@ -218,6 +225,27 @@ body
       right: 0
       background-image: url(asset-path('next.svg'))
 
+.candidates-mini-list
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: flex-start
+
+.candidate-mini
+  margin: 0 1rem
+  flex-basis: 8rem
+  flex-grow: 0
+  flex-shrink: 0
+  display: flex
+  flex-direction: column
+  justify-content: stretch
+  align-items: center
+  text-align: center
+
+  .face
+    width: 100%
+    margin-bottom: 1rem
+
 .page-header
   padding: 5rem 0 4rem
   position: relative
@@ -228,6 +256,7 @@ body
 
   .illustration
     display: none
+
   @media screen and (min-width: $small)
   @media screen and (min-width: $medium)
     padding: 7.5rem calc(50% - 30rem) 6.75rem

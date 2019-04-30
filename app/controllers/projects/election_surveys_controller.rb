@@ -24,6 +24,7 @@ class Projects::ElectionSurveysController < ApplicationController
     @parties = @survey.party_objects
     @party = @survey.find_party(params[:party_id])
     @candidates = @survey.candidates_for_party(@party)
+    @nonresponders = ElectionSurvey.filter_nonresponders(@survey, @candidates)
     @questions = @survey.question_objects
     @blue = true
   end

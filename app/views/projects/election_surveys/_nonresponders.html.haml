@@ -1,0 +1,12 @@
+.wrapper.-small{role: 'layout'}
+  .block.-my2
+    .p.-centered.-t4
+      .c.-w6 We're missing responses from these candidates:
+
+  .candidates-mini-list
+    - candidates.each do |candidate|
+      = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug), class: 'candidate-mini' do
+        .face
+          .artwork.-portrait.-square= image_tag "candidates/#{ candidate.slug }.jpg"
+        .info
+          .p.-t5.c.-w6= candidate.name
