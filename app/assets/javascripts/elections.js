@@ -3,3 +3,4 @@
 //= require jquery.key
 //= require turbolinks
 //= require cookie
+//= require election_questions

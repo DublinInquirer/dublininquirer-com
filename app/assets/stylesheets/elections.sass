@@ -57,18 +57,83 @@ body
     height: 100%
 
 .artwork.-portrait
+  background-color: transparent
+  overflow: visible
   img
     filter: grayscale(1)
+    border-radius: 100%
 
-.candidate-byline
-  padding: 1rem 0
+.response
+  display: flex
+  flex-direction: row
+  position: relative
+  .candidate
+    flex-basis: 14rem
+    padding-right: 2rem
+    & > .content
+      position: -webkit-sticky
+      top: 14rem
+      z-index: 999
+      .speech-line
+        display: block
+        position: absolute
+        top: 6rem
+        width: 1.5rem
+        height: 1px
+        right: -2rem
+        background: var(--black)
+
+  .body
+    flex: 1
+
+.area-switcher
+  border: 1px solid var(--default)
+  padding: 1rem
+  select
+    display: none
+
+.question-anchor
+  width: 100%
+  height: 0
+  overflow: hidden
   display: block
-  .artwork.-portrait.-square
-    padding-top: 0
-    float: left
-    width: 5rem
-    height: 5rem
-    margin-right: 1rem
+
+.question
+  .header
+    position: relative
+    position: sticky
+    position: -webkit-sticky
+    top: 0
+    z-index: 9999
+    background-color: var(--default)
+    padding: 2rem
+    border-bottom: 1px solid var(--black)
+
+    .next, .back
+      position: absolute
+      top: 0
+      bottom: 0
+      background-position: center center
+      background-repeat: no-repeat
+      background-size: 2rem auto
+      width: 4rem
+      text-indent: -9999px
+      overflow: hidden
+      opacity: 0.75
+      transition: 0.125s all ease
+      &:hover
+        cursor: pointer
+        opacity: 0.925
+      &:active
+        opacity: 1
+
+    .back
+      left: 0
+      background-image: url(asset-path('previous.svg'))
+
+    .next
+      right: 0
+      background-image: url(asset-path('next.svg'))
 
 .page-header
   padding: 5rem 0 4rem
