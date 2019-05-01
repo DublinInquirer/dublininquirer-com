@@ -22,7 +22,7 @@
 
             .block.-mt4
               .p.-t3.-centered
-                = link_to "Email #{ @candidate.name }", "mailto:#{ @candidate.email_address }?subject=dublin inquirer questionnaire", class: 'button -standard'
+                = link_to "Email #{ @candidate.name }", "mailto:#{ @candidate.email_address }?cc=sam@dublininquirer.com&subject=dublin inquirer questionnaire&body=I am a voter in #{ @area.name } and I am interested in your responses to the questions on Dublin Inquirer's local election project.", class: 'button -standard'
   - else
     .block.-bg-faint.-pt4
       - @questions.each do |question|

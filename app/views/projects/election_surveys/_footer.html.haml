@@ -9,11 +9,14 @@
               .block.-py2.-bt
                 .block.-mb1
                   %h3= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
-                .row
+
+                .candidates-mini-list.-left
                   - candidates.each do |candidate|
-                    .col-xs-6.col-md-4
-                      .candidate-partial
-                        = link_to candidate.name, candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug)
+                    = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: candidate.slug), class: 'candidate-mini' do
+                      .face
+                        .artwork.-portrait.-square= image_tag "candidates/#{ candidate.slug }.jpg"
+                      .info
+                        .p.-t5.c.-w6= candidate.name
 
         .col-xs-12.col-md-4
           .block.-p2.-bg-faint
