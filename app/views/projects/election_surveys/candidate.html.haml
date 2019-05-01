@@ -6,13 +6,15 @@
     .row
       .col-xs-12.col-md-8
         %h1.h.-h2 #{ @candidate.name }
-        .p.-t4.block.-mt1
+        .p.-t4.block.-mt1.-sf
           #{ link_to @party.name, party_projects_election_survey_path(id: @survey.slug, party_id: @party.slug) }
           candidate for
           #{ link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug) }
 
       .col-xs-12.col-md-4
-        &nbsp;
+        .external-links
+          - if @survey.tracker_url_for(@candidate)
+            = link_to "View past votes on CouncilTracker.ie", @survey.tracker_url_for(@candidate)
   
   - if !@survey.has_responses_from?(@candidate)
     .block.-bg-faint.-py4

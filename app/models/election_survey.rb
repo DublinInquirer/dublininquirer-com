@@ -31,6 +31,18 @@ class ElectionSurvey < ApplicationRecord
       r.body.strip.blank?
     end.any?
   end
+
+  def tracker_url_for(candidate)
+    Rails.cache.fetch("#{ self.slug }/tracker/#{ candidate.area }/#{ candidate.slug }") do
+      url = "https://counciltracker.ie/councillors/#{ candidate.slug }"
+      res = HTTP.get(url)
+      if res.status.to_i == 200
+        url
+      else
+        nil
+      end
+    end
+  end
   
   # children
 
