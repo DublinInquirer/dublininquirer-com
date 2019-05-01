@@ -2,7 +2,7 @@ class HomeController < ApplicationController
   layout 'front', only: [:show]
 
   def show
-    @current_issue = Rails.cache.fetch("/home/issue_current", expires_in: 5.minutes) do
+    @current_issue = Rails.cache.fetch("/home/issue_current", expires_in: 1.minutes) do
       Issue.current
     end
 
