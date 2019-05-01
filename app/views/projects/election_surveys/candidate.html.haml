@@ -10,41 +10,56 @@
 
       .col-xs-12.col-md-4
 
-  .block.-bg-faint.-pt4
-    - @questions.each do |question|
-      - response = @survey.response_for(question,@candidate)
-      %a.question-anchor{id: "question-#{ question.position }"} &nbsp;
-      .question.block.-brief
-        .header
-          - if question.position > 1
-            %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
+  
+  - if !@survey.has_responses_from?(@candidate)
+    .block.-bg-faint.-py4
+      .wrapper.-small{role: 'layout'}
+        .block.-my4.-py4
+          .block.-p4.-b.-bg-default
+            .p.-t3.-centered.-sf
+              :markdown
+                #{ @candidate.name } hasn't yet responded to our questionnaire. If #{ @area.name } is your local electoral area, why not send them an email to remind them to submit their responses?
 
-          .wrapper.-small{role: 'layout'}
-            .h.-h3.-centered
-              %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
-                .c.-w8
-                  #{ question.position }.
-                  %br
-                  = question.body
+            .block.-mt4
+              .p.-t3.-centered
+                = link_to "Email #{ @candidate.name }", "mailto:#{ @candidate.email_address }?cc=sam@dublininquirer.com&subject=dublin inquirer questionnaire&body=I am a voter in #{ @area.name } and I am interested in your responses to the questions on Dublin Inquirer's local election project.", class: 'button -standard'
+  - else
+    .block.-bg-faint.-pt4
+      - @questions.each do |question|
+        - response = @survey.response_for(question,@candidate)
+        %a.question-anchor{id: "question-#{ question.position }"} &nbsp;
+        .question.block.-brief
+          .header
+            - if question.position > 1
+              %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
 
-          - if question.position < 10
-            %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
+            .wrapper.-small{role: 'layout'}
+              .h.-h3.-centered
+                %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
+                  .c.-w8
+                    #{ question.position }.
+                    %br
+                    = question.body
 
-        .wrapper.-container{role: 'layout'}
-          .wrapper.-large{role: 'layout'}
-            .response.block.-my4
-              .candidate
-                .content
-                  = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: @candidate.slug) do
-                    .block.-mb2
-                      .artwork.-portrait.-square= image_tag "candidates/#{ @candidate.slug }.jpg"
-                      .speech-line
-                    .p.-centered
-                      %p.p.-t4.c.-w6= @candidate.name
-                      %p.p.-t5.c.-w4= @party.name
+            - if question.position < 10
+              %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
 
-              .body
-                .response-body
-                  .p.-serif.-sf.-t3
-                    :markdown
-                      #{ response.body }
+          .wrapper.-container{role: 'layout'}
+            .wrapper.-large{role: 'layout'}
+              .response.block.-my4
+                .candidate
+                  .content
+                    = link_to candidate_projects_election_survey_path(id: @survey.slug, candidate_id: @candidate.slug) do
+                      .block.-mb2
+                        .artwork.-portrait.-square= image_tag "candidates/#{ @candidate.slug }.jpg"
+                        .speech-line
+                      .p.-centered
+                        %p.p.-t4.c.-w6= @candidate.name
+                        %p.p.-t5.c.-w4= @party.name
+
+                .body
+                  .response-body
+                    - if response.body.present?
+                      .p.-serif.-sf.-t3
+                        :markdown
+                          #{ response.body }
