@@ -1,3 +1,6 @@
+- set_meta_tags title: @area.name
+- set_meta_tags description: "Read what candidates for #{ @area.name } in the 2019 local elections say they will do to address the issues our readers asked about"
+
 - cache [@survey, "area", @area.slug] do
   .block.-pt4.-pb2.-px2.-bg-blue
     .row
