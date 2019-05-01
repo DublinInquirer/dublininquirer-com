@@ -13,16 +13,18 @@
   
   - if !@survey.has_responses_from?(@candidate)
     .block.-bg-faint.-py4
-      .wrapper.-small{role: 'layout'}
-        .block.-my4.-py4
-          .block.-p4.-b.-bg-default
-            .p.-t3.-centered.-sf
-              :markdown
-                #{ @candidate.name } hasn't yet responded to our questionnaire. If #{ @area.name } is your local electoral area, why not send them an email to remind them to submit their responses?
+      .wrapper.-container{role: 'layout'}
+        .wrapper.-small{role: 'layout'}
+          .block.-my4.-py4
+            .block.-p4.-b.-bg-default
+              .p.-t3.-centered.-sf
+                :markdown
+                  #{ @candidate.name } hasn't yet responded to our questionnaire. If #{ @area.name } is your local electoral area, why not send them an email reminding them to submit their responses?
 
-            .block.-mt4
-              .p.-t3.-centered
-                = link_to "Email #{ @candidate.name }", "mailto:#{ @candidate.email_address }?cc=sam@dublininquirer.com&subject=dublin inquirer questionnaire&body=I am a voter in #{ @area.name } and I am interested in your responses to the questions on Dublin Inquirer's local election project.", class: 'button -standard'
+              .block.-mt4
+                .p.-t3.-centered
+                  = link_to "Email #{ @candidate.name }", "mailto:#{ @candidate.email_address }?cc=sam@dublininquirer.com&subject=dublin inquirer questionnaire&body=I am a voter in #{ @area.name } and I am interested in your responses to the questions on Dublin Inquirer's local election project.", class: 'button -standard'
+                  
   - else
     .block.-bg-faint.-pt4
       - @questions.each do |question|
