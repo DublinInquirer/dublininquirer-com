@@ -3,7 +3,7 @@
     .row
       .col-xs-12.col-md-8
         %h1.h.-h2 #{ @candidate.name }
-        %p.p.-t4.-sf
+        .p.-t4.block.-mt1
           #{ link_to @party.name, party_projects_election_survey_path(id: @survey.slug, party_id: @party.slug) }
           candidate for
           #{ link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug) }

@@ -3,7 +3,8 @@
     .row
       .col-xs-12.col-md-9
         %h1.h.-h2 #{ @area.name }
-        %p #{ pluralize @candidates.count, 'candidate' } competing for #{ pluralize @area.seats, 'seat' }
+        .p.-t4.block.-mt1
+          #{ pluralize @candidates.count, 'candidate' } competing for #{ pluralize @area.seats, 'seat' }
       .col-xs-12.col-md-3.flex
         .area-switcher
           %label switch electoral area
