@@ -1,14 +1,13 @@
 .block.flex
-  = link_to "/projects/elections/2019-local", class: ['block', '-my2', '-p2', '-py4', '-b', '-bg-faint', 'excerpt'] do
-    .p.-centered.-t4
-      %h3.headline.inline.c.-w4.-serif Citizens&rsquo; Agenda:<br>Local Elections 2019
+  = link_to "/projects/elections/2019-local", class: ['block', 'excerpt', '-election'] do
+    .p.-t3
+      .c.-w8 Citizens&rsquo; Agenda:<br>Local Elections 2019
 
-    .block.-px4.-my2
-      .block.-px4.-py1
-        .block.-px4
-          %figure.artwork.-square
-            = image_tag "elections/image.jpg"
-
-    .p.-centered.-t4
+    .p.-t4.-sf
       :markdown
         We asked our readers what they want candidates in the upcoming elections to discuss as they compete for votes.
+
+        These are their responses.
+      
+    %figure
+      = image_tag "elections/image.jpg"
