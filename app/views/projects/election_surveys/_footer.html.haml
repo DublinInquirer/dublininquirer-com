@@ -6,8 +6,8 @@
           .block
             - @survey.area_objects.each do |area|
               - candidates = @survey.candidates_for_area(area)
-              .block.-py2.-bt
-                .block.-mb1
+              .block.-pt1.-pb2.-bt
+                .block.-mb2
                   %h3= link_to area.name, area_projects_election_survey_path(id: @survey.slug, area_id: area.slug)
 
                 .candidates-mini-list.-left
