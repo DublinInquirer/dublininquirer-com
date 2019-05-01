@@ -26,7 +26,7 @@ class Projects::ElectionSurveysController < ApplicationController
     @candidates = survey_cache(@survey, "areas/#{ @area.slug }/candidates") do
       @survey.candidates_for_area(@area)
     end
-    @nonresponders = survey_cache(@survey, "nonresponders") do
+    @nonresponders = survey_cache(@survey, "areas/#{ @area.slug }/nonresponders") do
       ElectionSurvey.filter_nonresponders(@survey, @candidates)
     end
     @questions = survey_cache(@survey, "questions") do
@@ -46,7 +46,7 @@ class Projects::ElectionSurveysController < ApplicationController
     @candidates = survey_cache(@survey, "parties/#{ @party.slug }/candidates") do
       @survey.candidates_for_party(@party)
     end
-    @nonresponders = survey_cache(@survey, "nonresponders") do
+    @nonresponders = survey_cache(@survey, "parties/#{ @party.slug }/nonresponders") do
       ElectionSurvey.filter_nonresponders(@survey, @candidates)
     end
     @questions = survey_cache(@survey, "questions") do

@@ -1,0 +1,5 @@
+- path = "candidates/#{ candidate.slug }.jpg"
+- if asset_exists?(path)
+  .artwork.-portrait.-square= image_tag(path, alt: "a portrait of #{ candidate.name }")
+- else
+  .artwork.-portrait.-square= image_tag("candidates/missing.jpg", alt: "we don't have a picture of #{ candidate.name }")
