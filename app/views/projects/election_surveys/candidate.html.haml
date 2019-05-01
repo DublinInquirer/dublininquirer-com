@@ -11,7 +11,7 @@
           candidate for
           #{ link_to @area.name, area_projects_election_survey_path(id: @survey.slug, area_id: @area.slug) }
 
-      .col-xs-12.col-md-4
+      .col-xs-12.col-md-4.flex
         .external-links
           - if @survey.tracker_url_for(@candidate)
             = link_to "View past votes on CouncilTracker.ie", @survey.tracker_url_for(@candidate)
