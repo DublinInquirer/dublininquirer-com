@@ -3,6 +3,7 @@ class Tag < ApplicationRecord
   validates :slug, uniqueness: true
 
   after_validation :generate_slug
+  after_save :autolink_articles
   before_destroy :remove_from_articles
 
   scope :by_name, -> { order('name asc') }
@@ -27,6 +28,18 @@ class Tag < ApplicationRecord
   end
 
   private
+
+  def autolink_articles
+    return true unless self.autolink?
+
+    Article.basic_search(self.name).each do |article|
+      article.tag_ids << self.id
+
+      article.content = article.content.gsub /#{self.name}/i, '<a class="autolink" href="/tags/' + self.slug + '">\&</a>'
+
+      article.save
+    end
+  end
 
   def generate_slug
     self.slug = self.name.parameterize
