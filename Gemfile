@@ -20,7 +20,6 @@ gem 'meta-tags'
 gem 'sitemap_generator'
 gem 'mini_racer', platforms: :ruby
 gem 'redis', '~> 4.0'
-gem 'webpacker', '~> 4.x'
 gem 'nokogiri'
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick', '~> 4.8'
