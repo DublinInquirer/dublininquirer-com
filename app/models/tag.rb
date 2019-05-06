@@ -3,10 +3,24 @@ class Tag < ApplicationRecord
   validates :slug, uniqueness: true
 
   after_validation :generate_slug
-  after_save :autolink_articles
   before_destroy :remove_from_articles
 
   scope :by_name, -> { order('name asc') }
+  scope :autolinkable, -> { where(autolink: true) }
+
+  def self.remove_hard_autolinks
+    autolinkable.each do |tag|
+      tag.articles.each do |article|
+        ng_content = Nokogiri::HTML.fragment(article.content)
+        ng_content.css('a.autolink').each do |autolink_tag|
+          if autolink_tag.present? && autolink_tag.text.present?
+            autolink_tag.replace autolink_tag.text
+          end
+        end
+        article.update!(content: ng_content)
+      end
+    end
+  end
 
   def to_param
     self.slug_was
@@ -28,18 +42,6 @@ class Tag < ApplicationRecord
   end
 
   private
-
-  def autolink_articles
-    return true unless self.autolink?
-
-    Article.basic_search(self.name).each do |article|
-      article.tag_ids << self.id
-
-      article.content = article.content.gsub /#{self.name}/i, '<a class="autolink" href="/tags/' + self.slug + '">\&</a>'
-
-      article.save
-    end
-  end
 
   def generate_slug
     self.slug = self.name.parameterize

@@ -22,7 +22,7 @@
         = image_tag @article.featured_artwork.image.large.url
       %p= @article.featured_artwork.caption
 
-    = raw render_content(@article.content)
+    = raw render_content(@article)
 
 .admin-details
   %header.admin-subheader.-details

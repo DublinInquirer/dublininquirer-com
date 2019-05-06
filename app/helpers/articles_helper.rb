@@ -1,5 +1,6 @@
 module ArticlesHelper
-  def render_content(html)
+  def render_content(article)
+    html = article.content
     ng_content = Nokogiri::HTML.fragment(html)
 
     # artwork
@@ -11,9 +12,14 @@ module ArticlesHelper
       end
     end
 
-    # wrapper
-    ng_content.css('p, ul, ol, blockquote, iframe, h3, h4, h5, podcast, video, hr, script').each do |wrapped_el|
-      wrapped_el.replace "<section class='content -#{ wrapped_el.name.downcase }'>#{ wrapped_el }</section>"
+    # tags
+
+    if article.tags.autolinkable.any?
+      article.tags.autolinkable.each do |autolink_tag|
+        ng_content.css('p').each do |p_el|
+          p_el.replace(p_el.to_html.gsub /#{autolink_tag.name}/i, '<a class="autolink" href="/tags/' + autolink_tag.slug + '">\&</a>')
+        end
+      end
     end
 
     # podcasts
@@ -25,10 +31,11 @@ module ArticlesHelper
       podcast_el.replace el
     end
 
-    ng_content.to_html
-  end
+    # wrapper
+    ng_content.css('p, ul, ol, blockquote, iframe, h3, h4, h5, podcast, video, hr, script').each do |wrapped_el|
+      wrapped_el.replace "<section class='content -#{ wrapped_el.name.downcase }'>#{ wrapped_el }</section>"
+    end
 
-  def get_artist_from_cover_article(article)
-    article.title.scan(/Issue \d*: By (.+)$/i).first.try(:first)
+    ng_content.to_html
   end
 end
