@@ -21,7 +21,7 @@ class Tag < ApplicationRecord
   end
 
   def merge_into!(destination_tag)
-    raise "Can't merge into nil"
+    raise "Can't merge into nil" unless destination_tag && destination_tag.id
     articles.each do |article|
       article.update(tag_ids: article.tag_ids - [self.id] + [destination_tag.id])
     end
