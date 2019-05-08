@@ -21,6 +21,7 @@ class Article < ApplicationRecord
   after_initialize :clean_text_fields
   before_validation :sanitize_html, :uniq_tags, :generate_slug, :generate_text, :uniq_slugs
   before_save :format_common_hacks
+  before_save :attach_tags, if: :will_save_change_to_text?
 
   paginates_per 8
 
@@ -194,7 +195,9 @@ class Article < ApplicationRecord
 
     self.excerpt = Sanitize.fragment(excerpt,
       elements: %w(strong em b i a),
-      attributes: {}
+      attributes: {
+        'a' => %w(href)
+      }
     )
   end
 
@@ -213,6 +216,20 @@ class Article < ApplicationRecord
   end
 
   def uniq_tags
+    self.tag_ids = self.tag_ids.try(:uniq)
+  end
+
+  def attach_tags
+    # rm existing autolinks
+    self.tag_ids = self.tag_ids - self.tags.autolinkable.pluck(:id)
+
+    # add any applicable autolinks
+    normalised_text = self.text.downcase
+    Tag.autolinkable.pluck(:id, :name).each do |tag_id, tag_name|
+      next unless normalised_text.include?(tag_name.downcase)
+      self.tag_ids = (self.tag_ids << tag_id)
+    end
+
     self.tag_ids = self.tag_ids.try(:uniq)
   end
 

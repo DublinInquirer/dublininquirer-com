@@ -3,6 +3,7 @@ class Tag < ApplicationRecord
   validates :slug, uniqueness: true
 
   after_validation :generate_slug
+  after_save :add_to_articles, if: :saved_change_to_name?
   before_destroy :remove_from_articles
 
   scope :by_name, -> { order('name asc') }
@@ -38,5 +39,20 @@ class Tag < ApplicationRecord
     articles.each do |article|
       article.update(tag_ids: article.tag_ids - [self.id])
     end
+  end
+
+  def add_to_articles
+    return true unless self.autolink?
+
+    self.articles.each do |article|
+      article.update(tag_ids: article.tag_ids - [self.id])
+    end
+    
+    Article.basic_search(self.name).each do |article|
+      next if article.tag_ids.include?(self.id) # do this in pg in the line above
+      article.update(tag_ids: (article.tag_ids + [self.id]))
+    end
+
+    true
   end
 end
