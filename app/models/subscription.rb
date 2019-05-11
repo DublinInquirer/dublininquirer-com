@@ -192,10 +192,12 @@ class Subscription < ApplicationRecord
     )
 
     str_sub = self.stripe_subscription
+
+    item_id = str_sub.items.data[0].id
     str_sub.prorate = false
     str_sub.tax_percent = 0
     str_sub.items = [{
-      id: str_sub.items.data[0].id,
+      id: item_id,
       plan: new_plan.stripe_id,
     }]
 
