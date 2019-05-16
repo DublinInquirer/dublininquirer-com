@@ -178,7 +178,7 @@ class Subscription < ApplicationRecord
     old_plan = self.plan
 
     old_amount = if self.stripe_subscription.tax_percent && self.stripe_subscription.tax_percent > 0
-      (old_plan.amount + ((self.stripe_subscription.tax_percent * 0.01) * old_plan.amount))
+      (old_plan.amount + ((self.stripe_subscription.tax_percent * 0.01) * old_plan.amount)).round
     else
       old_plan.amount
     end
