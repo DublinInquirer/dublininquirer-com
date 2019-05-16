@@ -176,9 +176,16 @@ class Subscription < ApplicationRecord
   def change_product_to!(product_sym, maintain_price=false) # affects stripe
     new_product = Product.find_by_slug(product_sym.to_sym)
     old_plan = self.plan
+
+    old_amount = if self.stripe_subscription.tax_percent && self.stripe_subscription.tax_percent > 0
+      (old_plan.amount + ((self.stripe_subscription.tax_percent * 0.01) * old_plan.amount))
+    else
+      old_plan.amount
+    end
+
     new_plan = Plan.find_or_create_by(
       product_id: new_product.id,
-      amount: maintain_price ? old_plan.amount : new_product.base_price,
+      amount: maintain_price ? old_amount : new_product.base_price,
       interval: (self.plan.interval || 'month'),
       interval_count: self.plan.interval_count || 1
     )
