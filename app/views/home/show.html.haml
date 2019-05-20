@@ -30,7 +30,7 @@
                     = render partial: 'articles/excerpts/half', locals: {article: article}
                     %hr.-stroke
 
-                - if (@current_issue.issue_date >= Date.new(2019,5,1)) or Rails.env.development?
+                - if (@current_issue.issue_date <= Date.new(2019,5,29)) or Rails.env.development?
                   .col-xs-12.col-md-6.flex
                     = render partial: 'articles/excerpts/election'
                 
