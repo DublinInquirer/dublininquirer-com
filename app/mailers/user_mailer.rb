@@ -10,8 +10,7 @@ class UserMailer < ApplicationMailer
     @user = User.find user.id
     @url  = migrate_url(token: @user.reset_password_token)
     mail(to: @user.email_address,
-      subject: "Set up your new Dublin Inquirer account",
-      bcc: 'brian+signups@dublininquirer.com')
+      subject: "Set up your new Dublin Inquirer account")
   end
 
   def welcome_email(user_id, subscription_id)
@@ -32,7 +31,6 @@ class UserMailer < ApplicationMailer
     end
 
     mail(to: @user.email_address,
-         bcc: 'brian+signups@dublininquirer.com',
          subject: "Thanks for subscribing, #{ @given_name }!",
          from: 'Dublin Inquirer <info@dublininquirer.com>',
          template_path: 'user_mailer',
