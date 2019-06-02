@@ -2,7 +2,7 @@
   .block.-py4.p.-t4
     .wrapper.-contained{role: 'layout'}
       .row
-        .col-xs-12.col-md-3
+        .col-xs-12.col-md-4
           .block.-mb4
             = link_to :root do
               .logotype.-medium
@@ -11,7 +11,14 @@
               :markdown
                 Dublin Inquirer is an independent, reader-supported newspaper serving Ireland's capital.
 
-        .col-xs-12.col-md-3.col-md-offset-3
+          .block.-mb4
+            .p.-sf.-t5
+              = image_tag 'pci.jpg', style: 'float: left; width: 5rem; height: auto; margin-right: 1rem;'
+              :markdown
+                This publication supports the work of the Press Council of Ireland and the Office of the Press Ombudsman, and our staff operate within the Code of Practice. You can obtain a copy of the code, or contact the council, at [presscouncil.ie](https://www.presscouncil.ie), Lo-call 1890 208 080 or email: <a href="mailto:info@presscouncil.ie">info@presscouncil.ie</a>. 
+
+
+        .col-xs-12.col-md-3.col-md-offset-2
           .hidden.-md-show
             .block.-mb4.p.-sf
               %p
