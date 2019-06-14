@@ -23,10 +23,6 @@
             %p #{ link_to reporter.full_name, reporter }
 
         .block.-my2
-          %h4.h.-h4 Web
-          %p #{ link_to @staff[:cto].full_name, @staff[:cto] }
-
-        .block.-my2
           %h4.h.-h4 Columnists
           - @columnists.each do |author|
             %p #{ link_to author.full_name, author }

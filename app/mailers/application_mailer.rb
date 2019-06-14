@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: '"Dublin Inquirer" <brian@dublininquirer.com>'
+  default from: '"Dublin Inquirer" <info@dublininquirer.com>'
   layout 'mailer'
 end
