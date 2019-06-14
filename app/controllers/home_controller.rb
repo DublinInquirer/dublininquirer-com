@@ -43,9 +43,9 @@ class HomeController < ApplicationController
         deputy: Author.find_or_create_by!(full_name: 'Sam Tranum'),
         reporters: [
           Author.find_or_create_by!(full_name: 'Sean Finnan'),
-          Author.find_or_create_by!(full_name: 'Erin McGuire')
-        ],
-        cto: Author.find_or_create_by!(full_name: 'Brian Flanagan')
+          Author.find_or_create_by!(full_name: 'Erin McGuire'),
+          Author.find_or_create_by!(full_name: 'Aura McMenamin')
+        ]
       }
     end
 
