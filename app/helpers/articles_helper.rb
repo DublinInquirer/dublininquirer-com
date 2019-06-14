@@ -16,7 +16,7 @@ module ArticlesHelper
     if article.tags.autolinkable.any?
       article.tags.autolinkable.each do |autolink_tag|
         ng_content.css('p').each do |p_el|
-          if p_el.to_html.downcase.include?(autolink_tag.name)
+          if p_el.to_html.downcase.include?(autolink_tag.name.downcase)
             p_el.replace(p_el.to_html.gsub /#{autolink_tag.name}/i, '<a class="autolink" href="/tags/' + autolink_tag.slug + '">\&</a>')
             next
           end
