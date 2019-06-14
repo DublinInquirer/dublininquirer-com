@@ -13,13 +13,20 @@ module ArticlesHelper
     end
 
     # tags
-
     if article.tags.autolinkable.any?
       article.tags.autolinkable.each do |autolink_tag|
         ng_content.css('p').each do |p_el|
-          p_el.replace(p_el.to_html.gsub /#{autolink_tag.name}/i, '<a class="autolink" href="/tags/' + autolink_tag.slug + '">\&</a>')
+          if p_el.to_html.downcase.include?(autolink_tag.name)
+            p_el.replace(p_el.to_html.gsub /#{autolink_tag.name}/i, '<a class="autolink" href="/tags/' + autolink_tag.slug + '">\&</a>')
+            next
+          end
         end
       end
+    end
+
+    # wrapper
+    ng_content.css('p, ul, ol, blockquote, iframe, h3, h4, h5, podcast, video, hr, script').each do |wrapped_el|
+      wrapped_el.replace "<section class='content -#{ wrapped_el.name.downcase }'>#{ wrapped_el }</section>"
     end
 
     # podcasts
@@ -29,11 +36,6 @@ module ArticlesHelper
       el = render partial: "articles/podcast", locals: { podcast_url: podcast_url }
 
       podcast_el.replace el
-    end
-
-    # wrapper
-    ng_content.css('p, ul, ol, blockquote, iframe, h3, h4, h5, podcast, video, hr, script').each do |wrapped_el|
-      wrapped_el.replace "<section class='content -#{ wrapped_el.name.downcase }'>#{ wrapped_el }</section>"
     end
 
     ng_content.to_html
