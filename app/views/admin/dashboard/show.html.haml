@@ -1,7 +1,7 @@
 .container
   .row
     .col-xs-6
-      %h2= link_to "Current issue", [:admin, @current_issue]
+      %h2= link_to "Current issue", [:admin, @current_issue.first.issue]
       - if @current_issue.try(:any?)
         %table.admin-table
           - @current_issue.each do |article|
