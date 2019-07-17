@@ -99,6 +99,7 @@ class Subscription < ApplicationRecord
     return if !self.is_stripe? # return if non-stripe sub
     return if self.product.is_active? # return if normal already
     return if !(self.status.try(:downcase) == 'active') # return if not active
+    
     if self.digital_only?
       change_product_to! :digital, true
     else
@@ -293,7 +294,7 @@ class Subscription < ApplicationRecord
           id: s.id,
           name: u.try(:full_name),
           email: u.try(:email_address),
-          status: self.status,
+          status: s.status,
           address_line_1: u.try(:address_line_1),
           address_line_2: u.try(:address_line_2),
           city: u.try(:city),
