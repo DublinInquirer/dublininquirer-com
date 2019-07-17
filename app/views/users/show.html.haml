@@ -53,10 +53,10 @@
               - cache ['user/show', current_user, 'payment', current_user.subscription] do
                 %li.block.-mb1
                   %label.c.-w8 Payment method
-                  - if current_user.stripe_default_source.present?
+                  - if current_user.sources_count > 0
                     %p
-                      #{ current_user.stripe_default_source['brand'] }
-                      (exp #{ current_user.stripe_default_source['exp_month'].to_s.rjust(2, '0') }/#{ current_user.stripe_default_source['exp_year'] })
+                      #{ current_user.card_brand }
+                      (<code>...#{ current_user.card_last_4 }</code>)
                   - else
                     :markdown
                       We don't have a working payment method on file for you. Can you supply one?
