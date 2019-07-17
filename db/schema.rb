@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_03_183538) do
+ActiveRecord::Schema.define(version: 2019_07_17_152741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,6 +317,9 @@ ActiveRecord::Schema.define(version: 2019_05_03_183538) do
     t.text "hub"
     t.datetime "banned_at"
     t.text "full_name"
+    t.integer "sources_count", default: 0
+    t.text "card_last_4"
+    t.text "card_brand"
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
     t.index "to_tsvector('english'::regconfig, full_name)", name: "users_full_name", using: :gin
@@ -333,6 +336,7 @@ ActiveRecord::Schema.define(version: 2019_05_03_183538) do
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
     t.index ["role"], name: "index_users_on_role"
+    t.index ["sources_count"], name: "index_users_on_sources_count"
     t.index ["stripe_id"], name: "index_users_on_stripe_id", unique: true
   end
 

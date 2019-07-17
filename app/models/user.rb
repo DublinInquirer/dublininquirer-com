@@ -65,6 +65,16 @@ class User < ApplicationRecord
       self.metadata = {'description': cus['description']}
     end
 
+    self.sources_count = cus.sources.count
+    if cus.default_source.present?
+      cus.sources.each do |stripe_source|
+        next unless stripe_source.id == cus.default_source
+
+        self.card_last_4 = stripe_source.last4
+        self.card_brand = stripe_source.brand
+      end
+    end
+
     save!
   end
 
