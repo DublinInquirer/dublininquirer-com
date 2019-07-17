@@ -66,7 +66,7 @@ class User < ApplicationRecord
     end
 
     self.sources_count = cus.respond_to?(:sources) ? cus.sources.count : 0
-    if cus.default_source.present?
+    if cus.respond_to?(:default_source) && cus.default_source.present?
       cus.sources.each do |stripe_source|
         next unless stripe_source.id == cus.default_source
 
