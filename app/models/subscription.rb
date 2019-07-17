@@ -40,6 +40,7 @@ class Subscription < ApplicationRecord
   scope :is_stripe, -> { where(subscription_type: 'stripe') }
   scope :includes_print, -> { joins(:plan).merge( Plan.includes_print ).distinct }
   scope :needs_shipping, -> { active.includes_print }
+  scope :churning, -> { is_stripe.delinquent }
 
   def update_from_stripe!
     return unless self.stripe_id && self.stripe_subscription.present?
@@ -291,6 +292,8 @@ class Subscription < ApplicationRecord
         csv << {
           id: s.id,
           name: u.try(:full_name),
+          email: u.try(:email_address),
+          status: self.status,
           address_line_1: u.try(:address_line_1),
           address_line_2: u.try(:address_line_2),
           city: u.try(:city),

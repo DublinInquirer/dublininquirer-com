@@ -183,7 +183,8 @@ Rails.application.routes.draw do
     end
     resources :subscriptions, except: [:new, :create] do
       collection do
-        put :import
+        get :shipping_list
+        get :delinquent_list
       end
       member do
         put :change_product

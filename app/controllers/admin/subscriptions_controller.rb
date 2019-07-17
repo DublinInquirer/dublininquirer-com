@@ -22,13 +22,14 @@ class Admin::SubscriptionsController < Admin::ApplicationController
         raise "Unsupported sort option: #{ @sort }"
       end
     end
+  end
 
-    respond_to do |format|
-      format.html
-      format.csv do
-        send_data Subscription.needs_shipping.to_csv, filename: "subscriptions-#{Date.today}.csv"
-      end
-    end
+  def delinquent_list
+    send_data Subscription.churning.to_csv, filename: "subscriptions-#{Date.today}.csv"
+  end
+
+  def shipping_list
+    send_data Subscription.needs_shipping.to_csv, filename: "subscriptions-#{Date.today}.csv"
   end
 
   def change_product
@@ -97,10 +98,6 @@ class Admin::SubscriptionsController < Admin::ApplicationController
 
   def fixed_params
     params.require(:subscription).permit(:plan_id, :duration_months, :subscription_type)
-  end
-
-  def import_params
-    params.permit(:file)
   end
 
   def price_params

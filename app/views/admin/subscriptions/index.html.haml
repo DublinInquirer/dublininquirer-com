@@ -4,7 +4,8 @@
       = link_to 'Subscriptions', [:admin, :subscriptions]
 
     %nav
-      = link_to "Export shipping list", admin_subscriptions_path(format: 'csv'), class: 'button'
+      = link_to "Export delinquent list", delinquent_list_admin_subscriptions_path(format: 'csv'), class: 'button'
+      = link_to "Export shipping list", shipping_list_admin_subscriptions_path(format: 'csv'), class: 'button'
 
   %div.filters
     .page
