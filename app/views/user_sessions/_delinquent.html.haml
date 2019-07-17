@@ -14,7 +14,7 @@
         .block.-my1
           #{ link_to "Update payment details", [:payment, :user], class: 'button -white' }
 
-- elsif current_user.needs_source?
+- elsif logged_in? && current_user.needs_source?
   .notice.-paywall.-fixed.block.-bg-black
     %nav.close
       %a.icon{'data-action': 'closeNotice'}
