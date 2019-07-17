@@ -1,27 +1,41 @@
 .container
   .row
-    .col-xs-6
-      %h2= link_to "Current issue", [:admin, @current_issue.first.issue]
-      - if @current_issue.try(:any?)
-        %table.admin-table
-          - @current_issue.each do |article|
-            %tr
-              %td= link_to article.title, [:admin, article]
-      - else
-        .empty
-          :markdown
-            Nothing 😬
+    .col-xs-12.col-md-4
+      - cache ['admin', 'dashboard', @current_issue.articles] do
+        .block.-bg-faint.-p2
+          .block.-bb.-pb1.-mb1
+            %h3= link_to "Current issue", [:admin, @current_issue]
+          
+          .block
+            - @current_issue.articles.each do |article|
+              .p.-t5
+                .inline.c.-w6= link_to "· #{ article.title }", [:admin, article]
+                by #{ article.authors.map { |a| a.full_name }.to_sentence }
 
-    .col-xs-6
-      %h2 Comments in moderation
-      - if @unapproved_comments.any?
-        %table.admin-table
-          - @unapproved_comments.each do |comment|
-            %tr
-              %td
-                = link_to [:admin, comment] do
-                  Comment on #{ comment.article.title }
-      - else
-        .empty
-          :markdown
-            Nothing to moderate!
+    .col-xs-12.col-md-4
+      - cache ['admin', 'dashboard', @recent_subs] do
+        .block.-bg-faint.-p2
+          .block.-bb.-pb1.-mb1
+            %h3= link_to "Recently subscribed", [:admin, :subscriptions]
+          
+          .block
+            - @recent_subs.each do |subscription|
+              .p.-t5
+                .inline.c.-w6= link_to "· #{ subscription.user.email_address }:", [:admin, subscription]
+                #{ subscription.plan.human_name }
+                - if subscription.is_stripe?
+                  (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
+
+    .col-xs-12.col-md-4
+      - cache ['admin', 'dashboard', @recent_churns] do
+        .block.-bg-faint.-p2
+          .block.-bb.-pb1.-mb1
+            %h3= link_to "Recently churned", [:admin, :subscriptions]
+          
+          .block
+            - @recent_churns.each do |subscription|
+              .p.-t5
+                .inline.c.-w6= link_to "· #{ subscription.user.email_address }:", [:admin, subscription]
+                #{ subscription.plan.human_name }
+                - if subscription.is_stripe?
+                  (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})

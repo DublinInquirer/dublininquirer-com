@@ -145,7 +145,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'dashboard#show'
-    get 'auto', to: 'dashboard#auto'
     resources :articles do
       member do
         get :edit_content

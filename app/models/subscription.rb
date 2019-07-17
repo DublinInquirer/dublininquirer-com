@@ -41,6 +41,7 @@ class Subscription < ApplicationRecord
   scope :includes_print, -> { joins(:plan).merge( Plan.includes_print ).distinct }
   scope :needs_shipping, -> { active.includes_print }
   scope :churning, -> { is_stripe.delinquent }
+  scope :churned, -> { where(status: %w(unpaid canceled)) }
 
   def update_from_stripe!
     return unless self.stripe_id && self.stripe_subscription.present?
@@ -304,12 +305,6 @@ class Subscription < ApplicationRecord
         }.values
       end
     end
-  end
-
-  def self.recent_split_percentage
-    all_recent = all.is_stripe.where(created_at: ((Time.zone.now - 1.month)..Time.zone.now))
-
-    return ((all_recent.includes_print.count * 100.0) / all_recent.count)
   end
 
   def set_address_from_user!
