@@ -65,7 +65,7 @@ class User < ApplicationRecord
       self.metadata = {'description': cus['description']}
     end
 
-    self.sources_count = cus.sources.count
+    self.sources_count = cus.respond_to?(:sources) ? cus.sources.count : 0
     if cus.default_source.present?
       cus.sources.each do |stripe_source|
         next unless stripe_source.id == cus.default_source
