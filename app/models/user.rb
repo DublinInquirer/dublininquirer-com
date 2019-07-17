@@ -137,10 +137,17 @@ class User < ApplicationRecord
     since_time
   end
 
+  def needs_source?
+    self.subscriptions.each do |s|
+      return true if (s.subscription_type == 'stripe') && [:active, :past_due, :unpaid, :trialing].include?(s.status.downcase.to_sym) && (self.sources_count == 0)
+    end
+    false
+  end
+
   def delinquent?
     self.subscriptions.each do |s|
       return true if [:unpaid, :past_due].include?(s.status.downcase.to_sym)
-      return true if (s.status.downcase.to_sym == :trialing) && self.stripe_default_source.nil?
+      return true if (s.status.downcase.to_sym == :trialing) && (self.sources_count == 0)
     end
     false
   end
