@@ -26,8 +26,8 @@
     %dt Wants newsletter?
     %dd= @user.subscribed_weekly ? 'Yes' : 'No'
 
-    %dt Role
-    %dd= @user.role
+    %dt Has a payment card?
+    %dd= (@user.sources_count > 0) ? 'Yes' : 'No'
 
     - if @user.created_at < Date.new(2018,9,1)
       %dt Migrated?

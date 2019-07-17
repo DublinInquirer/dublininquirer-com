@@ -50,6 +50,9 @@ class User < ApplicationRecord
     save!
   end
 
+  def remove_sensitive_information_from_stripe!
+  end
+
   def update_from_stripe!
     return unless self.stripe_id.present?
     cus = self.stripe_customer
