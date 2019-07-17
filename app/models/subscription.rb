@@ -90,7 +90,6 @@ class Subscription < ApplicationRecord
     subsc = self.stripe_subscription
 
     subsc.metadata = {}
-    subsc.description = nil
 
     subsc.save
   end
