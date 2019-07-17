@@ -36,6 +36,6 @@
             - @recent_churns.each do |subscription|
               .p.-t5
                 .inline.c.-w6= link_to "· #{ subscription.user.email_address }:", [:admin, subscription]
-                #{ subscription.plan.human_name }
+                #{ subscription.plan.is_print? ? 'Print' : 'Digital' }
                 - if subscription.is_stripe?
                   (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
