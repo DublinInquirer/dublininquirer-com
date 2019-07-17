@@ -35,6 +35,8 @@ class Plan < ApplicationRecord
   def stripe_plan
     return nil unless self.stripe_id.present?
     @stripe_plan ||= Stripe::Plan.retrieve(self.stripe_id)
+  rescue Stripe::InvalidRequestError
+    nil
   end
 
   def monthly?
