@@ -51,6 +51,16 @@ class User < ApplicationRecord
   end
 
   def remove_sensitive_information_from_stripe!
+    return unless self.stripe_id.present?
+    cus = self.stripe_customer
+
+    cus.email = nil
+    cus.name = nil
+    cus.phone = nil
+    cus.metadata = {}
+    cus.description = nil
+
+    cus.save
   end
 
   def update_from_stripe!
@@ -78,6 +88,7 @@ class User < ApplicationRecord
       end
     end
 
+    remove_sensitive_information_from_stripe!
     save!
   end
 

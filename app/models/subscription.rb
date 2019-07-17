@@ -84,6 +84,16 @@ class Subscription < ApplicationRecord
     save!
   end
 
+  def remove_sensitive_information_from_stripe!
+    return unless self.stripe_id.present?
+    subsc = self.stripe_subscription
+
+    subsc.metadata = {}
+    subsc.description = nil
+
+    subsc.save
+  end
+
   def normalise_plan!
     return if !self.is_stripe? # return if non-stripe sub
     return if self.product.is_active? # return if normal already
