@@ -9,4 +9,9 @@
       = f.label :name
       = f.text_field :name
 
+    .field.-tick
+      = f.label :autolink do
+        Autolink?
+        = f.check_box :autolink
+
   .actions= f.submit 'Save', class: 'button'
