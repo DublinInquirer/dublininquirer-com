@@ -1,0 +1,31 @@
+- content_for :subheader_list do
+  %div
+    .breadcrumbs
+      = link_to 'Comments', [:admin, :comments]
+
+    %nav &nbsp;
+
+  %div.filters
+    .page
+      .current #{ @comments.current_page }/#{ @comments.total_pages }
+      .pagination
+        - if !@comments.first_page?
+          = link_to '<', p: (@comments.current_page - 1)
+        - else
+          %a.-disabled
+            <
+        - if !@comments.last_page?
+          = link_to '>', p: (@comments.current_page + 1)
+        - else
+          %a.-disabled
+            >
+
+%table.admin-table
+  %tbody
+    - @comments.each do |comment|
+      - cache ['admin', comment, 'row'] do
+        %tr
+          %td= link_to comment.display_name, [:admin, comment]
+          %td= link_to comment.article.title, [:admin, comment]
+          %td{width: '150'}= comment.created_at.strftime('%k:%M on %Y/%m/%d')
+          %td{width: '150'}= comment.is_published? ? 'published' : '-'

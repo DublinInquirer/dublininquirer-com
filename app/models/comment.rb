@@ -16,6 +16,8 @@ class Comment < ApplicationRecord
   scope :created_since, -> (t) { where('created_at > ?', t) }
   scope :by_user, -> (u) { where(user_id: u.id) }
 
+  paginates_per 8
+
   def display_name
     return self.nickname if self.nickname.present?
     return self.user.comment_name if self.user.present? && self.user.nickname.present?
