@@ -88,7 +88,6 @@ class User < ApplicationRecord
       end
     end
 
-    remove_sensitive_information_from_stripe!
     save!
   end
 
