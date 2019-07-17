@@ -7,7 +7,7 @@
             %h3= link_to "Current issue", [:admin, @current_issue]
           
           .block
-            - @current_issue.articles.each do |article|
+            - @current_issue.articles.by_position.each do |article|
               .p.-t5
                 .inline.c.-w6= link_to "· #{ article.title }", [:admin, article]
                 by #{ article.authors.map { |a| a.full_name }.to_sentence }
