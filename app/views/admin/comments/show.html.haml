@@ -1,8 +1,8 @@
 - content_for :subheader_detail do
   %div
     .breadcrumbs
-      = link_to 'Article', [:admin, @comment.article]
-      = link_to "#{@comment.display_name}'s comment", [:admin, @comment.user]
+      = link_to 'Comments', [:admin, :comments]
+      = link_to @comment.display_name, [:admin, @comment]
 
     %nav
       - if !@comment.is_spam?
