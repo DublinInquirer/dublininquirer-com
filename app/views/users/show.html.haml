@@ -56,10 +56,13 @@
                   - if current_user.sources_count > 0
                     %p
                       #{ current_user.card_brand }
-                      (<code>...#{ current_user.card_last_4 }</code>)
+                      (<code>&hellip;#{ current_user.card_last_4 }</code>)
                   - else
-                    :markdown
-                      We don't have a working payment method on file for you. Can you supply one?
+                    .block.-mb1
+                      :markdown
+                        We don't have a working payment method on file for you.
+
+                    = link_to "Enter payment details", [:payment, :user], class: 'button -standard'
 
   - if @invoices.any?
     - cache ['user/show', current_user, 'invoices', @invoices] do

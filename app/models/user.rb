@@ -153,9 +153,9 @@ class User < ApplicationRecord
   def needs_source?
     return false if self.sources_count > 0
 
-    self.subscriptions.each do |s|
-      return true if (s.subscription_type == 'stripe') && [:active, :past_due, :unpaid, :trialing].include?(s.status.downcase.to_sym)
-    end
+    most_recent = self.subscriptions.order('created_at desc').first
+
+    return true if (most_recent.subscription_type == 'stripe') && [:active, :past_due, :unpaid, :trialing].include?(most_recent.status.downcase.to_sym)
 
     false
   end
