@@ -39,3 +39,6 @@
                 #{ subscription.plan.is_print? ? 'Print' : 'Digital' }
                 - if subscription.is_stripe?
                   (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
+
+:markdown
+  Brian's shame: <code>#{ number_to_currency(@shame_mrr, unit: '€') }</code>
