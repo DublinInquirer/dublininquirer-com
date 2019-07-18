@@ -151,9 +151,12 @@ class User < ApplicationRecord
   end
 
   def needs_source?
+    return false if self.sources_count > 0
+
     self.subscriptions.each do |s|
-      return true if (s.subscription_type == 'stripe') && [:active, :past_due, :unpaid, :trialing].include?(s.status.downcase.to_sym) && (self.sources_count == 0)
+      return true if (s.subscription_type == 'stripe') && [:active, :past_due, :unpaid, :trialing].include?(s.status.downcase.to_sym)
     end
+
     false
   end
 
