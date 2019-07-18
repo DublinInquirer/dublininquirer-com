@@ -48,21 +48,7 @@ class Subscription < ApplicationRecord
     return unless self.stripe_id && self.stripe_subscription.present?
 
     subs = self.stripe_subscription
-    u = User.where(stripe_id: subs['customer']).first
 
-    self.user = if u.present?
-      u
-    else
-      raise "No user for #{ self.id }: #{ self.stripe_id }"
-    end
-
-    self.plan = if subs['plan'].present?
-      Plan.find_or_create_by(stripe_id: subs['plan']['id'])
-    else
-      raise "No plan for subscription: #{ self.stripe_id }"
-    end
-
-    self.metadata = subs['metadata']
     self.status = subs['status']
     self.cancel_at_period_end = subs['cancel_at_period_end']
 
