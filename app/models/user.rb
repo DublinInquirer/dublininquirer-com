@@ -152,6 +152,7 @@ class User < ApplicationRecord
 
   def needs_source?
     return false if self.sources_count > 0
+    return false if self.subscriptions.empty?
 
     most_recent = self.subscriptions.order('created_at desc').first
 
