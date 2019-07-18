@@ -8,10 +8,11 @@
 %nav.meta-nav{class: css_classes}
   .wrapper.-container{role: 'layout'}
     .block.-bb
-      .meta-nav_content
+      .meta-nav_content{style: 'min-height: 4.5rem'}
         .left
-          %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
-            .icon= render partial: 'layouts/images/hamburger'
+          - unless (defined?(brief) && brief)
+            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
+              .icon= render partial: 'layouts/images/hamburger'
 
         - if !(defined?(small) && small)
           .center
@@ -36,8 +37,9 @@
                 %span Log in
 
           - else
-            = link_to login_path, class: 'meta-nav_item' do
-              %span Log in
+            - if !logged_in?
+              = link_to login_path, class: 'meta-nav_item' do
+                %span Log in
 
           - unless (defined?(brief) && brief)
             - if !logged_in? or !current_user.subscriber?

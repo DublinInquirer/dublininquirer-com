@@ -1,5 +1,15 @@
 .content
-  - if !logged_in? or !current_user.subscriber?
+  - if logged_in? and current_user.lapsed?
+    %section.block.-py2.-px1.-mb2.-bg-blue
+      %h4.c.-w8 Special offer for past subscribers
+
+      .block.-my1
+        :markdown
+          Resubscribe to Dublin Inquirer and get your first month free.
+
+      .block.-mt2= link_to "Subscribe", '/resubscribe-offer-2018', class: 'button -white'
+
+  - elsif !logged_in? or !current_user.subscriber?
     %section.block.-py2.-px1.-mb2.-bg-blue
       %h4.c.-w8 Support local journalism
 

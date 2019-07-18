@@ -38,6 +38,7 @@ class Subscription < ApplicationRecord
   scope :active, -> { where(status: %w(trialing active past_due unpaid)) }
   scope :delinquent, -> { where(status: %w(past_due unpaid)) }
   scope :is_stripe, -> { where(subscription_type: 'stripe') }
+  scope :is_fixed, -> { where(subscription_type: 'fixed') }
   scope :includes_print, -> { joins(:plan).merge( Plan.includes_print ).distinct }
   scope :needs_shipping, -> { active.includes_print }
   scope :churning, -> { is_stripe.delinquent }
@@ -177,6 +178,10 @@ class Subscription < ApplicationRecord
     (self.subscription_type == 'fixed')
   end
 
+  def lapsed?
+    (self.status == 'lapsed')
+  end
+
   def patron?
     (self.plan.is_friend? or self.plan.is_patron?)
   end
@@ -285,6 +290,16 @@ class Subscription < ApplicationRecord
     update_from_stripe!
   end
 
+  def set_address_from_user!
+    return false unless self.user.present?
+    set_address_from_user(self.user)
+    save!
+  end
+
+  def self.searchable_columns
+    [:stripe_id]
+  end
+
   def self.to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w(id name address_line_1 address_line_2 city county post_code country hub)
@@ -307,14 +322,11 @@ class Subscription < ApplicationRecord
     end
   end
 
-  def set_address_from_user!
-    return false unless self.user.present?
-    set_address_from_user(self.user)
-    save!
-  end
-
-  def self.searchable_columns
-    [:stripe_id]
+  def self.mark_as_lapsed!
+    is_fixed.active.each do |subscription|
+      subscription.set_status
+      subscription.save!
+    end
   end
 
   private

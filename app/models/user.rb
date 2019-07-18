@@ -165,6 +165,16 @@ class User < ApplicationRecord
     false
   end
 
+  def lapsed? # mostly for gift subs
+    return false if self.subscription.present? # false if an active sub
+    return false if self.subscriptions.empty? # false if never had a sub
+
+    most_recent_sub = self.subscriptions.order('created_at desc').first
+    return false if most_recent_sub.subscription_type != 'fixed' # false unless most recent sub is fixed
+    return true if most_recent_sub.lapsed?
+    false
+  end
+
   def patron? # pays more than base price
     return false unless self.subscription
     self.subscription.patron?
@@ -172,7 +182,7 @@ class User < ApplicationRecord
 
   def subscription
     return nil unless self.subscriptions.active.any?
-    subscriptions.active.first
+    subscriptions.active.order('created_at desc').first
   end
 
   def subscription_status

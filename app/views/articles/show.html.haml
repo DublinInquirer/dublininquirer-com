@@ -28,20 +28,20 @@
   .block.-bt.-py4.-mt4
     - if @article.tags.any?
       .row
-        .col-xs-12.col-md-4
+        .col-xs-12.col-md-6.col-lg-4
           %h3.p.-t4.c.-w6 Filed under:
 
           .block.-mb2
-            .p.-t3
+            .p.-t4
               %ul.list.-sentence
                 - @article.displayable_tags.each do |tag|
                   %li= link_to tag.name, tag_path(id: tag.slug)
 
-        .col-xs-12.col-md-4
+        .col-xs-12.col-md-6.col-lg-4
           %h3.p.-t4.c.-w6 #{ @article.authors.many? ? 'Authors' : 'Author' }:
 
           .block.-mb2
-            .p.-t3
+            .p.-t4
               - @article.authors.each do |author|
                 :markdown
                   _#{ link_to author.full_name, author }:_ #{ author.bio }

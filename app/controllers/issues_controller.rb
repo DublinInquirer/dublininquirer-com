@@ -6,6 +6,6 @@ class IssuesController < ApplicationController
 
   def show
     @issue = Issue.published.find_by(issue_date: params[:id])
-    @articles = @issue.articles
+    @articles = @issue.articles.by_position
   end
 end
