@@ -296,6 +296,11 @@ class Subscription < ApplicationRecord
     save!
   end
 
+  def mark_as_lapsed_if_lapsed!
+    set_status
+    save!
+  end
+
   def self.searchable_columns
     [:stripe_id]
   end
@@ -323,9 +328,8 @@ class Subscription < ApplicationRecord
   end
 
   def self.mark_as_lapsed!
-    is_fixed.active.each do |subscription|
-      subscription.set_status
-      subscription.save!
+    is_fixed.active.each do |s|
+      s.mark_as_lapsed_if_lapsed!
     end
   end
 
