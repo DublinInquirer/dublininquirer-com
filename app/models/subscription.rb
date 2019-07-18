@@ -109,6 +109,16 @@ class Subscription < ApplicationRecord
     self.status
   end
 
+  def mrr
+    return nil unless is_stripe?
+    return nil unless self.plan.present?
+    return 0 unless self.plan.amount
+
+    divisor = (self.plan.interval == 'month') ? 1 : 12
+
+    (self.plan.amount / divisor.to_f)
+  end
+
   def product_name
     self.product.name
   end
