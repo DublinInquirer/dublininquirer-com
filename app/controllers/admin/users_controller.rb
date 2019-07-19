@@ -44,7 +44,9 @@ class Admin::UsersController < Admin::ApplicationController
     @user = User.find(params[:id])
     if @user.update(update_params)
       @user.remove_sensitive_information_from_stripe!
-      @user.subscription.remove_sensitive_information_from_stripe!
+      if @user.subscription.present?
+        @user.subscription.remove_sensitive_information_from_stripe!
+      end
       redirect_to [:admin, @user]
     else
       render :edit
