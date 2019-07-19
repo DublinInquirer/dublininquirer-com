@@ -93,6 +93,7 @@ class StripeImporter
 
   def self.import_invoice_from_invoice(stripe_invoice)
     return true if Invoice.where(stripe_id: stripe_invoice['id']).any?
+    return true unless stripe_invoice['date'].present? && stripe_invoice['due_date'].present?
     invoice = Invoice.new(stripe_id: stripe_invoice['id'])
     invoice.assign_attributes(invoice_attributes_from_stripe_invoice(stripe_invoice))
     invoice.save_without_timestamping!
