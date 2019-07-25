@@ -1,7 +1,15 @@
 class ApplicationController < ActionController::Base
   impersonates :user
-  before_action :set_raven_context
+  before_action :set_raven_context, :log_out_deleted_users
   helper_method :current_visitor, :remaining_reads, :read_count, :permission_for_cookie?
+
+  def log_out_deleted_users
+    return true unless logged_in?
+    return true unless current_user.scheduled_for_deletion?
+
+    logout
+    redirect_to :root
+  end
 
   def remaining_reads
     (current_visitor.read_limit - current_visitor.read_count)

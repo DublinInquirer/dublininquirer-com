@@ -1,0 +1,19 @@
+- content_for :subheader_detail do
+  %div
+    .breadcrumbs
+      = link_to 'Users', [:admin, :users]
+      = link_to @user.email_address, [:admin, @user]
+      = link_to 'Delete', [:confirm_delete, :admin, @user]
+
+    %nav
+      = link_to "Cancel without deleting", [:admin, @user], class: 'button -cancel'
+
+.admin-preview
+  .block.-b.-p2
+    .block.-mb4
+      .p.-t3
+        :markdown
+          Deleting `#{ @user.email_address }` will permanently delete all data related to this account. That includes personal details, comments, subscriptions, payment cards.
+      
+    .block.-mb2
+      = link_to "Yes, permanently delete '#{ @user.email_address }'", [:admin, @user], class: 'button -red -big', method: :delete

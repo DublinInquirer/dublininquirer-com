@@ -104,6 +104,15 @@ class Subscription < ApplicationRecord
     end
   end
 
+  def delete_completely!
+    self.remove_sensitive_information_from_stripe!
+    self.cancel_subscription_now!
+
+    reload
+
+    self.destroy
+  end
+
   def human_status
     return 'cancelling' if is_cancelling?
     self.status
@@ -275,6 +284,12 @@ class Subscription < ApplicationRecord
       str_sub.save
     end
 
+    update_from_stripe!
+  end
+
+  def cancel_subscription_now! # affects stripe
+    str_sub = self.stripe_subscription
+    str_sub.delete
     update_from_stripe!
   end
 

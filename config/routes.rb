@@ -178,6 +178,8 @@ Rails.application.routes.draw do
       member do
         put :reset_password
         put :impersonate
+        put :cancel_delete
+        get :confirm_delete
       end
     end
     resources :subscriptions, except: [:new, :create] do

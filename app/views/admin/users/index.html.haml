@@ -30,6 +30,6 @@
   %tbody
     - @users.each do |user|
       - cache ['admin', user, user.subscription, 'row'] do
-        %tr
+        %tr{class: user.scheduled_for_deletion? ? '-deleted' : nil}
           %td= link_to "#{ user.full_name.present? ? user.full_name : user.email_address }", [:admin, user]
           %td{width: '150'}= user.created_at.strftime('%e %b %Y')

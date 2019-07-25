@@ -40,6 +40,35 @@ class User < ApplicationRecord
     self.set_password_at.present?
   end
 
+  def schedule_for_deletion!
+    self.deleted_at = Time.now + 1.day
+    self.email_address = "#{ self.email_address }///#{ self.deleted_at.to_i }"
+    save!
+  end
+
+  def cancel_deletion!
+    self.deleted_at = nil
+    self.email_address = self.email_address.split('///').try(:first)
+    save!
+  end
+
+  def scheduled_for_deletion?
+    self.deleted_at.present?
+  end
+
+  def delete_completely!
+    return false unless self.scheduled_for_deletion? # probably stupid but i'm scared
+    self.comments.each(&:destroy)
+    self.subscriptions.each(&:delete_completely!)
+    self.remove_sensitive_information_from_stripe!
+    self.remove_sources_from_stripe!
+    self.stripe_customer.delete
+
+    reload
+    
+    self.destroy
+  end
+
   def is_banned?
     self.banned_at.present?
   end
@@ -50,8 +79,21 @@ class User < ApplicationRecord
     save!
   end
 
+  def remove_sources_from_stripe!
+    return unless self.stripe_id.present?
+    
+    cus = self.stripe_customer
+
+    cus.sources.each do |src|
+      src.delete
+    end
+
+    cus.save
+  end
+
   def remove_sensitive_information_from_stripe!
     return unless self.stripe_id.present?
+    
     cus = self.stripe_customer
 
     cus.email = nil
@@ -79,6 +121,7 @@ class User < ApplicationRecord
     end
 
     self.sources_count = cus.respond_to?(:sources) ? cus.sources.count : 0
+
     if cus.respond_to?(:default_source) && cus.default_source.present?
       cus.sources.each do |stripe_source|
         next unless stripe_source.id == cus.default_source

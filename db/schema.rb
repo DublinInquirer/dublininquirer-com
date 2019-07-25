@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_17_152741) do
+ActiveRecord::Schema.define(version: 2019_07_25_123550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -320,6 +320,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_152741) do
     t.integer "sources_count", default: 0
     t.text "card_last_4"
     t.text "card_brand"
+    t.datetime "deleted_at"
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
     t.index "to_tsvector('english'::regconfig, full_name)", name: "users_full_name", using: :gin
@@ -329,6 +330,7 @@ ActiveRecord::Schema.define(version: 2019_07_17_152741) do
     t.index ["city"], name: "index_users_on_city"
     t.index ["country_code"], name: "index_users_on_country_code"
     t.index ["county"], name: "index_users_on_county"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
     t.index ["hub"], name: "index_users_on_hub"
     t.index ["nickname"], name: "index_users_on_nickname"

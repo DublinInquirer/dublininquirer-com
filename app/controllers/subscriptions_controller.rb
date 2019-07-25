@@ -15,7 +15,8 @@ class SubscriptionsController < ApplicationController
       @user.assign_attributes(
         given_name: @subscription.given_name,
         surname: @subscription.surname,
-        stripe_token: params[:stripe_token]
+        stripe_token: params[:stripe_token],
+        sources_count: 1
       )
     else
       @user = User.new(
@@ -24,7 +25,8 @@ class SubscriptionsController < ApplicationController
         surname: @subscription.surname,
         password: @subscription.password,
         stripe_token: params[:stripe_token],
-        set_password_at: Time.zone.now
+        set_password_at: Time.zone.now,
+        sources_count: 1
       )
     end
 

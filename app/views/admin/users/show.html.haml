@@ -5,14 +5,27 @@
       = link_to @user.email_address, [:admin, @user]
 
     %nav
-      = link_to "Edit user", [:edit, :admin, @user], class: 'button'
-      = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put
-      = link_to "Add a fixed subscription", new_admin_user_subscription_path(@user, subscription_type: 'fixed'), class: 'button'
-      = link_to "Add a Stripe subscription", new_admin_user_subscription_path(@user, subscription_type: 'stripe'), class: 'button'
+
+      - if @user.scheduled_for_deletion?
+        = link_to "Cancel deletion", [:cancel_delete, :admin, @user], class: 'button', method: :put
+      - else
+        = link_to "Edit user", [:edit, :admin, @user], class: 'button'
+        = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put
+        = link_to "Delete this user", [:confirm_delete, :admin, @user], class: 'button', method: :get
+
+        - if !current_user.subscriber?
+          = link_to "Add sub (fixed)", new_admin_user_subscription_path(@user, subscription_type: 'fixed'), class: 'button'
+          = link_to "Add sub (stripe)", new_admin_user_subscription_path(@user, subscription_type: 'stripe'), class: 'button'
+        
       - if current_user.is_superadmin?
         = link_to "Impersonate this user", [:impersonate, :admin, @user], class: 'button', method: :put
 
 .admin-details
+  - if @user.scheduled_for_deletion?
+    .block.-bg-red.-p2.-mb2
+      .p.-t3
+        This user will be fully, permanently, terrifyingly deleted in #{ time_ago_in_words @user.deleted_at }.
+
   %dl.admin-data
     %dt Email address
     %dd= @user.email_address

@@ -53,6 +53,22 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def confirm_delete
+    @user = User.find(params[:id])
+  end
+
+  def cancel_delete
+    @user = User.find(params[:id])
+    @user.cancel_deletion!
+    redirect_to [:admin, @user]
+  end
+
+  def destroy
+    @user = User.find(params[:id])
+    @user.schedule_for_deletion!
+    redirect_to [:admin, @user]
+  end
+
   def reset_password
     @user = User.find(params[:id])
     @user.deliver_reset_password_instructions! if @user
