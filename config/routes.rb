@@ -174,6 +174,7 @@ Rails.application.routes.draw do
     resources :authors
     resources :gift_subscriptions
     resources :users do
+      resources :user_notes, only: [:new, :create, :destroy]
       resources :subscriptions, only: [:new, :create]
       member do
         put :reset_password

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_25_123550) do
+ActiveRecord::Schema.define(version: 2019_07_25_145322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -286,6 +286,14 @@ ActiveRecord::Schema.define(version: 2019_07_25_123550) do
     t.index ["slug"], name: "index_tags_on_slug", unique: true
   end
 
+  create_table "user_notes", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_notes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.text "email_address", null: false
     t.text "crypted_password"
@@ -321,6 +329,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_123550) do
     t.text "card_last_4"
     t.text "card_brand"
     t.datetime "deleted_at"
+    t.jsonb "notes", default: {}
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
     t.index "to_tsvector('english'::regconfig, full_name)", name: "users_full_name", using: :gin
@@ -334,6 +343,7 @@ ActiveRecord::Schema.define(version: 2019_07_25_123550) do
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
     t.index ["hub"], name: "index_users_on_hub"
     t.index ["nickname"], name: "index_users_on_nickname"
+    t.index ["notes"], name: "index_users_on_notes", using: :gin
     t.index ["post_code"], name: "index_users_on_post_code"
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token"
@@ -362,5 +372,6 @@ ActiveRecord::Schema.define(version: 2019_07_25_123550) do
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "subscriptions", column: "parent_id"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "user_notes", "users"
   add_foreign_key "visitors", "users"
 end

@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :subscriptions
   has_many :plans, through: :subscriptions
   has_many :invoices
+  has_many :user_notes
 
   attribute :stripe_token, :string
 

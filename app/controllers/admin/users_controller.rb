@@ -20,6 +20,7 @@ class Admin::UsersController < Admin::ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_note = @user.user_notes.new
   end
 
   def new

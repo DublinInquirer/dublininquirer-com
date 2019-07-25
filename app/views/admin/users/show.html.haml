@@ -69,3 +69,16 @@
             = link_to [:admin, subscription] do
               = subscription.plan.product.name
               (#{subscription.human_status})
+
+    .block.-bt.-pt2.-mt2
+      - @user.user_notes.reverse_chronologically.reject { |u| !u.persisted? }.each do |user_note|
+        .block.-bg-faint.-p2.-mb2
+          :markdown
+            #{ user_note.body } _<span class="c -grey"> — #{ user_note.created_at.strftime('%d/%m/%Y') }</span>_
+
+      = form_for [:admin, @user, @user_note], html: { class: 'admin-form block -m0' } do |f|
+        .field
+          = f.label :body, 'Add a note:'
+          = f.text_area :body
+        .actions
+          = f.submit 'Save', class: 'button'
