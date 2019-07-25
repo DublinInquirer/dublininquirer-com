@@ -58,6 +58,7 @@ class User < ApplicationRecord
 
   def delete_completely!
     return false unless self.scheduled_for_deletion? # probably stupid but i'm scared
+    Raven.capture_message 'Permanently deleting a user', extra: { user: self.email_address }
     self.comments.each(&:destroy)
     self.subscriptions.each(&:delete_completely!)
     self.remove_sensitive_information_from_stripe!
