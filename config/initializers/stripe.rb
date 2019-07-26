@@ -11,4 +11,4 @@ else
 end
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
-Stripe.api_version = "2019-03-14"
+Stripe.api_version = "2019-05-16"

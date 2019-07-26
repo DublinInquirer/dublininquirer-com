@@ -220,9 +220,7 @@ class Subscription < ApplicationRecord
       plan: new_plan.stripe_id,
     }]
 
-    str_sub.save
-
-    update_from_stripe!
+    str_sub.save && update(plan: new_plan)
   end
 
   def change_price_to!(amount) # affects stripe
@@ -242,19 +240,16 @@ class Subscription < ApplicationRecord
       plan: new_plan.stripe_id,
     }]
 
-    str_sub.save
-
-    update_from_stripe!
+    str_sub.save && update(plan: new_plan)
   end
 
   def change_billing_date_to!(date) # affects stripe
+    trial_ends_at = Date.parse(date).beginning_of_day
     str_sub = self.stripe_subscription
     str_sub.prorate = false
-    str_sub.trial_end = Date.parse(date).beginning_of_day.to_i
+    str_sub.trial_end = trial_ends_at.to_i
 
-    str_sub.save
-
-    update_from_stripe!
+    str_sub.save && update(trial_ends_at: trial_ends_at)
   end
 
   def toggle_cancellation!
