@@ -31,6 +31,7 @@ class SubscriptionsController < ApplicationController
     end
 
     if @subscription.requires_address?
+      @subscription.landing_page = nil
       @user.address_line_1 = @subscription.address_line_1
       @user.address_line_2 = @subscription.address_line_2
       @user.city = @subscription.city
