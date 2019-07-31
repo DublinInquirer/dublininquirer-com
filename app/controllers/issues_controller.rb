@@ -1,7 +1,7 @@
 class IssuesController < ApplicationController
   def index
     @page = [params[:p].to_i, 1].compact.max
-    @issues = Issue.published.order('issue_date desc').page(@page)
+    @issues = Issue.published.order('issue_date desc').includes(:articles).page(@page)
   end
 
   def show
