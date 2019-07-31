@@ -289,7 +289,13 @@ class Subscription < ApplicationRecord
 
   def cancel_subscription_now! # affects stripe
     str_sub = self.stripe_subscription
-    str_sub.delete
+    
+    begin
+      str_sub.delete
+    rescue Stripe::InvalidRequestError
+      return
+    end
+    
     update_from_stripe!
   end
 
