@@ -24,7 +24,7 @@ class User < ApplicationRecord
   before_save :reset_hub, if: :will_save_change_to_address?
   before_validation :normalise_email, :figure_out_country_code, :normalise_name
 
-  before_destroy :orphan_comments
+  before_destroy :orphan_comments, :orphan_invoices
 
   scope :unmigrated, -> { where(set_password_at: nil) }
   scope :migrated, -> { where.not(set_password_at: nil) }
@@ -383,6 +383,10 @@ class User < ApplicationRecord
       comment.email_address = self.email_address
       comment.save!
     end
+  end
+
+  def orphan_invoices
+    self.invoices.update_all(user_id: nil, subscription_id: nil)
   end
 
   def create_stripe_customer
