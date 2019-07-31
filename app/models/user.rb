@@ -386,7 +386,7 @@ class User < ApplicationRecord
   end
 
   def orphan_invoices
-    self.invoices.update_all(user_id: nil, subscription_id: nil)
+    self.invoices.update_all(user_id: nil)
   end
 
   def create_stripe_customer

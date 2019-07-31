@@ -33,6 +33,8 @@ class Subscription < ApplicationRecord
 
   after_validation :sync_stripe_subscription, :set_status
   before_validation :set_ended_at_for_fixed, if: -> (s) { s.is_fixed? && s.duration_months.present? }
+  
+  before_destroy :orphan_invoices
 
   scope :paid, -> { where(status: %w(trialing active)) }
   scope :active, -> { where(status: %w(trialing active past_due unpaid)) }
@@ -351,6 +353,10 @@ class Subscription < ApplicationRecord
   end
 
   private
+
+  def orphan_invoices
+    self.invoices.update_all(subscription_id: nil)
+  end
 
   def set_ended_at_for_fixed
     return true if self.subscription_type != 'fixed'
