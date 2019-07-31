@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 
   def feed
     @articles = Rails.cache.fetch("/articles/feed", expires_in: 1.hour) do
-      Article.published.by_date.limit(100)
+      Article.published.includes(:authors, :artworks).by_date.limit(50)
     end
 
     respond_to do |format|
@@ -25,7 +25,7 @@ class ArticlesController < ApplicationController
   def search
     @page = [params[:p].to_i, 1].compact.max
     @query = params[:q]
-    @articles = Article.published.basic_search(@query).page(@page)
+    @articles = Article.published.basic_search(@query).includes(:authors, :artworks).page(@page)
   end
 
   private
