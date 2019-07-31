@@ -20,9 +20,9 @@ class Visitor < ApplicationRecord
   end
 
   def read_count
-    articles_array.reject do |viewed_article|
+    @read_count ||= articles_array.reject do |viewed_article|
       viewed_article['date'].nil? or
-      (Date.parse(viewed_article['date']).beginning_of_day < 30.days.ago)
+      (Date.parse(viewed_article['date']).beginning_of_day < 1.month.ago)
     end.count
   end
 

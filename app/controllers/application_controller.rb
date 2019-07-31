@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
       visitor = Visitor.find(cookies.signed[:visitor_id])
       return visitor if visitor.present?
     end
+    
     visitor = Visitor.create!
     cookies.permanent.signed[:visitor_id] = visitor.id
     return visitor

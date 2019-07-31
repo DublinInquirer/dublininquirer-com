@@ -3,8 +3,8 @@ FactoryBot.define do
     issue
 
     title {  Faker::Book.unique.title }
-    excerpt { Faker::Books::Lovecraft.sentence(2) }
-    content { Faker::Books::Lovecraft.paragraph(2) }
+    excerpt { Faker::Books::Lovecraft.sentences }
+    content { Faker::Books::Lovecraft.paragraphs }
     template { 'standard' }
     category { 'city-desk' }
   end
