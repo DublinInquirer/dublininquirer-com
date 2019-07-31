@@ -76,10 +76,15 @@ class Subscription < ApplicationRecord
   def remove_sensitive_information_from_stripe!
     return unless self.stripe_id.present?
     subsc = self.stripe_subscription
+    return unless subsc.present?
 
     subsc.metadata = {}
-
-    subsc.save
+    
+    begin
+      subsc.save
+    rescue Stripe::InvalidRequestError
+      return
+    end
   end
 
   def normalise_plan!
