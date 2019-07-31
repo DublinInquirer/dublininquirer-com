@@ -46,8 +46,8 @@
                 :markdown
                   _#{ link_to author.full_name, author }:_ #{ author.bio }
 
-.block.-bt.-py4
-  - if @article.commentable?
+- if @article.commentable?
+  .block.-bt.-py4
     = render partial: 'comments/comments', locals: { article: @article }
 
 - cache ['articles', @article.from_the_same_issue, 'preview'] do

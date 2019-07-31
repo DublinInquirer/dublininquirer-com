@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def show
-    @article = Article.published.by_slug(internal_slug(params)).first
+    @article = Article.published.by_slug(internal_slug(params)).includes(:authors, :artworks, :comments).first
 
     if !@article
       raise ActiveRecord::RecordNotFound
