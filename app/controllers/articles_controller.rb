@@ -1,6 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :set_response_format
-  
   def show
     @article = Article.published.by_slug(internal_slug(params)).includes(:authors, :artworks, :comments).first
 
