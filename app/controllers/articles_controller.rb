@@ -1,4 +1,6 @@
 class ArticlesController < ApplicationController
+  before_action :set_response_format
+  
   def show
     @article = Article.published.by_slug(internal_slug(params)).includes(:authors, :artworks, :comments).first
 
@@ -10,6 +12,8 @@ class ArticlesController < ApplicationController
 
     # if the article is paywalled, the user doesn't haven't permission, and the browser isn't a bot
     @limited = @article.paywalled? && !browser.bot? && !permission_for_article?(internal_slug(params))
+    
+    request.format = :html
   end
 
   def feed
