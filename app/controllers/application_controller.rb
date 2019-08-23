@@ -49,8 +49,8 @@ class ApplicationController < ActionController::Base
 
   def find_or_create_current_visitor
     if cookies.signed[:visitor_id].present?
-      visitor = Visitor.find_or_create_by(cookies.signed[:visitor_id])
-      return visitor if visitor.present?
+      v = Visitor.where(id: cookies.signed[:visitor_id]).take
+      return v if v.present?
     end
     
     visitor = Visitor.create!
