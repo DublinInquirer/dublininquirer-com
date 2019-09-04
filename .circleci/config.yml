@@ -4,7 +4,7 @@ jobs:
   build:
     working_directory: ~/inquirer
     docker:
-      - image: circleci/ruby:2.6.3
+      - image: circleci/ruby:2.6.4
         environment:
           PGHOST: localhost
           PGUSER: inquirer

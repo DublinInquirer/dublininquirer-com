@@ -27,6 +27,18 @@ I use Foreman to run things locally:
 
         $ foreman start
 
+or
+
+        $ heroku local
+
+## Tests
+
+Run the test suite with `rake`.
+
+## Contributing
+
+Yes please! Keep it to branches and PRs and make sure the tests pass!
+
 ## Some notes
 
 This code exists to run dublininquirer.com and would need some amount of rejiggering to work for other publications. I'm not maintaining it as an open-source CMS, but you're most welcome to look through the code and use it for ... whatever. If you add a feature we might find useful, I welcome pull requests.
