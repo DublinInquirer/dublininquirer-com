@@ -84,6 +84,7 @@ Rails.application.routes.draw do
   resources :gift_subscriptions, path: 'gifts', only: [:index, :show, :create] do
     collection do
       get :thanks
+      post :confirm
     end
   end
 
@@ -92,6 +93,7 @@ Rails.application.routes.draw do
       get :upgrade
       put :upgrade
       get :thanks
+      post :confirm
     end
   end
 
