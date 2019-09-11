@@ -1,7 +1,7 @@
-setupStripePaymentForm = (form) ->
+setupStripePaymentMethodForm = (form) ->
   confirmPayment = (data) ->
     $.ajax
-      url: '/subscriptions/confirm'
+      url: '/gifts/confirm'
       type: 'POST'
       dataType: 'HTML'
       beforeSend: (xhr) ->
@@ -10,8 +10,7 @@ setupStripePaymentForm = (form) ->
       data: data
       success: (data, status) ->
         if status == 'success'
-          window.location.href = "/subscriptions/thanks"
-
+          window.location.href = "/gifts/thanks"
   registerElements = (elements, form) ->
     formButton = $(':submit', form)
     errorEl = $('.error:first', form)
@@ -41,29 +40,29 @@ setupStripePaymentForm = (form) ->
       e.preventDefault()
       form.addClass('submitting')
       disableInputsAndButton()
-      stripe.createToken(elements[0], {}).then (result) ->
+      stripe.createPaymentMethod('card', elements[0]).then (result) ->
         form.removeClass( 'submitting' )
-        if result.token
+        if result.paymentMethod
           hiddenInput = document.createElement('input')
           hiddenInput.setAttribute('type', 'hidden')
-          hiddenInput.setAttribute('name', 'stripe_token')
-          hiddenInput.setAttribute('value', result.token.id)
+          hiddenInput.setAttribute('name', 'payment_method_id')
+          hiddenInput.setAttribute('value', result.paymentMethod.id)
           form[0].appendChild(hiddenInput)
           $.ajax
             type: 'POST'
-            url: '/subscriptions'
+            url: '/gifts'
             data: $(form).serializeArray()
             dataType: 'json'
             async: false
             success: (data, status) ->
               if data.status == 'requires_action'
-                stripe.handleCardPayment(data.payment_intent_client_secret).then (result) ->
+                stripe.handleCardAction(data.payment_intent_client_secret).then (result) ->
                   if result.error
                     confirmPayment paymentIntentId: null
                   else
                     confirmPayment paymentIntentId: data.payment_intent_client_id
               else if data.status == 'succeeded'
-                window.location.href = "/subscriptions/thanks"
+                window.location.href = "/gifts/thanks"
           return false
           form.addClass( 'submitted' )
         else
@@ -118,5 +117,5 @@ setupStripePaymentForm = (form) ->
 $(document).on 'ready turbolinks:load', ->
   'use strict'
 
-  for subscriptionForm in $('.subscription-form')
-    setupStripePaymentForm($(subscriptionForm))
+  for subscriptionForm in $('.subscription-payment-method-form')
+    setupStripePaymentMethodForm($(subscriptionForm))

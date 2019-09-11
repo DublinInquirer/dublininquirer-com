@@ -18,11 +18,13 @@ class GiftSubscription < ApplicationRecord
   attribute :recipient_post_code, :string
   attribute :recipient_country_code, :string
 
-  attribute :stripe_token, :string
+  attribute :payment_method_id, :string
 
   before_validation :set_redemption_code, if: -> (gs) { gs.redemption_code.blank? }
   after_initialize :setup_subscription, if: -> (gs) { !gs.subscription }
   after_save :save_subscription, if: -> (gs) { !gs.subscription.changed? }
+
+  attr_accessor :charge_object
 
   validates :plan_id, presence: true
 
@@ -79,7 +81,7 @@ class GiftSubscription < ApplicationRecord
   end
 
   def capture_charge!
-    return nil unless self.stripe_token.present?
+    return nil unless self.payment_method_id.present?
     create_stripe_charge
     self.save
   end
@@ -119,14 +121,16 @@ class GiftSubscription < ApplicationRecord
   end
 
   def create_stripe_charge
-    charge = Stripe::Charge.create(
+    charge = Stripe::PaymentIntent.create({
+      payment_method: self.payment_method_id,
       amount: self.price,
       currency: "eur",
-      source: self.stripe_token,
+      confirmation_method: 'manual',
+      confirm: true,
       description: "Gift Subscription: #{ self.product_name }"
-    )
-
+    })
     self.stripe_id = charge.id
+    self.charge_object = charge
 
     if !charge['failure_code']
       self.charged_at = Time.zone.now

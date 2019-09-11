@@ -45,7 +45,17 @@ class SubscriptionsController < ApplicationController
     if @user.save && @subscription.save
       @user.send_welcome!
       auto_login(@user, true) unless logged_in?
-      redirect_to :thanks_subscriptions
+      latest_invoice = @subscription.latest_invoice.payment_intent
+      respond_to do |format|
+        format.html { redirect_to :thanks_subscriptions }
+        format.js do
+          render json: {
+            status: latest_invoice.status,
+            payment_intent_client_id: latest_invoice.id,
+            payment_intent_client_secret: latest_invoice.client_secret
+          }
+        end
+      end
     else
       @products = Product.active
       @plans = Plan.where(product: @products, interval: 'month')
@@ -54,6 +64,22 @@ class SubscriptionsController < ApplicationController
       @product = @plan.product
       render 'products/show'
     end
+  end
+
+  def confirm
+    begin
+      if params['paymentIntentId'].present?
+        intent = Stripe::PaymentIntent.retrieve(params['paymentIntentId'])
+        unless intent.status == 'succeeded'
+          intent = Stripe::PaymentIntent.confirm(params['paymentIntentId'])
+        end
+        return redirect_to :thanks_subscriptions if intent.status == 'succeeded'
+      end
+    rescue Stripe::CardError => e
+      # Display error on client
+      flash[:alert] = e.message
+    end
+    redirect_to :thanks_subscriptions
   end
 
   def upgrade

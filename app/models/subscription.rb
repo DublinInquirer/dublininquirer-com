@@ -33,7 +33,7 @@ class Subscription < ApplicationRecord
 
   after_validation :sync_stripe_subscription, :set_status
   before_validation :set_ended_at_for_fixed, if: -> (s) { s.is_fixed? && s.duration_months.present? }
-  
+
   before_destroy :orphan_invoices
 
   scope :paid, -> { where(status: %w(trialing active)) }
@@ -45,6 +45,8 @@ class Subscription < ApplicationRecord
   scope :needs_shipping, -> { active.includes_print }
   scope :churning, -> { is_stripe.delinquent }
   scope :churned, -> { where(status: %w(unpaid canceled)) }
+
+  attr_accessor :latest_invoice
 
   def update_from_stripe!
     return unless self.stripe_id && self.stripe_subscription.present?
@@ -81,7 +83,7 @@ class Subscription < ApplicationRecord
     return unless subsc.present?
 
     subsc.metadata = {}
-    
+
     begin
       subsc.save
     rescue Stripe::InvalidRequestError
@@ -90,10 +92,10 @@ class Subscription < ApplicationRecord
   end
 
   def normalise_plan!
-    return if !self.is_stripe? # return if non-stripe sub
+    return if !self.is_stripe? # return if non-stripe sub
     return if self.product.is_active? # return if normal already
     return if !(self.status.try(:downcase) == 'active') # return if not active
-    
+
     if self.digital_only?
       change_product_to! :digital, true
     else
@@ -291,13 +293,13 @@ class Subscription < ApplicationRecord
 
   def cancel_subscription_now! # affects stripe
     str_sub = self.stripe_subscription
-    
+
     begin
       str_sub.delete
     rescue Stripe::InvalidRequestError
       return
     end
-    
+
     update_from_stripe!
   end
 
@@ -388,21 +390,25 @@ class Subscription < ApplicationRecord
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
-        trial_end: (Time.zone.now + 1.month).to_i
+        trial_end: (Time.zone.now + 1.month).to_i,
+        expand: ['latest_invoice.payment_intent'] # Return the created payment intent.
       )
     elsif self.user.stripe_customer.sources.any? # if there's a card, charge
       Stripe::Subscription.create(
         customer: user.stripe_id,
-        items: [{ plan: plan.stripe_id }]
+        items: [{ plan: plan.stripe_id }],
+        expand: ['latest_invoice.payment_intent']
       )
     else # if there's no card, free day
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
-        trial_end: (Time.zone.now + 1.day).to_i
+        trial_end: (Time.zone.now + 1.day).to_i,
+        expand: ['latest_invoice.payment_intent']
       )
     end
     self.stripe_id = subscription.id
+    self.latest_invoice = subscription.latest_invoice
     self.current_period_ends_at = Time.zone.at(subscription['current_period_end'])
     self.status = subscription['status']
   end
