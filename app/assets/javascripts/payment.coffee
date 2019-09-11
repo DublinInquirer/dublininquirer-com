@@ -1,4 +1,17 @@
 setupStripePaymentForm = (form) ->
+  confirmPayment = (data) ->
+    $.ajax
+      url: '/subscriptions/confirm'
+      type: 'POST'
+      dataType: 'HTML'
+      beforeSend: (xhr) ->
+        xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
+        return
+      data: data
+      success: (data, status) ->
+        if status == 'success'
+          window.location.href = "/subscriptions/thanks"
+
   registerElements = (elements, form) ->
     formButton = $(':submit', form)
     errorEl = $('.error:first', form)
@@ -36,8 +49,22 @@ setupStripePaymentForm = (form) ->
           hiddenInput.setAttribute('name', 'stripe_token')
           hiddenInput.setAttribute('value', result.token.id)
           form[0].appendChild(hiddenInput)
-          form.off 'submit'
-          form.submit()
+          $.ajax
+            type: 'POST'
+            url: '/subscriptions'
+            data: $(form).serializeArray()
+            dataType: 'json'
+            async: false
+            success: (data, status) ->
+              if data.status == 'requires_action'
+                stripe.handleCardPayment(data.payment_intent_client_secret).then (result) ->
+                  if result.error
+                    confirmPayment paymentIntentId: null
+                  else
+                    confirmPayment paymentIntentId: data.payment_intent_client_id
+              else if data.status == 'succeeded'
+                window.location.href = "/subscriptions/thanks"
+          return false
           form.addClass( 'submitted' )
         else
           enableInputsAndButton()
