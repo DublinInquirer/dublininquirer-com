@@ -13,10 +13,3 @@
         If you have any problems, story suggestions, or just want to talk: email us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>. We like talking to our readers!
 
       = link_to raw("Go to the home page &rarr;"), :root, class: 'button -big'
-
-- if @subscription.present?
-  :javascript
-    fbq('track', 'Subscribe', {
-      value: #{ ((@subscription.plan.try(:amount)/100.0) * 12).round },
-      currency: 'EUR'
-    });
