@@ -112,10 +112,3 @@
         **Questions?**
 
         If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.
-
-:javascript
-  fbq('track', 'InitiateCheckout', {
-    value: #{ ((@gift_subscription.try(:price)/100.0) * 12).round },
-    currency: 'EUR',
-  });
-

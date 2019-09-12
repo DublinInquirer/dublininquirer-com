@@ -15,6 +15,7 @@
 //= require jquery.key
 //= require plyr
 //= require payment
+//= require payment_method
 //= require sticky
 //= require overlay
 //= require cookie
