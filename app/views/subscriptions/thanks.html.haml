@@ -14,8 +14,9 @@
 
       = link_to raw("Go to the home page &rarr;"), :root, class: 'button -big'
 
-:javascript
-  fbq('track', 'Subscribe', {
-    value: #{ ((@subscription.plan.try(:amount)/100.0) * 12).round },
-    currency: 'EUR'
-  });
+- if @subscription.present?
+  :javascript
+    fbq('track', 'Subscribe', {
+      value: #{ ((@subscription.plan.try(:amount)/100.0) * 12).round },
+      currency: 'EUR'
+    });
