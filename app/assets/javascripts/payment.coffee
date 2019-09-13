@@ -9,9 +9,9 @@ setupStripePaymentForm = (form) ->
         return
       data: data
       success: (data, status) ->
-        window.location.href = "/subscriptions/thanks"    
-      error: (data, status)->
-        window.location.href = "/failed_payment"
+        if status == 'success'
+          window.location.href = "/subscriptions/thanks"
+
   registerElements = (elements, form) ->
     formButton = $(':submit', form)
     errorEl = $('.error:first', form)
@@ -64,8 +64,6 @@ setupStripePaymentForm = (form) ->
                     confirmPayment paymentIntentId: data.payment_intent_client_id
               else if data.status == 'succeeded'
                 window.location.href = "/subscriptions/thanks"
-              else
-                window.location.href = "/failed_payment"  
           return false
           form.addClass( 'submitted' )
         else
