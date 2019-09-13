@@ -8,4 +8,8 @@ class ErrorsController < ApplicationController
   def internal_server_error
     render status: 500
   end
+
+  def authentication_fail_error
+  	render status: 500
+  end
 end

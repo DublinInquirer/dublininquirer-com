@@ -69,17 +69,30 @@ class SubscriptionsController < ApplicationController
   def confirm
     begin
       if params['paymentIntentId'].present?
+        # subscription = Subscription.find_by_
         intent = Stripe::PaymentIntent.retrieve(params['paymentIntentId'])
+        invoice = Stripe::Invoice.retrieve(intent.invoice)
         unless intent.status == 'succeeded'
           intent = Stripe::PaymentIntent.confirm(params['paymentIntentId'])
         end
-        return redirect_to :thanks_subscriptions if intent.status == 'succeeded'
+        subscription_id = invoice.lines.data[0]["subscription"]
+        subscription = Subscription.find_by_stripe_id(subscription_id)
+        subscription.status = "active"
+        subscription.save
+        if intent.status == 'succeeded'
+          return redirect_to :thanks_subscriptions 
+        else 
+          return render :status => 400
+        end  
+      else
+        return render :status => 400
       end
     rescue Stripe::CardError => e
       # Display error on client
       flash[:alert] = e.message
+      return render :status => 400
     end
-    redirect_to :thanks_subscriptions
+    return redirect_to :thanks_subscriptions
   end
 
   def upgrade

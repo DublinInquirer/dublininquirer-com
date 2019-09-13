@@ -92,7 +92,7 @@ class Subscription < ApplicationRecord
   end
 
   def normalise_plan!
-    return if !self.is_stripe? # return if non-stripe sub
+    return if !self.is_stripe? # return if non-stripe sub
     return if self.product.is_active? # return if normal already
     return if !(self.status.try(:downcase) == 'active') # return if not active
 
