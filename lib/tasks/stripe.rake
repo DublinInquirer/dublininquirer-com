@@ -1,8 +1,5 @@
 namespace :stripe do
   task update_all: :environment do
-    Plan.all.each { |pl| pl.update_from_stripe! }
-    Subscription.all.each { |s| s.update_from_stripe! }
-    User.all.each { |u| u.update_from_stripe! }
     Subscription.mark_as_lapsed!
 
     StripeImporter.import_invoices

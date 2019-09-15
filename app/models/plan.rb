@@ -11,18 +11,6 @@ class Plan < ApplicationRecord
 
   scope :includes_print, -> { joins(:product).merge( Product.includes_print ).distinct }
 
-  def update_from_stripe!
-    str_plan = self.stripe_plan
-    return false unless str_plan.present?
-
-    self.product = Product.find_or_create_by(stripe_id: str_plan.product)
-    self.amount = str_plan.amount
-    self.interval = str_plan.interval
-    self.interval_count = str_plan.interval_count
-
-    self.save!
-  end
-
   def requires_address?
     return false unless self.product.present?
     self.product.requires_address?
