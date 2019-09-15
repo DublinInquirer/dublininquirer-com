@@ -21,13 +21,17 @@ end
 
 StripeEvent.configure do |events|
   events.subscribe 'customer.updated' do |event|
-    user = User.find_by(stripe_id: event.data.object.id)
-    user.update_from_stripe!(event.data.object)
+    user = User.where(stripe_id: event.data.object.id),take
+    if user
+      user.update_from_stripe!(event.data.object)
+    end
   end
 
   events.subscribe 'customer.subscription.updated' do |subscription|
-    subscription = Subscription.find_by(stripe_id: event.data.object.id)
-    subscription.update_from_stripe!(event.data.object)
+    subscription = Subscription.where(stripe_id: event.data.object.id).take
+    if subscription
+      subscription.update_from_stripe!(event.data.object)
+    end
   end
 
   events.subscribe 'invoice.payment_failed' do |event|
