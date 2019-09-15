@@ -213,7 +213,9 @@ Rails.application.routes.draw do
     end
   end
 
-  mount Sidekiq::Web => '/sidekiq'
+  # webhooks
+
+  post '/hooks/stripe', to: 'stripe_webhooks#consume'
 
   # landing pages catch-all
 

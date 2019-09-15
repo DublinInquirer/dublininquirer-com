@@ -5,13 +5,14 @@ setupStripePaymentForm = (form) ->
       type: 'POST'
       dataType: 'HTML'
       beforeSend: (xhr) ->
-        xhr.setRequestHeader 'X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')
-        return
+        xhr.setRequestHeader 'X-CSRF-Token',
+          $('meta[name="csrf-token"]').attr('content')
       data: data
       success: (data, status) ->
         window.location.href = "/subscriptions/thanks"    
-      error: (data, status)->
+      error: (data, status) ->
         window.location.href = "/failed_payment"
+
   registerElements = (elements, form) ->
     formButton = $(':submit', form)
     errorEl = $('.error:first', form)
@@ -70,6 +71,7 @@ setupStripePaymentForm = (form) ->
           form.addClass( 'submitted' )
         else
           enableInputsAndButton()
+          
   elements = stripe.elements(
     fonts: [
       {
@@ -113,7 +115,6 @@ setupStripePaymentForm = (form) ->
     style: styles
     classes: classes)
   cardCvc.mount '#stripe-form_card-cvc'
-
 
   registerElements [ cardNumber, cardExpiry, cardCvc ], form
 
