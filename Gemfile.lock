@@ -371,6 +371,9 @@ GEM
       sprockets (>= 3.0.0)
     squasher (0.6.2)
     stripe (5.0.1)
+    stripe_event (2.3.0)
+      activesupport (>= 3.1)
+      stripe (>= 2.8, < 6)
     temple (0.8.1)
     textacular (5.2.0)
       activerecord (>= 5.0, < 6.1)
@@ -470,6 +473,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   squasher
   stripe
+  stripe_event
   textacular (~> 5.0)
   turbolinks
   tzinfo-data

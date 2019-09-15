@@ -1,7 +1,18 @@
 require 'test_helper'
 
 class VisitorTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test "read article" do
+  end
+
+  test "attempt to read" do
+  end
+
+  test "read count" do
+  end
+
+  test "read limit" do
+  end
+
+  test "articles array" do
+  end
 end
