@@ -48,6 +48,7 @@ gem 'roo' # CSV importing
 gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
 gem 'turbolinks'
+gem 'stripe_event'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

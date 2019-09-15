@@ -11,4 +11,29 @@ else
 end
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
-Stripe.api_version = "2019-05-16"
+Stripe.api_version = "2019-09-09"
+
+StripeEvent.signing_secret = if Rails.env.production?
+  Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :stripe, :signing_key)
+else
+  Rails.application.credentials.dig(:development, :stripe, :signing_key)
+end
+
+StripeEvent.configure do |events|
+  events.subscribe 'customer.updated' do |event|
+    user = User.find_by(stripe_id: event.data.object.id)
+    user.update_from_stripe!(event.data.object)
+  end
+
+  events.subscribe 'customer.subscription.updated' do |subscription|
+    subscription = Subscription.find_by(stripe_id: event.data.object.id)
+    subscription.update_from_stripe!(event.data.object)
+  end
+
+  events.subscribe 'invoice.payment_failed' do |event|
+  end
+
+  events.all do |event|
+    Raven.capture_message 'Stripe webhook', extra: event
+  end
+end
