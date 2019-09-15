@@ -66,7 +66,7 @@ class Plan < ApplicationRecord
 
   def sync_to_stripe
     if self.stripe_id.present? # retrieve
-      update_from_stripe!
+      # update_from_stripe!
     else # create
       potential_id = "#{ self.product.slug }-#{ self.interval.first }-#{ self.amount }"
       begin

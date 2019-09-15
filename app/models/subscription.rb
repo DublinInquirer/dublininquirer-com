@@ -281,10 +281,10 @@ class Subscription < ApplicationRecord
       str_sub.delete
     else # otherwise cancel at period end
       str_sub.cancel_at_period_end = true
-      str_sub.save
+      if str_sub.save
+        self.update(cancel_at_period_end: true)
+      end
     end
-
-    update_from_stripe!
   end
 
   def cancel_subscription_now! # affects stripe
@@ -296,15 +296,21 @@ class Subscription < ApplicationRecord
       return
     end
 
-    update_from_stripe!
+    self.status = 'canceled'
+    self.canceled_at = Time.now
+    self.ended_at = Time.now
+    self.save
   end
 
   def uncancel_subscription! # affects stripe
     str_sub = self.stripe_subscription
     str_sub.cancel_at_period_end = false
-    str_sub.save
-
-    update_from_stripe!
+    if str_sub.save
+      self.status = 'active'
+      self.canceled_at = nil
+      self.ended_at = nil
+      self.save
+    end
   end
 
   def set_address_from_user!
