@@ -125,10 +125,3 @@
           %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly
           %li Subscriptions renew automatically
           %li Cancel any time
-
-:javascript
-  fbq('track', 'InitiateCheckout', {
-    value: #{ ((@plan.try(:amount)/100.0) * 12).round },
-    currency: 'EUR',
-  });
-
