@@ -20,4 +20,20 @@ else
 end
 
 StripeEvent.configure do |events|
+  events.subscribe 'customer.updated' do |event|
+    user = User.find_by(stripe_id: event.data.object.id)
+    user.update_from_stripe!(event.data.object)
+  end
+
+  events.subscribe 'customer.subscription.updated' do |subscription|
+    subscription = Subscription.find_by(stripe_id: event.data.object.id)
+    subscription.update_from_stripe!(event.data.object)
+  end
+
+  events.subscribe 'invoice.payment_failed' do |event|
+  end
+
+  events.all do |event|
+    Raven.capture_message 'Stripe webhook', extra: event
+  end
 end

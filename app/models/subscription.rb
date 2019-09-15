@@ -48,28 +48,24 @@ class Subscription < ApplicationRecord
 
   attr_accessor :latest_invoice
 
-  def update_from_stripe!
-    return unless self.stripe_id && self.stripe_subscription.present?
+  def update_from_stripe!(stripe_subscription_object)
+    self.status = stripe_subscription_object['status']
+    self.cancel_at_period_end = stripe_subscription_object['cancel_at_period_end']
 
-    subs = self.stripe_subscription
-
-    self.status = subs['status']
-    self.cancel_at_period_end = subs['cancel_at_period_end']
-
-    self.current_period_ends_at = if subs['current_period_end'].present?
-      Time.zone.at(subs['current_period_end'])
+    self.current_period_ends_at = if stripe_subscription_object['current_period_end'].present?
+      Time.zone.at(stripe_subscription_object['current_period_end'])
     else
       nil
     end
 
-    self.canceled_at = if subs['canceled_at'].present?
-      Time.zone.at(subs['canceled_at'])
+    self.canceled_at = if stripe_subscription_object['canceled_at'].present?
+      Time.zone.at(stripe_subscription_object['canceled_at'])
     else
       nil
     end
 
-    self.ended_at = if subs['ended_at'].present?
-      Time.zone.at(subs['ended_at'])
+    self.ended_at = if stripe_subscription_object['ended_at'].present?
+      Time.zone.at(stripe_subscription_object['ended_at'])
     else
       nil
     end
