@@ -107,33 +107,8 @@ class User < ApplicationRecord
     cus.save
   end
 
-  def update_from_stripe!
-    return unless self.stripe_id.present?
-    cus = self.stripe_customer
-
-    if cus.nil?
-      raise 'Missing customer for user: #{ self.id }'
-    end
-
-    self.metadata = cus['metadata']
-    if self.metadata.is_a?(Hash)
-      self.metadata['description'] = cus['description']
-    else
-      self.metadata = {'description': cus['description']}
-    end
-
-    self.sources_count = cus.respond_to?(:sources) ? cus.sources.count : 0
-
-    if cus.respond_to?(:default_source) && cus.default_source.present?
-      cus.sources.each do |stripe_source|
-        next unless stripe_source.id == cus.default_source
-
-        self.card_last_4 = stripe_source.last4
-        self.card_brand = stripe_source.brand
-      end
-    end
-
-    save!
+  def update_from_stripe!(stripe_customer_object)
+    # nothing editable in stripe atm
   end
 
   def can_comment?(article)
