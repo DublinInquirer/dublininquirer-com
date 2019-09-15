@@ -12,3 +12,21 @@ end
 
 Stripe.api_key = Rails.configuration.stripe[:secret_key]
 Stripe.api_version = "2019-09-09"
+
+StripeEvent.signing_secret = if Rails.env.production?
+  Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :stripe, :signing_key)
+else
+  Rails.application.credentials.dig(:development, :stripe, :signing_key)
+end
+
+StripeEvent.configure do |events|
+  events.subscribe 'charge.failed' do |event|
+    event.class       #=> Stripe::Event
+    event.type        #=> "charge.failed"
+    event.data.object #=> #<Stripe::Charge:0x3fcb34c115f8>
+  end
+
+  events.all do |event|
+    # Handle all event types - logging, etc.
+  end
+end

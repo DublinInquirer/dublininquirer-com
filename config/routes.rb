@@ -215,7 +215,7 @@ Rails.application.routes.draw do
 
   # webhooks
 
-  post '/hooks/stripe', to: 'stripe_webhooks#consume'
+  mount StripeEvent::Engine, at: '/hooks/stripe'
 
   # landing pages catch-all
 
