@@ -8,10 +8,6 @@ class Invoice < ApplicationRecord
     self.number
   end
 
-  def update_from_stripe!
-    StripeImporter.update_invoice_from_stripe(self)
-  end
-
   def stripe_invoice
     return nil unless self.stripe_id.present?
     @stripe_invoice ||= Stripe::Invoice.retrieve(self.stripe_id)
@@ -66,6 +62,49 @@ class Invoice < ApplicationRecord
 
   def gross_amount
     self.total
+  end
+
+  def update_from_stripe_object!(stripe_object)
+    subscription = Subscription.find_by(stripe_id: stripe_object.subscription)
+    user = User.find_by(stripe_id: stripe_object.customer)
+
+    lines = stripe_object.lines.map do |line|
+      {
+        stripe_id: line.id,
+        amount: line.amount,
+        quantity: line.quantity,
+        plan_id: line.plan.present? ? Plan.find_or_create_by(stripe_id: line.plan.id).id : nil,
+        type: line.type
+      }
+    end
+
+    self.assign_attributes = {
+      stripe_id: stripe_object.id,
+      number: stripe_object.number,
+      receipt_number: stripe_object.receipt_number,
+      total: stripe_object.total,
+      closed: stripe_object.closed,
+      paid: stripe_object.paid,
+      attempted: stripe_object.attempted,
+      forgiven: stripe_object.forgiven,
+      created_on: Time.zone.at(stripe_object.date).to_date,
+      due_on: stripe_object.due_date.present? ? Time.zone.at(stripe_object.due_date).to_date : nil,
+      period_starts_at: Time.zone.at(stripe_object.period_start),
+      period_ends_at: Time.zone.at(stripe_object.period_end),
+      next_payment_attempt_at: stripe_object.next_payment_attempt.present? ? Time.zone.at(stripe_object.next_payment_attempt) : nil,
+      lines: lines,
+      user_id: user.try(:id),
+      subscription_id: subscription.try(:id),
+      created_at: Time.zone.at(stripe_object.date),
+      updated_at: Time.zone.at(stripe_object.date)
+    }
+
+    save_without_timestamping!
+  end
+
+  def self.create_from_stripe_object!(stripe_object)
+    i = new
+    i.update_from_stripe_object!(stripe_object)
   end
 
   private

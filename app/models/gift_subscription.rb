@@ -2,6 +2,7 @@
 # - charges card
 # - creates user
 # - creates fixed subscription
+# its stripe_id corresponds to a stripe charge
 
 class GiftSubscription < ApplicationRecord
   belongs_to :subscription

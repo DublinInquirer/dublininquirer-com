@@ -23,21 +23,43 @@ StripeEvent.configure do |events|
   events.subscribe 'customer.updated' do |event|
     user = User.where(stripe_id: event.data.object.id),take
     if user
-      user.update_from_stripe!(event.data.object)
+      user.create_from_stripe_object!(event.data.object)
     end
   end
 
   events.subscribe 'customer.subscription.updated' do |subscription|
     subscription = Subscription.where(stripe_id: event.data.object.id).take
     if subscription
-      subscription.update_from_stripe!(event.data.object)
+      subscription.create_from_stripe_object!(event.data.object)
+    end
+  end
+  
+  events.subscribe 'plan.updated' do |event|
+    plan = Plan.where(stripe_id: event.data.object.id),take
+    if plan
+      plan.create_from_stripe_object!(event.data.object)
+    end
+  end
+  
+  events.subscribe 'product.updated' do |event|
+    product = Product.where(stripe_id: event.data.object.id),take
+    if product
+      product.create_from_stripe_object!(event.data.object)
     end
   end
 
   events.subscribe 'invoice.payment_failed' do |event|
+    # do manual dunning
   end
-
-  events.all do |event|
-    Raven.capture_message 'Stripe webhook', extra: event
+  
+  events.subscribe 'invoice.created' do |event|
+    Invoice.create_from_stripe_object!(event.data.object)
+  end
+  
+  events.subscribe 'invoice.updated' do |event|
+    invoice = Invoice.where(stripe_id: event.data.object.id),take
+    if invoice
+      invoice.create_from_stripe_object!(event.data.object)
+    end
   end
 end
