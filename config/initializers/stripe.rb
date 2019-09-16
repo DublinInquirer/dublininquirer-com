@@ -27,7 +27,7 @@ StripeEvent.configure do |events|
     end
   end
 
-  events.subscribe 'customer.subscription.updated' do |subscription|
+  events.subscribe 'customer.subscription.updated' do |event|
     subscription = Subscription.where(stripe_id: event.data.object.id).take
     if subscription
       subscription.create_from_stripe_object!(event.data.object)
