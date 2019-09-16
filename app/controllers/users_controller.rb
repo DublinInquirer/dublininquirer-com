@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     @invoices = @user.invoices.
       where('created_at > ?', Date.new(2018,10,20).beginning_of_day).
       where('total > 0').
-      order('created_on desc').
+      order('created_at desc').
       limit(12)
   end
 
