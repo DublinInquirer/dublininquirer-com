@@ -23,6 +23,7 @@ class Subscription < ApplicationRecord
   attribute :country, :string
   attribute :country_code, :string
   attribute :hub, :string
+  attribute :latest_invoice
 
   # fixed only:
   attribute :duration_months, :integer
@@ -45,33 +46,6 @@ class Subscription < ApplicationRecord
   scope :needs_shipping, -> { active.includes_print }
   scope :churning, -> { is_stripe.delinquent }
   scope :churned, -> { where(status: %w(unpaid canceled)) }
-
-  attr_accessor :latest_invoice
-
-  def update_from_stripe!(stripe_subscription_object)
-    self.status = stripe_subscription_object['status']
-    self.cancel_at_period_end = stripe_subscription_object['cancel_at_period_end']
-
-    self.current_period_ends_at = if stripe_subscription_object['current_period_end'].present?
-      Time.zone.at(stripe_subscription_object['current_period_end'])
-    else
-      nil
-    end
-
-    self.canceled_at = if stripe_subscription_object['canceled_at'].present?
-      Time.zone.at(stripe_subscription_object['canceled_at'])
-    else
-      nil
-    end
-
-    self.ended_at = if stripe_subscription_object['ended_at'].present?
-      Time.zone.at(stripe_subscription_object['ended_at'])
-    else
-      nil
-    end
-
-    save!
-  end
 
   def remove_sensitive_information_from_stripe!
     return unless self.stripe_id.present?
@@ -110,8 +84,8 @@ class Subscription < ApplicationRecord
   end
 
   def delete_completely!
-    self.remove_sensitive_information_from_stripe!
-    self.cancel_subscription_now!
+    remove_sensitive_information_from_stripe! if is_stripe?
+    cancel_subscription_now! if is_stripe?
 
     reload
 
@@ -134,16 +108,15 @@ class Subscription < ApplicationRecord
   end
 
   def product_name
-    self.product.name
+    self.product.try(:name)
   end
 
   def product
-    self.plan.product
+    self.plan.try(:product)
   end
 
   def requires_address?
-    return false unless self.product.present?
-    self.product.requires_address?
+    self.product.try(:requires_address?)
   end
 
   def digital_only?
@@ -196,6 +169,7 @@ class Subscription < ApplicationRecord
     (self.plan.is_friend? or self.plan.is_patron?)
   end
 
+  # users can only change their sub if they're paying the base price on the active products
   def changeable?
     (self.is_stripe? && self.product.is_active? && self.is_base_price?)
   end
@@ -225,7 +199,7 @@ class Subscription < ApplicationRecord
       plan: new_plan.stripe_id,
     }]
 
-    str_sub.save && update(plan: new_plan)
+    str_sub.save && update_from_stripe_object!(str_sub)
   end
 
   def change_price_to!(amount) # affects stripe
@@ -245,7 +219,7 @@ class Subscription < ApplicationRecord
       plan: new_plan.stripe_id,
     }]
 
-    str_sub.save && update(plan: new_plan)
+    str_sub.save && update_from_stripe_object!(str_sub)
   end
 
   def change_billing_date_to!(date) # affects stripe
@@ -254,7 +228,7 @@ class Subscription < ApplicationRecord
     str_sub.prorate = false
     str_sub.trial_end = trial_ends_at.to_i
 
-    str_sub.save && update(trial_ends_at: trial_ends_at)
+    str_sub.save && update_from_stripe_object!(str_sub)
   end
 
   def toggle_cancellation!
@@ -281,10 +255,9 @@ class Subscription < ApplicationRecord
       str_sub.delete
     else # otherwise cancel at period end
       str_sub.cancel_at_period_end = true
-      if str_sub.save
-        self.update(cancel_at_period_end: true)
-      end
     end
+
+    update_from_stripe_object!(str_sub)
   end
 
   def cancel_subscription_now! # affects stripe
@@ -296,27 +269,15 @@ class Subscription < ApplicationRecord
       return
     end
 
-    self.status = 'canceled'
-    self.canceled_at = Time.now
-    self.ended_at = Time.now
-    self.save
+    update_from_stripe_object!(str_sub)
   end
 
   def uncancel_subscription! # affects stripe
     str_sub = self.stripe_subscription
     str_sub.cancel_at_period_end = false
-    if str_sub.save
-      self.status = 'active'
-      self.canceled_at = nil
-      self.ended_at = nil
-      self.save
-    end
-  end
-
-  def set_address_from_user!
-    return false unless self.user.present?
-    set_address_from_user(self.user)
-    save!
+    str_sub.save
+    
+    update_from_stripe_object!(str_sub)
   end
 
   def mark_as_lapsed_if_lapsed!
@@ -356,6 +317,21 @@ class Subscription < ApplicationRecord
     end
   end
 
+  def update_from_stripe_object!(str_obj)
+    self.stripe_id = str_obj.id
+    self.current_period_ends_at = str_obj.current_period_end ? Time.zone.at(str_obj.current_period_end) : nil
+    self.cancel_at_period_end = str_obj.cancel_at_period_end ? true : false
+    self.canceled_at = str_obj.canceled_at ? Time.zone.at(str_obj.canceled_at) : nil
+    self.trial_ends_at = str_obj.trial_end ? Time.zone.at(str_obj.trial_end) : nil
+    self.ended_at = str_obj.ended_at ? Time.zone.at(str_obj.ended_at) : nil
+    self.status = str_obj.status
+    self.plan_id = Plan.find_by!(stripe_id: str_obj.plan.id).id
+    self.user_id = User.find_by!(stripe_id: str_obj.customer).id
+    self.product_id = Product.find_by!(stripe_id: str_obj.plan.product).id
+
+    self.save!
+  end
+
   private
 
   def orphan_invoices
@@ -383,12 +359,16 @@ class Subscription < ApplicationRecord
     return if self.stripe_id.present? && self.persisted?
 
     if !self.stripe_id.present? && !self.persisted?
-      create_stripe_subscription # create if the sub doesn't exist yet
+      create_stripe_subscription # create if the stripe sub doesn't exist yet
     end
   end
 
   def create_stripe_subscription
-    subscription = if self.landing_page_slug.present? # if there's a landing_page_slug, free month
+    # landing page sign ups are hardcoded here for a free month
+    # adding that logic to the landing page model is as straightforward
+    # as you'd guess it'd be – add an integer of free_days to landing_page
+    # and use it here
+    str_subscription = if self.landing_page_slug.present? # if there's a landing_page_slug, free month
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
@@ -409,9 +389,7 @@ class Subscription < ApplicationRecord
         expand: ['latest_invoice.payment_intent']
       )
     end
-    self.stripe_id = subscription.id
-    self.latest_invoice = subscription.latest_invoice
-    self.current_period_ends_at = Time.zone.at(subscription['current_period_end'])
-    self.status = subscription['status']
+
+    self.update_from_stripe_object!(str_subscription)
   end
 end

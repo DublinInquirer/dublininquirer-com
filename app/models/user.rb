@@ -107,7 +107,7 @@ class User < ApplicationRecord
     cus.save
   end
 
-  def update_from_stripe!(stripe_customer_object)
+  def update_from_stripe_object!(stripe_object)
     # nothing editable in stripe atm
   end
 
@@ -348,7 +348,11 @@ class User < ApplicationRecord
   end
 
   def normalise_email
-    self.email_address = self.email_address.downcase.strip
+    if will_save_change_to_email_address?
+      self.email_address = self.email_address.downcase.strip
+    end
+
+    true
   end
 
   def orphan_comments

@@ -49,6 +49,7 @@ gem 'aws-sdk-s3', require: false
 gem 'fog-aws', group: :production
 gem 'turbolinks'
 gem 'stripe_event'
+gem 'stripe-ruby-mock', '~> 2.5.8', :require => 'stripe_mock'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

@@ -7,14 +7,9 @@ class Plan < ApplicationRecord
   validates :interval, presence: true, if: -> (p) { p.stripe_id.blank? }
   validates :interval_count, presence: true, if: -> (p) { p.stripe_id.blank? }
 
-  after_create :sync_to_stripe
+  after_save :sync_to_stripe
 
   scope :includes_print, -> { joins(:product).merge( Product.includes_print ).distinct }
-
-  def requires_address?
-    return false unless self.product.present?
-    self.product.requires_address?
-  end
 
   def human_name
     self.product.name.gsub('subscription','').strip
@@ -45,12 +40,16 @@ class Plan < ApplicationRecord
     (self.amount >= 50_00)
   end
 
+  def requires_address?
+    self.product.try(:requires_address?)
+  end
+
   def is_print?
-    self.product.is_print?
+    self.product.try(:is_print?)
   end
 
   def is_digital?
-    self.product.is_digital?
+    self.product.try(:is_digital?)
   end
 
   def self.find_by_slug_and_interval(slug, interval)
@@ -62,12 +61,15 @@ class Plan < ApplicationRecord
     (self.product.base_price == self.amount)
   end
 
+  # TODO more fields could be updated from stripe
+  def update_from_stripe_object!(stripe_object)
+    self.update!(stripe_id: stripe_object.id)
+  end
+
   private
 
   def sync_to_stripe
-    if self.stripe_id.present? # retrieve
-      # update_from_stripe!
-    else # create
+    if !self.stripe_id.present? # if already exists, it already exists
       potential_id = "#{ self.product.slug }-#{ self.interval.first }-#{ self.amount }"
       begin
         str_plan = Stripe::Plan.retrieve(potential_id)
@@ -82,8 +84,7 @@ class Plan < ApplicationRecord
         )
       end
 
-      self.stripe_id = str_plan['id']
-      self.save!
+      self.update_from_stripe_object!(str_plan)
     end
   end
 end

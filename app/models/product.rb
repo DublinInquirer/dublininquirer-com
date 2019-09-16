@@ -24,11 +24,11 @@ class Product < ApplicationRecord
     !self.is_print?
   end
 
-  def is_active_digital?
+  def is_active_digital? # TODO: hardcoded
     (name == 'Digital subscription')
   end
 
-  def is_active_print?
+  def is_active_print? # TODO: hardcoded
     (name == 'Digital + Print subscription')
   end
 
@@ -42,7 +42,7 @@ class Product < ApplicationRecord
     return self.name.parameterize
   end
 
-  def self.find_by_slug(slug)
+  def self.find_by_slug(slug) # TODO this shouldn't be hardcoded!
     case slug.downcase.to_sym
     when :print
       find_by_name('Digital + Print subscription')
@@ -56,5 +56,10 @@ class Product < ApplicationRecord
   def stripe_product
     return nil unless self.stripe_id.present?
     @stripe_product ||= Stripe::Product.retrieve(self.stripe_id)
+  end
+
+  # TODO more fields could be updated from stripe
+  def update_from_stripe_object!(stripe_object)
+    self.update!(stripe_id: stripe_object.id)
   end
 end
