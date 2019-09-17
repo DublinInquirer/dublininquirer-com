@@ -101,7 +101,7 @@ class Invoice < ApplicationRecord
   end
 
   def self.create_from_stripe_object!(stripe_object)
-    i = new
+    i = find_or_initialize_by(stripe_id: stripe_object.id)
     i.update_from_stripe_object!(stripe_object)
   end
 
