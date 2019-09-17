@@ -83,7 +83,6 @@ class Invoice < ApplicationRecord
       number: stripe_object.number,
       receipt_number: stripe_object.receipt_number,
       total: stripe_object.total,
-      closed: stripe_object.closed,
       paid: stripe_object.paid,
       attempted: stripe_object.attempted,
       forgiven: stripe_object.forgiven,

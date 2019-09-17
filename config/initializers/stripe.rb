@@ -21,30 +21,30 @@ end
 
 StripeEvent.configure do |events|
   events.subscribe 'customer.updated' do |event|
-    user = User.where(stripe_id: event.data.object.id),take
+    user = User.where(stripe_id: event.data.object.id).take
     if user
-      user.create_from_stripe_object!(event.data.object)
+      user.update_from_stripe_object!(event.data.object)
     end
   end
 
   events.subscribe 'customer.subscription.updated' do |event|
     subscription = Subscription.where(stripe_id: event.data.object.id).take
     if subscription
-      subscription.create_from_stripe_object!(event.data.object)
+      subscription.update_from_stripe_object!(event.data.object)
     end
   end
   
   events.subscribe 'plan.updated' do |event|
-    plan = Plan.where(stripe_id: event.data.object.id),take
+    plan = Plan.where(stripe_id: event.data.object.id).take
     if plan
-      plan.create_from_stripe_object!(event.data.object)
+      plan.update_from_stripe_object!(event.data.object)
     end
   end
   
   events.subscribe 'product.updated' do |event|
-    product = Product.where(stripe_id: event.data.object.id),take
+    product = Product.where(stripe_id: event.data.object.id).take
     if product
-      product.create_from_stripe_object!(event.data.object)
+      product.update_from_stripe_object!(event.data.object)
     end
   end
 
@@ -57,9 +57,9 @@ StripeEvent.configure do |events|
   end
   
   events.subscribe 'invoice.updated' do |event|
-    invoice = Invoice.where(stripe_id: event.data.object.id),take
+    invoice = Invoice.where(stripe_id: event.data.object.id).take
     if invoice
-      invoice.create_from_stripe_object!(event.data.object)
+      invoice.update_from_stripe_object!(event.data.object)
     end
   end
 
