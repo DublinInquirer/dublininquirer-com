@@ -8,7 +8,8 @@ Bundler.require(*Rails.groups)
 
 module Inquirer
   class Application < Rails::Application
-    config.load_defaults 5.2
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 6.0
     config.active_job.queue_adapter = :sidekiq
 
     config.generators do |g|

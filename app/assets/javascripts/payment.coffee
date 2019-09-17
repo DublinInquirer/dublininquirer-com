@@ -19,14 +19,14 @@ setupStripePaymentForm = (form) ->
     errorMessageEl = $('.message:first', errorEl)
 
     enableInputsAndButton = ->
-      toggleInputDisalbed(false)
+      toggleInputDisabled(false)
       formButton.prop('disabled', false)
 
     disableInputsAndButton = ->
-      toggleInputDisalbed(true)
+      toggleInputDisabled(true)
       formButton.prop('disabled', true)
 
-    toggleInputDisalbed = (disabled) ->
+    toggleInputDisabled = (disabled) ->
       elements.forEach (element) ->
         element.update(disabled: disabled)
 

@@ -62,4 +62,8 @@ StripeEvent.configure do |events|
       invoice.create_from_stripe_object!(event.data.object)
     end
   end
+
+  events.all do |event|
+    puts "Hello"
+  end
 end

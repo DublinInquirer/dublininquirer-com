@@ -45,14 +45,14 @@ class SubscriptionsController < ApplicationController
     if @user.save && @subscription.save
       @user.send_welcome!
       auto_login(@user, true) unless logged_in?
-      latest_invoice = @subscription.latest_invoice.payment_intent
+      latest_invoice = @subscription.latest_invoice['payment_intent']
       respond_to do |format|
         format.html { redirect_to :thanks_subscriptions }
         format.js do
           render json: {
-            status: latest_invoice.status,
-            payment_intent_client_id: latest_invoice.id,
-            payment_intent_client_secret: latest_invoice.client_secret
+            status: latest_invoice['status'],
+            payment_intent_client_id: latest_invoice['id'],
+            payment_intent_client_secret: latest_invoice['client_secret']
           }
         end
       end

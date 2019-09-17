@@ -15,7 +15,6 @@ $(document).ready ->
     e.preventDefault()
     $('html, body').animate({scrollTop: (targetOffset - 80)});
 
-
   player = new Plyr('#player', controls: [
     'play'
     'progress'
