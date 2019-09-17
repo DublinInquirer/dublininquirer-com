@@ -85,7 +85,7 @@ class Invoice < ApplicationRecord
       total: stripe_object.total,
       paid: stripe_object.paid,
       attempted: stripe_object.attempted,
-      created_on: Time.zone.at(stripe_object.date).to_date,
+      created_on: Time.zone.at(stripe_object.created).to_date,
       due_on: stripe_object.due_date.present? ? Time.zone.at(stripe_object.due_date).to_date : nil,
       period_starts_at: Time.zone.at(stripe_object.period_start),
       period_ends_at: Time.zone.at(stripe_object.period_end),
@@ -93,8 +93,8 @@ class Invoice < ApplicationRecord
       lines: lines,
       user_id: user.try(:id),
       subscription_id: subscription.try(:id),
-      created_at: Time.zone.at(stripe_object.date),
-      updated_at: Time.zone.at(stripe_object.date)
+      created_at: Time.zone.at(stripe_object.created),
+      updated_at: Time.zone.at(stripe_object.created)
     }
 
     save_without_timestamping!
