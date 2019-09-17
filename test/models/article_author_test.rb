@@ -5,7 +5,8 @@ class ArticleAuthorTest < ActiveSupport::TestCase
     author_1 = create(:author)
     author_2 = create(:author)
     author_3 = create(:author)
-    article = create(:article, author_ids: [author_1.id, author_2.id])
+    article = create(:article)
+    article.update author_ids: [author_1.id, author_2.id]
 
     assert article.authors.include?(author_1)
     assert article.authors.include?(author_2)
