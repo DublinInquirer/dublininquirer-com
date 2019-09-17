@@ -27,92 +27,7 @@
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-  = form_for @subscription, url: subscriptions_path, method: :post, html: {class: 'subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
-
-    = f.hidden_field :plan_id
-    = f.hidden_field :landing_page_slug
-
-    .block.-form
-      .block.-b.-p2.-my2.-bg-faint
-        .block.-mb2.-pb1.-bb
-          %h3.c.-w8 Account details
-
-        .field
-          .twofer
-            .field
-              = f.label :given_name, 'First name'
-              = f.text_field :given_name, placeholder: 'First'
-              = render_errors_for(@subscription, :given_name)
-            .field
-              = f.label :surname, 'Surname'
-              = f.text_field :surname, placeholder: 'Surname'
-              = render_errors_for(@subscription, :surname)
-
-        - if !(@subscription.user.present? && @subscription.user.persisted?)
-          .field
-            = f.label :email_address
-            = f.email_field :email_address, placeholder: 'aoife@example.ie'
-            = render_errors_for(@subscription.user, :email_address)
-
-          .field
-            = f.label :password
-            = f.password_field :password, placeholder: 'password123'
-            = render_errors_for(@subscription.user, :password)
-
-      - if @subscription.requires_address?
-        .block.-b.-p2.-my2.-bg-faint
-          .block.-mb2.-pb1.-bb
-            %h3.c.-w8 Subscription address
-
-          .field
-            = f.label :address_line_1
-            = f.text_field :address_line_1
-            = render_errors_for(@subscription, :address_line_1)
-          .field
-            = f.label :address_line_2
-            = f.text_field :address_line_2
-            = render_errors_for(@subscription, :address_line_2)
-          .field
-            = f.label :city
-            = f.text_field :city
-            = render_errors_for(@subscription, :city)
-          .field.twofer
-            .field
-              = f.label :county
-              = f.text_field :county
-              = render_errors_for(@subscription, :county)
-            .field
-              = f.label :post_code
-              = f.text_field :post_code
-              = render_errors_for(@subscription, :post_code)
-          .field.-select
-            = f.label :country_code, 'Country'
-            = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
-            = render_errors_for(@subscription, :country_code)
-
-      .block.-b.-p2.-my2.-bg-faint
-        .block.-mb2.-pb1.-bb
-          %h3.c.-w8 Payment details
-
-          - if @landing_page
-            .text.-tiny
-              :markdown
-                You won't be charged until your free month elapses on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }.
-
-        .field
-          %label Card number
-          #stripe-form_card-number
-
-        .field.twofer
-          .field
-            %label Expiration date
-            #stripe-form_card-expiry
-          .field
-            %label Security code
-            #stripe-form_card-cvc
-
-      %nav.block.-mt2.actions
-        = f.submit 'Subscribe', class: 'button -standard -big'
+  #subscribe-form
 
   .block.-my4.-pb4
     .p.-t4.-sf.-centered
@@ -126,3 +41,6 @@
           %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 0) } billed monthly
           %li Subscriptions renew automatically
           %li Cancel any time
+
+- content_for :head_tags do
+  = javascript_pack_tag 'subscribe'

@@ -25,6 +25,8 @@
     <meta name="theme-color" content="#ff0000">
     = render partial: 'layouts/snippets/stripe'
 
+    = yield :head_tags
+
   %body
     .wrapper.-container{role: 'layout'}
       = render partial: 'layouts/modal-nav'
