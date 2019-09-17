@@ -85,7 +85,6 @@ class Invoice < ApplicationRecord
       total: stripe_object.total,
       paid: stripe_object.paid,
       attempted: stripe_object.attempted,
-      forgiven: stripe_object.forgiven,
       created_on: Time.zone.at(stripe_object.date).to_date,
       due_on: stripe_object.due_date.present? ? Time.zone.at(stripe_object.due_date).to_date : nil,
       period_starts_at: Time.zone.at(stripe_object.period_start),
