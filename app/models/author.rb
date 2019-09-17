@@ -40,7 +40,7 @@ class Author < ApplicationRecord
   private
 
   def generate_slug
-    slug_matches = self.class.where(slug: full_name.parameterize).where.not(id: self.id)
+    slug_matches = self.class.unscoped.where(slug: full_name.parameterize).where.not(id: self.id)
     self.slug = if slug_matches.any?
       full_name.parameterize + "-#{ slug_matches.count + 1 }"
     else

@@ -118,10 +118,11 @@
     .p.-t4.-sf.-centered
       - if @landing_page
         %ul.list.-nav
-          %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }
+          %li You won't be billed today
+          %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 0) } billed monthly beginning on #{ @subscription.trial_ends_at.strftime('%-d %B %Y') }
           %li Cancel any time
       - else
         %ul.list.-nav
-          %li #{ number_to_currency((@plan.amount/100.0), unit: '€') } billed monthly
+          %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 0) } billed monthly
           %li Subscriptions renew automatically
           %li Cancel any time

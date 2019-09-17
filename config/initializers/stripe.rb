@@ -62,8 +62,4 @@ StripeEvent.configure do |events|
       invoice.update_from_stripe_object!(event.data.object)
     end
   end
-
-  events.all do |event|
-    puts "Hello"
-  end
 end
