@@ -78,7 +78,7 @@ class Invoice < ApplicationRecord
       }
     end
 
-    self.assign_attributes = {
+    self.assign_attributes({
       stripe_id: stripe_object.id,
       number: stripe_object.number,
       receipt_number: stripe_object.receipt_number,
@@ -95,7 +95,7 @@ class Invoice < ApplicationRecord
       subscription_id: subscription.try(:id),
       created_at: Time.zone.at(stripe_object.date),
       updated_at: Time.zone.at(stripe_object.date)
-    }
+    })
 
     save_without_timestamping!
   end
