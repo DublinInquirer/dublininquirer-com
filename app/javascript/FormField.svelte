@@ -1,14 +1,14 @@
 <script>
-  let type = 'text';
-  let name = 'name';
-  let value = 'value';
-  let errors = ['nice'];
+  export let name;
+  export let value;
+  export let errors;
 </script>
 
 <style>
 </style>
 
 <div class="field {type}">
+  <label>{name}</label>
   <slot></slot>
 
   <div class="error">
