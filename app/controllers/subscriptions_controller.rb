@@ -2,6 +2,14 @@ class SubscriptionsController < ApplicationController
   before_action :require_login, only: [:upgrade, :thanks]
   layout 'modal', only: [:upgrade, :create, :thanks]
 
+  def create
+    raise params.inspect
+  end
+
+  def confirm
+    raise params.inspect
+  end
+
   def upgrade
     @subscription = current_user.subscription
     if request.put?
