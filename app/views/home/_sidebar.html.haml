@@ -19,15 +19,14 @@
 
       .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
   - else
-    .block.-bg-faint.-b.-py2.-px1.-mb2
-      .p.-t5
-        %h3.c.-w8 Give a subscription
-        .block.-mt1
-          :markdown
-            The perfect gift for the inquisitive Dubliner in your life.
+    .block.block.-py2.-px1.-mb2.-bg-blue
+      %h4.c.-w8 Give a subscription
+      .block.-my1
+        :markdown
+          The perfect gift for the inquisitive Dubliner in your life.
 
-        %nav.block.-mt2
-          #{ link_to "See options", :gift_subscriptions, class: 'button -standard p -t5' }
+        .block.-mt2
+          #{ link_to "See options", :gift_subscriptions, class: 'button -white' }
 
   %section.block.-mb2
     .block.-pb1.-bb

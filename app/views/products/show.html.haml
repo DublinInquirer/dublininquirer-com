@@ -1,33 +1,22 @@
 .wrapper.-small{role: 'layout'}
   %header.page-header
-    %h1.h.-h2
-      - if @plan.is_base_plan?
-        #{ @plan.product.name }
-      - elsif @plan.is_friend?
-        'Friend' subscription
-      - elsif @plan.is_patron?
-        'Patron' subscription
-      - else # discount
-        #{ @plan.product.name }
+    %h1.h.-h2= @product.name
 
   .block.-mb4
     .p.-t3.-sf
-      - if @landing_page
+      - if @landing_page # TODO free month shouldn't be hardcoded
         :markdown
           As a special offer, subscribe now and you'll receive a **free month** of digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-      - elsif @subscription.requires_address?
+      - elsif @plan.requires_address?
         :markdown
           **Monthly print edition** featuring a selection of our favourite online articles delivered to your door, in addition to unlimited **digital access**, including our full archive.
-        - if @plan.is_friend? or @plan.is_patron?
-          :markdown
-            Thank you so much for your generosity in supporting us. We depend on readers like you.
 
       - else
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-  #subscribe-form{data: {'action': subscriptions_path }}
+  #subscribe-form{data: {'action': subscriptions_path, user: @user_data.to_json, plan: @plan.stripe_id}}
 
   .block.-my4.-pb4
     .p.-t4.-sf.-centered

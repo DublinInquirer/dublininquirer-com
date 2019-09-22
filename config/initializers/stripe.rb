@@ -20,6 +20,13 @@ else
 end
 
 StripeEvent.configure do |events|
+  events.subscribe 'customer.created' do |event|
+    user = User.where(stripe_id: event.data.object.id).take
+    if user
+      user.update_from_stripe_object!(event.data.object)
+    end
+  end
+
   events.subscribe 'customer.updated' do |event|
     user = User.where(stripe_id: event.data.object.id).take
     if user

@@ -1,86 +1,120 @@
 <script>
   import { onMount } from 'svelte';
+  import { styles, classes, fonts } from './stripe-elements.js';
+  import Field from './Field.svelte';
 
-  export let formAction;
-  export let csrfToken;
+  export let stripePublicKey, formAction, csrfToken, userJson, planId;
 
-  let stripeErrorMessage;
-  let stripeToken;
+  const stripe = Stripe(stripePublicKey);
 
-  let formIsValid = true;
+  let elements, card, stripeToken, form;
+  let givenName, surname, emailAddress, password, payment, createdAt;
+  let givenNameError, surnameError, emailAddressError, passwordError, paymentError;
 
-  const elements = stripe.elements({
-    fonts: [
-      {
-        family: 'Zirkon',
-        src: 'url(https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Light.woff2)',
-        style: 'normal',
-        weight: '400'
-      }
-    ]
-  });
+  $: formDataIsValid = validateUserData(givenName, surname, emailAddress, password, createdAt, stripeToken);
 
-  const styles = {
-    base: {
-      color: '#070707',
-      fontWeight: '400',
-      fontFamily: '"Zirkon", sans-serif',
-      fontSize: '17.5px',
-      fontSmoothing: 'optimizeLegibility',
-      ':focus': {
-        color: '#000'
-      },
-      '::placeholder': {
-        color: '#999'
-      },
-      ':focus::placeholder': {
-        color: '#DDD'
-      }
-    },
-    invalid: {
-      color: '#FC4604',
-      ':focus': {
-        color: '#070707'
-      },
-      '::placeholder': {
-        color: '#FED1C0'
-      }
-    }
-  };
+  function parseUserData(userData) {
+    const attributes = userData.attributes;
+    const errors = userData.errors;
 
-  const classes = {
-    focus: '-focus',
-    empty: '-empty',
-    invalid: '-invalid'
-  };
+    givenName = attributes.given_name;
+    surname = attributes.surname;
+    emailAddress = attributes.email_address;
+    createdAt = attributes.created_at;
 
-  const card = elements.create('card', {
-    style: styles,
-    classes: classes
-  });
+    givenNameError = errors.given_name;
+    surnameError = errors.surname;
+    emailAddressError = errors.email_address;
+    passwordError = errors.password;
+    paymentError = errors.payment;
+  }
 
-  async function handleSubmit(event) {
-    const {token, error} = await stripe.createToken(card);
-    const form = event.target;
-    if (error) {
-      stripeErrorMessage = error.message;
+  function validateUserData(givenName, surname, emailAddress, password, createdAt, stripeToken) {
+    if (!!emailAddress && emailAddress.length < 3) {
+      emailAddressError = "can't be blank";
     } else {
-      stripeToken = token.id;
-      console.log('Submit form');
+      emailAddressError = null;
+    }
+
+    if (!!!createdAt && (!!password && password.length < 6)) {
+      passwordError = 'must be at least 6 characters';
+    } else {
+      passwordError = null;
+    }
+
+    if (!!givenNameError || !!surnameError || !! emailAddressError || !! passwordError || !!paymentError) {
+      return false;
+    } else {
+      return true;
     }
   }
 
-	onMount(async () => {
+  async function submitFormWithToken(token) {
+    const response = await fetch(formAction,
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': csrfToken
+      },
+      body: JSON.stringify({
+        user: {
+          'given_name': givenName,
+          'surname': surname,
+          'email_address': emailAddress,
+          'password': password
+        },
+        payment: {
+          'stripe_token': stripeToken
+        },
+        subscription: {
+          'plan_id': planId
+        }
+      })
+    });
+    const data = await response.json();
+
+    switch(data.status) { 
+      case "ok": { 
+        window.location.href = '/subscriptions/thanks'
+        break; 
+      } 
+      case "error": { 
+        parseUserData(data.user);
+        break; 
+      }
+      case "incomplete": {
+        console.log("Incomplete");
+        break; 
+      }
+    }
+  }
+
+  async function handleSubmit(event) {
+    const {token, error} = await stripe.createToken(card);
+
+    if (error) {
+      paymentError = error.message;
+    } else {
+      stripeToken = token.id;
+
+      // fetch
+      submitFormWithToken(stripeToken);
+    }
+  }
+
+  onMount(() => {
+    parseUserData(JSON.parse(userJson));
+
+    elements = stripe.elements({fonts: fonts});
+    card = elements.create('card', {style: styles, classes: classes});
     card.mount('#card');
+    
     card.addEventListener('change', ({error}) => {
-      if (stripeToken) {
-        stripeToken = null;
-      }
-      if (error) {
-        stripeErrorMessage = error.message;
-      } else {
-        stripeErrorMessage = '';
-      }
+      stripeToken = null;
+      paymentError = error ? error.message : '';
     });
   });
 </script>
@@ -88,7 +122,7 @@
 <style>
 </style>
 
-<form action={formAction} method='post' on:submit|preventDefault={handleSubmit}>
+<form action={formAction} method='post' on:submit|preventDefault={handleSubmit} bind:this={form}>
   {#if csrfToken}
     <input type="hidden" name="authenticity_token" bind:value={csrfToken} />
   {/if}
@@ -99,16 +133,34 @@
   <div class="block -form">
     <div class="block -b -p2 -my2 -bg-faint">
       <div class="field">
-        <label>Payment details</label>
-        <div id="card"></div>
-        {#if stripeErrorMessage}
-          <div class="error">{stripeErrorMessage}</div>
-        {/if}
+        <div class="twofer">
+          <Field label="Given name" error={givenNameError}>
+            <input type="text" name="user[given_name]" bind:value={givenName} />
+          </Field>
+          <Field label="Surname" error={surnameError}>
+            <input type="text" name="user[surname]" bind:value={surname} />
+          </Field>
+        </div>
       </div>
+
+      <Field label="Email address" error={emailAddressError}>
+        <input type="email" name="user[email_address]" bind:value={emailAddress} />
+      </Field>
+
+      {#if !!!createdAt}
+        <Field label="Password" error={passwordError}>
+          <input type="password" name="user[password]" bind:value={password} />
+        </Field>
+      {/if}
     </div>
-    
+      
+    <div class="block -b -p2 -my2 -bg-faint">
+      <Field label="Credit/debit card" error={paymentError}>
+        <div id="card"></div>
+      </Field>
+    </div>
     <nav class="block -mt2 actions">
-      <button class="button -standard -big" disabled={!!stripeToken}>Subscribe</button>
+      <button class="button -standard -big" disabled={!formDataIsValid}>Submit</button>
     </nav>
   </div>
 </form>

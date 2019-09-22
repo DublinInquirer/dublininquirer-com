@@ -23,6 +23,8 @@ class Subscription < ApplicationRecord
   attribute :country, :string
   attribute :country_code, :string
   attribute :hub, :string
+
+  # for payment intents
   attribute :latest_invoice
 
   # fixed only:
@@ -368,18 +370,18 @@ class Subscription < ApplicationRecord
     # adding that logic to the landing page model is as straightforward
     # as you'd guess it'd be – add an integer of free_days to landing_page
     # and use it here
-    str_subscription = if self.landing_page_slug.present? # if there's a landing_page_slug, free month
+    str_subscription = if self.landing_page_slug.present?
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
         trial_end: (Time.zone.now + 1.month).to_i,
-        expand: ['latest_invoice.payment_intent'] # Return the created payment intent.
+        expand: ['latest_invoice.payment_intent'] # does this happen if there's a trial?
       )
-    elsif self.user.stripe_customer.sources.any? # if there's a card, charge
+    elsif self.user.stripe_customer.sources.any?
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
-        expand: ['latest_invoice.payment_intent']
+        expand: ['latest_invoice.payment_intent'] # Return the created payment intent.
       )
     else # if there's no card, free day
       Stripe::Subscription.create(
