@@ -13,8 +13,6 @@
   let givenNameError, surnameError, emailAddressError, passwordError, paymentError;
   let isSubmitting = false;
 
-  $: formDataIsValid = !isSubmitting;
-
   function parseUserData(userData) {
     const attributes = userData.attributes;
     const errors = userData.errors;
@@ -44,7 +42,7 @@
     stripe.handleCardPayment(piClientSecret).then(function(result) {
       if (result.error) {
         paymentError = 'Unable to authenticate payment method. Try another or again?';
-        isSubmitting = false;
+        stopSubmitting();
       } else {
         const data = {payment_intent_id: piClientId};
         submitConfirmation(data);
@@ -95,7 +93,7 @@
       } 
       case "error": {
         paymentError = 'Unable to authenticate payment method. Try another or again?';
-        isSubmitting = false;
+        stopSubmitting();
         break;
       }
     }
@@ -112,7 +110,7 @@
         // display errors
         if (!!data.user) { parseUserData(data.user); }
         if (!!data.payment) { parsePaymentData(data.payment); }
-        isSubmitting = false;
+        stopSubmitting();
         break; 
       }
       case "incomplete": {
@@ -208,7 +206,7 @@
       </Field>
     </div>
     <nav class="block -mt2 actions">
-      <button class="button -standard -big" disabled={!formDataIsValid}>
+      <button class="button -standard -big" disabled={isSubmitting}>
         {#if isSubmitting}
           &hellip;
         {:else}

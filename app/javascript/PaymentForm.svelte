@@ -12,11 +12,6 @@
   let paymentError;
   let isSubmitting = false;
 
-  $: formDataIsValid = !isSubmitting;
-
-  function parseUserData(userData) {
-  }
-
   function parsePaymentData(paymentData) {
     paymentError = paymentData.error;
   }
@@ -25,7 +20,7 @@
     stripe.handleCardPayment(piClientSecret).then(function(result) {
       if (result.error) {
         paymentError = 'Unable to authenticate payment method. Try another or again?';
-        isSubmitting = false;
+        stopSubmitting();
       } else {
         const data = {payment_intent_id: piClientId};
         submitConfirmation(data);
@@ -37,7 +32,25 @@
     paymentError = null;
   }
 
-  function handleNextSteps(data) {
+  function getHeaders() {
+    return {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': csrfToken
+    }
+  }
+
+  function startSubmitting() {
+    clearErrors();
+    isSubmitting = true;
+  }
+
+  function stopSubmitting() {
+    isSubmitting = false;
+  }
+
+  function handleServerResponse(data) {
     switch(data.status) { 
       case "ok": { 
         // exit!
@@ -46,9 +59,8 @@
       } 
       case "error": {
         // display errors
-        if (!!data.user) { parseUserData(data.user); }
         if (!!data.payment) { parsePaymentData(data.payment); }
-        isSubmitting = false;
+        stopSubmitting();
         break; 
       }
       case "incomplete": {
@@ -63,12 +75,7 @@
     const response = await fetch('/user/payment/confirm',
     {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': csrfToken
-      },
+      headers: getHeaders(),
       body: JSON.stringify(payload)
     });
 
@@ -81,48 +88,39 @@
       } 
       case "error": {
         paymentError = 'Unable to authenticate payment method. Try another or again?';
-        isSubmitting = false;
+        stopSubmitting();
         break;
       }
     }
   }
 
-  async function submitFormWithToken(token) {
-    isSubmitting = true;
+  async function submitFormAndToken(token) {
+    stripeToken = token;
     const response = await fetch(formAction,
     {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': csrfToken
-      },
+      headers: getHeaders(),
       body: JSON.stringify({
-        payment: {
-          'stripe_token': stripeToken
-        }
+        payment: {'stripe_token': token}
       })
     });
-    const data = await response.json();
-    handleNextSteps(data);
+
+    await handleServerResponse(await response.json());
   }
 
-  async function handleSubmit(event) {
-    clearErrors();
+  async function handleFormSubmit(event) {
+    startSubmitting();
     const {token, error} = await stripe.createToken(card);
 
     if (error) {
+      stopSubmitting();
       paymentError = error.message;
     } else {
-      stripeToken = token.id;
-      submitFormWithToken(stripeToken);
+      submitFormAndToken(token.id);
     }
   }
 
   onMount(() => {
-    parseUserData(JSON.parse(userJson));
-
     elements = stripe.elements({fonts: fonts});
     card = elements.create('card', {style: styles, classes: classes});
     card.mount('#card');
@@ -134,7 +132,7 @@
   });
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
+<form on:submit|preventDefault={handleFormSubmit}>
   {#if csrfToken}
     <input type="hidden" name="authenticity_token" bind:value={csrfToken} />
   {/if}
@@ -147,7 +145,7 @@
       <div id="card"></div>
     </Field>
     <nav class="block -mt2 actions">
-      <button class="button -standard -big" disabled={!formDataIsValid}>
+      <button class="button -standard -big" disabled={isSubmitting}>
         {#if isSubmitting}
           &hellip;
         {:else}

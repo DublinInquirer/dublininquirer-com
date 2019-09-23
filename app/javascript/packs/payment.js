@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     props: {
       formAction: target.getAttribute('data-action'),
       csrfToken: document.head.querySelector("[name~=csrf-token][content]").content,
-      stripePublicKey: document.head.querySelector("[name~=stripe-public-key][content]").content,
-      userJson: target.getAttribute('data-user')
+      stripePublicKey: document.head.querySelector("[name~=stripe-public-key][content]").content
     }
   });
 

@@ -170,10 +170,6 @@ class Subscription < ApplicationRecord
   def patron?
     (self.plan.is_friend? or self.plan.is_patron?)
   end
-
-  def latest_invoice=(invoice_object)
-    @latest_invoice = invoice_object
-  end
   
   def latest_invoice
     @latest_invoice ||= self.stripe_subscription.latest_invoice
@@ -338,7 +334,6 @@ class Subscription < ApplicationRecord
     self.plan_id = Plan.find_by!(stripe_id: str_obj.plan.id).id
     self.user_id = User.find_by!(stripe_id: str_obj.customer).id
     self.product_id = Product.find_by!(stripe_id: str_obj.plan.product).id
-    self.latest_invoice = str_obj.latest_invoice
 
     self.save!
   end

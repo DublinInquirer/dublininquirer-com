@@ -78,7 +78,6 @@ class UsersController < ApplicationController
 
   def payment
     @user = current_user
-    @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }
   end
 
   def payment_submit
@@ -89,6 +88,10 @@ class UsersController < ApplicationController
     attach_card_to_user(@user, payment_params) { return }
 
     render json: {status: :ok}
+  end
+
+  def payment_confirm
+
   end
 
   private
