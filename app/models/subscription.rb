@@ -24,9 +24,6 @@ class Subscription < ApplicationRecord
   attribute :country_code, :string
   attribute :hub, :string
 
-  # for payment intents
-  attribute :latest_invoice
-
   # fixed only:
   attribute :duration_months, :integer
 
@@ -152,7 +149,10 @@ class Subscription < ApplicationRecord
 
   def stripe_subscription
     return nil unless self.stripe_id.present?
-    @stripe_subscription ||= Stripe::Subscription.retrieve(self.stripe_id)
+    @stripe_subscription ||= Stripe::Subscription.retrieve({
+      id: self.stripe_id, 
+      expand: ['latest_invoice.payment_intent']
+    })
   end
 
   def is_stripe?
@@ -169,6 +169,14 @@ class Subscription < ApplicationRecord
 
   def patron?
     (self.plan.is_friend? or self.plan.is_patron?)
+  end
+
+  def latest_invoice=(invoice_object)
+    @latest_invoice = invoice_object
+  end
+  
+  def latest_invoice
+    @latest_invoice ||= self.stripe_subscription.latest_invoice
   end
 
   # users can only change their sub if they're paying the base price on the active products
@@ -330,6 +338,7 @@ class Subscription < ApplicationRecord
     self.plan_id = Plan.find_by!(stripe_id: str_obj.plan.id).id
     self.user_id = User.find_by!(stripe_id: str_obj.customer).id
     self.product_id = Product.find_by!(stripe_id: str_obj.plan.product).id
+    self.latest_invoice = str_obj.latest_invoice
 
     self.save!
   end
@@ -375,7 +384,7 @@ class Subscription < ApplicationRecord
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
         trial_end: (Time.zone.now + 1.month).to_i,
-        expand: ['latest_invoice.payment_intent'] # does this happen if there's a trial?
+        expand: ['latest_invoice.payment_intent'] # TODO: does this happen if there's a trial?
       )
     elsif self.user.stripe_customer.sources.any?
       Stripe::Subscription.create(

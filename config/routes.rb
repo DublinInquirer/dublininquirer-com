@@ -106,7 +106,8 @@ Rails.application.routes.draw do
       put :address
 
       get :payment
-      put :payment
+      post :payment_submit
+      post 'payment/confirm' => 'user#payment_confirm'
     end
   end
 
@@ -116,7 +117,6 @@ Rails.application.routes.draw do
 
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"
-  get "/failed_payment" => "errors#authentication_fail_error"
 
   # legacy
 

@@ -7,11 +7,13 @@
 
   const stripe = Stripe(stripePublicKey);
 
-  let elements, card, stripeToken, form;
+  let elements, card, stripeToken;
+  let piStatus, piClientId, piClientSecret;
   let givenName, surname, emailAddress, password, payment, createdAt;
   let givenNameError, surnameError, emailAddressError, passwordError, paymentError;
+  let isSubmitting = false;
 
-  $: formDataIsValid = validateUserData(givenName, surname, emailAddress, password, createdAt, stripeToken);
+  $: formDataIsValid = !isSubmitting;
 
   function parseUserData(userData) {
     const attributes = userData.attributes;
@@ -21,44 +23,112 @@
     surname = attributes.surname;
     emailAddress = attributes.email_address;
     createdAt = attributes.created_at;
-
+    
     givenNameError = errors.given_name;
     surnameError = errors.surname;
     emailAddressError = errors.email_address;
     passwordError = errors.password;
-    paymentError = errors.payment;
   }
 
-  function validateUserData(givenName, surname, emailAddress, password, createdAt, stripeToken) {
-    if (!!emailAddress && emailAddress.length < 3) {
-      emailAddressError = "can't be blank";
-    } else {
-      emailAddressError = null;
-    }
+  function parsePaymentData(paymentData) {
+    paymentError = paymentData.error;
+  }
 
-    if (!!!createdAt && (!!password && password.length < 6)) {
-      passwordError = 'must be at least 6 characters';
-    } else {
-      passwordError = null;
-    }
+  function parseInvoiceData(invoiceData) {
+    piStatus = invoiceData.status;
+    piClientId = invoiceData.payment_intent_client_id;
+    piClientSecret = invoiceData.payment_intent_client_secret;
+  }
 
-    if (!!givenNameError || !!surnameError || !! emailAddressError || !! passwordError || !!paymentError) {
-      return false;
-    } else {
-      return true;
+  function handleScaAction() {
+    stripe.handleCardPayment(piClientSecret).then(function(result) {
+      if (result.error) {
+        paymentError = 'Unable to authenticate payment method. Try another or again?';
+        isSubmitting = false;
+      } else {
+        const data = {payment_intent_id: piClientId};
+        submitConfirmation(data);
+      }
+    });
+  }
+
+  function clearErrors() {
+    givenNameError = null;
+    surnameError = null;
+    emailAddressError = null;
+    passwordError = null;
+    paymentError = null;
+  }
+
+  function getHeaders() {
+    return {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-CSRF-Token': csrfToken
     }
   }
 
-  async function submitFormWithToken(token) {
+  function startSubmitting() {
+    clearErrors();
+    isSubmitting = true;
+  }
+
+  function stopSubmitting() {
+    isSubmitting = false;
+  }
+
+  async function submitConfirmation(payload) {
+    const response = await fetch('/subscriptions/confirm',
+    {
+      method: 'POST',
+      headers: getHeaders(),
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+
+    switch(data.status) { 
+      case "ok": {
+        window.location.href = "/subscriptions/thanks";
+        break;
+      } 
+      case "error": {
+        paymentError = 'Unable to authenticate payment method. Try another or again?';
+        isSubmitting = false;
+        break;
+      }
+    }
+  }
+
+  async function handleServerResponse(data) {
+    switch(data.status) { 
+      case "ok": { 
+        // exit!
+        window.location.href = '/subscriptions/thanks'
+        break; 
+      } 
+      case "error": {
+        // display errors
+        if (!!data.user) { parseUserData(data.user); }
+        if (!!data.payment) { parsePaymentData(data.payment); }
+        isSubmitting = false;
+        break; 
+      }
+      case "incomplete": {
+        parseInvoiceData(data.invoice);
+        handleScaAction();
+        break; 
+      }
+    }
+  }
+
+  async function submitFormAndToken(token) {
+    stripeToken = token;
     const response = await fetch(formAction,
     {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': csrfToken
-      },
+      headers: getHeaders(),
       body: JSON.stringify({
         user: {
           'given_name': givenName,
@@ -66,42 +136,23 @@
           'email_address': emailAddress,
           'password': password
         },
-        payment: {
-          'stripe_token': stripeToken
-        },
-        subscription: {
-          'plan_id': planId
-        }
+        payment: {'stripe_token': token},
+        subscription: {'plan_id': planId}
       })
     });
-    const data = await response.json();
 
-    switch(data.status) { 
-      case "ok": { 
-        window.location.href = '/subscriptions/thanks'
-        break; 
-      } 
-      case "error": { 
-        parseUserData(data.user);
-        break; 
-      }
-      case "incomplete": {
-        console.log("Incomplete");
-        break; 
-      }
-    }
+    await handleServerResponse(await response.json());
   }
 
-  async function handleSubmit(event) {
+  async function handleFormSubmit(event) {
+    startSubmitting();
     const {token, error} = await stripe.createToken(card);
 
     if (error) {
+      stopSubmitting();
       paymentError = error.message;
     } else {
-      stripeToken = token.id;
-
-      // fetch
-      submitFormWithToken(stripeToken);
+      submitFormAndToken(token.id);
     }
   }
 
@@ -122,12 +173,9 @@
 <style>
 </style>
 
-<form action={formAction} method='post' on:submit|preventDefault={handleSubmit} bind:this={form}>
+<form on:submit|preventDefault={handleFormSubmit}>
   {#if csrfToken}
     <input type="hidden" name="authenticity_token" bind:value={csrfToken} />
-  {/if}
-  {#if stripeToken}
-    <input type="hidden" name="stripe_token" bind:value={stripeToken} />
   {/if}
 
   <div class="block -form">
@@ -144,12 +192,12 @@
       </div>
 
       <Field label="Email address" error={emailAddressError}>
-        <input type="email" name="user[email_address]" bind:value={emailAddress} />
+        <input type="email" name="user[email_address]" required bind:value={emailAddress} />
       </Field>
 
       {#if !!!createdAt}
         <Field label="Password" error={passwordError}>
-          <input type="password" name="user[password]" bind:value={password} />
+          <input type="password" name="user[password]" required bind:value={password} />
         </Field>
       {/if}
     </div>
@@ -160,7 +208,13 @@
       </Field>
     </div>
     <nav class="block -mt2 actions">
-      <button class="button -standard -big" disabled={!formDataIsValid}>Submit</button>
+      <button class="button -standard -big" disabled={!formDataIsValid}>
+        {#if isSubmitting}
+          &hellip;
+        {:else}
+          Subscribe
+        {/if}
+      </button>
     </nav>
   </div>
 </form>

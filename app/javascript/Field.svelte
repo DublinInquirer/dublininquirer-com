@@ -8,6 +8,6 @@
   <label>{label}</label>
   <slot></slot>
   {#if error}
-    <div class="error">{label} {error}</div>
+    <div class="error">{error}</div>
   {/if}
 </div>

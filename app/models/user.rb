@@ -284,18 +284,11 @@ class User < ApplicationRecord
     new_source = c.sources.create(source: stripe_token)
     c.default_source = new_source
     c.save
-
-    begin
-      self.pay_outstanding_invoice
-    rescue Stripe::CardError
-      raise "Card error" # TODO: something with this!
-    end
   end
 
   def pay_outstanding_invoice # TODO: forgive all previous invoices
     return unless self.stripe_customer.present?
     return unless self.delinquent?
-
     if self.stripe_invoices.any? && !self.stripe_invoices.first['paid']
       self.stripe_invoices.first.pay
     end
@@ -395,6 +388,7 @@ class User < ApplicationRecord
     else
       Stripe::Customer.create
     end
+
     self.stripe_id = customer.id
     self.sources_count = customer.sources.total_count
     self.card_last_4 = customer.sources.first.last4

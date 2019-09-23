@@ -78,24 +78,34 @@ class UsersController < ApplicationController
 
   def payment
     @user = current_user
+    @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }
+  end
 
-    case request.request_method.downcase.to_sym
-    when :get
-      render :payment
-    when :put
-      @user.stripe_token = payment_params[:stripe_token]
-      if @user.save
-        redirect_to :user
-      else
-        render :payment
-      end
-    end
+  def payment_submit
+    @user = current_user
+    @subscription = @user.subscription
+
+    # if the card is invalid, return here
+    attach_card_to_user(@user, payment_params) { return }
+
+    render json: {status: :ok}
   end
 
   private
 
+  def attach_card_to_user(user, payment_params)
+    begin
+      user.add_stripe_source(payment_params[:stripe_token])
+    rescue Stripe::CardError => e
+      render(json: {
+          status: :error,
+          payment: {error: e.message}
+        }) and yield
+    end
+  end
+
   def payment_params
-    params.permit(:stripe_token)
+    params.require(:payment).permit(:stripe_token)
   end
 
   def address_params
