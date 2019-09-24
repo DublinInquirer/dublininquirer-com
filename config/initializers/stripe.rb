@@ -56,7 +56,7 @@ StripeEvent.configure do |events|
   end
 
   events.subscribe 'invoice.payment_failed' do |event|
-    # do manual dunning
+    Raven.capture_message 'Invoice payment failed', extra: event.to_hash
   end
   
   events.subscribe 'invoice.created' do |event|

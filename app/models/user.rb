@@ -110,8 +110,10 @@ class User < ApplicationRecord
     src = stripe_object.default_source
 
     self.sources_count = stripe_object.sources.total_count
-    self.card_last_4 = stripe_default_source.last4
-    self.card_brand = stripe_default_source.brand
+    unless src.is_a?(String)
+      self.card_last_4 = stripe_default_source.last4
+      self.card_brand = stripe_default_source.brand
+    end
     self.save!
   end
 
