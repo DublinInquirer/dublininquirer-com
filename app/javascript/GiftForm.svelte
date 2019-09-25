@@ -10,8 +10,8 @@
 
   let elements, card, stripeToken;
   let piStatus, piClientSecret, piId;
-  let giverGivenName, giverSurname, giverEmailAddress, recipientGivenName, recipientSurname, recipientEmailAddress, recipientAddressLine1, recipientAddressLine2, recipientCity, recipientCounty, recipientPostCode, recipientCountryCode, planId, duration;
-  let giverGivenNameError, giverSurnameError, giverEmailAddressError, recipientGivenNameError, recipientSurnameError, recipientEmailAddressError, recipientAddressLine1Error, recipientAddressLine2Error, recipientCityError, recipientCountyError, recipientPostCodeError, recipientCountryCodeError, paymentError;
+  let giverGivenName, giverSurname, giverEmailAddress, recipientGivenName, recipientSurname, recipientEmailAddress, planId, duration;
+  let giverGivenNameError, giverSurnameError, giverEmailAddressError, recipientGivenNameError, recipientSurnameError, recipientEmailAddressError, paymentError;
   let isSubmitting = false;
 
   $: purchasePrice = duration * 5;
@@ -30,22 +30,10 @@
     recipientGivenName = attributes.recipient_given_name;
     recipientSurname = attributes.recipient_surname;
     recipientEmailAddress = attributes.recipient_email_address;
-    recipientAddressLine1 = attributes.recipient_address_line_1;
-    recipientAddressLine2 = attributes.recipient_address_line_2;
-    recipientCity = attributes.recipient_address_city;
-    recipientCounty = attributes.recipient_county;
-    recipientPostCode = attributes.recipient_post_code;
-    recipientCountryCode = attributes.recipient_country_code;
 
     recipientGivenNameError = errors.recipient_given_name;
     recipientSurnameError = errors.recipient_surname;
     recipientEmailAddressError = errors.recipient_email_address;
-    recipientAddressLine1Error = errors.recipient_address_line_1;
-    recipientAddressLine2Error = errors.recipient_address_line_2;
-    recipientCityError = errors.recipient_address_city;
-    recipientCountyError = errors.recipient_county;
-    recipientPostCodeError = errors.recipient_post_code;
-    recipientCountryCodeError = errors.recipient_country_code;
   }
 
   function parsePaymentIntentData(paymentIntentData) {
@@ -72,12 +60,6 @@
     recipientGivenNameError = null;
     recipientSurnameError = null;
     recipientEmailAddressError = null;
-    recipientAddressLine1Error = null;
-    recipientAddressLine2Error = null;
-    recipientCityError = null;
-    recipientCountyError = null;
-    recipientPostCodeError = null;
-    recipientCountryCodeError = null;
     paymentError = null;
   }
 
@@ -98,12 +80,6 @@
       recipient_given_name: recipientGivenName,
       recipient_surname: recipientSurname,
       recipient_email_address: recipientEmailAddress,
-      recipient_address_line_1: recipientAddressLine1,
-      recipient_address_line_2: recipientAddressLine2,
-      recipient_city: recipientCity,
-      recipient_county: recipientCounty,
-      recipient_post_code: recipientPostCode,
-      recipient_country_code: recipientCountryCode,
       plan_id: planId,
       duration: duration,
       stripe_id: piId
@@ -249,28 +225,11 @@
       <Field label="Email address" error={recipientEmailAddressError}>
         <input type="email" bind:value={recipientEmailAddress} />
       </Field>
-      <Field label="Address line 1" error={recipientAddressLine1Error}>
-        <input type="text" bind:value={recipientAddressLine1} />
-      </Field>
-      <Field label="Address line 2" error={recipientAddressLine2Error}>
-        <input type="text" bind:value={recipientAddressLine2} />
-      </Field>
-      <Field label="City" error={recipientCityError}>
-        <input type="text" bind:value={recipientCity} />
-      </Field>
-      <div class="field">
-        <div class="twofer">
-          <Field label="County" error={recipientCountyError}>
-            <input type="text" bind:value={recipientCounty} />
-          </Field>
-          <Field label="Post code" error={recipientPostCodeError}>
-            <input type="text" bind:value={recipientPostCode} />
-          </Field>
+      {#if true}
+        <div class="block -mt2">
+          <p class="p -centered -t5 c">We won't notify the recipient directly. We need an email address to set up their user account.</p>
         </div>
-      </div>
-      <Field label="Country" error={recipientCountryCodeError}>
-        <input type="text" bind:value={recipientCountryCode} />
-      </Field>
+      {/if}
     </div>
 
     <div class="block -b -p2 -my2 -bg-faint">
@@ -285,7 +244,7 @@
         {#if isSubmitting}
           &hellip;
         {:else}
-          Purchase
+          Purchase &mdash; {purchasePrice}
         {/if}
       </button>
     </nav>
