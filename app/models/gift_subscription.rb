@@ -41,6 +41,10 @@ class GiftSubscription < ApplicationRecord
 
   scope :by_date, -> { order('created_at desc') }
 
+  def to_param
+    redemption_code
+  end
+
   def requires_address?
     return false unless self.plan.present?
     self.plan.requires_address?

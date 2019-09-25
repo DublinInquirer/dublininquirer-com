@@ -1,0 +1,47 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Thanks
+    .block.p.-mt1.-t3
+      :markdown
+        Just one more thing: where should we send the monthly print edition?
+      
+  .block.-pb4
+    = form_with model: @user, url: [:address, :subscriptions], html: {method: :put}, data: {remote: false} do |f|
+      .block.-form.-b.-p2.-bg-faint
+        .field.twofer
+          .field
+            = f.label :given_name
+            = f.text_field :given_name
+          .field
+            = f.label :surname
+            = f.text_field :surname
+        .field
+          = f.label :address_line_1
+          = f.text_field :address_line_1
+        .field
+          = f.label :address_line_2
+          = f.text_field :address_line_2
+        .field
+          = f.label :city
+          = f.text_field :city
+        .field.twofer
+          .field
+            = f.label :county
+            = f.text_field :county
+          .field
+            = f.label :post_code
+            = f.text_field :post_code
+        .field.-select
+          = f.label :country_code, 'Country'
+          = f.country_select :country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
+
+        %nav.block.-mt2.actions
+          = f.submit 'Save address', class: 'button -standard -big'
+
+  .block.-my4.-pb4
+    %hr.-separator
+    .block.-mt4.p.-t4.-sf.-centered
+      :markdown
+        **Questions?**
+
+        If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

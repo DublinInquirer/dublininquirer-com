@@ -1,14 +1,7 @@
 class SubscriptionsController < ApplicationController
   before_action :require_login, only: [:upgrade, :thanks]
   before_action :require_no_subscription, only: [:create]
-  layout 'modal', only: [:upgrade, :create, :thanks]
-
-  # user valid:
-  # 1. Payment succeeds
-  # 2. Payment requires SCA
-  # 3. Payment fails
-  # user invalid:
-  # 1. Display errors client-side
+  layout 'modal', only: [:upgrade, :create, :address, :thanks]
 
   def create
     @user = logged_in? ? current_user : User.new
@@ -84,6 +77,21 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def address
+    @user = current_user
+
+    case request.request_method.downcase.to_sym
+    when :get
+      render :address
+    when :put
+      if @user.update(address_params)
+        redirect_to [:thanks, :subscriptions]
+      else
+        render :address
+      end
+    end
+  end
+
   def thanks
     @subscription = current_user.subscription
   end
@@ -155,5 +163,9 @@ class SubscriptionsController < ApplicationController
 
   def subscription_params
     params.require(:subscription).permit(:plan_id)
+  end
+
+  def address_params
+    params.require(:user).permit(:address_line_1, :address_line_2, :city, :county, :post_code, :country_code)
   end
 end

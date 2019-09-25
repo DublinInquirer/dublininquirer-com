@@ -3,7 +3,7 @@
   import { styles, classes, fonts } from './stripe-elements.js';
   import Field from './Field.svelte';
 
-  export let stripePublicKey, formAction, csrfToken, userJson, planId;
+  export let stripePublicKey, formAction, csrfToken, userJson, planJson;
 
   const stripe = Stripe(stripePublicKey);
 
@@ -11,6 +11,7 @@
   let piStatus, piClientId, piClientSecret;
   let givenName, surname, emailAddress, password, payment, createdAt;
   let givenNameError, surnameError, emailAddressError, passwordError, paymentError;
+  let planId, addressRequired;
   let isSubmitting = false;
 
   function parseUserData(userData) {
@@ -26,6 +27,11 @@
     surnameError = errors.surname;
     emailAddressError = errors.email_address;
     passwordError = errors.password;
+  }
+
+  function parsePlanData(planData) {
+    planId = planData.stripe_id;
+    addressRequired = planData.address_required;
   }
 
   function parsePaymentData(paymentData) {
@@ -58,6 +64,14 @@
     paymentError = null;
   }
 
+  function nextStepUrl() {
+    if (addressRequired) {
+      return "/subscriptions/address";
+    } else {
+      return "/subscriptions/thanks";
+    }
+  }
+
   function getHeaders() {
     return {
       'Accept': 'application/json',
@@ -88,7 +102,7 @@
 
     switch(data.status) { 
       case "ok": {
-        window.location.href = "/subscriptions/thanks";
+        window.location.href = nextStepUrl();
         break;
       } 
       case "error": {
@@ -103,7 +117,7 @@
     switch(data.status) { 
       case "ok": { 
         // exit!
-        window.location.href = '/subscriptions/thanks'
+        window.location.href = nextStepUrl();
         break; 
       } 
       case "error": {
@@ -156,6 +170,7 @@
 
   onMount(() => {
     parseUserData(JSON.parse(userJson));
+    parsePlanData(JSON.parse(planJson));
 
     elements = stripe.elements({fonts: fonts});
     card = elements.create('card', {style: styles, classes: classes});

@@ -16,7 +16,7 @@
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-  #subscribe-form{data: {'action': subscriptions_path, user: @user_data.to_json, plan: @plan.stripe_id}}
+  #subscribe-form{data: {'action': subscriptions_path, user: @user_data.to_json, plan: {address_required: @plan.requires_address?, stripe_id: @plan.stripe_id}.to_json}}
 
   .block.-my4.-pb4
     .p.-t4.-sf.-centered

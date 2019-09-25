@@ -86,10 +86,17 @@ Rails.application.routes.draw do
       get :thanks
       post :confirm
     end
+
+    member do
+      get :address
+      put :address
+    end
   end
 
   resources :subscriptions, only: [:new, :create] do
     collection do
+      get :address
+      put :address
       get :upgrade
       put :upgrade
       get :thanks

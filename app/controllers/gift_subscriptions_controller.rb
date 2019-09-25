@@ -43,15 +43,6 @@ class GiftSubscriptionsController < ApplicationController
       )
     end
 
-    if @subscription.requires_address? && !@user.persisted? # What about users who are persisted but have no address?
-      @user.address_line_1 = @subscription.address_line_1
-      @user.address_line_2 = @subscription.address_line_2
-      @user.city = @subscription.city
-      @user.county = @subscription.county
-      @user.post_code = @subscription.post_code
-      @user.country_code = @subscription.country_code
-    end
-
     @subscription.user = @user
     
     @gift_subscription.save && (@user.persisted? || @user.save)
@@ -59,10 +50,32 @@ class GiftSubscriptionsController < ApplicationController
     render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription)}
   end
 
+  def address
+    @gift_subscription = GiftSubscription.find_by(redemption_code: params[:id])
+    @user = @gift_subscription.user
+
+    case request.request_method.downcase.to_sym
+    when :get
+      if @user.has_address?
+        redirect_to [:thanks, :gift_subscriptions]
+      else
+        render :address
+      end
+    when :put
+      if @user.update(address_params)
+        redirect_to [:thanks, :gift_subscriptions]
+      else
+        render :address
+      end
+    end
+  end
+
+  def thanks; end
+
   private
 
   def gift_subscription_data(gift_subscription)
-    { attributes: gift_subscription.attributes.slice('giver_given_name', 'giver_surname', 'giver_email_address', 'plan_id', 'duration', 'recipient_given_name', 'recipient_surname', 'recipient_email_address', 'recipient_address_line_1', 'recipient_address_line_2', 'recipient_city', 'recipient_county', 'recipient_post_code', 'recipient_country_code'), errors: gift_subscription.errors.messages }
+    { attributes: gift_subscription.attributes.slice('giver_given_name', 'giver_surname', 'giver_email_address', 'plan_id', 'duration', 'recipient_given_name', 'recipient_surname', 'recipient_email_address', 'redemption_code').merge(price: gift_subscription.price, address_required: gift_subscription.requires_address?), errors: gift_subscription.errors.messages }
   end
 
   def validate_gift_subscription(gift_subscription)
@@ -93,6 +106,10 @@ class GiftSubscriptionsController < ApplicationController
   end
 
   def gift_subscription_params
-    params.require(:gift_subscription).permit(:giver_given_name, :giver_surname, :giver_email_address, :recipient_given_name, :recipient_surname, :recipient_email_address, :recipient_address_line_1, :recipient_address_line_2, :recipient_city, :recipient_county, :recipient_post_code, :recipient_country_code, :plan_id, :payment_method_id, :duration)
+    params.require(:gift_subscription).permit(:giver_given_name, :giver_surname, :giver_email_address, :recipient_given_name, :recipient_surname, :recipient_email_address, :plan_id, :payment_method_id, :duration)
+  end
+
+  def address_params
+    params.require(:user).permit(:address_line_1, :address_line_2, :city, :county, :post_code, :country_code)
   end
 end

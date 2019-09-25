@@ -11,7 +11,7 @@
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile for #{ pluralize @gift_subscription.duration, 'month' }.
   
-  %div#gift-form{data: {'action': gift_subscriptions_path, 'gift-subscription': @gift_subscription_data.to_json, plan: 'STRIPE_ID'}}
+  %div#gift-form{data: {'action': gift_subscriptions_path, 'gift-subscription': @gift_subscription_data.to_json}}
 
   .block.-my4.-pb4
     %hr.-separator

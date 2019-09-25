@@ -90,9 +90,7 @@ class UsersController < ApplicationController
     render json: {status: :ok}
   end
 
-  def payment_confirm
-
-  end
+  def payment_confirm; end
 
   private
 

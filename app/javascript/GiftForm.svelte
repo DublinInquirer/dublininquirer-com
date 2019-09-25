@@ -10,11 +10,11 @@
 
   let elements, card, stripeToken;
   let piStatus, piClientSecret, piId;
-  let giverGivenName, giverSurname, giverEmailAddress, recipientGivenName, recipientSurname, recipientEmailAddress, planId, duration;
+  let giverGivenName, giverSurname, giverEmailAddress, recipientGivenName, recipientSurname, recipientEmailAddress, planId, duration, price, addressRequired, redemptionCode;
   let giverGivenNameError, giverSurnameError, giverEmailAddressError, recipientGivenNameError, recipientSurnameError, recipientEmailAddressError, paymentError;
   let isSubmitting = false;
 
-  $: purchasePrice = duration * 5;
+  $: purchasePrice = (price / 100);
 
   function parseGiftSubscriptionData(giftSubscriptionData) {
     const attributes = giftSubscriptionData.attributes;
@@ -22,6 +22,9 @@
 
     planId = attributes.plan_id;
     duration = attributes.duration;
+    price = attributes.price;
+    addressRequired = attributes.address_required;
+    redemptionCode = attributes.redemption_code;
 
     giverGivenName = attributes.giver_given_name;
     giverSurname = attributes.giver_surname;
@@ -63,6 +66,14 @@
     paymentError = null;
   }
 
+  function nextStepUrl() {
+    if (addressRequired) {
+      return `/gifts/${redemptionCode}/address`;
+    } else {
+      return "/gifts/thanks";
+    }
+  }
+
   function getHeaders() {
     return {
       'Accept': 'application/json',
@@ -89,7 +100,8 @@
   function finalisePurchase(data) {
     switch(data.status) { 
       case "ok": {
-        window.location.href = "/gifts/thanks";
+        parseGiftSubscriptionData(data.gift_subscription);
+        window.location.href = nextStepUrl();
         break;
       } 
       case "error": {
@@ -244,7 +256,7 @@
         {#if isSubmitting}
           &hellip;
         {:else}
-          Purchase &mdash; {purchasePrice}
+          Purchase &mdash; €{purchasePrice}
         {/if}
       </button>
     </nav>

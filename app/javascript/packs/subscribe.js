@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       csrfToken: document.head.querySelector("[name~=csrf-token][content]").content,
       stripePublicKey: document.head.querySelector("[name~=stripe-public-key][content]").content,
       userJson: target.getAttribute('data-user'),
-      planId: target.getAttribute('data-plan')
+      planJson: target.getAttribute('data-plan')
     }
   });
 
