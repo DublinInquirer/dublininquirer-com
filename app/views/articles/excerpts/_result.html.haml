@@ -5,7 +5,7 @@
         .overlay.block.-b.-bg-default
           .p.-t5.c.-w4= display_category(article.category)
         - if article.featured_artwork.image.present?
-          = image_tag article.featured_artwork.image.large.url
+          = image_tag article.featured_artwork.image.medium.url
 
     .p.-centered
       %span.p.-t4

@@ -13,11 +13,23 @@ class GiftSubscriptionsController < ApplicationController
     else
       GiftSubscription.new(plan: product.base_plan, duration: duration)
     end
+
+    @gift_subscription_data = gift_subscription_data(@gift_subscription)
+  end
+  
+  def create # validates sub + creates the intent
+    @gift_subscription = GiftSubscription.new(gift_subscription_params)
+
+    validate_gift_subscription(@gift_subscription) { return }
+    @payment_intent = setup_payment_intent(@gift_subscription)
+
+    render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription), payment_intent: @payment_intent.to_hash.slice(:status, :client_secret)}
   end
 
-  def create
+  def confirm
     @gift_subscription = GiftSubscription.new(gift_subscription_params)
-    @gift_subscription.payment_method_id = params[:payment_method_id]
+
+    # TODO: the gift sub itself should handle all this
     @subscription = @gift_subscription.subscription
 
     @user = if User.where(email_address: @subscription.try(:email_address)).any?
@@ -41,50 +53,30 @@ class GiftSubscriptionsController < ApplicationController
     end
 
     @subscription.user = @user
-    if @gift_subscription.save &&
-       (@user.persisted? || @user.save) &&
-      @gift_subscription.capture_charge!
-      respond_to do |format|
-        format.html { redirect_to [:thanks, :gift_subscriptions] }
-        format.js do
-          render json: {
-            status: @gift_subscription.charge_object.status,
-            payment_intent_client_id: @gift_subscription.charge_object.id,
-            payment_intent_client_secret: @gift_subscription.charge_object.client_secret
-          }
-        end
-      end
-    else
-      render :show
-    end
-  end
+    
+    @gift_subscription.save && (@user.persisted? || @user.save)
 
-  def confirm
-    begin
-      if params['paymentIntentId'].present?
-
-        subscription = GiftSubscription.find_by_stripe_id(params['paymentIntentId'])
-        intent = Stripe::PaymentIntent.confirm(params['paymentIntentId'])
-        if intent.status == 'succeeded'
-          subscription.charged_at = Time.zone.now
-          subscription.save
-          return redirect_to %I[thanks gift_subscriptions]
-        else
-          return render :status => 400
-        end  
-         
-      else
-        return render :status => 400 
-      end
-    rescue Stripe::CardError => e
-      # Display error on client
-      flash[:alert] = e.message
-      return render :status => 400
-    end
-    redirect_to %I[thanks gift_subscriptions]
+    render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription)}
   end
 
   private
+
+  def gift_subscription_data(gift_subscription)
+    { attributes: gift_subscription.attributes.slice('giver_given_name', 'giver_surname', 'giver_email_address', 'plan_id', 'duration', 'recipient_given_name', 'recipient_surname', 'recipient_email_address', 'recipient_address_line_1', 'recipient_address_line_2', 'recipient_city', 'recipient_county', 'recipient_post_code', 'recipient_country_code'), errors: gift_subscription.errors.messages }
+  end
+
+  def validate_gift_subscription(gift_subscription)
+    if !gift_subscription.valid?
+      render(json: {status: :error, gift_subscription: gift_subscription_data(gift_subscription)}) and yield
+    end
+  end
+
+  def setup_payment_intent(gift_subscription)
+    Stripe::PaymentIntent.create({
+      amount: gift_subscription.price,
+      currency: 'eur',
+    })
+  end
 
   def duration_from_id(id)
     return nil unless id.present?
@@ -101,6 +93,6 @@ class GiftSubscriptionsController < ApplicationController
   end
 
   def gift_subscription_params
-    params.require(:gift_subscription).permit(:giver_given_name, :giver_surname, :giver_email_address, :recipient_given_name, :recipient_surname, :recipient_email_address, :recipient_address_line_1, :recipient_address_line_2, :recipient_city, :recipient_county, :recipient_post_code, :recipient_country_code, :first_address_line_1, :first_address_line_2, :first_city, :first_county, :first_post_code, :first_country_code, :plan_id, :payment_method_id, :duration)
+    params.require(:gift_subscription).permit(:giver_given_name, :giver_surname, :giver_email_address, :recipient_given_name, :recipient_surname, :recipient_email_address, :recipient_address_line_1, :recipient_address_line_2, :recipient_city, :recipient_county, :recipient_post_code, :recipient_country_code, :plan_id, :payment_method_id, :duration)
   end
 end

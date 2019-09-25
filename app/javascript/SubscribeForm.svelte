@@ -92,7 +92,7 @@
         break;
       } 
       case "error": {
-        paymentError = 'Unable to authenticate payment method. Try another or again?';
+        paymentError = 'Unable to authenticate payment card. Try again?';
         stopSubmitting();
         break;
       }
@@ -180,7 +180,7 @@
     <div class="block -b -p2 -my2 -bg-faint">
       <div class="field">
         <div class="twofer">
-          <Field label="Given name" error={givenNameError}>
+          <Field label="First name" error={givenNameError}>
             <input type="text" name="user[given_name]" bind:value={givenName} />
           </Field>
           <Field label="Surname" error={surnameError}>
