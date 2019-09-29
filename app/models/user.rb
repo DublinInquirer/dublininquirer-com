@@ -287,7 +287,6 @@ class User < ApplicationRecord
     c = self.stripe_customer
     new_source = c.sources.create(source: stripe_token)
     c.default_source = new_source
-    c = Stripe::Customer.retrieve(id: self.stripe_id, expand: ['default_source', 'sources'])
     c.save && update_from_stripe_object!(c)
   end
 
