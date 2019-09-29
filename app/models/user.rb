@@ -111,10 +111,16 @@ class User < ApplicationRecord
 
     self.sources_count = stripe_object.sources.total_count
 
-    if src.is_a?(Stripe::Source)
-      self.card_last_4 = src.last4
-      self.card_brand = src.brand
+    src = if stripe_object.default_source.is_a?(String)
+      Stripe::Source.retrieve(id: stripe_object.default_source)
+    elsif stripe_object.default_source.is_a?(Stripe::Source)
+      stripe_object.default_source
+    else
+      raise "Can't understand source: #{ stripe_object.default_source.inspect }"
     end
+
+    self.card_last_4 = src.last4
+    self.card_brand = src.brand
 
     self.save!
   end
