@@ -107,13 +107,18 @@ class User < ApplicationRecord
   end
 
   def update_from_stripe_object!(stripe_object)
+    return unless stripe_object.is_a?(Stripe::Customer)
+
     src = stripe_object.default_source
 
     self.sources_count = stripe_object.sources.total_count
 
     src = if stripe_object.default_source.is_a?(String)
-      Stripe::Source.retrieve(id: stripe_object.default_source)
-    elsif stripe_object.default_source.is_a?(Stripe::Source)
+      Stripe::Customer.retrieve_source(
+        stripe_object.id,
+        stripe_object.default_source
+      )
+    elsif stripe_object.default_source.is_a?(Stripe::Card)
       stripe_object.default_source
     else
       raise "Can't understand source: #{ stripe_object.default_source.inspect }"
