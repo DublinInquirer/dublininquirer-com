@@ -1,56 +1,33 @@
 class ProductsController < ApplicationController
   layout 'modal'
+  before_action :require_no_subscription
 
   def index
-    if logged_in? and current_user.subscriptions.active.any?
-      redirect_to(:root) && return
-    end
-
     @digital = Product.find_by(name: 'Digital subscription')
     @print = Product.find_by(name: 'Digital + Print subscription')
   end
 
   def show
-    if logged_in? and current_user.subscriptions.active.any?
-      redirect_to(:root) && return
-    end
-
-    @products = Product.active
-    @plans = Plan.where(product: @products, interval: 'month')
-
-    @plan = case params[:id].try(:downcase).try(:to_sym)
+    @product = case params[:id].try(:downcase).try(:to_sym)
     when :digital
-      Product.find_by_slug('digital').base_plan
+      Product.find_by_slug('digital')
     when :print
-      Product.find_by_slug('print').base_plan
-    when :friend
-      Product.find_by_slug('print').plans.find_or_create_by(amount: 20_00, interval: 'month')
-    when :patron
-      Product.find_by_slug('print').plans.find_or_create_by(amount: 50_00, interval: 'month')
+      Product.find_by_slug('print')
     else
       raise ActiveRecord::RecordNotFound
     end
+    @plan = @product.base_plan
+    @user = logged_in? ? current_user : User.new
 
-    @product = @plan.product
+    @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }
+  end
 
-    @subscription = if logged_in?
-      Subscription.new(
-        user: current_user,
-        plan: @plan,
-        given_name: current_user.given_name,
-        surname: current_user.surname)
-    else
-      Subscription.new(plan: @plan)
-    end
+  private
 
-    @landing_page = if session[:landing_page]
-      LandingPage.find_by(slug: session[:landing_page])
-    else
-      nil
-    end
-    if @landing_page
-      @subscription.trial_ends_at = (Time.zone.now + 1.month)
-      @subscription.landing_page_slug = @landing_page.slug
-    end
+  def require_no_subscription
+    return unless logged_in?
+    return unless current_user.subscriptions.active.any? or current_user.is_banned?
+
+    redirect_to(:root)
   end
 end

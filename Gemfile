@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.4'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 6.0.x'
 gem 'pg', '< 1.0.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -11,7 +11,7 @@ gem 'haml'
 gem 'http'
 gem 'oj'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jbuilder', '~> 2.5'
@@ -50,6 +50,7 @@ gem 'fog-aws', group: :production
 gem 'turbolinks'
 gem 'stripe_event'
 gem 'stripe-ruby-mock', '~> 2.5.8', :require => 'stripe_mock'
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false

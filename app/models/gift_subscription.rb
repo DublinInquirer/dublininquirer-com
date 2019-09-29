@@ -2,7 +2,7 @@
 # - charges card
 # - creates user
 # - creates fixed subscription
-# its stripe_id corresponds to a stripe charge
+# its stripe_id corresponds to a stripe payment intent
 
 class GiftSubscription < ApplicationRecord
   belongs_to :subscription
@@ -18,8 +18,6 @@ class GiftSubscription < ApplicationRecord
   attribute :recipient_county, :string
   attribute :recipient_post_code, :string
   attribute :recipient_country_code, :string
-
-  attribute :payment_method_id, :string
 
   before_validation :set_redemption_code, if: -> (gs) { gs.redemption_code.blank? }
   after_initialize :setup_subscription, if: -> (gs) { !gs.subscription }
@@ -42,6 +40,10 @@ class GiftSubscription < ApplicationRecord
   validate :user_is_not_subscribed
 
   scope :by_date, -> { order('created_at desc') }
+
+  def to_param
+    redemption_code
+  end
 
   def requires_address?
     return false unless self.plan.present?
@@ -76,15 +78,9 @@ class GiftSubscription < ApplicationRecord
     "#{ self.giver_given_name } #{ self.giver_surname }".strip
   end
 
-  def stripe_charge
+  def stripe_payment_intent
     return nil unless self.stripe_id
-    @charge ||= Stripe::Charge.retrieve(self.stripe_id)
-  end
-
-  def capture_charge!
-    return nil unless self.payment_method_id.present?
-    create_stripe_charge
-    self.save
+    @payment_intent ||= Stripe::PaymentIntent.retrieve(self.stripe_id)
   end
 
   def self.searchable_columns
@@ -119,23 +115,6 @@ class GiftSubscription < ApplicationRecord
 
   def save_subscription
     self.subscription.save!
-  end
-
-  def create_stripe_charge
-    charge = Stripe::PaymentIntent.create({
-      payment_method: self.payment_method_id,
-      amount: self.price,
-      currency: "eur",
-      confirmation_method: 'manual',
-      confirm: true,
-      description: "Gift Subscription: #{ self.product_name }"
-    })
-    self.stripe_id = charge.id
-    self.charge_object = charge
-
-    if !charge['failure_code']
-      self.charged_at = Time.zone.now
-    end
   end
 
   def set_redemption_code

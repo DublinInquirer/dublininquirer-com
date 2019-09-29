@@ -86,10 +86,17 @@ Rails.application.routes.draw do
       get :thanks
       post :confirm
     end
+
+    member do
+      get :address
+      put :address
+    end
   end
 
   resources :subscriptions, only: [:new, :create] do
     collection do
+      get :address
+      put :address
       get :upgrade
       put :upgrade
       get :thanks
@@ -106,7 +113,8 @@ Rails.application.routes.draw do
       put :address
 
       get :payment
-      put :payment
+      post :payment_submit
+      post 'payment/confirm' => 'user#payment_confirm'
     end
   end
 
@@ -116,7 +124,6 @@ Rails.application.routes.draw do
 
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"
-  get "/failed_payment" => "errors#authentication_fail_error"
 
   # legacy
 

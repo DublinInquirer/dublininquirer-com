@@ -7,8 +7,8 @@ class User < ApplicationRecord
   authenticates_with_sorcery!
 
   validates :email_address, uniqueness: true, presence: true
-  validates :password, length: { minimum: 5 }, if: -> { new_record? || changes[:crypted_password] }
-  validates :password, length: { minimum: 5 }, on: :password_reset
+  validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }
+  validates :password, length: { minimum: 6 }, on: :password_reset
   validates :nickname, uniqueness: true, allow_blank: true
 
   has_many :comments
@@ -20,7 +20,6 @@ class User < ApplicationRecord
   attribute :stripe_token, :string
 
   before_save :create_stripe_customer, unless: :stripe_id?
-  before_save :add_stripe_source, if: :stripe_token?
   before_save :reset_hub, if: :will_save_change_to_address?
   before_validation :normalise_email, :figure_out_country_code, :normalise_name
 
@@ -41,13 +40,13 @@ class User < ApplicationRecord
     self.set_password_at.present?
   end
 
-  def schedule_for_deletion!
+  def schedule_for_deletion! # paranoid
     self.deleted_at = Time.now + 1.day
     self.email_address = "#{ self.email_address }///#{ self.deleted_at.to_i }"
     save!
   end
 
-  def cancel_deletion!
+  def cancel_deletion! # unschedule for deletion
     self.deleted_at = nil
     self.email_address = self.email_address.split('///').try(:first)
     save!
@@ -108,7 +107,16 @@ class User < ApplicationRecord
   end
 
   def update_from_stripe_object!(stripe_object)
-    # nothing editable in stripe atm
+    src = stripe_object.default_source
+
+    self.sources_count = stripe_object.sources.total_count
+
+    if src.is_a?(Stripe::Source)
+      self.card_last_4 = src.last4
+      self.card_brand = src.brand
+    end
+
+    self.save!
   end
 
   def can_comment?(article)
@@ -221,7 +229,7 @@ class User < ApplicationRecord
   def stripe_default_source
     return nil unless self.stripe_id.present?
     return nil unless self.stripe_customer.default_source.present?
-    @source ||= self.stripe_customer.sources.retrieve(self.stripe_customer.default_source)
+    @source ||= self.stripe_customer.default_source
   end
 
   def stripe_sources
@@ -231,7 +239,7 @@ class User < ApplicationRecord
 
   def stripe_customer
     return nil unless self.stripe_id.present?
-    @stripe_customer ||= Stripe::Customer.retrieve(self.stripe_id)
+    @stripe_customer ||= Stripe::Customer.retrieve(id: self.stripe_id, expand: ['default_source', 'sources'])
   end
 
   def stripe_invoices
@@ -275,10 +283,17 @@ class User < ApplicationRecord
     c.translations['en']
   end
 
+  def add_stripe_source(stripe_token)
+    c = self.stripe_customer
+    new_source = c.sources.create(source: stripe_token)
+    c.default_source = new_source
+    c = Stripe::Customer.retrieve(id: self.stripe_id, expand: ['default_source', 'sources'])
+    c.save && update_from_stripe_object!(c)
+  end
+
   def pay_outstanding_invoice # TODO: forgive all previous invoices
     return unless self.stripe_customer.present?
     return unless self.delinquent?
-
     if self.stripe_invoices.any? && !self.stripe_invoices.first['paid']
       self.stripe_invoices.first.pay
     end
@@ -373,22 +388,18 @@ class User < ApplicationRecord
   end
 
   def create_stripe_customer
-    customer = Stripe::Customer.create
+    customer = if self.stripe_token.present?
+      Stripe::Customer.create(source: self.stripe_token)
+    else
+      Stripe::Customer.create
+    end
+
     self.stripe_id = customer.id
-  end
 
-  def add_stripe_source
-    raise "Stripe customer not present for user: #{ self.id }" unless self.stripe_customer
-    cus = stripe_customer
-    nc = cus.sources.create(source: self.stripe_token)
-    cus.default_source = nc
-    cus.save
-    self.stripe_token = nil
-
-    begin
-      self.pay_outstanding_invoice
-    rescue Stripe::CardError
-      raise "Card error" # TODO: something with this!
+    self.sources_count = customer.sources.total_count
+    if customer.sources.total_count > 0
+      self.card_last_4 = customer.sources.first.last4
+      self.card_brand = customer.sources.first.brand
     end
   end
 end

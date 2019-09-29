@@ -21,7 +21,7 @@ class Artwork < ApplicationRecord
   end
 
   def rendered_element
-    "<figure class='artwork #{ self.portrait? ? '-portrait' : nil }'><img src='#{ self.image.massive.url }' />#{ self.rendered_caption }</figure>"
+    "<figure class='artwork #{ self.portrait? ? '-portrait' : nil }'><img src='#{ self.image.large.url }' />#{ self.rendered_caption }</figure>"
   end
 
   def rendered_caption

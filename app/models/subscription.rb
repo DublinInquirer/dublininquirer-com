@@ -23,7 +23,6 @@ class Subscription < ApplicationRecord
   attribute :country, :string
   attribute :country_code, :string
   attribute :hub, :string
-  attribute :latest_invoice
 
   # fixed only:
   attribute :duration_months, :integer
@@ -150,7 +149,10 @@ class Subscription < ApplicationRecord
 
   def stripe_subscription
     return nil unless self.stripe_id.present?
-    @stripe_subscription ||= Stripe::Subscription.retrieve(self.stripe_id)
+    @stripe_subscription ||= Stripe::Subscription.retrieve({
+      id: self.stripe_id, 
+      expand: ['latest_invoice.payment_intent']
+    })
   end
 
   def is_stripe?
@@ -167,6 +169,10 @@ class Subscription < ApplicationRecord
 
   def patron?
     (self.plan.is_friend? or self.plan.is_patron?)
+  end
+  
+  def latest_invoice
+    @latest_invoice ||= self.stripe_subscription.latest_invoice
   end
 
   # users can only change their sub if they're paying the base price on the active products
@@ -368,18 +374,18 @@ class Subscription < ApplicationRecord
     # adding that logic to the landing page model is as straightforward
     # as you'd guess it'd be – add an integer of free_days to landing_page
     # and use it here
-    str_subscription = if self.landing_page_slug.present? # if there's a landing_page_slug, free month
+    str_subscription = if self.landing_page_slug.present?
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
         trial_end: (Time.zone.now + 1.month).to_i,
-        expand: ['latest_invoice.payment_intent'] # Return the created payment intent.
+        expand: ['latest_invoice.payment_intent'] # TODO: does this happen if there's a trial?
       )
-    elsif self.user.stripe_customer.sources.any? # if there's a card, charge
+    elsif self.user.stripe_customer.sources.any?
       Stripe::Subscription.create(
         customer: user.stripe_id,
         items: [{ plan: plan.stripe_id }],
-        expand: ['latest_invoice.payment_intent']
+        expand: ['latest_invoice.payment_intent'] # Return the created payment intent.
       )
     else # if there's no card, free day
       Stripe::Subscription.create(

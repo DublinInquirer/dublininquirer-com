@@ -19,7 +19,7 @@
   %article.article.-formatted.-standard{lang: 'en'}
     - if article.featured_artwork.present?
       %figure.artwork.-featured
-        = image_tag article.featured_artwork.image.large.url
+        = image_tag article.featured_artwork.medium.large.url
         %figcaption= article.featured_artwork.caption
 
     - if !@limited

@@ -1,98 +1,66 @@
 class SubscriptionsController < ApplicationController
   before_action :require_login, only: [:upgrade, :thanks]
-  layout 'modal', only: [:upgrade, :create, :thanks]
+  before_action :require_no_subscription, only: [:create]
+  layout 'modal', only: [:upgrade, :create, :address, :thanks]
 
-  def create # not for gifts
-    if logged_in? and (current_user.subscriptions.active.any? or current_user.is_banned?)
-      redirect_to(:user) && return
-    end
+  def create
+    @user = logged_in? ? current_user : User.new
+    @user.assign_attributes(user_params)
 
-    @subscription = Subscription.new(subscription_params)
+    # if the user is invalid, return here
+    validate_user(@user) { return }
 
-    if logged_in?
-      @user = current_user
-      @subscription.email_address = @user.email_address
-      @user.assign_attributes(
-        given_name: @subscription.given_name,
-        surname: @subscription.surname,
-        stripe_token: params[:stripe_token],
-        sources_count: 1
-      )
-    else
-      @user = User.new(
-        email_address: @subscription.email_address,
-        given_name: @subscription.given_name,
-        surname: @subscription.surname,
-        password: @subscription.password,
-        stripe_token: params[:stripe_token],
-        set_password_at: Time.zone.now,
-        sources_count: 1
-      )
-    end
+    # if the card is invalid, return here
+    setup_user_with_card(@user, payment_params) { return }
+    @subscription = setup_subscription(@user, subscription_params)
+    auto_login(@user) # login regardless as the user has been created/saved
 
-    if @subscription.requires_address?
-      @subscription.landing_page_slug = nil
-      @user.address_line_1 = @subscription.address_line_1
-      @user.address_line_2 = @subscription.address_line_2
-      @user.city = @subscription.city
-      @user.county = @subscription.county
-      @user.post_code = @subscription.post_code
-      @user.country_code = @subscription.country_code
-    end
-
-    @subscription.user = @user
-
-    if @user.save && @subscription.save
-      @user.send_welcome!
-      auto_login(@user, true) unless logged_in?
-      latest_invoice = @subscription.latest_invoice.payment_intent
-      respond_to do |format|
-        format.html { redirect_to :thanks_subscriptions }
-        format.js do
-          render json: {
-            status: latest_invoice.status,
-            payment_intent_client_id: latest_invoice.id,
-            payment_intent_client_secret: latest_invoice.client_secret
-          }
-        end
-      end
-    else
-      @products = Product.active
-      @plans = Plan.where(product: @products, interval: 'month')
-
-      @plan = Plan.find(subscription_params[:plan_id])
-      @product = @plan.product
-      render 'products/show'
+    case @subscription.status.to_sym # TODO: 3??
+    when :incomplete # 2
+      payment_intent = @subscription.latest_invoice.payment_intent
+      add_source_to_payment_intent(payment_intent, @user)
+      render json: {status: :incomplete, invoice: {
+        status: payment_intent.status,
+        payment_intent_client_id: payment_intent.id,
+        payment_intent_client_secret: payment_intent.client_secret
+      }}
+    when :active # 1
+      render json: {status: :ok}
     end
   end
 
-  def confirm
+  def confirm # TODO: pls refactor me
+    payment_intent_id = params['payment_intent_id']
     begin
-      if params['paymentIntentId'].present?
-        # subscription = Subscription.find_by_
-        intent = Stripe::PaymentIntent.retrieve(params['paymentIntentId'])
+      if payment_intent_id
+        intent = Stripe::PaymentIntent.retrieve(payment_intent_id)
         invoice = Stripe::Invoice.retrieve(intent.invoice)
-        unless intent.status == 'succeeded'
-          intent = Stripe::PaymentIntent.confirm(params['paymentIntentId'])
+        
+        if intent.status != 'succeeded'
+          intent = Stripe::PaymentIntent.confirm(payment_intent_id)
         end
-        subscription_id = invoice.lines.data[0]["subscription"]
-        subscription = Subscription.find_by_stripe_id(subscription_id)
+        
+        subscription = Subscription.find_by(stripe_id: invoice.lines.data[0]["subscription"])
         subscription.status = "active"
         subscription.save
-        if intent.status == 'succeeded'
-          return redirect_to :thanks_subscriptions 
-        else 
-          return render :status => 400
-        end  
+      end
+
+      if intent && (intent.status == 'succeeded')
+        render(json: {
+          status: :ok
+        }) and return # exit
       else
-        return render :status => 400
+        render(json: {
+          status: :error,
+          payment: {error: 'No payment id'}
+        }) and return # exit
       end
     rescue Stripe::CardError => e
-      # Display error on client
-      flash[:alert] = e.message
-      return render :status => 400
+      render(json: {
+        status: :error,
+        payment: {error: e.message}
+      }) and return # exit
     end
-    return redirect_to :thanks_subscriptions
   end
 
   def upgrade
@@ -109,13 +77,95 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  def address
+    @user = current_user
+
+    case request.request_method.downcase.to_sym
+    when :get
+      render :address
+    when :put
+      if @user.update(address_params)
+        redirect_to [:thanks, :subscriptions]
+      else
+        render :address
+      end
+    end
+  end
+
   def thanks
     @subscription = current_user.subscription
   end
 
   private
 
+  # valid? or return attributes + errors
+  def validate_user(user)
+    if !user.valid?
+      render(json: {status: :error, user: user_data(user)}) and yield
+    end
+  end
+
+  # save user
+  def setup_user_with_card(user, payment_params)
+    begin
+      if user.stripe_id.present? # if customer exists, add a source
+        user.add_stripe_source(payment_params[:stripe_token])
+      else # if no customer exists, add the token to the user
+        user.stripe_token = payment_params[:stripe_token]
+        user.save
+      end
+    rescue Stripe::CardError => e
+      render(json: {
+          status: :error,
+          user: user_data(user),
+          payment: {error: e.message}
+        }) and yield
+    end
+  end
+
+  # set up subscription or return attributes + errors
+  def setup_subscription(user, subscription_params)
+    plan = Plan.find_by!(stripe_id: subscription_params[:plan_id])
+    if user.subscriptions.where(status: 'incomplete', plan_id: plan.id).any?
+      user.subscriptions.where(status: 'incomplete', plan_id: plan.id).take
+    else
+      Subscription.create!(plan: plan, user: user)
+    end
+  end
+
+  def add_source_to_payment_intent(payment_intent, user)
+    return unless (payment_intent.status == 'requires_payment_method')
+    payment_intent.payment_method = user.stripe_customer.default_source
+    payment_intent.save
+  end
+
+  def require_no_subscription
+    return unless logged_in?
+    return unless current_user.subscriptions.active.any? or current_user.is_banned?
+
+    redirect_to(:root)
+  end
+
+  def user_data(user)
+    {
+      attributes: user.attributes.slice('created_at', 'given_name','surname','email_address'),
+      errors: user.errors.messages
+    }
+  end
+
+  def user_params
+    params.require(:user).permit(:email_address, :given_name, :surname,:address_line_1, :address_line_2, :city, :county, :post_code, :country_code, :password)
+  end
+
+  def payment_params
+    params.require(:payment).permit(:stripe_token)
+  end
+
   def subscription_params
-    params.require(:subscription).permit(:email_address, :given_name, :surname, :plan_id, :address_line_1, :address_line_2, :city, :county, :post_code, :country_code, :password, :landing_page_slug)
+    params.require(:subscription).permit(:plan_id)
+  end
+
+  def address_params
+    params.require(:user).permit(:address_line_1, :address_line_2, :city, :county, :post_code, :country_code)
   end
 end

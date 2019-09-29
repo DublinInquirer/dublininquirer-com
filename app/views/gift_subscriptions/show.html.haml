@@ -1,10 +1,3 @@
-:coffeescript
-  $ ->
-    $('[data-action="submitForm"]').on 'click', (e) ->
-      e.preventDefault()
-      $(e.currentTarget).attr('data-action', '')
-      $(e.currentTarget).parents('form:first').submit()
-
 .wrapper.-small{role: 'layout'}
   %header.page-header
     %h1.h.-h2 Give a subscription
@@ -17,93 +10,8 @@
       - else
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile for #{ pluralize @gift_subscription.duration, 'month' }.
-
-  = form_for @gift_subscription, url: gift_subscriptions_path, method: :post, html: {class: 'subscription-form', data: {'fonts-url': asset_url('fonts.css')}} do |f|
-    = f.hidden_field :plan_id
-    = f.hidden_field :duration
-
-    .block.-form
-      .block.-b.-p2.-my2.-bg-faint
-        .block.-mb2.-pb1.-bb
-          %h3.c.-w8 Your details
-
-        .field
-          = f.label :giver_given_name, 'Your name'
-          .twofer
-            = f.text_field :giver_given_name, placeholder: 'First'
-            = f.text_field :giver_surname, placeholder: 'Surname'
-            = render_errors_for(@gift_subscription, :giver_surname)
-
-        .field
-          = f.label :giver_email_address, 'Your email address'
-          = f.email_field :giver_email_address, placeholder: 'sean@example.ie'
-          = render_errors_for(@gift_subscription, :giver_email_address)
-
-      .block.-b.-p2.-my2.-bg-faint
-        .block.-mb2.-pb1.-bb
-          %h3.c.-w8 Recipient&rsquo;s details
-
-        .field
-          = f.label :recipient_given_name, 'Name'
-          .twofer
-            = f.text_field :recipient_given_name, placeholder: 'First'
-            = f.text_field :recipient_surname, placeholder: 'Surname'
-            = render_errors_for(@gift_subscription, :recipient_surname)
-
-        .field
-          = f.label :recipient_email_address, 'Email address'
-          = f.email_field :recipient_email_address, placeholder: 'sean@example.ie'
-          = render_errors_for(@gift_subscription, :recipient_email_address)
-
-      - if @gift_subscription.requires_address?
-        .block.-b.-p2.-my2.-bg-faint
-          .block.-mb2.-pb1.-bb
-            %h3.c.-w8 Subscription address
-
-          .field
-            = f.label :recipient_address_line_1, 'Address line 1'
-            = f.text_field :recipient_address_line_1
-            = render_errors_for(@gift_subscription, :recipient_address_line_1)
-          .field
-            = f.label :recipient_address_line_2, 'Address line 2'
-            = f.text_field :recipient_address_line_2
-            = render_errors_for(@gift_subscription, :recipient_address_line_2)
-          .field
-            = f.label :recipient_city, 'City'
-            = f.text_field :recipient_city
-            = render_errors_for(@gift_subscription, :recipient_city)
-          .field.twofer
-            .field
-              = f.label :recipient_county, 'County'
-              = f.text_field :recipient_county
-              = render_errors_for(@gift_subscription, :recipient_county)
-            .field
-              = f.label :recipient_post_code, 'Post code'
-              = f.text_field :recipient_post_code
-              = render_errors_for(@gift_subscription, :recipient_post_code)
-          .field.-select
-            = f.label :recipient_country_code, 'Country'
-            = f.country_select :recipient_country_code, priority_countries: ["IE", "GB"], priority_countries_divider: "-"
-            = render_errors_for(@gift_subscription, :recipient_country_code)
-
-      .block.-b.-p2.-my2.-bg-faint
-        .block.-mb2.-pb1.-bb
-          %h3.c.-w8 Payment details
-
-        .field
-          %label Card number
-          #stripe-form_card-number
-
-        .field.twofer
-          .field
-            %label Expiration date
-            #stripe-form_card-expiry
-          .field
-            %label Security code
-            #stripe-form_card-cvc
-
-      %nav.block.-mt2.actions
-        = f.submit raw("Purchase &mdash; #{ number_to_currency((@gift_subscription.price/100.0), unit: '€').gsub('.00','') }"), class: 'button -standard -big'
+  
+  %div#gift-form{data: {'action': gift_subscriptions_path, 'gift-subscription': @gift_subscription_data.to_json}}
 
   .block.-my4.-pb4
     %hr.-separator
@@ -112,3 +20,6 @@
         **Questions?**
 
         If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.
+
+- content_for :head_tags do
+  = javascript_pack_tag 'gift'

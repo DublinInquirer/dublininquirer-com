@@ -1,6 +1,8 @@
 .button, a.button, a.button:link, a.button:visited, input.button
   font-family: $sans
   -webkit-appearance: none
+  margin-left: 0
+  margin-right: 0
   border: 0
 
   &:hover
@@ -21,6 +23,15 @@
       line-height: 1.5
       padding: 1.75rem 3.25rem
       font-weight: 800
+    
+    &:disabled, &[disabled]
+      background-color: var(--faint)
+      color: var(--grey)
+      border-color: var(--grey)
+      &:hover
+        cursor: default
+        background-color: var(--faint)
+        color: var(--grey)
 
   &.-red
     background: var(--red)

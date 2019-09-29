@@ -20,6 +20,13 @@ else
 end
 
 StripeEvent.configure do |events|
+  events.subscribe 'customer.created' do |event|
+    user = User.where(stripe_id: event.data.object.id).take
+    if user
+      user.update_from_stripe_object!(event.data.object)
+    end
+  end
+
   events.subscribe 'customer.updated' do |event|
     user = User.where(stripe_id: event.data.object.id).take
     if user
@@ -49,7 +56,11 @@ StripeEvent.configure do |events|
   end
 
   events.subscribe 'invoice.payment_failed' do |event|
-    # do manual dunning
+    Raven.capture_message 'Invoice payment failed', extra: event.to_hash
+  end
+
+  events.subscribe 'invoice.payment_action_required' do |event|
+    Raven.capture_message 'Invoice payment action required', extra: event.to_hash
   end
   
   events.subscribe 'invoice.created' do |event|
