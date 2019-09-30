@@ -287,6 +287,19 @@ class User < ApplicationRecord
     end
   end
 
+  def send_dunning_email!
+    # don't send too many emails
+    return if self.payment_failed_email_sent_at && (self.payment_failed_email_sent_at > 48.hours.ago)
+
+    touch :payment_failed_email_sent_at
+    
+    if Rails.env.production?
+      UserMailer.payment_failed_email(self.id).deliver_later
+    else
+      UserMailer.payment_failed_email(self.id).deliver_now
+    end
+  end
+
   def country_name
     return nil unless self.country_code
     c = ISO3166::Country[self.country_code]

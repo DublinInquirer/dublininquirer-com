@@ -1,4 +1,4 @@
-Hi <%= @given_name %>,
+Hi <%= @given_name.present? ? @given_name : 'there' %>,
 
 I just wanted to say thanks so much for supporting Dublin Inquirer with your generous monthly subscription. It's readers like you who make our work possible. You should receive your first issue in the post soon.
 

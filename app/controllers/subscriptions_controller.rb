@@ -14,6 +14,7 @@ class SubscriptionsController < ApplicationController
     setup_user_with_card(@user, payment_params) { return }
     @subscription = setup_subscription(@user, subscription_params)
     auto_login(@user) # login regardless as the user has been created/saved
+    @user.send_welcome! # welcome the user, even if they're possibly incomplete
 
     case @subscription.status.to_sym # TODO: 3??
     when :incomplete # 2

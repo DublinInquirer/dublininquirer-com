@@ -18,6 +18,8 @@ class UserMailer < ApplicationMailer
     @subscription = Subscription.find subscription_id
     @given_name = @user.given_name
 
+    @subject = @given_name.present? ? "Thanks for subscribing, #{ @given_name }!" : "Thanks for subscribing!"
+
     template_name = if @subscription.plan.is_patron?
       'welcome_patron'
     elsif @subscription.plan.is_friend?
@@ -31,10 +33,24 @@ class UserMailer < ApplicationMailer
     end
 
     mail(to: @user.email_address,
-         subject: "Thanks for subscribing, #{ @given_name }!",
+         subject: @subject,
          from: 'Dublin Inquirer <info@dublininquirer.com>',
          template_path: 'user_mailer',
          template_name: template_name
+      )
+  end
+
+  def payment_failed_email(user_id)
+    @user = User.find user_id
+    @given_name = @user.given_name
+
+    @subject = "We're having trouble charging your card"
+
+    mail(to: @user.email_address,
+         subject: @subject,
+         from: 'Dublin Inquirer <info@dublininquirer.com>',
+         template_path: 'user_mailer',
+         template_name: 'payment_failed'
       )
   end
 end
