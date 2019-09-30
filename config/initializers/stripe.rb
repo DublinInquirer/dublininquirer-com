@@ -58,7 +58,7 @@ StripeEvent.configure do |events|
   events.subscribe 'invoice.payment_failed' do |event|
     customer_id = event.data.object.customer
     if customer_id && customer_id.is_a?(String)
-      user = User.find_by(stripe_id: customer_if)
+      user = User.find_by(stripe_id: customer_id)
       user.send_dunning_email!
     end
   end

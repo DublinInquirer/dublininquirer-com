@@ -1,4 +1,4 @@
-Hi <%= @given_name %>,
+Hi <%= @given_name.present? ? @given_name : 'there' %>,
 
 I just wanted to say thanks so much for subscribing to Dublin Inquirer. You should see your first issue in the post soon.
 

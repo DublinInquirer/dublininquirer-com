@@ -289,7 +289,7 @@ class User < ApplicationRecord
 
   def send_dunning_email!
     # don't send too many emails
-    return if (self.payment_failed_email_sent_at > 48.hours.ago)
+    return if self.payment_failed_email_sent_at && (self.payment_failed_email_sent_at > 48.hours.ago)
 
     touch :payment_failed_email_sent_at
     
