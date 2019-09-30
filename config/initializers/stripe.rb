@@ -56,7 +56,11 @@ StripeEvent.configure do |events|
   end
 
   events.subscribe 'invoice.payment_failed' do |event|
-    Raven.capture_message 'Invoice payment failed', extra: event.to_hash
+    customer_id = event.data.object.customer
+    if customer_id && customer_id.is_a?(String)
+      user = User.find_by(stripe_id: customer_if)
+      user.send_dunning_email!
+    end
   end
 
   events.subscribe 'invoice.payment_action_required' do |event|

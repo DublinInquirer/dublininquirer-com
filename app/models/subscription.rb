@@ -37,7 +37,7 @@ class Subscription < ApplicationRecord
   before_destroy :orphan_invoices
 
   scope :paid, -> { where(status: %w(trialing active)) }
-  scope :active, -> { where(status: %w(trialing active past_due unpaid)) }
+  scope :active, -> { where(status: %w(trialing incomplete active past_due unpaid)) }
   scope :delinquent, -> { where(status: %w(past_due unpaid)) }
   scope :is_stripe, -> { where(subscription_type: 'stripe') }
   scope :is_fixed, -> { where(subscription_type: 'fixed') }
