@@ -21,14 +21,17 @@ class ImageUploader < CarrierWave::Uploader::Base
 
   version :large do
     process resize_to_fit: [1600, 1600]
+    process quality: 90
   end
 
   version :medium do
     process resize_to_fit: [960, 960]
+    process quality: 90
   end
 
   version :small do
     process resize_to_fit: [480, 480]
+    process quality: 90
   end
 
   private
