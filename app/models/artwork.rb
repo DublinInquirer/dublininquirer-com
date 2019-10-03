@@ -21,7 +21,7 @@ class Artwork < ApplicationRecord
   end
 
   def rendered_element
-    "<figure class='artwork #{ self.portrait? ? '-portrait' : nil }'><img src='#{ self.image.large.url }' />#{ self.rendered_caption }</figure>"
+    "<figure class='artwork #{ self.portrait? ? '-portrait' : nil }'><img src='#{ self.image.medium.url }' />#{ self.rendered_caption }</figure>"
   end
 
   def rendered_caption
@@ -38,6 +38,12 @@ class Artwork < ApplicationRecord
     return 'image/gif' if (image.file.to_s.include?('.gif'))
     return 'image/png' if (image.file.to_s.include?('.png'))
     nil
+  end
+  
+  def medium_width_px
+  end
+  
+  def medium_height_px
   end
 
   def large_width_px # 1600^2
