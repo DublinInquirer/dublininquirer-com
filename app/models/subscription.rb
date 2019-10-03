@@ -297,7 +297,7 @@ class Subscription < ApplicationRecord
 
   def self.to_csv
     CSV.generate(headers: true) do |csv|
-      csv << %w(id name address_line_1 address_line_2 city county post_code country hub)
+      csv << %w(id name email status address_line_1 address_line_2 city county post_code country hub)
       all.includes(:plan, :user).find_each do |s|
         u = s.user
         csv << {

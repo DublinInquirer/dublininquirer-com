@@ -24,9 +24,6 @@ class Admin::SubscriptionsController < Admin::ApplicationController
     end
   end
 
-  def mailing_list # TODO
-  end
-
   def delinquent_list
     send_data Subscription.churning.to_csv, filename: "subscriptions-#{Date.today}.csv"
   end

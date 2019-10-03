@@ -4,6 +4,7 @@
       = link_to 'Users', [:admin, :users]
 
     %nav
+      = link_to "Export newsletter list", mailing_list_admin_users_path(format: 'csv'), class: 'button'
       = link_to 'New user', [:new, :admin, :user], class: 'button'
 
   %div.filters

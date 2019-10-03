@@ -18,6 +18,10 @@ class Admin::UsersController < Admin::ApplicationController
     end
   end
 
+  def mailing_list
+    send_data User.wants_newsletter.to_csv, filename: "newsletter-list-#{Date.today}.csv"
+  end
+
   def show
     @user = User.find(params[:id])
     @user_note = @user.user_notes.new

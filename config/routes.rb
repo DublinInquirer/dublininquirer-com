@@ -186,6 +186,9 @@ Rails.application.routes.draw do
     resources :users do
       resources :user_notes, only: [:new, :create, :destroy]
       resources :subscriptions, only: [:new, :create]
+      collection do
+        get :mailing_list
+      end
       member do
         put :reset_password
         put :impersonate

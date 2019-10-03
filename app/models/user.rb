@@ -26,6 +26,7 @@ class User < ApplicationRecord
   before_destroy :orphan_comments, :orphan_invoices, :orphan_visitors
 
   scope :unmigrated, -> { where(set_password_at: nil) }
+  scope :wants_newsletter, -> { where(subscribed_weekly: true) }
   scope :migrated, -> { where.not(set_password_at: nil) }
   scope :subscribed, -> { joins(:subscriptions).merge( Subscription.active ).distinct }
   scope :needs_shipping, -> { joins(:subscriptions).merge( Subscription.needs_shipping ).distinct }
@@ -321,6 +322,19 @@ class User < ApplicationRecord
       self.stripe_invoices.first.pay
     end
   end
+
+  def self.to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << %w(name email_address)
+      all.find_each do |u|
+        csv << {
+          name: u.full_name,
+          email: u.email_address
+        }.values
+      end
+    end
+  end
+
 
   def self.searchable_columns
     [:email_address, :full_name, :nickname, :stripe_id, :address_line_1, :address_line_2, :city, :county, :post_code, :country, :country_code, :hub]
