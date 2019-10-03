@@ -11,7 +11,7 @@
   %dt Portrait
   %dd
     - if @author.portrait.present?
-      = image_tag @author.portrait.url
+      = image_tag @author.portrait.url, loading: 'lazy'
   %dt Name
   %dd= @author.full_name
   %dt Bio

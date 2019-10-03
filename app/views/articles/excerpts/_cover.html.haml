@@ -4,7 +4,7 @@
       .block.-mb1
         %figure.artwork.-square
           - if article.featured_artwork.image.present?
-            = image_tag article.featured_artwork.image.medium.url
+            = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
 
       .p.-centered
         %span.p.-t4

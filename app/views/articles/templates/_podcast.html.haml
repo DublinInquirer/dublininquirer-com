@@ -23,7 +23,7 @@
   - if article.featured_artwork.present?
     %section.content.-artwork
       %figure.artwork.-featured
-        = image_tag article.featured_artwork.image.medium.url
+        = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
         %figcaption= article.featured_artwork.caption
 
   = raw render_content(article)

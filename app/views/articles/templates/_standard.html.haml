@@ -18,7 +18,7 @@
 %article.article.-formatted.-standard{lang: 'en'}
   - if article.featured_artwork.present?
     %figure.artwork.-featured
-      = image_tag article.featured_artwork.image.medium.url
+      = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
       %figcaption= article.featured_artwork.caption
 
   - if !@limited

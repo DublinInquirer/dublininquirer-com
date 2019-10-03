@@ -7,6 +7,6 @@
 %article.article.-standard{lang: 'en'}
   - if article.featured_artwork.present?
     %figure.artwork.-featured
-      = image_tag article.featured_artwork.image.large.url
+      = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
       %figcaption= article.featured_artwork.caption
   = raw render_content(article)

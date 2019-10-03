@@ -35,7 +35,7 @@
           %div.option
             %label
               = f.radio_button :featured_artwork_id, artwork.id, checked: (artwork == article.featured_artwork)
-              = image_tag artwork.image.small.url
+              = image_tag artwork.image.small.url, loading: 'lazy'
 
   .actions= f.submit 'Save', class: 'button'
 
