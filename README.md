@@ -8,28 +8,30 @@ It's a fairly standard Rails app with a bunch of little hacks to facilitate a sl
 
 ## Get set up
 
+You'll need Ruby installed with `rbenv` or `rvm`, as well as `postgresql`, `redis`, and `imagemagick` (all available via Homebrew).
+
 Get the app and database set up:
 
-        $ bundle
-        $ rake db:create
-        $ rake db:migrate
+   $ bundle
+   $ rake db:create
+   $ rake db:migrate
 
 Seed the db and setup the Stripe plans:
 
-        $ rake db:seed
-        $ rake stripe:setup
+   $ rake db:seed
+   $ rake stripe:setup
 
 Set up your own credentials file (see `/config/credentials.yml.example`) or contact me for the master key:
 
-        $ rails credentials:edit
+   $ rails credentials:edit
 
 I use Foreman to run things locally:
 
-        $ foreman start
+   $ foreman start
 
 or
 
-        $ heroku local
+   $ heroku local
 
 ## Tests
 
