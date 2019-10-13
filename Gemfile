@@ -12,6 +12,7 @@ gem 'http'
 gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+gem "rubyzip", ">= 1.3.0"
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
