@@ -44,7 +44,8 @@ class HomeController < ApplicationController
         reporters: [
           Author.find_or_create_by!(full_name: 'Sean Finnan'),
           Author.find_or_create_by!(full_name: 'Erin McGuire'),
-          Author.find_or_create_by!(full_name: 'Aura McMenamin')
+          Author.find_or_create_by!(full_name: 'Aura McMenamin'),
+          Author.find_or_create_by!(full_name: 'Laoise Neylon')
         ]
       }
     end

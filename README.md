@@ -8,7 +8,7 @@ It's a fairly standard Rails app with a bunch of little hacks to facilitate a sl
 
 ## Get set up
 
-You'll need Ruby installed with `rbenv` or `rvm`, as well as `postgresql`, `redis`, and `imagemagick` (all available via Homebrew).
+You'll need Ruby installed with `rbenv` or `rvm`, as well as `postgresql`, `yarn`, `redis`, and `imagemagick` (all available via Homebrew).
 
 Get the app and database set up:
 
