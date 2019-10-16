@@ -55,7 +55,7 @@ class HomeController < ApplicationController
     end
 
     @contributors = Rails.cache.fetch("/imprint/contributors", expires_in: 1.day) do
-      Author.where(full_name: ['Martin Cook', 'Dan Grennan', 'Gary Ibbotson', 'Shrinidhi Kalwad', 'Haseena Manek', 'Luke Maxwell', 'David Monaghan', 'Laoise Neylon', 'Melatu Uche Okorie', 'Christine O\'Donnell', 'Daniel Seery'])
+      Author.where(full_name: ['Martin Cook', 'Dan Grennan', 'Gary Ibbotson', 'Shrinidhi Kalwad', 'Haseena Manek', 'Luke Maxwell', 'David Monaghan', 'Melatu Uche Okorie', 'Christine O\'Donnell', 'Daniel Seery'])
     end
   end
 
