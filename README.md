@@ -2,34 +2,46 @@
 
 This runs [dublininquirer.com](https://www.dublininquirer.com), a local news publication in Dublin, Ireland.
 
-It's a fairly standard Rails app with a bunch of little hacks to facilitate a slow transition from a Wordpress installation.
+It's a fairly standard Rails app with a bunch of little hacks to facilitate a slow transition from a Wordpress installation (we switched over Summer 2018).
 
 [![CircleCI](https://circleci.com/gh/DublinInquirer/dublininquirer-com.svg?style=svg)](https://circleci.com/gh/DublinInquirer/dublininquirer-com)
 
 ## Get set up
 
+You'll need Ruby installed with `rbenv` or `rvm`, as well as `postgresql`, `yarn`, `redis`, and `imagemagick` (all available via Homebrew).
+
 Get the app and database set up:
 
-        $ bundle
-        $ rake db:create
-        $ rake db:migrate
+```bash
+bundle
+rake db:create
+rake db:migrate
+```
 
 Seed the db and setup the Stripe plans:
 
-        $ rake db:seed
-        $ rake stripe:setup
+```bash
+rake db:seed
+rake stripe:setup
+```
 
 Set up your own credentials file (see `/config/credentials.yml.example`) or contact me for the master key:
 
-        $ rails credentials:edit
+```bash
+rails credentials:edit
+```
 
 I use Foreman to run things locally:
 
-        $ foreman start
+```bash
+foreman start
+```
 
 or
 
-        $ heroku local
+```bash
+heroku local
+```
 
 ## Tests
 
