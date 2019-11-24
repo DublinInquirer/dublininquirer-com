@@ -15,12 +15,18 @@
     margin-bottom: -4rem
     z-index: 99
     position: relative
+  
+  &.-bg-christmas
+    background-color: var(--christmas-red)
+    color: var(--white)
+    a, a:link, a:visited
+      color: var(--white)
+
   &.-bg-black
     color: var(--default)
     background-color: var(--black)
     a, a:link, a:visited
       color: var(--default)
-
   &.-bg-blue
     color: var(--default)
     background-color: var(--blue)
@@ -248,6 +254,11 @@
 
   &.-shadow
     box-shadow: 0 0.5rem 1rem rgba(#000,0.175)
+  
+  &.-horizontal-nav
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
 
 .flex
   display: flex
