@@ -490,7 +490,7 @@ DEPENDENCIES
   puma (~> 3.11)
   puma_worker_killer
   rack-mini-profiler
-  rails (~> 6.0.0)
+  rails (~> 6.0.x)
   redis (~> 4.0)
   reverse_markdown
   rinku

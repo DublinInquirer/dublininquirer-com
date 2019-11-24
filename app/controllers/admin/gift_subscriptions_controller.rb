@@ -17,6 +17,6 @@ class Admin::GiftSubscriptionsController < Admin::ApplicationController
   end
 
   def show
-    @gift_subscription = GiftSubscription.find_by(id: params[:id])
+    @gift_subscription = GiftSubscription.find_by(redemption_code: params[:id])
   end
 end
