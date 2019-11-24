@@ -1,7 +1,13 @@
 class GiftSubscriptionsController < ApplicationController
+  include ApplicationHelper
   layout 'modal'
 
   def index
+    if is_christmastime?
+      render :christmas
+    else
+      render :index
+    end
   end
 
   def show

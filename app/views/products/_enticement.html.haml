@@ -1,18 +1,6 @@
 - if true or (logged_in? and current_user.subscriber? and is_christmastime?)
-  .block.-bg-christmas.-my4
-    .wrapper.-contained{role: 'layout'}
-      .block
-        .row
-          .col-xs-12.col-md-6.col.flex.-c
-            .flex.-c.block.-pr4.-py4.-pl2
-              .block.-mb2
-                %h3.h.-h2 Christmas gift subscriptions
-              .p.-t3.-serif.-sf
-                :markdown
-                  A subscription to Dublin Inquirer is the perfect gift for the inquisitive Dubliner in your life.
-
-              %nav.block.-mt4.-horizontal-nav
-                = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -christmas'
+  = render partial: 'products/christmas'
+  
 - else
   .block.-bg-black.-my4
     .wrapper.-contained{role: 'layout'}
