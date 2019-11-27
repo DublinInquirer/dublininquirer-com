@@ -20,9 +20,9 @@
                 Unlimited digital access to DublinInquirer.com, including our full, searchable archive, optimised for desktop and mobile.
 
             .block.-px2.-pt3.-pb3.-bg-faint
-              .p.-t4.-centered
-                = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard -big'
-                = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard -big'
+              %nav
+                = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard -big block -mb1'
+                = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard -big block'
 
         .col-xs-12.col-md-6.flex
           .block.-bg-default.-b.flex.-c.-sb.-mt2
@@ -32,12 +32,12 @@
                 The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
             .block.-px2.-pt3.-pb3.-bg-faint
-              .p.-t4.-centered
-                = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard -big'
-                = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard -big'
+              %nav
+                = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard -big block -mb1'
+                = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard -big block'
 
 .block.-bt.-bg-default.-py4
-  .block.-my4.-py4
+  .block.-my4
     .p.-t4.-sf.-centered
       :markdown
         **Questions?**
