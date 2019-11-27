@@ -11,6 +11,7 @@
 
     = csrf_meta_tags
     = csp_meta_tag
+    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
 
@@ -24,19 +25,19 @@
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
 
   %body
-    = render partial: 'layouts/meta-nav', locals: { fixed: true, small: false}
-    = render partial: 'layouts/primary-flag'
+    = render partial: 'layouts/partials/meta-nav', locals: { fixed: true, small: false}
+    = render partial: 'layouts/partials/primary-flag'
 
     .wrapper.-container{role: 'layout'}
       = yield
 
       .block.-bt
-        = render partial: 'layouts/primary-footer'
+        = render partial: 'layouts/partials/primary-footer'
 
       = render partial: 'user_sessions/cookies'
       - if permission_for_cookie?
         = render partial: 'user_sessions/delinquent'
 
-    = render partial: 'layouts/search'
-    = render partial: 'layouts/expansive-nav'
+    = render partial: 'layouts/partials/search'
+    = render partial: 'layouts/partials/expansive-nav'
     = render partial: 'layouts/snippets/analytics'

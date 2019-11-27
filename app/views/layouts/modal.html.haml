@@ -12,6 +12,9 @@
 
     = csrf_meta_tags
     = csp_meta_tag
+    
+    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
     = stylesheet_link_tag 'audio', media: 'all'
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
@@ -29,7 +32,7 @@
 
   %body
     .wrapper.-container{role: 'layout'}
-      = render partial: 'layouts/modal-nav'
+      = render partial: 'layouts/partials/modal-nav'
 
       = yield
 
@@ -53,6 +56,6 @@
     - if current_user != true_user
       = render partial: 'user_sessions/impersonating'
 
-    = render partial: 'layouts/search'
-    = render partial: 'layouts/expansive-nav'
+    = render partial: 'layouts/partials/search'
+    = render partial: 'layouts/partials/expansive-nav'
     = render partial: 'layouts/snippets/analytics'
