@@ -6,4 +6,4 @@
           = render partial: 'articles/excerpts/result', locals: { article: article }
           %hr.-stroke
 
-= render partial: 'layouts/pagination', locals: {page: page, collection: articles, query_params: query_params}
+= render partial: 'layouts/partials/pagination', locals: {page: page, collection: articles, query_params: query_params}

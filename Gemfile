@@ -12,7 +12,6 @@ gem 'http'
 gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
 gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
-gem "rubyzip", ">= 1.3.0"
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
@@ -27,8 +26,8 @@ gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'puma_worker_killer'
 gem 'bcrypt', '~> 3.1.7'
+gem 'webpacker-svelte', "~> 0.0.0"
 
 gem 'meta-tags'
 gem 'sitemap_generator'

@@ -26,13 +26,13 @@
 
   %body
     .wrapper.-container{role: 'layout'}
-      = render partial: 'layouts/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
+      = render partial: 'layouts/partials/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 
       .sub-omnipresent{role: 'layout'}
         = yield
 
       .block.-bt
-        = render partial: 'layouts/primary-footer'
+        = render partial: 'layouts/partials/primary-footer'
 
     = render partial: 'user_sessions/cookies'
 
@@ -42,7 +42,7 @@
     - if current_user != true_user
       = render partial: 'user_sessions/impersonating'
 
-    = render partial: 'layouts/search'
-    = render partial: 'layouts/expansive-nav'
+    = render partial: 'layouts/partials/search'
+    = render partial: 'layouts/partials/expansive-nav'
     = auto_discovery_link_tag(:rss, feed_url(format: :xml))
     = render partial: 'layouts/snippets/analytics'

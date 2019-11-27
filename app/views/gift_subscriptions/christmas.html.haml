@@ -1,0 +1,45 @@
+- set_meta_tags title: "Become a subscriber"
+
+.block.-py4.-px2.-bg-christmas{'data-behaviour': 'snowing'}
+  .p.-centered
+    .block.-pt2
+      .row
+        .col-xs-12.col-md-8.col-md-offset-2
+          %h1.h.-h2.c.-serif Give the gift of local journalism
+          .block.-mt2.p.-t4
+            If you order by 17 December, we'll send you a little card so you have something to put under the tree, and if you choose a print subscription, we'll include an issue of the paper to add to that gift package. And then, for the rest of the year, we'll deliver quality, original local journalism.
+
+  .block.-mt4
+    .wrapper.-large{role: 'layout'}
+      .row
+        .col-xs-12.col-md-6.flex
+          .block.-bg-default.-b.flex.-c.-sb.-mt2
+            .block.-p2.p.-t4.-centered
+              %h3.p.-t3.-centered.c.-w8.block.-mb1 Digital
+              :markdown
+                Unlimited digital access to DublinInquirer.com, including our full, searchable archive, optimised for desktop and mobile.
+
+            .block.-px2.-pt3.-pb3.-bg-faint
+              .p.-t4.-centered
+                = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard -big'
+                = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard -big'
+
+        .col-xs-12.col-md-6.flex
+          .block.-bg-default.-b.flex.-c.-sb.-mt2
+            .block.-p2.p.-t4.-centered
+              %h3.p.-t3.-centered.c.-w8.block.-mb1 Digital + Print
+              :markdown
+                The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
+
+            .block.-px2.-pt3.-pb3.-bg-faint
+              .p.-t4.-centered
+                = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard -big'
+                = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard -big'
+
+.block.-bt.-bg-default.-py4
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      :markdown
+        **Questions?**
+
+        If you have any questions or special requests, you can reach us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.

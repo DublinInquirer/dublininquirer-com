@@ -28,12 +28,23 @@
         .block.-mt2
           #{ link_to "See options", :gift_subscriptions, class: 'button -white' }
 
-  %section.block.-mb2
-    .block.-pb1.-bb
-      %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
+  - if (!logged_in? or (logged_in? and current_user.subscriber?)) and is_christmastime?
+    .block.block.-pt2.-px1.-pb1.-mb2.-bg-christmas{'data-behaviour': 'snowing'}
+      %h4.c.-w8 Gift subscriptions
+      .block.-my1
+        :markdown
+          The perfect gift for the inquisitive Dubliner in your life.
 
-    .block.-mt1
-      = render partial: 'recent_podcasts'
+        .block.-mt2
+          #{ link_to "See options", :gift_subscriptions, class: 'button -christmas' }
+
+  - else
+    %section.block.-mb2
+      .block.-pb1.-bb
+        %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
+
+      .block.-mt1
+        = render partial: 'recent_podcasts'
 
   %section.block
     .block.-pb1.-bb
