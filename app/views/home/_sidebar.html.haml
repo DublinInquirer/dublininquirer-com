@@ -18,17 +18,7 @@
           Dublin Inquirer is funded by its readers, not advertisers.
 
       .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
-  - elsif is_christmastime?
-    .block.block.-pt2.-px1.-pb1.-mb2.-bg-christmas{'data-behaviour': 'snowing'}
-      %h4.c.-w8 Gift subscriptions
-      .block.-my1
-        :markdown
-          The perfect gift for the inquisitive Dubliner in your life.
-
-        .block.-mt2
-          #{ link_to "See options", :gift_subscriptions, class: 'button -christmas' }
-          
-  - else
+  - elsif !is_christmastime?
     .block.block.-py2.-px1.-mb2.-bg-blue
       %h4.c.-w8 Give a subscription
       .block.-my1
