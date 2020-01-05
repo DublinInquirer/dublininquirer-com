@@ -5,7 +5,7 @@
 - set_meta_tags og: {image:  'https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg'}
 - set_meta_tags twitter: {image: {'_':  'https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg'}}
 
-- cache ['home', (logged_in? ? current_user.id.to_s : 'logged_out'), @articles, 'v2'] do
+- cache ['home', (logged_in? ? current_user.id.to_s : 'logged_out'), @articles, 'v2', (is_christmastime? ? 'christmas' : nil)] do
   .block.-pb2.sub-semipresent
     .wrapper.-contained{role: 'layout'}
       .fixed{role: 'layout'}
