@@ -1,4 +1,4 @@
-- if true or (logged_in? and current_user.subscriber? and is_christmastime?)
+- if (logged_in? and current_user.subscriber? and is_christmastime?)
   = render partial: 'products/christmas'
   
 - else
