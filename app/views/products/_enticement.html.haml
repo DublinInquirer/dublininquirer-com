@@ -1,49 +1,53 @@
-.block.-bg-black.-my4
-  .wrapper.-contained{role: 'layout'}
-    .block
-      - if logged_in? and current_user.subscriber? and (current_user.patron? or [true, false].sample)
-        .row
-          .col-xs-12.col-md-6
-            %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
-          .col-xs-12.col-md-6.col.flex.-c
-            .flex.-c.block.-pr4.-py4.-pl2
-              .block.-mb2
-                %h3.h.-h2 Give a subscription
-              .p.-t3.-serif.-sf
-                :markdown
-                  A subscription to Dublin Inquirer is the perfect gift for the inquisitive Dubliner in your life.
+- if (logged_in? and current_user.subscriber? and is_christmastime?)
+  = render partial: 'products/christmas'
+  
+- else
+  .block.-bg-black.-my4
+    .wrapper.-contained{role: 'layout'}
+      .block
+        - if logged_in? and current_user.subscriber? and (current_user.patron? or [true, false].sample)
+          .row
+            .col-xs-12.col-md-6
+              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+            .col-xs-12.col-md-6.col.flex.-c
+              .flex.-c.block.-pr4.-py4.-pl2
+                .block.-mb2
+                  %h3.h.-h2 Give a subscription
+                .p.-t3.-serif.-sf
+                  :markdown
+                    A subscription to Dublin Inquirer is the perfect gift for the inquisitive Dubliner in your life.
 
-              %nav.block.-mt4
-                = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -standard -big'
+                %nav.block.-mt4
+                  = link_to raw("Give a subscription &rarr;"), :gift_subscriptions, class: 'button -standard -big'
 
-      - elsif logged_in? and current_user.subscriber?
-        .row
-          .col-xs-12.col-md-6
-            %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
-          .col-xs-12.col-md-6.col.flex.-c
-            .flex.-c.block.-pr4.-py4.-pl2
-              .block.-mb2
-                %h3.h.-h2 Support our work
-              .p.-t3.-serif.-sf
-                :markdown
-                  In-depth, original local reporting is time consuming and expensive. But we think it's important.
+        - elsif logged_in? and current_user.subscriber?
+          .row
+            .col-xs-12.col-md-6
+              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+            .col-xs-12.col-md-6.col.flex.-c
+              .flex.-c.block.-pr4.-py4.-pl2
+                .block.-mb2
+                  %h3.h.-h2 Support our work
+                .p.-t3.-serif.-sf
+                  :markdown
+                    In-depth, original local reporting is time consuming and expensive. But we think it's important.
 
-                  If you value our work, consider becoming a _Friend_ or _Patron_ level subscriber.
+                    If you value our work, consider becoming a _Friend_ or _Patron_ level subscriber.
 
-              %nav.block.-mt4
-                = link_to raw("Become a patron &rarr;"), [:upgrade, :subscriptions], class: 'button -standard -big'
+                %nav.block.-mt4
+                  = link_to raw("Become a patron &rarr;"), [:upgrade, :subscriptions], class: 'button -standard -big'
 
-      - else
-        .row
-          .col-xs-12.col-md-6
-            %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
-          .col-xs-12.col-md-6.col.flex.-c
-            .flex.-c.block.-pr4.-py4.-pl2
-              .block.-mb2
-                %h3.h.-h2 Understand your city
-              .p.-t3.-serif.-sf
-                :markdown
-                  We do in-depth, shoe-leather reporting about the issues that shape Dublin. We're not funded by advertisers. We're funded by readers like you.
+        - else
+          .row
+            .col-xs-12.col-md-6
+              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+            .col-xs-12.col-md-6.col.flex.-c
+              .flex.-c.block.-pr4.-py4.-pl2
+                .block.-mb2
+                  %h3.h.-h2 Understand your city
+                .p.-t3.-serif.-sf
+                  :markdown
+                    We do in-depth, shoe-leather reporting about the issues that shape Dublin. We're not funded by advertisers. We're funded by readers like you.
 
-              %nav.block.-mt4
-                = link_to raw("Become a subscriber &rarr;"), :products, class: 'button -standard -big'
+                %nav.block.-mt4
+                  = link_to raw("Become a subscriber &rarr;"), :products, class: 'button -standard -big'

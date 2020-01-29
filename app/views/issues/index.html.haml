@@ -21,4 +21,4 @@
                 %figure.artwork= image_tag issue.featured_article.featured_artwork.image.small.url, loading: 'lazy'
         %hr.-stroke
 
-    = render partial: 'layouts/pagination', locals: {page: @page, collection: @issues}
+    = render partial: 'layouts/partials/pagination', locals: {page: @page, collection: @issues}

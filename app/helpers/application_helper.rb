@@ -10,4 +10,10 @@ module ApplicationHelper
       Rails.application.assets_manifest.assets[path].present?
     end
   end
+
+  def is_christmastime?
+    return true if (Date.current.month == 12)
+    return true if (Date.current.month == 11) && (Date.current.day > 15)
+    false
+  end
 end
