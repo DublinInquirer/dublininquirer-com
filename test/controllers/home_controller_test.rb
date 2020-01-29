@@ -2,7 +2,7 @@ require 'test_helper'
 
 class HomeControllerTest < ActionDispatch::IntegrationTest
   setup do
-    stub_request(:get, "https://counciltracker.ie/motions.json").
+    stub_request(:get, "https://www.counciltracker.ie/motions.json").
       to_return(status: 200, body: "{}")
   end
 
