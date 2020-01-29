@@ -63,7 +63,7 @@ class HomeController < ApplicationController
 
   def get_recent_motions
     begin
-      Oj.load(HTTP.get("https://counciltracker.ie/motions.json").body).first(3)
+      Oj.load(HTTP.get("https://www.counciltracker.ie/motions.json").body).first(3)
     rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError, NoMethodError
       []
     end
