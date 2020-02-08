@@ -4,8 +4,6 @@ This runs [dublininquirer.com](https://www.dublininquirer.com), a local news pub
 
 It's a fairly standard Rails app with a bunch of little hacks to facilitate a slow transition from a Wordpress installation (we switched over Summer 2018).
 
-[![CircleCI](https://circleci.com/gh/DublinInquirer/dublininquirer-com.svg?style=svg)](https://circleci.com/gh/DublinInquirer/dublininquirer-com)
-
 ## Get set up
 
 You'll need Ruby installed with `rbenv` or `rvm`, as well as `postgresql`, `yarn`, `redis`, and `imagemagick` (all available via Homebrew).
