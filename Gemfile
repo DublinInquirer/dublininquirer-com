@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+ruby '2.7.0'
 
 gem 'rails', '~> 6.0.x'
 gem 'pg', '< 1.0.0'
@@ -11,7 +11,7 @@ gem 'haml'
 gem 'http'
 gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
-gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+gem 'webpacker'
 
 gem 'redis', '~> 4.0'
 gem 'sidekiq'

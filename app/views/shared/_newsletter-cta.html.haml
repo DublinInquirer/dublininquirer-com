@@ -1,0 +1,13 @@
+.block.-mb4.-pb4
+  .wrapper.-small{role: 'layout'}
+    .block.-b.-p2.-bg-faint
+      .p.-t4.c.-i
+        :markdown
+          Sign up to get our free Dublin Inquirer email newsletter each Wednesday, with headlines from the week’s online edition, updates from inside the newsroom, and more. It’s a little reminder when we have a new edition out, and a way for you to stay in touch with what we’re up to.
+      
+      %form.cta-form{action: "https://tinyletter.com/DublinInquirer", method: "post", onsubmit: "window.open('https://tinyletter.com/DublinInquirer', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", target: "popupwindow"}
+        .cta-form_content
+          .field
+            %input{name: 'email', type: 'email', placeholder: 'Enter your email'}
+          .action
+            %input.button{type: 'submit', value: 'Sign up'}

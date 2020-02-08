@@ -1,0 +1,40 @@
+.cta-form
+  margin-top: 2rem
+  display: flex
+  flex-direction: row
+  justify-content: center
+  align-items: center
+
+  .cta-form_content
+    display: flex
+    flex-direction: row
+    flex-grow: 0
+
+    .field
+      flex-grow: 1
+      display: flex
+
+      input
+        padding: var(--baseline)
+        width: 100%
+        margin: 0
+        border: 1px solid var(--black)
+        border-right: 0
+        background-color: transparent
+        resize: none
+        font-size: var(--b3)
+        &:focus
+          background-color: var(--white)
+
+    .action
+      flex-grow: 0
+      display: flex
+
+      input.button
+        padding: var(--baseline)
+        border: 1px solid var(--black)
+        background-color: var(--yellow)
+        margin: 0
+        color: var(--black)
+        &:hover
+          color: var(--red)

@@ -24,6 +24,8 @@
 - cache ['articles', @article, @template, @limited] do
   .block.-pb4= render partial: "articles/templates/#{ @template }", locals: { article: @article, limited: @limited }
 
+= render partial: 'shared/newsletter-cta'
+
 - cache ['articles', @article, @article.authors, 'meta'] do
   .block.-bt.-py4.-mt4
     - if @article.tags.any?
