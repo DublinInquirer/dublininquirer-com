@@ -86,6 +86,8 @@ class User < ApplicationRecord
     
     cus = self.stripe_customer
 
+    return unless cus.present? and !cus.deleted?
+
     cus.sources.each do |src|
       src.delete
     end
@@ -98,7 +100,7 @@ class User < ApplicationRecord
     
     cus = self.stripe_customer
 
-    return unless cus.present?
+    return unless cus.present? and !cus.deleted?
 
     cus.email = nil
     cus.name = nil
@@ -106,7 +108,7 @@ class User < ApplicationRecord
     cus.metadata = {}
     cus.description = nil
 
-    cus.save rescue Stripe::InvalidRequestError
+    cus.save
   end
 
   def update_from_stripe_object!(stripe_object)
