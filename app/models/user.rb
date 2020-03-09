@@ -106,7 +106,7 @@ class User < ApplicationRecord
     cus.metadata = {}
     cus.description = nil
 
-    cus.save
+    cus.save rescue Stripe::InvalidRequestError
   end
 
   def update_from_stripe_object!(stripe_object)
