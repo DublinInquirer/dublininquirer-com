@@ -62,9 +62,11 @@ class User < ApplicationRecord
     Raven.capture_message 'Permanently deleting a user', extra: { user: self.email_address }
     self.comments.each(&:destroy)
     self.subscriptions.each(&:delete_completely!)
-    self.remove_sensitive_information_from_stripe!
-    self.remove_sources_from_stripe!
-    self.stripe_customer.delete
+    if !self.stripe_customer.deleted?
+      self.remove_sensitive_information_from_stripe!
+      self.remove_sources_from_stripe!
+      self.stripe_customer.delete
+    end
 
     reload
     
