@@ -98,6 +98,8 @@ class User < ApplicationRecord
     
     cus = self.stripe_customer
 
+    return unless cus.present?
+
     cus.email = nil
     cus.name = nil
     cus.phone = nil
