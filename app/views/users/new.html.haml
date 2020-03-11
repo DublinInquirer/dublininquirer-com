@@ -29,6 +29,11 @@
         = f.password_field :password, placeholder: 'password123'
         = render_errors_for(@user, :password)
 
+      .field.-referral
+        = f.label :referral_required, 'Referral (required)'
+        = f.text_field :referral_required, placeholder: 'referral'
+        = render_errors_for(@user, :referral_required)
+
       .field.-check
         = f.label :subscribed_weekly do
           = f.check_box :subscribed_weekly

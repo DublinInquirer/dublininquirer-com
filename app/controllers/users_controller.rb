@@ -4,10 +4,19 @@ class UsersController < ApplicationController
   layout 'modal'
 
   def new
+    if visitor_is_probable_bot?
+      redirect_to(:root) && return
+    end
+
     @user = User.new
   end
 
   def create
+    if user_params[:referral_required].present? && !user_params[:referral_required].strip.blank?
+      mark_visitor_as_probable_bot
+      redirect_to(:root) && return
+    end
+
     @legacy_user = User.unmigrated.find_or_initialize_by(email_address: user_params[:email_address].strip.downcase)
 
     if @legacy_user.persisted? && @legacy_user.needs_setup?
@@ -118,6 +127,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email_address, :given_name, :surname, :password, :subscribed_weekly)
+    params.require(:user).permit(:email_address, :given_name, :surname, :password, :subscribed_weekly, :referral_required)
   end
 end

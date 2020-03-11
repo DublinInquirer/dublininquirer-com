@@ -17,6 +17,7 @@ class User < ApplicationRecord
   has_many :invoices
   has_many :user_notes
 
+  attribute :referral_required, :string # for spam trap only
   attribute :stripe_token, :string
 
   before_save :create_stripe_customer, unless: :stripe_id?

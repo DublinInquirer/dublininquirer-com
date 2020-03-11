@@ -44,6 +44,15 @@ class ApplicationController < ActionController::Base
     UserMailer.migrate_account_email(user).deliver_later
     redirect_to :migrate_hold
   end
+  
+  def visitor_is_probable_bot?
+    return true if cookies.permanent.signed[:probable_bot] == 'true'
+    false
+  end
+
+  def mark_visitor_as_probable_bot
+    (cookies.permanent.signed[:probable_bot] == 'true')
+  end
 
   private
 
