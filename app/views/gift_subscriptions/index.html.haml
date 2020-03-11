@@ -1,13 +1,13 @@
 - set_meta_tags title: "Become a subscriber"
 
-.block.-pt4.-px2.-bg-christmas
+.block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
   .p.-centered
     .block.-pt2
       .p.-centered
         %h1.h.-h1.c.-serif Give the gift of local journalism
         .block.-mt2.p.-t3 A gift subscription to the Dublin Inquirer is perfect for the inquisitive Dubliner in your life
 
-  .block.-mt4.-pull-down
+  .block.-mt4
     .wrapper.-large{role: 'layout'}
       .row
         .col-xs-12.col-md-6.flex
@@ -15,11 +15,12 @@
             .block.-p2.p.-t4.-centered
               %h3.p.-t3.-centered.c.-w8.block.-mb1 Digital
               :markdown
-                Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
+                Unlimited digital access to DublinInquirer.com, including our full, searchable archive, optimised for desktop and mobile.
 
             .block.-px2.-pt3.-pb3.-bg-faint
-              .p.-t4.-centered
-                = link_to raw("Subscribe for €5/month"), product_path(:digital), class: 'button -standard -big'
+              %nav
+                = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard -big block -mb1'
+                = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard -big block'
 
         .col-xs-12.col-md-6.flex
           .block.-bg-default.-b.flex.-c.-sb.-mt2
@@ -29,56 +30,14 @@
                 The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
             .block.-px2.-pt3.-pb3.-bg-faint
-              .p.-t4.-centered
-                = link_to raw("Subscribe for €8/month"), product_path(:print), class: 'button -standard -big'
+              %nav
+                = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard -big block -mb1'
+                = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard -big block'
 
 .block.-bt.-bg-default.-py4
-  .block.-my4.-pt4
-    .wrapper.-small{role: 'layout'}
-      .block.-mb1
-        %h3.h.-h2.-centered Independent, impactful
-      .p.-t3.-centered
-        :markdown
-          Dublin Inquirer is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
-
-  %hr.-separator
-
   .block.-my4
-    .wrapper.-small{role: 'layout'}
-      .block.-bg-faint.-p4.-b
-        .block.-mb2
-          %h3.h.-h3.-centered Become a subscriber:
-        .p.-t4.-centered
-          = link_to raw("Digital &mdash; €5/month"), product_path(:digital), class: 'block -mb1 button -standard -big'
-          = link_to raw("Digital + Print &mdash; €8/month"), product_path(:print), class: 'block button -standard -big'
-
-  .block.-form.-b.-p2.-bg-faint.-mb2
-    .block.-pb1.-bb.-mb2
-      %h3.c.-w8 Digital
-
-    .p.-t4.-sf
-      :markdown
-        Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
-
-    %nav.block.-mt2.-mb1
-      = link_to raw("One year &mdash; €60"), gift_subscription_path(id: 'digital-full'), class: 'button -standard'
-      = link_to raw("Half year &mdash; €30"), gift_subscription_path(id: 'digital-half'), class: 'button -standard'
-
-  .block.-form.-b.-p2.-bg-faint
-    .block.-pb1.-bb.-mb2
-      %h3.c.-w8 Digital + Print
-
-    .p.-t4.-sf
-      :markdown
-        The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
-
-    %nav.block.-mt2.-mb1
-      = link_to raw("One year &mdash; €96"), gift_subscription_path(id: 'print-full'), class: 'button -standard'
-      = link_to raw("Half year &mdash; €48"), gift_subscription_path(id: 'print-half'), class: 'button -standard'
-
-  .block.-my4.-py4
     .p.-t4.-sf.-centered
       :markdown
         **Questions?**
 
-        If you have any questions or special requests, you can reach us at: <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.
+        If you have any questions or special requests, you can reach us at <a href="mailto:info@dublininquirer.com">info@dublininquirer.com</a>.
