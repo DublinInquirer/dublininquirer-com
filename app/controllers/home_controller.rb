@@ -37,14 +37,14 @@ class HomeController < ApplicationController
   end
 
   def imprint
-    @staff = Rails.cache.fetch("/imprint/masthead", expires_in: 1.day) do
+    @staff = Rails.cache.fetch("/imprint/masthead/v1", expires_in: 1.day) do
       {
         editor: Author.find_or_create_by!(full_name: 'Lois Kapila'),
         deputy: Author.find_or_create_by!(full_name: 'Sam Tranum'),
         reporters: [
-          Author.find_or_create_by!(full_name: 'Sean Finnan'),
           Author.find_or_create_by!(full_name: 'Erin McGuire'),
-          Author.find_or_create_by!(full_name: 'Laoise Neylon')
+          Author.find_or_create_by!(full_name: 'Laoise Neylon'),
+          Author.find_or_create_by!(full_name: 'Donal Corrigan')
         ],
         tech: Author.find_or_create_by!(full_name: 'Brian Flanagan')
       }
