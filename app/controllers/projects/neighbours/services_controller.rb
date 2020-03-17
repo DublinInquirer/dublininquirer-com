@@ -3,12 +3,9 @@ class Projects::Neighbours::ServicesController < ApplicationController
 
   def index
     @services = get_services
-    @areas = @services.map { |s| s['areas'] }.flatten.uniq
-    @categories = @services.map { |s| s['categories'] }.flatten.uniq
-    @scope = {
-      area: nil,
-      category: nil
-    }
+    @areas = @services.map { |s| s['areas'] }.flatten.uniq.sort
+    @categories = @services.map { |s| s['categories'] }.flatten.uniq.sort
+    @scope = get_scope(params)
   end
 
   def new
@@ -19,6 +16,13 @@ class Projects::Neighbours::ServicesController < ApplicationController
   end
 
   private
+
+  def get_scope(params)
+    {
+      area: params[:area],
+      category: params[:category]
+    }
+  end
 
   def get_services
     url = Rails.env.production? ? "https://helpers.civictech.ie/api/services.json" : "http://0.0.0.0:5001/api/services.json"

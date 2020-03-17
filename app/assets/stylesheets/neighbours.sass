@@ -122,3 +122,60 @@
         margin-left: 1rem
         padding-left: 1rem
         border-left: 1px solid var(--grey)
+
+.switcher
+  margin-top: 2rem
+  flex: 1
+  display: flex
+  flex-direction: column
+  justify-content: flex-end
+  align-items: stretch
+
+  & + .switcher
+    margin-left: 2rem
+
+  &.-cta
+    select
+      font-size: var(--t3)
+      font-weight: 600
+      border-width: 2px
+      background-position: right 1.5rem center
+
+  label
+    display: none
+  select
+    display: block
+    font-size: var(--t4)
+    font-family: $sans
+    font-weight: 400
+    color: var(--default)
+    line-height: 1.4
+    padding: .5em 2em .5em .75em
+    width: 100%
+    max-width: 100%
+    box-sizing: border-box
+    margin: 0
+    border: 1px solid var(--default)
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.0)
+    border-radius: 0
+    -moz-appearance: none
+    -webkit-appearance: none
+    appearance: none
+    background-color: var(--blue)
+    background-position: right 1rem center
+    background-image: url(asset-path('elections/switch.svg'))
+    background-size: 2.5rem auto
+    background-repeat: no-repeat
+    &::-ms-expand
+      display: none
+    &:hover
+      border-color: var(--white)
+      color: var(--white)
+      cursor: pointer
+    &:focus
+      border-color: var(--white)
+      box-shadow: 0 0 0 0 rgba(59, 153, 252, 0)
+      color: var(--white)
+      outline: none
+    option
+      font-weight: normal
