@@ -1,6 +1,17 @@
+.filters
+  %form
+    %label Filter
+    %select
+      %option By area
+      - @areas.each do |area|
+        %option{value: area, selected: area == @scope['area']}= area
+    %select
+      %option By service
+      - @categories.each do |category|
+        %option{value: category, selected: category == @scope['category']}= category
+
 .block.-pt4
   .wrapper.-container{role: 'layout'}
     .wrapper.-large{role: 'layout'}
-      %ul.services
-        - @services.each do |service|
-          %li= render partial: 'service', locals: {service: service}
+      %div{data: {partial: 'services', scope: 'scope'}}
+        = render partial: 'services', locals: {services: @services}

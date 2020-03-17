@@ -1,0 +1,15 @@
+= form_with url: [:projects, :neighbours, :services], method: :post, data: {remote: false} do |f|
+  .field
+    = f.label :description, 'Service description'
+    = f.text_area :description
+
+  .field
+    = f.label :contact_name, 'Contact name'
+    = f.text_field :contact_name
+
+  .field
+    = f.label :contact_number, 'Contact number'
+    = f.telephone_field :contact_number
+
+  .actions
+    = f.button 'Submit service'

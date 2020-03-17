@@ -15,15 +15,17 @@
     .areas
       %label Areas
       - service['areas'].each do |area|
-        = link_to area, projects_neighbours_services_path(area: area.parameterize)
+        = link_to area, projects_neighbours_services_path(area: area)
     
     .categories
       %label Categories
       - service['categories'].each do |category|
-        = link_to category, projects_neighbours_services_path(category: category.parameterize)
+        = link_to category, projects_neighbours_services_path(category: category)
     
     .contact
       %label Contact
+      - if service['contact_name']&.present?
+        %span= service['contact_name']
       - if service['contact_number']&.present?
         = link_to service['contact_number'], "tel:#{service['contact_number']}"
       - if service['contact_email']&.present?

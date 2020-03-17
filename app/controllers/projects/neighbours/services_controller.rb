@@ -3,6 +3,12 @@ class Projects::Neighbours::ServicesController < ApplicationController
 
   def index
     @services = get_services
+    @areas = @services.map { |s| s['areas'] }.flatten.uniq
+    @categories = @services.map { |s| s['categories'] }.flatten.uniq
+    @scope = {
+      area: nil,
+      category: nil
+    }
   end
 
   def new

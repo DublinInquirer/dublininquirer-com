@@ -56,6 +56,14 @@
   @media screen and (min-width: $medium)
     display: none
 
+.filters
+  top: 0
+  position: sticky
+  position: -webkit-sticky
+  padding: 2rem
+  background-color: var(--default)
+  border-bottom:  1px solid var(--black)
+
 .services
   & > li
     margin-bottom: 2rem
@@ -85,19 +93,32 @@
   
   .details
     display: flex
-    flex-direction: row
+    flex-direction: column
     & > * + *
-      margin-left: 1rem
-      padding-left: 1rem
-      border-left: 1px solid var(--grey)
-
-  .categories, .areas, .address, .contact
-    label
-      display: block
+      margin-bottom: 1rem
     
-    span, a
-      &:after
-        content: ', '
-      &:last-child
+    a, a:link, a:visited
+      text-decoration: underline
+      &:hover
+        color: var(--blue)
+        text-decoration: underline
+
+    .categories, .areas, .address, .contact
+      label
+        display: block
+      
+      span, a
         &:after
-          content: ''
+          content: ', '
+        &:last-child
+          &:after
+            content: ''
+  
+    @media screen and (min-width: $small)
+    @media screen and (min-width: $medium)
+      flex-direction: row
+      & > * + *
+        margin-bottom: 0
+        margin-left: 1rem
+        padding-left: 1rem
+        border-left: 1px solid var(--grey)
