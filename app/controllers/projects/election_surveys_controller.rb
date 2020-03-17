@@ -1,5 +1,5 @@
 class Projects::ElectionSurveysController < ApplicationController
-  layout 'elections'
+  layout 'projects/election_surveys/layouts/elections'
 
   def show
     @survey = ElectionSurvey.find_by!(slug: params[:id])
