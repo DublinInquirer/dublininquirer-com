@@ -16,8 +16,9 @@ class Projects::Neighbours::ServicesController < ApplicationController
   private
 
   def get_services
+    url = Rails.env.production? ? "https://helpers.civictech.ie/api/services.json" : "http://0.0.0.0:5001/api/services.json"
     begin
-      Oj.load(HTTP.get("https://helpers.civictech.ie/services.json").body)
+      Oj.load(HTTP.get(url).body)
     rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError, NoMethodError
       []
     end

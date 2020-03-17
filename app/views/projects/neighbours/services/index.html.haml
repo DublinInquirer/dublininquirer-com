@@ -1,1 +1,6 @@
-= @services.inspect
+.block.-pt4
+  .wrapper.-container{role: 'layout'}
+    .wrapper.-large{role: 'layout'}
+      %ul.services
+        - @services.each do |service|
+          %li= render partial: 'service', locals: {service: service}

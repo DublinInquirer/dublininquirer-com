@@ -1,0 +1,66 @@
+// just an override for elections at the moment
+
+@import 'modules/variables'
+
+body
+  background-color: var(--faint)
+
+.header.-elections
+  flex-direction: column
+  justify-content: flex-start
+  align-items: stretch
+
+  .project-title
+    flex: 1
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+  
+  .cta
+    display: none
+  
+  a, a:link, a:visited
+    &.button.-white
+      color: var(--black)
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    flex-direction: row
+    align-items: center
+
+    .project-title
+
+    .cta
+      display: block
+
+.submit-overlay
+  position: fixed
+  bottom: 0
+  left: 0
+  right: 0
+  padding: 2rem
+  background-color: var(--black)
+  color: var(--white)
+  display: flex
+  flex-direction: column
+  text-align: center
+  align-items: stretch
+
+  .button
+    display: block
+    margin-top: 1rem
+    flex: 1
+
+  @media screen and (min-width: $small)
+  @media screen and (min-width: $medium)
+    display: none
+
+.services
+  & > li
+    margin-bottom: 2rem
+  
+.service
+  display: block
+  padding: 2rem
+  background-color: var(--default)
+  border: 1px solid var(--black)

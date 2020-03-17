@@ -13,7 +13,9 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'elections', media: 'all'
-    = javascript_include_tag 'elections'
+    = stylesheet_link_tag 'neighbours', media: 'all'
+
+    = javascript_pack_tag 'neighbours'
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,17 +27,24 @@
 
   %body.-project
     %header.header.-elections.-blue
-      .logo
-        = link_to root_path, 'data-turbolinks': false do
-          .logotype.-small
-            = render partial: 'layouts/images/logo-left'
-      .title
-        = link_to '/projects/elections/2019-local' do
-          %strong Helping neighbours<br>
-          Local services directory for COVID-19
+      .project-title
+        .logo
+          = link_to root_path, 'data-turbolinks': false do
+            .logotype.-small
+              = render partial: 'layouts/images/logo-left'
+        .title
+          = link_to '/projects/elections/2019-local' do
+            %strong Helping neighbours<br>
+            Local services directory while we're social distancing
+      .cta
+        = link_to "Submit a service", [:new, :projects, :neighbours, :service], class: 'button -white'
     
-    %main.main.-elections
+    %main.main.-elections.-neighbours
       = yield
+    
+    .submit-overlay
+      %h3 Offering a service yourself, or know of one being offered?
+      .actions= link_to "Submit a service", [:new, :projects, :neighbours, :service], class: 'button -white'
 
     .wrapper.-container{role: 'layout'}
       .block.-py4.-my4
