@@ -26,8 +26,8 @@
       - if service['contact_name']&.present?
         %span= service['contact_name']
       - if service['contact_number']&.present?
-        = link_to service['contact_number'], "tel:#{service['contact_number']}"
+        %span= link_to service['contact_number'], "tel:#{service['contact_number']}"
       - if service['contact_email']&.present?
-        = link_to service['contact_email'], "mailto:#{service['contact_email']}"
+        %span= link_to service['contact_email'], "mailto:#{service['contact_email']}"
       - if service['contact_url']&.present?
-        = link_to format_url(service['contact_url']), service['contact_url']
+        %span= link_to format_url(service['contact_url']), service['contact_url']
