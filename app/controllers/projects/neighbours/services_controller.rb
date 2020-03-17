@@ -12,11 +12,10 @@ class Projects::Neighbours::ServicesController < ApplicationController
   end
 
   def new
-
   end
 
   def create
-
+    raise params.inspect
   end
 
   private

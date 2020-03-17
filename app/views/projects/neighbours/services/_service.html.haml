@@ -12,15 +12,17 @@
         %label Address
         = simple_format address_lines.compact.join(', ')
 
-    .areas
-      %label Areas
-      - service['areas'].each do |area|
-        = link_to area, projects_neighbours_services_path(area: area)
+    - if service['areas']&.any?
+      .areas
+        %label Areas
+        - service['areas'].each do |area|
+          = link_to area, projects_neighbours_services_path(area: area)
     
-    .categories
-      %label Categories
-      - service['categories'].each do |category|
-        = link_to category, projects_neighbours_services_path(category: category)
+    - if service['categories']&.any?
+      .categories
+        %label Categories
+        - service['categories'].each do |category|
+          = link_to category, projects_neighbours_services_path(category: category)
     
     .contact
       %label Contact
