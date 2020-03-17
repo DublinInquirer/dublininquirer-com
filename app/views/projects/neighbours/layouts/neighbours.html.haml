@@ -5,7 +5,7 @@
     %meta{'http-equiv': 'x-ua-compatible', content: 'ie=edge'}/
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
-    - set_meta_tags site: 'Dublin Inquirer'
+    - set_meta_tags site: 'Helping neighbours | Dublin Inquirer'
     - set_meta_tags og: { title: :title, site_name: :site, image: :image_src }
     - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
     = display_meta_tags reverse: true, separator: '|'
@@ -35,7 +35,7 @@
         .title
           = link_to '/projects/elections/2019-local' do
             %strong Helping neighbours<br>
-            Local services directory while we're social distancing
+            Local services directory
       .cta
         = link_to "Submit a service", [:new, :projects, :neighbours, :service], class: 'button -white'
     
