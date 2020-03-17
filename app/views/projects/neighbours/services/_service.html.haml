@@ -1,22 +1,19 @@
 .service
   .title-bar
     %h3.h.-h4= service['title']
-    .organisation= service['organisation'].present? ? service['organisation'] : service['contact_name']
-    
   .description= simple_format service['description']
 
   .details
+    - if service['organisation']&.present?
+      .organisation
+        %label Organisation
+        %span= service['organisation']
+
     - address_lines = service.values_at('address_line_1', 'address_line_2', 'address_city', 'address_county', 'address_postcode').reject(&:blank?)
     - if address_lines.any?
       .address
         %label Address
         %span= simple_format address_lines.compact.join(', ')
-
-    - if service['areas']&.any?
-      .areas
-        %label Areas
-        - service['areas'].each do |area|
-          %span= link_to area, projects_neighbours_services_path(area: area)
     
     - if service['categories']&.any?
       .categories

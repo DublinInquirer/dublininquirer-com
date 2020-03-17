@@ -94,7 +94,7 @@
   .details
     display: flex
     flex-direction: column
-    & > * + *
+    & > *
       margin-bottom: 1rem
     
     a, a:link, a:visited
@@ -103,7 +103,7 @@
         color: var(--blue)
         text-decoration: underline
 
-    .categories, .areas, .address, .contact
+    .categories, .areas, .address, .contact, .organisation
       label
         display: block
       
@@ -117,10 +117,12 @@
     @media screen and (min-width: $small)
     @media screen and (min-width: $medium)
       flex-direction: row
+      & > *
+        margin: 0
+        overflow: hidden
       & > * + *
-        margin-bottom: 0
-        margin-left: 1rem
-        padding-left: 1rem
+        margin-left: 2rem
+        padding-left: 2rem
         border-left: 1px solid var(--grey)
 
 .switcher

@@ -8,8 +8,16 @@
     = f.text_field :contact_name
 
   .field
-    = f.label :contact_number, 'Contact number'
+    = f.label :contact_number, 'Contact phone number'
     = f.telephone_field :contact_number
+
+  .field
+    = f.label :contact_email, 'Contact email'
+    = f.telephone_field :contact_email
+
+  .field
+    = f.label :contact_url, 'Contact web address'
+    = f.telephone_field :contact_url
 
   .actions
     = f.button 'Submit service'
