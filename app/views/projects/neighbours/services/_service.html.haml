@@ -1,22 +1,32 @@
 .service
   .title-bar
-    %h3= service['title']
+    %h3.h.-h4= service['title']
     .organisation= service['organisation'].present? ? service['organisation'] : service['contact_name']
     
-  = simple_format service['description']
+  .description= simple_format service['description']
 
-  - address_lines = service.values_at('address_line_1', 'address_line_2', 'address_city', 'address_county', 'address_postcode').reject(&:blank?)
+  .details
+    - address_lines = service.values_at('address_line_1', 'address_line_2', 'address_city', 'address_county', 'address_postcode').reject(&:blank?)
+    - if address_lines.any?
+      .address
+        %label Address
+        = simple_format address_lines.compact.join(', ')
 
-  - if address_lines.any?
-    .address
-      %label Address
-      = simple_format address_lines.compact.join(', ')
-
-  .areas
-    %label Areas
-    - service['areas'].each do |area|
-      = link_to area, projects_neighbours_services_path(area: area.parameterize)
-  .categories
-    %label Categories
-    - service['categories'].each do |category|
-      = link_to category, projects_neighbours_services_path(category: category.parameterize)
+    .areas
+      %label Areas
+      - service['areas'].each do |area|
+        = link_to area, projects_neighbours_services_path(area: area.parameterize)
+    
+    .categories
+      %label Categories
+      - service['categories'].each do |category|
+        = link_to category, projects_neighbours_services_path(category: category.parameterize)
+    
+    .contact
+      %label Contact
+      - if service['contact_number']&.present?
+        = link_to service['contact_number'], "tel:#{service['contact_number']}"
+      - if service['contact_email']&.present?
+        = link_to service['contact_email'], "mailto:#{service['contact_email']}"
+      - if service['contact_url']&.present?
+        = link_to format_url(service['contact_url']), service['contact_url']

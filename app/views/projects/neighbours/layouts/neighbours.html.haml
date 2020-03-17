@@ -33,13 +33,13 @@
             .logotype.-small
               = render partial: 'layouts/images/logo-left'
         .title
-          = link_to '/projects/elections/2019-local' do
+          = link_to [:projects, :neighbours, :root] do
             %strong Helping neighbours<br>
             Local services directory
       .cta
         = link_to "Submit a service", [:new, :projects, :neighbours, :service], class: 'button -white'
     
-    %main.main.-elections.-neighbours
+    %main.main.-elections.-neighbours.block.-pt2.-pb4
       = yield
     
     .submit-overlay

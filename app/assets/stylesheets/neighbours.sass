@@ -2,8 +2,9 @@
 
 @import 'modules/variables'
 
-body
+.main
   background-color: var(--faint)
+  border-bottom: 1px solid var(--black)
 
 .header.-elections
   flex-direction: column
@@ -64,3 +65,39 @@ body
   padding: 2rem
   background-color: var(--default)
   border: 1px solid var(--black)
+
+  label
+    display: block
+    font-weight: 600
+
+  .title-bar
+    display: flex
+    flex-direction: row
+    justify-content: flex-start
+    align-items: flex-end
+    & > * + *
+      margin-left: 1rem
+      padding-left: 1rem
+      border-left: 1px solid var(--grey)
+  
+  .description
+    margin: 2rem 0
+  
+  .details
+    display: flex
+    flex-direction: row
+    & > * + *
+      margin-left: 1rem
+      padding-left: 1rem
+      border-left: 1px solid var(--grey)
+
+  .categories, .areas, .address, .contact
+    label
+      display: block
+    
+    span, a
+      &:after
+        content: ', '
+      &:last-child
+        &:after
+          content: ''

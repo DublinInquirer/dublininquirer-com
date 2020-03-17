@@ -16,4 +16,8 @@ module ApplicationHelper
     return true if (Date.current.month == 11) && (Date.current.day > 15)
     false
   end
+
+  def format_url(url)
+    url&.gsub(/(^https?:\/\/(www.)?)/,'').gsub(/(\/)$/,'')
+  end
 end
