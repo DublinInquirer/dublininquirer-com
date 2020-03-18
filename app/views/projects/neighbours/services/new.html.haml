@@ -1,23 +1,65 @@
-= form_with url: [:projects, :neighbours, :services], method: :post, data: {remote: false} do |f|
-  .field
-    = f.label :description, 'Service description'
-    = f.text_area :description
+.wrapper.-container{role: 'layout'}
+  .wrapper.-small{role: 'layout'}
+    %header.page-header
+      %h2.h.-h4.-centered
+        If you're offering a service or know of one being offered, submit the details below and we're add it to our directory.
 
-  .field
-    = f.label :contact_name, 'Contact name'
-    = f.text_field :contact_name
+    .block
+      = form_with url: [:projects, :neighbours, :services], method: :post, data: {remote: false} do |f|
+        .block.-form.-b.-p2.-bg-faint.-mb2
+          .field
+            = f.label :organisation, 'Organisation or person offering the service'
+            = f.text_field :organisation
+          .field
+            = f.label :description, 'Service description'
+            = f.text_area :description
+            - if @errors['description']&.present?
+              .error Description can't be blank
+            - else
+              .hint What is the service being offered? Where is it being offered?
 
-  .field
-    = f.label :contact_number, 'Contact phone number'
-    = f.telephone_field :contact_number
+        .block.-form.-b.-p2.-bg-faint.-mb2
+          .field
+            = f.label :contact_name, 'Contact name'
+            = f.text_field :contact_name
+            .hint If different from the organisation/person name above
 
-  .field
-    = f.label :contact_email, 'Contact email'
-    = f.telephone_field :contact_email
+          .field.twofer
+            .field
+              = f.label :contact_number, 'Phone number'
+              = f.text_field :contact_number
 
-  .field
-    = f.label :contact_url, 'Contact web address'
-    = f.telephone_field :contact_url
+            .field
+              = f.label :contact_email, 'Email'
+              = f.text_field :contact_email
 
-  .actions
-    = f.button 'Submit service'
+            .field
+              = f.label :contact_url, 'Web address'
+              = f.text_field :contact_url
+
+            .field
+              = f.label :contact_url, 'Web address'
+              = f.text_field :contact_url
+
+        .block.-form.-b.-p2.-bg-faint
+          .field
+            = f.label :address_line_1
+            = f.text_field :address_line_1
+            .hint Optional – only if applicable.
+          .field
+            = f.label :address_line_2
+            = f.text_field :address_line_2
+          .field
+            = f.label :address_city
+            = f.text_field :address_city
+          .field.twofer
+            .field
+              = f.label :address_county
+              = f.text_field :address_county
+            .field
+              = f.label :address_postcode
+              = f.text_field :address_postcode
+
+        .block.-form
+          %nav.block.-mt2.actions
+            = f.submit 'Submit service', class: 'button -standard -big'
