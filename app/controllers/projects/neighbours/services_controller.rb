@@ -2,11 +2,19 @@ class Projects::Neighbours::ServicesController < ApplicationController
   layout 'projects/neighbours/layouts/neighbours'
 
   def index
-    @all_services = get_all_services
-    @areas = @all_services.map { |s| s['areas'] }.flatten.uniq.sort
-    @categories = @all_services.map { |s| s['categories'] }.flatten.uniq.sort
+    @all_services = Rails.cache.fetch("/projects/neighbours/services", expires_in: (3..6).to_a.sample.minutes) do
+      get_all_services
+    end
+    @areas = Rails.cache.fetch("/projects/neighbours/services/areas", expires_in: (3..6).to_a.sample.minutes) do
+      @all_services.map { |s| s['areas'] }.flatten.uniq.sort
+    end
+    @categories = Rails.cache.fetch("/projects/neighbours/services/categories", expires_in: (3..6).to_a.sample.minutes) do
+      @all_services.map { |s| s['categories'] }.flatten.uniq.sort
+    end
     @scope = get_scope(params)
-    @services = get_services(@scope)
+    @services = Rails.cache.fetch("/projects/neighbours/services/#{@scope[:area]}/#{@scope[:category]}", expires_in: (3..6).to_a.sample.minutes) do
+      get_services(@scope)
+    end
   end
 
   def new
