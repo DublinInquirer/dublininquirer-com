@@ -1,3 +1,10 @@
+:javascript
+  function filterSwitcher(element) {
+    name = element.getAttribute('name');
+    value = element.options[element.selectedIndex].value;
+    window.location = "/projects/neighbours?" + name + '=' + value;
+  }
+
 .block.-pt4.-pb2.-px2.-bg-blue.filter
   .row
     .col-xs-12.col-md-9
@@ -16,14 +23,14 @@
     .col-xs-12.col-md-3.flex
       .switcher
         %label By area
-        %select
+        %select{name: 'area', onChange: 'filterSwitcher(this)'}
           %option By area
           <option disabled>──────────</option>
           - @areas.each do |area|
-            %option{value: area, selected: area == @scope['area']}= area
+            %option{value: area, selected: area == @scope['area']}= area.capitalize
       .switcher
         %label By service
-        %select
+        %select{name: 'category', onChange: 'filterSwitcher(this)'}
           %option By service
           <option disabled>──────────</option>
           - @categories.each do |category|
