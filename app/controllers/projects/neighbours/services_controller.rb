@@ -2,10 +2,11 @@ class Projects::Neighbours::ServicesController < ApplicationController
   layout 'projects/neighbours/layouts/neighbours'
 
   def index
-    @services = get_services
-    @areas = @services.map { |s| s['areas'] }.flatten.uniq.sort
-    @categories = @services.map { |s| s['categories'] }.flatten.uniq.sort
+    @all_services = get_all_services
+    @areas = @all_services.map { |s| s['areas'] }.flatten.uniq.sort
+    @categories = @all_services.map { |s| s['categories'] }.flatten.uniq.sort
     @scope = get_scope(params)
+    @services = get_services(@scope)
   end
 
   def new
@@ -38,6 +39,10 @@ class Projects::Neighbours::ServicesController < ApplicationController
 
   private
 
+  def endpoint
+    Rails.env.production? ? 'https://helpers.civictech.ie' : 'http://0.0.0.0:5001'
+  end
+
   def get_scope(params)
     {
       area: params[:area],
@@ -45,15 +50,23 @@ class Projects::Neighbours::ServicesController < ApplicationController
     }
   end
 
-  def get_services
+  def get_all_services
     begin
-      Oj.load(HTTP.get("https://helpers.civictech.ie/api/services.json").body)
+      Oj.load(HTTP.get("#{ endpoint }/api/services.json").body)
+    rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError, NoMethodError
+      []
+    end
+  end
+
+  def get_services(scope)
+    begin
+      Oj.load(HTTP.get("#{ endpoint }/api/services.json", params: scope).body)
     rescue HTTP::ConnectionError, OpenSSL::SSL::SSLError, NoMethodError
       []
     end
   end
 
   def create_service(payload)
-    HTTP.post('https://helpers.civictech.ie/api/services.json', json: {service: payload})
+    HTTP.post("#{ endpoint }/api/services.json", json: {service: payload})
   end
 end
