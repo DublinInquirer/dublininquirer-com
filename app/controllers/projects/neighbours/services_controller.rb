@@ -54,6 +54,6 @@ class Projects::Neighbours::ServicesController < ApplicationController
   end
 
   def create_service(payload)
-    HTTP.post('http://0.0.0.0:5001/api/services.json', json: {service: payload})
+    HTTP.post('https://helpers.civictech.ie/api/services.json', json: {service: payload})
   end
 end
