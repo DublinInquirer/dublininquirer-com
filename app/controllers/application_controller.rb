@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   impersonates :user
-  before_action :set_raven_context, :log_out_deleted_users
+  before_action :log_out_deleted_users
   helper_method :current_visitor, :remaining_reads, :read_count, :permission_for_cookie?
 
   def log_out_deleted_users
@@ -69,12 +69,5 @@ class ApplicationController < ActionController::Base
 
   def not_authenticated
     redirect_to login_path, alert: "You need to log in."
-  end
-
-  def set_raven_context
-    if logged_in?
-      Raven.user_context(email: current_user.email_address)
-      Raven.extra_context(params: params.to_unsafe_h, url: request.url)
-    end
   end
 end

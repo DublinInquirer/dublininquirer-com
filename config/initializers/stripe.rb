@@ -64,7 +64,7 @@ StripeEvent.configure do |events|
   end
 
   events.subscribe 'invoice.payment_action_required' do |event|
-    Raven.capture_message 'Invoice payment action required', extra: event.to_hash
+    raise "Invoice payment action required: #{ event.to_hash.inspect }"
   end
   
   events.subscribe 'invoice.created' do |event|

@@ -44,12 +44,10 @@ gem 'browser'
 gem 'kaminari' # pagination
 gem 'plyr-rails'
 gem 'rinku'
-
-gem 'sentry-raven'
 gem 'postmark-rails'
 gem 'stripe'
 gem 'stripe_event'
-gem 'scout_apm'
+gem 'appsignal'
 
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick", ">= 4.9.4"

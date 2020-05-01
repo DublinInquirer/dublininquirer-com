@@ -141,12 +141,7 @@ class StripeImporter
     )
 
     if !u.valid?
-      Raven.capture_message 'Invalid user from customer',
-        extra: {
-          user_errors: u.errors.full_messages.to_json,
-          stripe_user: customer.to_json,
-          stripe_id: customer['id']
-        }
+      raise "Invalid user from customer: #{ { user_errors: u.errors.full_messages.to_json, stripe_user: customer.to_json, stripe_id: customer['id'] }.inspect }"
     end
 
     u.save_without_timestamping!
@@ -187,12 +182,7 @@ class StripeImporter
     )
 
     if !s.valid?
-      Raven.capture_message 'Invalid subscription from stripe',
-        extra: {
-          sub_errors: s.errors.full_messages.to_json,
-          subscription: subscription.to_json,
-          stripe_id: subscription['id']
-        }
+      raise "Invalid subscription from stripe: #{ { sub_errors: s.errors.full_messages.to_json, subscription: subscription.to_json, stripe_id: subscription['id'] }.inspect }"
     end
 
     s.save_without_timestamping!
