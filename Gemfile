@@ -57,6 +57,8 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'turbolinks'
 
+gem 'whenever', require: false
+
 group :development, :test do
   gem 'rack-mini-profiler'
   gem 'stripe-ruby-mock', '~> 2.5.8', :require => 'stripe_mock'
