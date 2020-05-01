@@ -10,7 +10,7 @@ module Inquirer
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
-    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_adapter = :sucker_punch
 
     config.generators do |g|
       g.assets false

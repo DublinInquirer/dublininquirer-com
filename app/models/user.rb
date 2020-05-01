@@ -289,7 +289,7 @@ class User < ApplicationRecord
   def send_welcome!
     return false unless self.subscriber?
     if Rails.env.production?
-      UserMailer.welcome_email(self.id, self.subscription.id).deliver_later(wait: 72.minutes)
+      UserMailer.welcome_email(self.id, self.subscription.id).deliver_later
     else
       UserMailer.welcome_email(self.id, self.subscription.id).deliver_now
     end

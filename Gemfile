@@ -14,7 +14,7 @@ gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 
 gem 'redis', '~> 4.0'
-gem 'sidekiq'
+gem 'sucker_punch', '~> 2.0'
 
 gem 'oj'
 gem 'roo' # CSV importing

@@ -108,7 +108,6 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
-    connection_pool (2.2.2)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
       money (~> 6.9)
@@ -291,8 +290,6 @@ GEM
     rack (2.2.2)
     rack-mini-profiler (2.0.1)
       rack (>= 1.2.0)
-    rack-protection (2.0.8.1)
-      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -369,11 +366,6 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
-    sidekiq (6.0.7)
-      connection_pool (>= 2.2.2)
-      rack (~> 2.0)
-      rack-protection (>= 2.0.0)
-      redis (>= 4.1.0)
     sitemap_generator (6.1.0)
       builder (~> 3.0)
     sixarm_ruby_unaccent (1.2.0)
@@ -403,6 +395,8 @@ GEM
     stripe_event (2.3.0)
       activesupport (>= 3.1)
       stripe (>= 2.8, < 6)
+    sucker_punch (2.1.2)
+      concurrent-ruby (~> 1.0)
     temple (0.8.2)
     textacular (5.2.0)
       activerecord (>= 5.0, < 6.1)
@@ -503,7 +497,6 @@ DEPENDENCIES
   rubocop
   sanitize
   sass-rails (~> 5.0)
-  sidekiq
   sitemap_generator
   sorcery
   spring
@@ -512,6 +505,7 @@ DEPENDENCIES
   stripe
   stripe-ruby-mock (~> 2.5.8)
   stripe_event
+  sucker_punch (~> 2.0)
   textacular (~> 5.0)
   turbolinks
   tzinfo-data
