@@ -9,7 +9,6 @@ class DropUnneededTablesAndCreateNewElectionSurveys < ActiveRecord::Migration[5.
       t.text :slug
       t.text :election_type
       t.integer :election_year
-      t.jsonb :candidates, null: false, default: {}
       t.jsonb :responses, null: false, default: {}
       t.jsonb :questions, null: false, default: {}
       t.jsonb :parties, null: false, default: {}
