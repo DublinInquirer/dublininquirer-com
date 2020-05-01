@@ -37,26 +37,6 @@ class HomeController < ApplicationController
   end
 
   def imprint
-    @staff = Rails.cache.fetch("/imprint/masthead/v1", expires_in: 1.day) do
-      {
-        editor: Author.find_or_create_by!(full_name: 'Lois Kapila'),
-        deputy: Author.find_or_create_by!(full_name: 'Sam Tranum'),
-        reporters: [
-          Author.find_or_create_by!(full_name: 'Erin McGuire'),
-          Author.find_or_create_by!(full_name: 'Laoise Neylon'),
-          Author.find_or_create_by!(full_name: 'Donal Corrigan')
-        ],
-        tech: Author.find_or_create_by!(full_name: 'Brian Flanagan')
-      }
-    end
-
-    @columnists = Rails.cache.fetch("/imprint/columnists", expires_in: 1.day) do
-      Author.where(full_name: ['Donal Fallon', 'Ebun Joseph', 'Niamh Kirk', 'Joe McGrath', 'David O’Connor','Odran Reid'])
-    end
-
-    @contributors = Rails.cache.fetch("/imprint/contributors", expires_in: 1.day) do
-      Author.where(full_name: ['Martin Cook', 'Dan Grennan', 'Gary Ibbotson', 'Shrinidhi Kalwad', 'Haseena Manek', 'Luke Maxwell', 'David Monaghan', 'Melatu Uche Okorie', 'Christine O\'Donnell', 'Daniel Seery'])
-    end
   end
 
   private
