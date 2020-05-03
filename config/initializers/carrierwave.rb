@@ -11,7 +11,8 @@ if Rails.env.production?
       provider: 'AWS',
       aws_access_key_id: Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :linode, :access_key_id),
       aws_secret_access_key: Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :linode, :secret_access_key),
-      endpoint: 'eu-central-1.linodeobjects.com',
+      endpoint: 'https://eu-central-1.linodeobjects.com',
+      host: 'eu-central-1.linodeobjects.com',
       region: ''
     }
 
