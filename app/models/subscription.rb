@@ -262,6 +262,7 @@ class Subscription < ApplicationRecord
     else # otherwise cancel at period end
       str_sub.cancel_at_period_end = true
     end
+    str_sub.save
 
     update_from_stripe_object!(str_sub)
   end
