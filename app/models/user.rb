@@ -128,12 +128,16 @@ class User < ApplicationRecord
       )
     elsif stripe_object.default_source.is_a?(Stripe::Card)
       stripe_object.default_source
+    elsif stripe_object.default_source.nil?
+      nil
     else
       raise "Can't understand source: #{ stripe_object.default_source.inspect }"
     end
 
-    self.card_last_4 = src.last4
-    self.card_brand = src.brand
+    if src
+      self.card_last_4 = src.last4
+      self.card_brand = src.brand
+    end
 
     self.save!
   end
