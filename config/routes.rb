@@ -156,6 +156,9 @@ Rails.application.routes.draw do
   get '/data_content/*path', to: redirect{ |params,request| "https://www.dublininquirer.com/#{ request.fullpath.gsub('/data_content/','') }" }
   get 'wp-content/*path', to: redirect{ |params,request| "https://d1trxack2ykyus.cloudfront.net#{ request.fullpath.gsub('wp-content/','') }" }
 
+  # legacy article redirects
+  get '/2016/11/16/slavery-in-stoneybatter', to: redirect('/2016/11/09/slavery-in-stoneybatter')
+
   # admin stuff
 
   put '/stop_impersonating', to: 'home#stop_impersonating'
