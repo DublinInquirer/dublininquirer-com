@@ -129,6 +129,9 @@ Rails.application.routes.draw do
   get "/404" => "errors#not_found"
   get "/500" => "errors#internal_server_error"
 
+  # ugh
+  get '/wp-login.php', to: redirect('https://www.youtube.com/watch?v=oHg5SJYRHA0')
+
   # legacy
 
   get '/online-battlelines', to: redirect('https://d1trxack2ykyus.cloudfront.net/projects/online-battlelines/twitter.html')
