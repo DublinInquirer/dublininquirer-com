@@ -4,7 +4,7 @@ class Subscription < ApplicationRecord
   belongs_to :plan
   belongs_to :user, optional: true
 
-  has_many :invoices
+  has_many :invoices, :gift_subscriptions
 
   attribute :given_name, :string
   attribute :surname, :string
@@ -34,6 +34,7 @@ class Subscription < ApplicationRecord
   after_validation :sync_stripe_subscription, :set_status
   before_validation :set_ended_at_for_fixed, if: -> (s) { s.is_fixed? && s.duration_months.present? }
 
+  before_destroy :orphan_gift_subscriptions
   before_destroy :orphan_invoices
 
   scope :paid, -> { where(status: %w(trialing active)) }
@@ -339,6 +340,10 @@ class Subscription < ApplicationRecord
   end
 
   private
+
+  def orphan_gift_subscriptions
+    self.gift_subscriptions.update_all(subscription_id: nil)
+  end
 
   def orphan_invoices
     self.invoices.update_all(subscription_id: nil)

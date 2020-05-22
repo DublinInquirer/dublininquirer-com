@@ -5,7 +5,7 @@
 # its stripe_id corresponds to a stripe payment intent
 
 class GiftSubscription < ApplicationRecord
-  belongs_to :subscription
+  belongs_to :subscription, optional: true
   belongs_to :plan
 
   attribute :recipient_given_name, :string
