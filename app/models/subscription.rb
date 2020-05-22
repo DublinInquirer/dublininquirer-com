@@ -4,7 +4,8 @@ class Subscription < ApplicationRecord
   belongs_to :plan
   belongs_to :user, optional: true
 
-  has_many :invoices, :gift_subscriptions
+  has_many :invoices
+  has_many :gift_subscriptions
 
   attribute :given_name, :string
   attribute :surname, :string
