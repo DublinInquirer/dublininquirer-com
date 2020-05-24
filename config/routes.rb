@@ -130,6 +130,8 @@ Rails.application.routes.draw do
   get "/500" => "errors#internal_server_error"
 
   # ugh
+  get '/email', to: redirect('https://www.youtube.com/watch?v=oHg5SJYRHA0')
+  get '/oo.aspx', to: redirect('https://www.youtube.com/watch?v=oHg5SJYRHA0')
   get '/wp-login.php', to: redirect('https://www.youtube.com/watch?v=oHg5SJYRHA0')
 
   # legacy
