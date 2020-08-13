@@ -9,3 +9,7 @@ end
 every 1.hours do
   rake "users:mark_as_lapsed"
 end
+
+every 1.hours do
+  rake "users:cancel_missing_subs"
+end
