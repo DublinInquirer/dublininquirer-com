@@ -9,5 +9,9 @@ namespace :users do
 
   task mark_as_lapsed: :environment do
     Subscription.mark_as_lapsed!
-  end  
+  end
+
+  task cancel_missing_subs: :environment do
+    Subscription.cancel_missing_stripe_subscriptions!
+  end
 end

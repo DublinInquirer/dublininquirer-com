@@ -294,6 +294,16 @@ class Subscription < ApplicationRecord
     save!
   end
 
+  def cancel_if_subscription_is_missing!
+    begin
+      s.stripe_subscription.present?
+    rescue Stripe::InvalidRequestError => e
+      if e.code.to_s == 'resource_missing'
+        self.update status: 'canceled'
+      end
+    end
+  end
+
   def self.searchable_columns
     [:stripe_id]
   end
@@ -322,6 +332,12 @@ class Subscription < ApplicationRecord
   def self.mark_as_lapsed!
     is_fixed.active.each do |s|
       s.mark_as_lapsed_if_lapsed!
+    end
+  end
+
+  def self.cancel_missing_stripe_subscriptions!
+    is_stripe.active.each do |s|
+      s.cancel_if_subscription_is_missing!
     end
   end
 
