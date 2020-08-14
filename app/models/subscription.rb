@@ -330,6 +330,7 @@ class Subscription < ApplicationRecord
   end
 
   def cancel_if_subscription_is_missing!
+    return true if self.is_fixed?
     begin
       str_sub = self.stripe_subscription
       if str_sub.status == 'canceled'
