@@ -337,6 +337,7 @@ class Subscription < ApplicationRecord
         self.canceled_at = str_sub.canceled_at ? Time.zone.at(str_sub.canceled_at) : nil
         self.ended_at = str_sub.ended_at ? Time.zone.at(str_sub.ended_at) : nil
         self.status = str_sub.status
+        self.save!
       end
     rescue Stripe::InvalidRequestError => e
       if (e.code&.to_s == 'resource_missing')
