@@ -38,7 +38,7 @@ gem 'pretender'
 gem 'namae'
 gem 'countries'
 gem 'country_select', '~> 3.1'
-gem 'reverse_markdown' # for importing, can be pulled out soon
+gem 'reverse_markdown' # used to re-display html after saving
 
 gem 'browser'
 gem 'kaminari' # pagination
