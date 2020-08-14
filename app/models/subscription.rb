@@ -296,7 +296,9 @@ class Subscription < ApplicationRecord
 
   def cancel_if_subscription_is_missing!
     begin
-      self.stripe_subscription.present?
+      if self.stripe_subscription.status == 'canceled'
+        self.update status: 'canceled'
+      end
     rescue Stripe::InvalidRequestError => e
       if (e.code&.to_s == 'resource_missing')
         self.update status: 'canceled'
