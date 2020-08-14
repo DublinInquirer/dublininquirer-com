@@ -48,6 +48,41 @@ class Subscription < ApplicationRecord
   scope :churning, -> { is_stripe.delinquent }
   scope :churned, -> { where(status: %w(unpaid canceled)) }
 
+  def self.searchable_columns
+    [:stripe_id]
+  end
+
+  def self.to_csv
+    CSV.generate(headers: true) do |csv|
+      csv << %w(name email status address_line_1 address_line_2 city county post_code country hub)
+      all.includes(:plan, :user).find_each do |s|
+        u = s.user
+        csv << {
+          name: u.try(:full_name),
+          email: u.try(:email_address),
+          status: s.status,
+          address_line_1: u.try(:address_line_1),
+          address_line_2: u.try(:address_line_2),
+          city: u.try(:city),
+          county: u.try(:county),
+          post_code: u.try(:post_code),
+          country: u.try(:country_name),
+          hub: u.try(:hub)
+        }.values
+      end
+    end
+  end
+
+  def self.mark_as_lapsed!
+    is_fixed.active.each do |s|
+      s.mark_as_lapsed_if_lapsed!
+    end
+  end
+
+  def self.cancel_missing_stripe_subscriptions!
+    is_stripe.each(&:cancel_if_subscription_is_missing!)
+  end
+
   def remove_sensitive_information_from_stripe!
     return unless self.stripe_id.present?
     subsc = self.stripe_subscription
@@ -296,49 +331,17 @@ class Subscription < ApplicationRecord
 
   def cancel_if_subscription_is_missing!
     begin
-      if self.stripe_subscription.status == 'canceled'
-        self.update status: 'canceled'
+      str_sub = self.stripe_subscription
+      if str_sub.status == 'canceled'
+        self.canceled_at = str_sub.canceled_at ? Time.zone.at(str_sub.canceled_at) : nil
+        self.ended_at = str_sub.ended_at ? Time.zone.at(str_sub.ended_at) : nil
+        self.status = str_sub.status
       end
     rescue Stripe::InvalidRequestError => e
       if (e.code&.to_s == 'resource_missing')
         self.update status: 'canceled'
       end
     end
-  end
-
-  def self.searchable_columns
-    [:stripe_id]
-  end
-
-  def self.to_csv
-    CSV.generate(headers: true) do |csv|
-      csv << %w(name email status address_line_1 address_line_2 city county post_code country hub)
-      all.includes(:plan, :user).find_each do |s|
-        u = s.user
-        csv << {
-          name: u.try(:full_name),
-          email: u.try(:email_address),
-          status: s.status,
-          address_line_1: u.try(:address_line_1),
-          address_line_2: u.try(:address_line_2),
-          city: u.try(:city),
-          county: u.try(:county),
-          post_code: u.try(:post_code),
-          country: u.try(:country_name),
-          hub: u.try(:hub)
-        }.values
-      end
-    end
-  end
-
-  def self.mark_as_lapsed!
-    is_fixed.active.each do |s|
-      s.mark_as_lapsed_if_lapsed!
-    end
-  end
-
-  def self.cancel_missing_stripe_subscriptions!
-    is_stripe.active.each(&:cancel_if_subscription_is_missing!)
   end
 
   def update_from_stripe_object!(str_obj)
