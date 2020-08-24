@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     @plan = @product.base_plan
-    @user = logged_in? ? current_user : User.new
+    @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
 
     @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }
   end

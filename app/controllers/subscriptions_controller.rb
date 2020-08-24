@@ -4,7 +4,7 @@ class SubscriptionsController < ApplicationController
   layout 'modal', only: [:upgrade, :create, :address, :thanks]
 
   def create
-    @user = logged_in? ? current_user : User.new
+    @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
     @user.assign_attributes(user_params)
 
     # if the user is invalid, return here
