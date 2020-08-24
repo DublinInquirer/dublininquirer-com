@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       redirect_to(:root) && return
     end
 
-    @user = User.new
+    @user = User.new(subscribed_weekly: true)
   end
 
   def create
