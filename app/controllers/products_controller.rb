@@ -13,10 +13,21 @@ class ProductsController < ApplicationController
       Product.find_by_slug('digital')
     when :print
       Product.find_by_slug('print')
+    when :student
+      Product.find_by_slug('digital')
     else
       raise ActiveRecord::RecordNotFound
     end
-    @plan = @product.base_plan
+    @plan = case params[:id].try(:downcase).try(:to_sym)
+    when :digital
+      @product.base_plan
+    when :print
+      @product.base_plan
+    when :student
+      @product.student_plan
+    else
+      raise ActiveRecord::RecordNotFound
+    end
     @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
 
     @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }

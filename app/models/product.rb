@@ -35,6 +35,10 @@ class Product < ApplicationRecord
   def base_plan
     self.plans.find_or_create_by!(amount: self.base_price, interval: 'month', interval_count: 1)
   end
+  
+  def student_plan
+    self.plans.find_or_create_by!(amount: (self.base_price / 2), interval: 'month', interval_count: 1)
+  end
 
   def slug
     return 'print' if self.name == 'Digital + Print subscription'
