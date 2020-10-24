@@ -13,7 +13,7 @@ module ApplicationHelper
 
   def is_christmastime?
     return true if (Date.current.month == 12)
-    return true if (Date.current.month == 11) && (Date.current.day > 15)
+    return true if (Date.current.month == 11)
     false
   end
 
