@@ -1,0 +1,14 @@
+- if !permission_for_cookie?
+  .notice.block.-bg-black
+    %nav.close
+      %a.icon{'data-action': 'acceptCookies'}
+        %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
+          %rect{fill: "#fafafa", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
+          %rect{fill: "#fafafa", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
+
+    .content.block.-p1
+      .p.-centered.-t4
+        :markdown
+          We use first-party cookies to allow visitors to log in to our website and read our articles.
+
+        .block.-my1 #{ link_to "I understand", :accept_cookies, 'data-action': 'acceptCookies', class: 'button -white' }
