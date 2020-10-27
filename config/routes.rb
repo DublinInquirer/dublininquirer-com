@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   get 'login' => 'user_sessions#new', as: :login
   get 'logout' => 'user_sessions#destroy', as: :logout
   put 'accept' => 'user_sessions#accept_cookies', as: :accept_cookies
+  put 'dismiss-newsletter-subscribe' => 'user_sessions#dismiss_newsletter_subscribe'
 
   # user migration
 

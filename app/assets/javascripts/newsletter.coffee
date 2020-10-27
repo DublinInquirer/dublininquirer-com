@@ -6,6 +6,13 @@ $(document).on 'ready turbolinks:load', ->
     noticeEl.css 'bottom', '-100%'
     e.preventDefault()
 
+    $.ajax
+      url: '/dismiss-newsletter-subscribe'
+      type: 'PUT'
+      data: {}
+      success: (data) ->
+        return
+
     setTimeout ->
       noticeEl.detach()
     , 500
