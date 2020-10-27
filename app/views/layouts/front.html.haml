@@ -35,6 +35,7 @@
         = render partial: 'layouts/partials/primary-footer'
 
       = render layout: 'layouts/partials/fixed-bottom' do
+        = render partial: 'newsletter/front-subscribe-newsletter'
         = render partial: 'user_sessions/cookies-content'
 
       - if permission_for_cookie?
