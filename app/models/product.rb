@@ -31,9 +31,18 @@ class Product < ApplicationRecord
   def is_active_print? # TODO: hardcoded
     (name == 'Digital + Print subscription')
   end
+  
+  def annual_base_price
+    return 0 if !base_price
+    (base_price * 12)
+  end
 
   def base_plan
     self.plans.find_or_create_by!(amount: self.base_price, interval: 'month', interval_count: 1)
+  end
+
+  def base_annual_plan
+    self.plans.find_or_create_by!(amount: self.annual_base_price, interval: 'year', interval_count: 1)
   end
   
   def student_plan

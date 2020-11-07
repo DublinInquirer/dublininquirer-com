@@ -29,15 +29,24 @@ class Plan < ApplicationRecord
   def yearly?
     (self.interval == 'year')
   end
+  
+  def monthly_amount
+    case self.interval
+    when 'month'
+      self.amount
+    when 'year'
+      (self.amount / 12.00)
+    end
+  end
 
   def is_friend?
     return false unless amount.present?
-    ((self.amount > self.product.base_price) && !self.is_patron?)
+    ((self.monthly_amount > self.product.base_price) && !self.is_patron?)
   end
 
   def is_patron?
     return false unless amount.present?
-    (self.amount >= 50_00)
+    (self.monthly_amount >= 50_00)
   end
 
   def requires_address?
