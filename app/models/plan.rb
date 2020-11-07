@@ -35,7 +35,7 @@ class Plan < ApplicationRecord
     when 'month'
       self.amount
     when 'year'
-      (self.amount / 12.00)
+      (self.amount / 12)
     end
   end
 
