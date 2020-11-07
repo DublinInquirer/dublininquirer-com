@@ -245,6 +245,26 @@ class Subscription < ApplicationRecord
     str_sub.save && update_from_stripe_object!(str_sub)
   end
 
+  def change_price_and_interval_to!(amount, interval) # affects stripe
+    new_plan = Plan.find_or_create_by!(
+      amount: amount.to_i,
+      product_id: self.product.id,
+      interval: interval,
+      interval_count: self.plan.interval_count || 1
+    )
+
+    str_sub = self.stripe_subscription
+
+    str_sub.prorate = false
+    str_sub.tax_percent = 0
+    str_sub.items = [{
+      id: str_sub.items.data[0].id,
+      plan: new_plan.stripe_id,
+    }]
+
+    str_sub.save && update_from_stripe_object!(str_sub)
+  end
+
   def change_price_to!(amount) # affects stripe
     new_plan = Plan.find_or_create_by!(
       amount: amount.to_i,
