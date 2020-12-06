@@ -38,3 +38,6 @@ development:
 production:
   <<: *defaults
   active: true
+  ignore_errors:
+    - ActiveRecord::RecordNotFound
+    - ActionController::RoutingError
