@@ -2,7 +2,12 @@ class LandingPagesController < ApplicationController
   layout 'landing'
 
   def show
-    @landing_page = LandingPage.find_by!(slug: params[:id].try(:downcase))
+    @landing_page = LandingPage.find_by(slug: params[:id].try(:downcase))
+    
+    if !@landing_page
+      raise ActiveRecord::RecordNotFound
+    end
+    
     session[:landing_page] = @landing_page.slug
 
     if @landing_page.template.present?
