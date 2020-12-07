@@ -8,7 +8,7 @@
         - if logged_in? and current_user.subscriber? and (current_user.patron? or [true, false].sample)
           .row
             .col-xs-12.col-md-6
-              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+              %figure.artwork.-enticement= image_tag "ads/meath-street.jpg", loading: 'lazy'
             .col-xs-12.col-md-6.col.flex.-c
               .flex.-c.block.-pr4.-py4.-pl2
                 .block.-mb2
@@ -23,7 +23,7 @@
         - elsif logged_in? and current_user.subscriber?
           .row
             .col-xs-12.col-md-6
-              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+              %figure.artwork.-enticement= image_tag "ads/meath-street.jpg", loading: 'lazy'
             .col-xs-12.col-md-6.col.flex.-c
               .flex.-c.block.-pr4.-py4.-pl2
                 .block.-mb2
@@ -40,7 +40,7 @@
         - else
           .row
             .col-xs-12.col-md-6
-              %figure.artwork= image_tag "ads/meath-street.jpg", loading: 'lazy'
+              %figure.artwork.-enticement= image_tag "ads/meath-street.jpg", loading: 'lazy'
             .col-xs-12.col-md-6.col.flex.-c
               .flex.-c.block.-pr4.-py4.-pl2
                 .block.-mb2

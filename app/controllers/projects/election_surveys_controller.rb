@@ -21,7 +21,7 @@ class Projects::ElectionSurveysController < ApplicationController
       @survey.area_objects
     end
     @area = survey_cache(@survey, "areas/#{ params[:area_id] }") do
-      @survey.find_area(params[:area_id])
+      @survey.find_area!(params[:area_id])
     end
     @candidates = survey_cache(@survey, "areas/#{ @area.slug }/candidates") do
       @survey.candidates_for_area(@area)
@@ -41,7 +41,7 @@ class Projects::ElectionSurveysController < ApplicationController
       @survey.party_objects
     end
     @party = survey_cache(@survey, "parties/#{ params[:party_id] }") do
-      @survey.find_party(params[:party_id])
+      @survey.find_party!(params[:party_id])
     end
     @candidates = survey_cache(@survey, "parties/#{ @party.slug }/candidates") do
       @survey.candidates_for_party(@party)
@@ -58,16 +58,16 @@ class Projects::ElectionSurveysController < ApplicationController
     @survey = ElectionSurvey.find_by!(slug: params[:id])
 
     @candidate = survey_cache(@survey, "candidates/#{ params[:candidate_id] }") do
-      @survey.find_candidate(params[:candidate_id])
+      @survey.find_candidate!(params[:candidate_id])
     end
     @questions = survey_cache(@survey, "questions") do
       @survey.question_objects
     end
     @party = survey_cache(@survey, "parties/#{ @candidate.party }") do
-      @survey.find_party(@candidate.party)
+      @survey.find_party!(@candidate.party)
     end
     @area = survey_cache(@survey, "areas/#{ @candidate.area }") do
-      @survey.find_area(@candidate.area)
+      @survey.find_area!(@candidate.area)
     end
   end
 
