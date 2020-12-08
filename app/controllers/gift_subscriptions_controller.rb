@@ -32,7 +32,7 @@ class GiftSubscriptionsController < ApplicationController
     render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription), payment_intent: @payment_intent.to_hash.slice(:status, :client_secret)}
   end
 
-  def confirm
+  def confirm # TODO this seems very janky
     @gift_subscription = GiftSubscription.new(gift_subscription_params)
 
     # TODO: the gift sub itself should handle all this
@@ -51,9 +51,11 @@ class GiftSubscriptionsController < ApplicationController
 
     @subscription.user = @user
     
-    @gift_subscription.save && (@user.persisted? || @user.save)
-
-    render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription)}
+    if @gift_subscription.save && (@user.persisted? || @user.save)
+      render json: {status: :ok, gift_subscription: gift_subscription_data(@gift_subscription)}
+    else
+      render json: {status: :error, gift_subscription: gift_subscription_data(@gift_subscription)}
+    end
   end
 
   def address
