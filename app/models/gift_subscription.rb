@@ -152,7 +152,7 @@ class GiftSubscription < ApplicationRecord
     return unless recipient_user
     
     if recipient_user.subscriber?
-      errors.add(:recipient_email_address, "an error occurred setting up the recipient's subscription")
+      errors.add(:recipient_email_address, "is unable to be subscribed")
     end
   end
 end
