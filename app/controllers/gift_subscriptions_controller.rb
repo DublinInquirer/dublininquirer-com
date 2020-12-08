@@ -59,7 +59,7 @@ class GiftSubscriptionsController < ApplicationController
   end
 
   def address
-    @gift_subscription = GiftSubscription.find_by(redemption_code: params[:id])
+    @gift_subscription = GiftSubscription.find_by!(redemption_code: params[:id])
     @user = @gift_subscription.user
 
     case request.request_method.downcase.to_sym
