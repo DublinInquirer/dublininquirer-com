@@ -41,3 +41,4 @@ production:
   ignore_errors:
     - ActiveRecord::RecordNotFound
     - ActionController::RoutingError
+    - Mime::Type::InvalidMimeType

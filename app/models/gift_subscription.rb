@@ -37,7 +37,7 @@ class GiftSubscription < ApplicationRecord
 
   validates :duration, presence: true, numericality: { only_integer: true }
 
-  validate :user_is_not_subscribed
+  validate :email_is_not_subscribed
 
   scope :by_date, -> { order('created_at desc') }
 
@@ -147,9 +147,11 @@ class GiftSubscription < ApplicationRecord
     }
   end
 
-  def user_is_not_subscribed
-    return unless self.user
-    if (self.subscription.persisted? && self.user.subscriptions.paid.where.not(id: self.subscription.id).any?) || (!self.subscription.persisted? && self.user.subscriptions.paid.any?)
+  def email_is_not_subscribed
+    recipient_user = User.where(email_address: self.recipient_email_address).take
+    return unless recipient_user
+    
+    if recipient_user.subscriber?
       errors.add(:recipient_email_address, "is already subscribed")
     end
   end
