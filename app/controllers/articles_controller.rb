@@ -32,9 +32,7 @@ class ArticlesController < ApplicationController
 
   def internal_slug(params)
     return unless params[:slug].present?
-    Rails.cache.fetch("/slugs/#{ params.slice(:year, :month, :day, :slug).to_a.flatten.join('/') }") do
-      slug = params[:slug].split(/[^\w-]/i)&.first
-      "/#{ params[:year] }/#{ params[:month] }/#{ params[:day] }/#{ slug }"
-    end
+    slug = params[:slug].split(/[^\w-]/i)&.first
+    "/#{ params[:year] }/#{ params[:month] }/#{ params[:day] }/#{ slug }"
   end
 end
