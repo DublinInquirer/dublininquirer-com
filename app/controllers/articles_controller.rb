@@ -31,6 +31,8 @@ class ArticlesController < ApplicationController
   private
 
   def internal_slug(params)
+    return unless params[:slug].present?
+    slug = params[:slug].split(/[^\w-]/i)&.first
     "/#{ params[:year] }/#{ params[:month] }/#{ params[:day] }/#{ params[:slug] }"
   end
 end
