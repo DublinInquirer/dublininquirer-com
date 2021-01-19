@@ -284,7 +284,7 @@ GEM
     parallel (1.20.1)
     parser (3.0.0.0)
       ast (~> 2.4.1)
-    pg (0.21.0)
+    pg (1.2.3)
     plyr-rails (3.5.6)
     postmark (1.21.3)
       json
@@ -493,7 +493,7 @@ DEPENDENCIES
   namae
   nokogiri (>= 1.10.4)
   oj
-  pg (< 1.0.0)
+  pg
   plyr-rails
   postmark-rails
   pretender
