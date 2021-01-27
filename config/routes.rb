@@ -46,8 +46,8 @@ Rails.application.routes.draw do
   get 'about', to: redirect('/imprint')
   get 'about-us', to: redirect('/imprint')
   get 'contact-us', to: redirect('/contact')
-  get 'pick-up-print', to: redirect('/stockists')
-  get 'stockists' => 'home#stockists', as: :stockists
+  get 'pick-up-print', to: redirect('/')
+  get 'stockists', to: redirect('/')
   get 'imprint' => 'home#imprint', as: :imprint
   get 'contact' => 'home#contact', as: :contact
   get 'newsletter' => 'home#newsletter', as: :newsletter
