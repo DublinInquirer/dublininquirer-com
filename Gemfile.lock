@@ -99,10 +99,11 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
-    carrierwave (1.3.1)
+    carrierwave (1.3.2)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
+      ssrf_filter (~> 1.0)
     childprocess (3.0.0)
     chronic (0.10.2)
     coffee-rails (5.0.0)
@@ -112,7 +113,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     countries (2.1.4)
       i18n_data (~> 0.8.0)
       money (~> 6.9)
@@ -196,7 +197,7 @@ GEM
     http-form_data (2.3.0)
     http-parser (1.2.3)
       ffi-compiler (>= 1.0, < 2.0)
-    i18n (1.8.7)
+    i18n (1.8.8)
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
@@ -400,6 +401,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     squasher (0.6.2)
+    ssrf_filter (1.0.7)
     stripe (5.29.0)
     stripe-ruby-mock (2.5.8)
       dante (>= 0.2.0)
@@ -468,7 +470,7 @@ DEPENDENCIES
   browser
   byebug
   capybara
-  carrierwave (~> 1.0)
+  carrierwave (~> 1.3)
   coffee-rails
   countries
   country_select (~> 3.1)

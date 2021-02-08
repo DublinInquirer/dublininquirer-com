@@ -49,7 +49,7 @@ gem 'stripe'
 gem 'stripe_event'
 gem 'appsignal'
 
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave', '~> 1.3'
 gem "mini_magick", ">= 4.9.4"
 gem 'fog-aws', group: :production
 gem 'aws-sdk-s3', require: false
