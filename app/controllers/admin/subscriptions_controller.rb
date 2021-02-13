@@ -61,6 +61,12 @@ class Admin::SubscriptionsController < Admin::ApplicationController
     redirect_to [:admin, @subscription]
   end
 
+  def cancel_now
+    @subscription = Subscription.find(params[:id])
+    @subscription.cancel_subscription_now!
+    redirect_to [:admin, @subscription]
+  end
+
   def show
     @subscription = Subscription.find(params[:id])
     @user = @subscription.user

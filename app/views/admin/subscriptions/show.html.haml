@@ -21,7 +21,11 @@
 
           = link_to "Change subscription price", [:change_price, :admin, @subscription], class: 'button', method: 'get'
           = link_to "Change billing day", [:change_day, :admin, @subscription], class: 'button', method: 'get'
-          = link_to "Cancel at period end", [:cancel, :admin, @subscription], class: 'button', method: 'put'
+
+          - if @subscription.is_delinquent?
+            = link_to "Cancel now", [:cancel_now, :admin, @subscription], class: 'button', method: 'put'
+          - else
+            = link_to "Cancel at period end", [:cancel, :admin, @subscription], class: 'button', method: 'put'
 
       - elsif !@subscription.is_cancelled?
         = link_to "Edit subscription", [:edit, :admin, @subscription], class: 'button'
