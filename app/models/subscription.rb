@@ -44,7 +44,7 @@ class Subscription < ApplicationRecord
   scope :is_stripe, -> { where(subscription_type: 'stripe') }
   scope :is_fixed, -> { where(subscription_type: 'fixed') }
   scope :includes_print, -> { joins(:plan).merge( Plan.includes_print ).distinct }
-  scope :needs_shipping, -> { active.includes_print }
+  scope :needs_shipping, -> { where(status: %w(trialing incomplete active past_due)).includes_print }
   scope :churning, -> { is_stripe.delinquent }
   scope :churned, -> { where(status: %w(unpaid canceled)) }
 
