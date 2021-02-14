@@ -311,26 +311,18 @@ class Subscription < ApplicationRecord
   end
 
   def cancel_subscription! # affects stripe
-    str_sub = self.stripe_subscription
-
-    # if there's an unpaid or overdue invoice, cancel immediately so it doesn't keep trying to charge the card
-    if is_delinquent?
-      str_sub.delete
-    else # otherwise cancel at period end
-      str_sub.cancel_at_period_end = true
-    end
-    str_sub.save
-
-    update_from_stripe_object!(str_sub)
-  end
-
-  def cancel_subscription_now! # affects stripe
-    str_sub = self.stripe_subscription
-
     begin
-      str_sub.delete
-    rescue Stripe::InvalidRequestError
-      return
+      str_sub = self.stripe_subscription
+
+      # if there's an unpaid or overdue invoice, cancel immediately so it doesn't keep trying to charge the card
+      if is_delinquent?
+        str_sub.delete
+      else # otherwise cancel at period end
+        str_sub.cancel_at_period_end = true
+      end
+      str_sub.save
+    rescue Stripe::InvalidRequestError => e
+      Appsignal.set_error(e)
     end
 
     update_from_stripe_object!(str_sub)

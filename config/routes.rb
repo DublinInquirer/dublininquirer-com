@@ -220,7 +220,6 @@ Rails.application.routes.draw do
         get :change_day
         put :change_day
         put :cancel
-        put :cancel_now
       end
     end
     resources :contact_messages
