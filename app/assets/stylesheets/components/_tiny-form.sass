@@ -5,6 +5,10 @@
   align-items: flex-end
   width: 100%
   position: relative
+  overflow: visible
+  
+  label
+    display: none
 
   input[type="text"], input[type="email"], input[type="password"]
     background: transparent
@@ -21,4 +25,5 @@
 
   input[type="submit"]
     display: inline-block
+    padding-bottom: 0.075rem
     line-height: calc(var(--baseline) * 1.4)
