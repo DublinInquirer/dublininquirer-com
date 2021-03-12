@@ -8,8 +8,8 @@
 
   const stripe = Stripe(stripePublicKey);
 
-  let elements, card, stripeToken;
-  let piStatus, piClientSecret, piId;
+  let elements, card;
+  let piClientSecret, piId;
   let giverGivenName, giverSurname, giverEmailAddress, recipientGivenName, recipientSurname, recipientEmailAddress, planId, duration, price, addressRequired, redemptionCode;
   let giverGivenNameError, giverSurnameError, giverEmailAddressError, recipientGivenNameError, recipientSurnameError, recipientEmailAddressError, paymentError;
   let isSubmitting = false;

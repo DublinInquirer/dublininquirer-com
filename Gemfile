@@ -1,63 +1,60 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.0.0'
 
 gem 'rails', '~> 6.1.x'
 gem 'pg'
-gem 'puma', '~> 3.12'
-gem 'sass-rails', '~> 5.0'
+gem 'puma', '~> 5.0'
 gem 'haml'
 gem 'http'
-gem 'uglifier', '>= 1.3.0'
-gem 'mini_racer', platforms: :ruby
-gem 'webpacker'
+gem 'webpacker', '~> 6.0.0-beta.6'
+gem 'jbuilder', '~> 2.7'
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bcrypt'
 
-gem 'redis', '~> 4.0'
-gem 'sucker_punch', '~> 2.0'
+gem 'redis'
+gem 'sucker_punch'
 
-gem 'oj'
-gem 'roo' # CSV importing
-gem 'sanitize'
-gem "nokogiri", ">= 1.10.4"
-gem 'jbuilder', '~> 2.5'
-gem 'kramdown'
-gem 'autoprefixer-rails'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'bcrypt', '~> 3.1.7'
-gem 'webpacker-svelte', "~> 0.0.0"
-
-gem 'meta-tags'
-gem 'sitemap_generator'
-
-gem 'textacular', "~> 5.0"
+# auth
 gem 'sorcery'
 gem 'pretender'
+
+# parsing
+gem 'oj'
+gem 'roo' # CSV importing
+
+gem 'sanitize'
+gem 'nokogiri'
+gem 'kramdown' # markdown
+gem 'reverse_markdown' # used to re-display html after saving
+gem 'meta-tags'
+gem 'sitemap_generator'
+gem 'textacular' # pg search
 gem 'namae'
 gem 'countries'
 gem 'country_select', '~> 3.1'
-gem 'reverse_markdown' # used to re-display html after saving
-
 gem 'browser'
 gem 'kaminari' # pagination
-gem 'plyr-rails'
 gem 'rinku'
+
+# external services
 gem 'postmark-rails'
+gem 'gibbon'
 gem 'stripe'
 gem 'stripe_event'
-gem 'appsignal'
 
-gem 'carrierwave', '~> 1.0'
-gem "mini_magick", ">= 4.9.4"
+# attachments
+gem 'carrierwave'
+gem "mini_magick"
 gem 'fog-aws', group: :production
 gem 'aws-sdk-s3', require: false
 
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'turbolinks'
+# cron
+gem 'whenever', require: false # cron jobs
 
-gem 'whenever', require: false
+# apm
+gem 'appsignal'
 
 group :development, :test do
   gem 'rack-mini-profiler'
@@ -67,6 +64,7 @@ group :development, :test do
   gem 'faker'
   gem 'database_cleaner'
   gem 'mocha'
+  gem "standard"
 end
 
 group :development do
@@ -78,7 +76,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'letter_opener_web'
-  gem 'rubocop', require: false
   gem 'squasher', require: false
 end
 

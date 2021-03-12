@@ -3,12 +3,12 @@
   import { styles, classes, fonts } from './stripe-elements.js';
   import Field from './Field.svelte';
 
-  export let stripePublicKey, formAction, csrfToken, userJson;
+  export let stripePublicKey, formAction, csrfToken;
 
   const stripe = Stripe(stripePublicKey);
 
   let elements, card, stripeToken;
-  let piStatus, piClientId, piClientSecret;
+  let piClientId, piClientSecret;
   let paymentError;
   let isSubmitting = false;
 
