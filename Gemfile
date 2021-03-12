@@ -29,7 +29,6 @@ gem 'nokogiri'
 gem 'kramdown' # markdown
 gem 'reverse_markdown' # used to re-display html after saving
 gem 'meta-tags'
-gem 'sitemap_generator'
 gem 'textacular' # pg search
 gem 'namae'
 gem 'countries'

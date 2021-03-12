@@ -11,20 +11,11 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'audio', media: 'all'
-    = stylesheet_link_tag 'application', media: 'all'
 
-    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    = javascript_include_tag 'application'
+    = javascript_pack_tag 'application'
+    = stylesheet_pack_tag 'application'
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4000ff">
-    <meta name="msapplication-TileColor" content="#4000ff">
-    <meta name="theme-color" content="#ff0000">
-    %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
+    = render partial: 'layouts/favicons'
 
   %body
     .wrapper.-container{role: 'layout'}
