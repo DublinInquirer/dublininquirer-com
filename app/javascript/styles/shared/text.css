@@ -1,0 +1,192 @@
+@charset "UTF-8";
+
+.c.-w3 {
+  font-weight: 300;
+}
+.c.-w4 {
+  font-weight: 400;
+}
+.c.-w5 {
+  font-weight: 500;
+}
+.c.-w6 {
+  font-weight: 600;
+}
+.c.-w8 {
+  font-weight: 800;
+}
+.c.-i {
+  font-style: italic;
+}
+.c.-serif {
+  font-family: var(--serif);
+}
+.c.-red {
+  color: var(--red);
+}
+.c.-red.-sf a,
+.c.-red.-sf a:link,
+.c.-red.-sf a:visited {
+  color: var(--red);
+  font-weight: 400;
+  border-color: var(--red);
+}
+.c.-grey {
+  color: var(--grey);
+}
+.c.-grey.-sf a,
+.c.-grey.-sf a:link,
+.c.-grey.-sf a:visited {
+  color: var(--grey);
+  font-weight: 400;
+  border-color: var(--grey);
+}
+.c.-quote {
+  background: var(--faint);
+}
+.c.-quote:before {
+  content: "‘";
+}
+.c.-quote:after {
+  content: "’";
+}
+
+.a.-elsewhere:after {
+  font-weight: 400;
+  content: " →";
+  opacity: 0;
+  margin-left: -0.5rem;
+  transition: 0.25s all ease;
+}
+.a.-elsewhere:hover:after {
+  opacity: 1;
+  margin-left: 0;
+}
+
+.code {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-style: normal;
+}
+
+.p.-mono {
+  font-family: var(--mono);
+  font-weight: 400;
+  font-style: normal;
+}
+.p.-t1 {
+  font-size: var(--t1);
+  line-height: 1.1;
+}
+.p.-t2 {
+  font-size: var(--t2);
+  line-height: 1.2;
+}
+.p.-t2.-serif {
+  font-size: calc(var(--t2) * 0.869);
+  line-height: calc(var(--t2) * 1.4);
+  font-family: var(--serif);
+}
+.p.-t3 {
+  font-size: var(--t3);
+  line-height: 1.4;
+}
+.p.-t3.-serif {
+  font-size: calc(var(--t3) * 0.869);
+  line-height: calc(var(--t3) * 1.4);
+  font-family: var(--serif);
+}
+.p.-t4 {
+  font-size: var(--t4);
+  line-height: 1.4;
+}
+.p.-t4.-serif {
+  font-size: calc(var(--t4) * 0.869);
+  line-height: calc(var(--t4) * 1.4);
+  font-family: var(--serif);
+}
+.p.-t5 {
+  font-size: var(--t5);
+  line-height: 1.4;
+}
+.p.-t5.-serif {
+  font-size: calc(var(--t5) * 0.869);
+  line-height: calc(var(--t5) * 1.4);
+  font-family: var(--serif);
+}
+.p.-sf a,
+.p.-sf a:link,
+.p.-sf a:visited {
+  border-bottom: 1px solid var(--black);
+}
+.p.-sf a:hover,
+.p.-sf a:link:hover,
+.p.-sf a:visited:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+.p.-sf p,
+.p.-sf ul,
+.p.-sf ol {
+  margin: 1em 0;
+}
+.p.-sf p:first-child,
+.p.-sf ul:first-child,
+.p.-sf ol:first-child {
+  margin-top: 0;
+}
+.p.-sf p:last-child,
+.p.-sf ul:last-child,
+.p.-sf ol:last-child {
+  margin-bottom: 0;
+}
+.p.-serif {
+  font-family: var(--serif);
+}
+.p.-centered {
+  text-align: center;
+}
+.p.-left {
+  text-align: left;
+}
+.p.-right {
+  text-align: right;
+}
+
+.h.-h1 {
+  font-size: var(--t1);
+  letter-spacing: -0.0325em;
+  line-height: 1.1;
+  font-weight: 400;
+}
+.h.-h2 {
+  font-size: var(--t2);
+  letter-spacing: -0.0325em;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.h.-h3 {
+  font-size: var(--t3);
+  line-height: 1.2;
+  font-weight: 400;
+}
+.h.-h4 {
+  font-family: var(--sans);
+  font-size: var(--t3);
+  line-height: 1.2;
+  font-weight: 800;
+}
+.h.-serif {
+  font-family: var(--serif);
+  letter-spacing: 0;
+  font-weight: 400;
+}
+.h.-centered {
+  text-align: center;
+}
+.h.-left {
+  text-align: left;
+}
+.h.-right {
+  text-align: right;
+}

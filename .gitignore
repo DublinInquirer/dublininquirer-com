@@ -30,7 +30,7 @@ dump.rdb
 
 /public/assets
 .byebug_history
-
+.sass-cache
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 

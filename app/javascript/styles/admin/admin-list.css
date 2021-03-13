@@ -1,0 +1,23 @@
+.admin-list.-artworks {
+  overflow: hidden;
+}
+.admin-list.-artworks > li {
+  float: left;
+  width: 20%;
+  overflow: hidden;
+  padding: 1rem;
+}
+.admin-list.-artworks > li code {
+  font-family: var(--sans);
+  font-size: var(--t5);
+  line-height: 1.25;
+}
+.admin-list.-artworks > li figure.artwork.-small {
+  width: 90%;
+  margin: 0;
+  padding: 0;
+}
+.admin-list.-artworks > li figure.artwork.-small img {
+  width: 100%;
+  height: auto;
+}

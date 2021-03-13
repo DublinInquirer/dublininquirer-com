@@ -1,0 +1,20 @@
+.table.-invoice {
+  width: 100%;
+  border-top: 0.25rem solid var(--black);
+  font-size: var(--b3);
+}
+.table.-invoice th {
+  font-weight: 600;
+}
+.table.-invoice td,
+.table.-invoice th {
+  padding: 0.5rem;
+  text-align: left;
+}
+.table.-invoice td:last-child,
+.table.-invoice th:last-child {
+  text-align: right;
+}
+.table.-invoice tbody tr {
+  border-top: 1px solid var(--black);
+}

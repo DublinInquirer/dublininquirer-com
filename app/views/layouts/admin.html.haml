@@ -5,8 +5,9 @@
     = display_meta_tags site: 'Dublin Inquirer'
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag    'admin', media: 'all'
-    = javascript_include_tag 'admin'
+    
+    = stylesheet_packs_with_chunks_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body.admin
     .progress-bar.-fixed &nbsp;

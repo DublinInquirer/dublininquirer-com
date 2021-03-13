@@ -1,0 +1,120 @@
+.block.-form {
+  position: relative;
+}
+.block.-form .block {
+  position: relative;
+}
+.block.-form .hint,
+.block.-form .error {
+  font-size: var(--t5);
+}
+.block.-form .hint {
+  color: var(--grey);
+}
+.block.-form .error {
+  color: var(--red);
+}
+.block.-form .actions [type="submit"],
+.block.-form .actions button {
+  width: 100%;
+  text-align: center;
+}
+.block.-form .twofer {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  padding-bottom: 1rem;
+}
+.block.-form .twofer .field {
+  border: 0;
+  flex: 1;
+  margin-bottom: 0;
+  padding-right: 1rem;
+}
+.block.-form .twofer .field [type="text"],
+.block.-form .twofer .field [type="email"],
+.block.-form .twofer .field [type="password"],
+.block.-form .twofer .field textarea,
+.block.-form .twofer .field .StripeElement {
+  padding-bottom: 0;
+}
+.block.-form .twofer .field + .field {
+  padding-right: 0;
+  padding-left: 1rem;
+  border-left: 1px solid var(--black);
+}
+.block.-form .twofer .field + .field label {
+  left: 1rem;
+}
+.block.-form .field {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--black);
+  position: relative;
+}
+.block.-form .field .hint,
+.block.-form .field .error {
+  position: absolute;
+  top: 0;
+  right: var(--baseline);
+}
+.block.-form .field label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: var(--t5);
+}
+.block.-form .field .StripeElement {
+  padding: 3rem 0 1rem;
+}
+.block.-form .field [type="text"],
+.block.-form .field [type="email"],
+.block.-form .field [type="password"],
+.block.-form .field textarea {
+  padding: 3rem 0 1rem;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background-color: var(--faint);
+  resize: none;
+  font-size: var(--t3);
+}
+.block.-form .field.-referral {
+  height: 0;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  width: 100%;
+}
+.block.-form .field.-select {
+  padding: 3rem 0 1rem;
+}
+.block.-form .field.-select select {
+  width: 100%;
+}
+.block.-form .field.-check {
+  padding: var(--baseline);
+}
+.block.-form .field.-check input,
+.block.-form .field.-check label {
+  display: inline;
+}
+.block.-form .field.-check label {
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: var(--t5);
+}
+.block.-form .block.-form-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--default);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

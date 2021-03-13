@@ -1,0 +1,35 @@
+.tiny-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+}
+.tiny-form label {
+  display: none;
+}
+.tiny-form input[type="text"],
+.tiny-form input[type="email"],
+.tiny-form input[type="password"] {
+  background: transparent;
+  -webkit-apperance: none;
+  border: 0;
+  border-bottom: 1px solid var(--grey);
+  text-align: left;
+  line-height: calc(var(--baseline) * 1.25);
+  width: 12rem;
+  padding: 0;
+  margin: 0 0.5rem 0 0;
+}
+.tiny-form input[type="text"]:focus,
+.tiny-form input[type="email"]:focus,
+.tiny-form input[type="password"]:focus {
+  border-color: var(--black);
+}
+.tiny-form input[type="submit"] {
+  display: inline-block;
+  padding-bottom: 0.075rem;
+  line-height: calc(var(--baseline) * 1.4);
+}

@@ -1,0 +1,35 @@
+.fixed[role="layout"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.fixed[role="layout"] > aside {
+  display: none;
+  padding-top: calc(var(--gutter) / 2);
+  border-top: 1px solid var(--black);
+}
+@media screen and (min-width: 780px) {
+  .fixed[role="layout"] {
+    flex-direction: row-reverse;
+  }
+  .fixed[role="layout"] > main {
+    flex: 1;
+  }
+  .fixed[role="layout"] > aside {
+    display: block;
+    flex: none;
+    width: 21rem;
+    border-top: 0;
+    padding: 2rem 2rem 0 0;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .fixed[role="layout"] > aside {
+    padding: 2rem var(--gutter) 0 0;
+  }
+}
+@media screen and (min-width: 1500px) {
+  .fixed[role="layout"] > aside {
+    width: 24rem;
+  }
+}

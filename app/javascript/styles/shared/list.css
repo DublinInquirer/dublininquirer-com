@@ -1,0 +1,80 @@
+@charset "UTF-8";
+.list.-nav > li {
+  display: inline;
+}
+.list.-nav > li + li:before {
+  content: "/ ";
+  color: var(--grey);
+}
+.list.-em > li:before {
+  content: "—";
+  color: var(--grey);
+}
+.list.-delineated li {
+  padding: 0 0 calc(var(--baseline) / 2);
+}
+.list.-delineated li:last-child {
+  padding-bottom: 0;
+}
+.list.-delineated li + li {
+  padding-top: calc(var(--baseline) / 2);
+  border-top: 1px solid var(--faint);
+}
+.list.-options li + li {
+  margin-top: var(--baseline);
+}
+.list.-meta li + li {
+  border-top: 1px solid var(--black);
+}
+.list.-meta li {
+  position: relative;
+  padding: calc(var(--baseline) * 2.75) var(--baseline) var(--baseline);
+}
+.list.-meta li label {
+  position: absolute;
+  top: calc(var(--baseline) / 2);
+  left: var(--baseline);
+  font-size: var(--t5);
+}
+.list.-articles {
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+.list.-articles > li {
+  display: inline;
+}
+.list.-articles > li + li:before {
+  content: " / ";
+  color: var(--grey);
+}
+.list.-sentence > li {
+  display: inline;
+}
+.list.-sentence > li:after {
+  content: ", ";
+}
+.list.-sentence > li:last-child:after {
+  content: "";
+}
+.list.-tags li {
+  display: inline-block;
+}
+.list.-tags a,
+.list.-tags a:link,
+.list.-tags a:visited,
+.list.-tags .tag {
+  margin-top: 0;
+  margin-bottom: 0;
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: 0.5rem 0.75rem;
+  transition: 0.25s all ease;
+}
+.list.-tags a:hover,
+.list.-tags a:link:hover,
+.list.-tags a:visited:hover,
+.list.-tags .tag:hover {
+  background: var(--red);
+  color: var(--default);
+}

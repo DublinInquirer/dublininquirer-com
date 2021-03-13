@@ -1,9 +1,45 @@
-/* 
-Any CSS added to this file or imported from this file, e.g. `@import '../stylesheets/my-css.css'`,
-will be included in the "application" pack. Any CSS imported from application.js or as part of the 
-application.js dependency graph, e.g. `import '../stylesheets/my-css.css'` will also be included 
-in the "application" pack. 
+@import "../styles/shared/reset.css";
+@import "../styles/shared/variables.css";
 
-To reference this file, add <%= stylesheet_pack_tag 'application' %> to the appropriate
-layout file, like app/views/layouts/application.html.erb
-*/
+@import "../styles/shared/fonts.css";
+@import "../styles/deprecated/grid.css";
+@import "../styles/deprecated/flex.css";
+@import "../styles/deprecated/form.css";
+
+@import "../styles/layout/admin.css";
+@import "../styles/layout/centered.css";
+@import "../styles/layout/fixed.css";
+@import "../styles/layout/frame.css";
+@import "../styles/layout/modal.css";
+@import "../styles/layout/overlay.css";
+@import "../styles/layout/wrapper.css";
+
+@import "../styles/shared/basics.css";
+@import "../styles/shared/list.css";
+@import "../styles/shared/table.css";
+@import "../styles/deprecated/block.css";
+@import "../styles/shared/artwork.css";
+@import "../styles/shared/ads.css";
+
+@import "../styles/components/article.css";
+@import "../styles/components/excerpt.css";
+@import "../styles/components/page-header.css";
+@import "../styles/components/search-form.css";
+@import "../styles/components/author.css";
+@import "../styles/components/hr.css";
+@import "../styles/components/sidebar.css";
+@import "../styles/components/block-form.css";
+@import "../styles/components/icon.css";
+@import "../styles/components/sub-omnipresent.css";
+@import "../styles/components/box-form.css";
+@import "../styles/components/logo.css";
+@import "../styles/components/tiny-form.css";
+@import "../styles/components/content-nav.css";
+@import "../styles/components/meta-nav.css";
+@import "../styles/components/primary-footer.css";
+@import "../styles/components/cta-form.css";
+@import "../styles/components/notice.css";
+@import "../styles/components/paywall.css";
+@import "../styles/components/plyr.css";
+@import "../styles/components/primary-flag.css";
+@import "../styles/components/progress.css";

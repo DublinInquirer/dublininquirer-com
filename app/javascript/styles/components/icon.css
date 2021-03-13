@@ -1,0 +1,31 @@
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+}
+.icon svg {
+  display: block;
+  width: 80%;
+  height: auto;
+}
+
+a.icon:hover,
+a:link.icon:hover,
+a:visited.icon:hover {
+  cursor: pointer;
+  background-color: var(--blue);
+}
+a.icon:hover svg,
+a:link.icon:hover svg,
+a:visited.icon:hover svg {
+  fill: var(--default);
+  stroke-color: var(--default);
+}
+a.icon:hover svg rect,
+a:link.icon:hover svg rect,
+a:visited.icon:hover svg rect {
+  fill: var(--default);
+  stroke-color: var(--default);
+}

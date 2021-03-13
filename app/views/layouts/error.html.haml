@@ -10,9 +10,9 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-
-    = javascript_pack_tag 'application'
-    = stylesheet_pack_tag 'application'
+    
+    = stylesheet_packs_with_chunks_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload'
 
   %body
     .centered{role: 'layout'}

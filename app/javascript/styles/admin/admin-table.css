@@ -1,0 +1,33 @@
+.admin-table {
+  width: 100%;
+}
+.admin-table tr:nth-child(odd) {
+  background-color: var(--faint);
+}
+.admin-table td,
+.admin-table th {
+  padding: 0.5rem;
+}
+.admin-table td {
+  font-size: var(--t5);
+}
+.admin-table tr.-deleted td:first-of-type {
+  text-decoration: line-through;
+}
+.admin-table tr.placeholder {
+  height: 1px;
+  overflow: hidden;
+  background-color: var(--red);
+  padding: 0;
+}
+.admin-table tr.ui-sortable-helper {
+  background-color: var(--white);
+  border: 1px solid var(--black);
+  box-shadow: 0 0.25rem 1rem rgba(7, 7, 7, 0.075);
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+.admin-table.-issue tbody tr:first-child td:first-child {
+  font-weight: 600;
+}

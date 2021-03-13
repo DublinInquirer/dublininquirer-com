@@ -1,10 +1,10 @@
 default: &defaults
   # Your push api key, it is possible to set this dynamically using ERB:
   # push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
-  push_api_key: "<%= Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :appsignal, :push_api_key) %>"
+  push_api_key: "<%= ENV['APPSIGNAL_PUSH_API_KEY'] %>"
 
   # Your app's name
-  name: "<%= Rails.application.credentials.dig(ENV['PRODUCTION_ENVIRONMENT'].to_sym, :appsignal, :app_name) %>"
+  name: "<%= ENV['APPSIGNAL_APP_NAME'] %>"
 
   # Actions that should not be monitored by AppSignal
   # ignore_actions:

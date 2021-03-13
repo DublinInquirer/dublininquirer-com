@@ -1,0 +1,15 @@
+.flex {
+  display: flex;
+}
+.flex.-c {
+  flex-direction: column;
+}
+.flex.-sb {
+  justify-content: space-between;
+}
+.flex.-fs {
+  justify-content: flex-start;
+}
+.flex.-fe {
+  justify-content: flex-end;
+}

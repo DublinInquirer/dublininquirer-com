@@ -1,11 +1,3 @@
-@import 'modules/variables'
-@import 'modules/*'
-
-+reset
-
-@import 'shared/*'
-@import 'layouts/*'
-
 body
   font-size: var(--t4)
   line-height: 1.4
@@ -95,7 +87,7 @@ body
       border: 1px solid var(--black)
       overflow: hidden
 
-  @media screen and (min-width: $medium)
+  @media screen and (min-width: 780px)
     .candidate
       flex-basis: 14rem
       padding-right: 2rem
@@ -120,7 +112,7 @@ body
   a, a:link, a:visited
     dispplay: block
     font-size: var(--t4)
-    font-family: $sans
+    font-family: var(--sans)
     font-weight: 400
     color: var(--default)
     line-height: 1.4
@@ -128,7 +120,7 @@ body
     border: 1px solid var(--white)
     background-color: var(--blue)
     background-position: right 1rem center
-    background-image: url(asset-path('external.svg'))
+    background-image: url('~external.svg')
     background-size: 2rem auto
     background-repeat: no-repeat
 
@@ -152,7 +144,7 @@ body
   select
     display: block
     font-size: var(--t4)
-    font-family: $sans
+    font-family: var(--sans)
     font-weight: 400
     color: var(--default)
     line-height: 1.4
@@ -169,7 +161,7 @@ body
     appearance: none
     background-color: var(--blue)
     background-position: right 1rem center
-    background-image: url(asset-path('elections/switch.svg'))
+    background-image: url('~elections/switch.svg')
     background-size: 2.5rem auto
     background-repeat: no-repeat
     &::-ms-expand
@@ -197,7 +189,7 @@ body
   padding-bottom: 8rem
   margin-bottom: 4rem
   border-bottom: 1px solid var(--black)
-  @media screen and (min-width: $medium)
+  @media screen and (min-width: 780px)
     padding-bottom: 12rem
 
   &.-brief
@@ -240,11 +232,11 @@ body
 
     .back
       left: 0
-      background-image: url(asset-path('previous.svg'))
+      background-image: url('~previous.svg')
 
     .next
       right: 0
-      background-image: url(asset-path('next.svg'))
+      background-image: url('~next.svg')
 
 .candidates-mini-list
   display: flex
@@ -282,7 +274,7 @@ body
   .illustration
     display: none
 
-  @media screen and (min-width: $medium)
+  @media screen and (min-width: 780px)
     padding: 7.5rem calc(50% - 30rem) 6.75rem
 
     .illustration

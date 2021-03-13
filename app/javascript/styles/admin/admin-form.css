@@ -1,0 +1,82 @@
+@charset "UTF-8";
+.admin-form {
+  border: 1px solid var(--black);
+  margin: 1rem;
+}
+.admin-form .errors {
+  border-bottom: 1px solid var(--black);
+  padding: 1rem;
+}
+.admin-form .errors li {
+  color: var(--red);
+  font-weight: 400;
+  font-style: italic;
+}
+.admin-form .errors li:before {
+  content: "– ";
+}
+.admin-form .field {
+  border-bottom: 1px solid var(--black);
+  padding: 1rem;
+}
+.admin-form .field .hint {
+  text-align: right;
+  font-size: var(--t5);
+  color: var(--grey);
+}
+.admin-form .field label {
+  display: block;
+  font-style: italic;
+}
+.admin-form .field input,
+.admin-form .field textarea {
+  background: var(--faint);
+  border: 0;
+  padding: 0.25rem;
+  font-size: var(--t3);
+  line-height: 1.4;
+  width: 100%;
+}
+.admin-form .field select {
+  width: 100%;
+}
+.admin-form .field textarea.article {
+  height: 80vh;
+  font-size: var(--t3);
+  line-height: 1.5;
+  font-family: var(--serif);
+}
+.admin-form .field img {
+  max-width: 30vw;
+  width: auto;
+  max-height: 40vh;
+  height: auto;
+}
+.admin-form .actions {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.input.-image-picker {
+  overflow: hidden;
+  margin: 0 -1rem;
+}
+.input.-image-picker .option {
+  float: left;
+  width: 20%;
+  padding: 1rem;
+}
+
+.admin-search-form input[type="submit"],
+.admin-search-form button {
+  border: 0;
+  color: var(--black);
+  background-color: transparent;
+}
+.admin-search-form input[type="submit"]:hover,
+.admin-search-form button:hover {
+  color: var(--red);
+  background-color: transparent;
+}

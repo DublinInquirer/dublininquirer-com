@@ -1,0 +1,6 @@
+input,
+textarea {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t5);
+}
