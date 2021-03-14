@@ -1,3 +1,5 @@
-- path = "candidates/#{ candidate.slug }.jpg"
-.artwork.-portrait.-square= image_tag(path, alt: "a portrait of #{ candidate.name }")
-.artwork.-portrait.-square= image_tag("candidates/missing.jpg", alt: "we don't have a picture of #{ candidate.name }")
+- path = "media/images/#{ candidate.slug }.jpg"
+- if Webpacker.manifest.lookup(path)
+  .artwork.-portrait.-square= image_pack_tag(path, alt: "a portrait of #{ candidate.name }")
+- else
+  .artwork.-portrait.-square= image_pack_tag("media/images/missing.jpg", alt: "we don't have a picture of #{ candidate.name }")
