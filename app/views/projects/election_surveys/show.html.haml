@@ -23,7 +23,7 @@
               .block.-mt4
                 .area-switcher.-cta
                   %label select an electoral area
-                  %select{'data-behaviour': 'switchView', 'data-path': area_projects_election_survey_path(id: @survey.slug, area_id: '')}
+                  %select{data: {election: {target: "switcher", path: area_projects_election_survey_path(id: @survey.slug, area_id: '')}, action: "election#switchView"}}
                     %option Choose your electoral area
                     <option disabled>──────────</option>
                     - @areas.each do |area|

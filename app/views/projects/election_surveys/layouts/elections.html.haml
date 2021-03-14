@@ -9,16 +9,16 @@
     - set_meta_tags og: { title: :title, site_name: :site, image: :image_src }
     - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
     = display_meta_tags reverse: true, separator: '|'
-
+    
     = csrf_meta_tags
     = csp_meta_tag
     
     = stylesheet_packs_with_chunks_tag 'elections', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_packs_with_chunks_tag 'elections', 'data-turbolinks-track': 'reload'
+    = javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload'
 
     = render partial: 'layouts/favicons'
 
-  %body.-project
+  %body.-project{data: {controller: "election"}}
     %header.header.-elections.-blue
       .logo
         = link_to root_path, 'data-turbolinks': false do

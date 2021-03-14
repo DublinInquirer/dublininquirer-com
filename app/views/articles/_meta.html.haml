@@ -4,4 +4,4 @@
       %li= link_to "Facebook", "http://www.facebook.com/share.php?u=#{ "https://www.dublininquirer.com#{ article.path }" }"
       %li= link_to "Twitter", "https://twitter.com/intent/tweet?text=#{ article.title }&url=#{ "https://www.dublininquirer.com#{ article.path }" }"
       - if article.commentable?
-        %li= link_to "Respond", "#comments", 'data-behaviour': 'scroll'
+        %li= link_to "Respond", "#comments", data: {action: "election#scrollTo"}
