@@ -109,6 +109,9 @@
 .meta-nav.-fixed.-omnipresent {
   top: 0;
 }
+.meta-nav.-fixed.-hidden {
+  display: none;
+}
 .meta-nav.-fixed.-open {
   top: 0;
   transition: top 0.5s ease;

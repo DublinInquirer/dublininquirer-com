@@ -28,7 +28,9 @@ body {
   line-height: 1.4;
 }
 
-.turbolinks-progress-bar {
+.turbo-progress-bar {
+  position: absolute;
+  top: 0;
   height: 0.75rem;
   background-color: var(--faint);
 }

@@ -17,7 +17,7 @@
 
     = render partial: 'layouts/favicons'
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     .wrapper.-container{role: 'layout'}
       = render partial: 'layouts/partials/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 

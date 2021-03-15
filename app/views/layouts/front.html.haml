@@ -17,7 +17,7 @@
 
     = render partial: 'layouts/favicons'
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     = render partial: 'layouts/partials/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/partials/primary-flag'
 
