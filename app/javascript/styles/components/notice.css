@@ -6,6 +6,12 @@
   z-index: 999;
   padding: 0;
   padding-left: 4rem;
+  opacity: 1;
+  transition: 1s ease bottom, 1s ease opacity;
+}
+.notice.-fixed.-hidden {
+  bottom: -100%;
+  opacity: 0;
 }
 .notice.-fixed nav {
   position: absolute;
