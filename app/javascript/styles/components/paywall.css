@@ -11,6 +11,9 @@
 [role="overlay"].-limited {
   transition: all 1s ease;
 }
+[role="overlay"].-displayed {
+  display: block;
+}
 [role="overlay"].-open {
   pointer-events: auto;
   opacity: 1;

@@ -20,5 +20,5 @@
   right: 0;
 }
 [role="overlay"].-limited {
-  background-color: rgba(0, 0, 0, 0.875);
+  background-color: rgba(0, 0, 0, 0.75);
 }

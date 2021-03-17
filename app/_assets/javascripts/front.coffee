@@ -1,22 +1,5 @@
 # sprinkles
 
-$(document).ready ->
-  if $(window).scrollTop() > 145
-    $('.meta-nav.-fixed').addClass('-open')
-  else
-    $('.meta-nav.-fixed').removeClass('-open')
-
-  $(window).on 'scroll', ->
-    if $(window).scrollTop() > 145
-      $('.meta-nav.-fixed').addClass('-open')
-    else
-      $('.meta-nav.-fixed').removeClass('-open')
-
-  $('[data-behaviour="scroll"]').on 'click', (e) ->
-    targetOffset = $($(e.currentTarget).attr('href')).offset().top
-    e.preventDefault()
-    $('html, body').animate({scrollTop: (targetOffset - 80)});
-
   for snowingEl, i in $('[data-behaviour="snowing"]')
     $(snowingEl).prepend($("<div class='snowing-bg'></div>"))
     $('.snowing-bg:last', $(snowingEl)).attr('id', 'snow-' + i)
