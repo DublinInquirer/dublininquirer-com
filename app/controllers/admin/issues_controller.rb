@@ -33,18 +33,21 @@ class Admin::IssuesController < Admin::ApplicationController
   end
 
   def reorder
-    Issue.includes(:articles).
-      find_by(issue_date: params[:id]).
-      articles.each do |a|
-      a.update!(position: position_params[:positions].index(a.id.to_s))
+    issue_id = Issue.find_by!(issue_date: params[:id]).id
+    
+    position_params[:positions]
+      .sort_by { |p| p[:position] }
+      .each_with_index do |position_param, i|
+      a = Article.find_by!(issue_id: issue_id, id: position_param[:id])
+      a.update!(position: i)
     end
-
+    
     render plain: 'noted.'
   end
 
   private
 
   def position_params
-    params.permit(positions: [])
+    params.permit(positions: [:id, :position])
   end
 end

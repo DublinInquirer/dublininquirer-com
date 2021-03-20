@@ -23,5 +23,5 @@ const imagePath = (name) => images(name, true);
 Rails.start();
 
 const application = Application.start();
-const context = require.context("../controllers", true, /\.js$/);
+const context = require.context("../controllers/public", true, /\.js$/);
 application.load(definitionsFromContext(context));

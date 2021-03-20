@@ -7,19 +7,7 @@
       = link_to 'New author', [:new, :admin, :author], class: 'button'
 
   %div.filters
-    .page
-      .current #{ @authors.current_page }/#{ @authors.total_pages }
-      .pagination
-        - if !@authors.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@authors.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@authors.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@authors.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @authors}
 
     .options
       = form_tag [:admin, :authors], method: 'get', class: 'admin-search-form' do

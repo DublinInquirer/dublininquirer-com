@@ -1,0 +1,17 @@
+:root {
+  --header-width: 12rem;
+  --progress-bar-y: 0.5rem;
+
+  --white: #fff;
+  --ink: #070707;
+  --bg: #f3f3f3;
+  --offset: #eee;
+  --div: #ccc;
+
+  --z-progress-bar: 950;
+  --z-menu: 900;
+
+  --brand: #4000ff;
+  --accent: #fcfc04;
+  --error: #fc4604;
+}

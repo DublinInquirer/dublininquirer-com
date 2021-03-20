@@ -7,19 +7,7 @@
       = link_to 'New article', [:new, :admin, :article], class: 'button'
 
   %div.filters
-    .page
-      .current #{ @articles.current_page }/#{ @articles.total_pages }
-      .pagination
-        - if !@articles.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@articles.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@articles.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@articles.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @articles}
 
     .options
       = form_tag [:admin, :articles], method: 'get', class: 'admin-search-form' do

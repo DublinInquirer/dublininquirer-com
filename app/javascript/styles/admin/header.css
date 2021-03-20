@@ -1,0 +1,40 @@
+.admin-header {
+  background-color: var(--white);
+  z-index: var(--z-menu);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  padding-top: var(--progress-bar-y);
+}
+
+.admin-header {
+  padding: var(--progress-bar-y) 2rem 0 1rem;
+
+  & > section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--div);
+
+    a,
+    a:link,
+    a:visited {
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 400;
+      position: relative;
+      &:hover {
+        color: var(--brand);
+        &:before {
+          position: absolute;
+          left: -0.725rem;
+          content: "■";
+        }
+      }
+    }
+  }
+}

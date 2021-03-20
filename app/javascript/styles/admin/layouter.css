@@ -1,0 +1,36 @@
+.layouter {
+  &__preview {
+    display: grid;
+    grid-auto-flow: row;
+    gap: 1rem;
+    grid-template-columns: repeat(2, 18rem);
+  }
+
+  &__headline {
+    font-weight: 600;
+  }
+
+  &__byline {
+    font-weight: 400;
+  }
+
+  &__article {
+    width: 18rem;
+    height: 12rem;
+    background: var(--bg);
+    border: 1px solid var(--ink);
+    padding: 1rem;
+
+    &.-chosen {
+      box-shadow: 0 0.5rem 1rem rgba(#000, 0.25);
+    }
+
+    &.-ghost {
+      text-indent: -9999px;
+      overflow: hidden;
+      background-color: var(--div);
+      box-shadow: none;
+      border-color: var(--div);
+    }
+  }
+}

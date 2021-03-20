@@ -6,19 +6,7 @@
     %nav &nbsp;
 
   %div.filters
-    .page
-      .current #{ @contact_messages.current_page }/#{ @contact_messages.total_pages }
-      .pagination
-        - if !@contact_messages.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@contact_messages.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@contact_messages.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@contact_messages.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @contact_messages}
 
     .options &nbsp;
 

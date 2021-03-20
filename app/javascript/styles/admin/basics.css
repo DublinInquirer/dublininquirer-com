@@ -1,0 +1,53 @@
+html {
+  font-size: 16px;
+  line-height: calc(25 / 18);
+}
+
+body {
+  font-family: var(--sans);
+  padding-top: var(--progress-bar-y);
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+a,
+a:link,
+a:visited {
+  text-decoration: none;
+  color: var(--ink);
+  &:hover {
+    color: var(--brand);
+  }
+}
+
+.progress-bar.-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-progress-bar);
+  height: var(--progress-bar-y);
+  background-color: var(--ink);
+}
+
+.button,
+a.button,
+a.button:link,
+a.button:visited {
+  appearance: none;
+  border: 0;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.325rem 0.5rem 0.25rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  margin: 0;
+  &:hover {
+    cursor: pointer;
+    color: var(--bg);
+    background-color: var(--brand);
+  }
+}

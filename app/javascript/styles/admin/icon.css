@@ -1,0 +1,16 @@
+.icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &.-sm {
+    width: calc(var(--header-width) - 2rem);
+    height: calc(var(--header-width) - 2rem);
+  }
+  &.-hamburger {
+  }
+
+  &.-close {
+  }
+}

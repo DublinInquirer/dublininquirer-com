@@ -2,64 +2,14 @@
 @import "../styles/shared/variables.css";
 
 @import "../styles/shared/fonts.css";
-@import "../styles/deprecated/grid.css";
-@import "../styles/deprecated/flex.css";
-@import "../styles/deprecated/form.css";
-@import "../styles/deprecated/block.css";
+@import "../styles/admin/variables.css";
+@import "../styles/admin/basics.css";
+@import "../styles/admin/icon.css";
 
-@import "../styles/shared/ads.css";
-@import "../styles/shared/artwork.css";
-@import "../styles/shared/basics.css";
-@import "../styles/shared/button.css";
-@import "../styles/shared/list.css";
-@import "../styles/shared/table.css";
-@import "../styles/shared/text.css";
+@import "../styles/admin/layout.css";
+@import "../styles/admin/header.css";
+@import "../styles/admin/view.css";
 
-@import "../styles/components/hr.css";
-@import "../styles/components/progress.css";
-
-@import "../styles/admin/admin-data.css";
-@import "../styles/admin/admin-form.css";
-@import "../styles/admin/admin-header.css";
-@import "../styles/admin/admin-list.css";
-@import "../styles/admin/admin-main.css";
-@import "../styles/admin/admin-preview.css";
-@import "../styles/admin/admin-select.css";
-@import "../styles/admin/admin-subheader.css";
-@import "../styles/admin/admin-table.css";
-@import "../styles/admin/admin-view.css";
-
-body {
-  border-top: 0;
-}
-
-.button,
-a.button,
-a.button:link,
-a.button:visited,
-input.button {
-  font-family: var(--sans);
-  font-size: var(--t5);
-  -webkit-appearance: none;
-  background: var(--default);
-  color: var(--black);
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--black);
-  transition: 0.125s ease all;
-}
-.button:hover,
-a.button:hover,
-a.button:link:hover,
-a.button:visited:hover,
-input.button:hover {
-  cursor: pointer;
-  background: var(--yellow);
-  color: var(--black);
-}
-.button.-small,
-a.button.-small,
-a.button:link.-small,
-a.button:visited.-small,
-input.button.-small {
-  padding: 0 0.5rem;
-}
+@import "../styles/admin/table.css";
+@import "../styles/admin/layouter.css";
+@import "../styles/admin/subheader.css";

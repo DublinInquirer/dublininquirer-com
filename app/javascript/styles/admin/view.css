@@ -1,0 +1,12 @@
+.admin-view {
+  padding: 1rem;
+
+  ul {
+    opacity: 0;
+    visibility: hidden !important;
+  }
+
+  table {
+    visibility: visible !important;
+  }
+}
