@@ -16,7 +16,13 @@
 }
 
 .admin-table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 1rem;
+
   &:last-child {
+    padding-right: 0;
     text-align: right;
   }
 }

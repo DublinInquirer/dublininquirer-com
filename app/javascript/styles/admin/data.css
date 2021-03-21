@@ -1,0 +1,19 @@
+.admin-data {
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+.admin-data dd + dt {
+  margin-top: 1rem;
+}
+.admin-data dt {
+  font-style: italic;
+}
+.admin-data dd {
+  padding-right: 10%;
+}
+.admin-data a,
+.admin-data a:link,
+.admin-data a:visited {
+  border-bottom: 1px solid var(--blue);
+}

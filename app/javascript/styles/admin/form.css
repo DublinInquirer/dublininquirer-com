@@ -1,0 +1,85 @@
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: calc(25 / 18);
+}
+
+.admin-form {
+}
+.admin-form .errors {
+  border-bottom: 1px solid var(--black);
+  padding: 1rem;
+}
+.admin-form .errors li {
+  color: var(--red);
+  font-weight: 400;
+}
+.admin-form .errors li:before {
+  content: "– ";
+}
+.admin-form .field {
+  border-bottom: 1px solid var(--black);
+  padding: 1rem 0;
+}
+.admin-form .field .hint {
+  text-align: right;
+  font-size: 0.75rem;
+}
+.admin-form .field label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.admin-form .field input,
+.admin-form .field textarea {
+  background: var(--faint);
+  border: 0;
+  padding: 0.25rem;
+  width: 100%;
+}
+.admin-form .field select {
+  width: 100%;
+}
+.admin-form .field textarea.article {
+  height: 80vh;
+  font-family: var(--serif);
+}
+.admin-form .field img {
+  max-width: 30vw;
+  width: auto;
+  max-height: 40vh;
+  height: auto;
+}
+.admin-form .actions {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.input.-image-picker {
+  overflow: hidden;
+  margin: 0 -1rem;
+}
+.input.-image-picker .option {
+  float: left;
+  width: 20%;
+  padding: 1rem;
+}
+
+.admin-search-form input[type="submit"],
+.admin-search-form button {
+  border: 0;
+  color: var(--black);
+  background-color: transparent;
+}
+.admin-search-form input[type="submit"]:hover,
+.admin-search-form button:hover {
+  color: var(--red);
+  background-color: transparent;
+}
