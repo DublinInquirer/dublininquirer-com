@@ -11,6 +11,12 @@ body {
   line-height: calc(25 / 18);
 }
 
+::selection {
+  color: var(--bg);
+  background: var(--blue);
+  text-shadow: none;
+}
+
 code {
   font-family: var(--mono);
 }
@@ -38,7 +44,9 @@ a:visited {
 .button,
 a.button,
 a.button:link,
-a.button:visited {
+a.button:visited,
+input.button,
+button.button {
   appearance: none;
   border: 0;
   background: var(--ink);

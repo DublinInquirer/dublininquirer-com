@@ -1,6 +1,7 @@
 if Rails.env.development? || Rails.env.test?
   CarrierWave.configure do |config|
     config.storage = :file
+    config.asset_host = "https://d1trxack2ykyus.cloudfront.net"
   end
 end
 

@@ -1,0 +1,51 @@
+.admin-notes {
+  margin-top: 2rem;
+
+  h3 {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  &__note {
+    background: var(--offset);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    margin-bottom: 1rem;
+  }
+  &__form {
+    display: flex;
+    justify-content: stretch;
+    background: var(--offset);
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    margin-bottom: 1rem;
+
+    .field {
+      padding-right: 0.5rem;
+      flex: 1;
+      display: flex;
+      justify-content: stretch;
+      label {
+        display: none;
+      }
+      textarea {
+        resize: none;
+        margin: 0;
+        background-color: var(--offset);
+        color: var(--ink);
+        border: 0;
+        width: 100%;
+        font-family: var(--sans);
+        font-size: 0.875rem;
+        line-height: calc(25 / 18);
+      }
+    }
+    .button {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+  }
+}

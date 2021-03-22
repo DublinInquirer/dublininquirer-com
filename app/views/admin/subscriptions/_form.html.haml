@@ -1,4 +1,4 @@
-= form_for [:admin, @user, @subscription], html: { class: 'admin-form' } do |f|
+= form_for [:admin, @user, @subscription], html: {class: 'admin-form', data: {"form-target": "form"}} do |f|
   - if @subscription.errors.any?
     %ul.errors
       - @subscription.errors.full_messages.each do |message|

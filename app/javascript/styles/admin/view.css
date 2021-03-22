@@ -1,5 +1,7 @@
 .admin-view {
   padding: 1rem;
+  max-width: 100%;
+  overflow: hidden;
 
   ul {
     opacity: 0;

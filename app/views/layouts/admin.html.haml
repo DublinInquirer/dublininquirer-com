@@ -14,7 +14,7 @@
     .admin{role: 'layout'}
       = render partial: "admin/layouts/header"
 
-      %main.admin-main
+      %main.admin-main{data: {controller: "form"}}
         - if content_for(:subheader_detail) && content_for(:subheader_list)
           - raise "Choose detail or list header only"
         - elsif content_for(:subheader_detail)
