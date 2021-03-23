@@ -1,4 +1,4 @@
-= form_for [:admin, landing_page], html: { class: 'admin-form', multipart: true } do |f|
+= form_for [:admin, landing_page], html: { class: 'admin-form', multipart: true, data: {"form-target": "form"} } do |f|
   - if landing_page.errors.any?
     %ul.errors
       - landing_page.errors.full_messages.each do |message|

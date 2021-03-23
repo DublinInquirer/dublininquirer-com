@@ -1,4 +1,10 @@
 .admin-data {
+  margin-bottom: 2rem;
+}
+
+.admin-data img {
+  width: 12rem;
+  height: auto;
 }
 
 .admin-data dd + dt {

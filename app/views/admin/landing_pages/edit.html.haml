@@ -6,7 +6,7 @@
       = link_to 'Edit', [:edit, :admin, @landing_page]
 
     %nav
-      = link_to "Cancel without saving", [:admin, @landing_page], class: 'button -cancel'
-      = link_to "Save", [:admin, @landing_page], class: 'button', 'data-action': 'submitForm'
+      = link_to "Cancel", [:admin, @landing_page], class: 'button -cancel'
+      = link_to "Save", [:admin, @landing_page], class: 'button', data: {action: "form#submitForm"}
 
 = render partial: 'admin/landing_pages/form', locals: {landing_page: @landing_page}

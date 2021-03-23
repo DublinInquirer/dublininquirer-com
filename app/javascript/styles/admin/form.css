@@ -23,6 +23,19 @@ input[type="submit"] {
 }
 .admin-form .field {
   margin-bottom: 1rem;
+
+  &.-tick {
+    input {
+      padding: 0;
+      width: auto;
+      margin-right: 0.25rem;
+    }
+    label:last-of-type {
+      font-weight: 400;
+      text-transform: none;
+      margin: 0;
+    }
+  }
 }
 .admin-form .field .hint {
   text-align: right;
@@ -60,6 +73,9 @@ input[type="submit"] {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  .button {
+    display: none;
+  }
 }
 
 .input.-image-picker {

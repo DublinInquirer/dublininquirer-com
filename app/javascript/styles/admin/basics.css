@@ -76,3 +76,9 @@ button.button {
     }
   }
 }
+
+label {
+  input {
+    display: inline;
+  }
+}

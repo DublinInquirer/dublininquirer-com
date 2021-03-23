@@ -6,7 +6,7 @@
 
     %nav
       = link_to "Cancel without saving", [:admin, @tag], class: 'button -cancel'
-      = link_to "Save", [:merge, :admin, @tag], class: 'button', 'data-action': 'submitForm'
+      = link_to "Save", [:merge, :admin, @tag], class: 'button', data: {action: "form#submitForm"}
 
 = form_tag [:merge, :admin, @tag], class: 'admin-form' do
   %fieldset

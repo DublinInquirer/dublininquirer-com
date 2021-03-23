@@ -17,5 +17,8 @@
       - @issue.articles.by_position.each do |article|
         - cache ['admin', @issue, article, 'row'] do
           .layouter__article{data: {layouter: {target: "article", "article-id": article.id}}}
-            .layouter__headline= article.title
+            .layouter__image
+              - if article.featured_artwork.present?
+                = image_tag article.featured_artwork.image.large.url
+            .layouter__headline= link_to article.title, [:admin, article]
             .layouter__byline= raw article.authors.map { |author| link_to(author.full_name, [:admin, author]) }.to_sentence

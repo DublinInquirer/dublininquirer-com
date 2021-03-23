@@ -20,6 +20,8 @@
 }
 
 .breadcrumbs {
+  white-space: nowrap;
+
   & > * {
     &:after {
       color: var(--ink);

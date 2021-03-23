@@ -1,4 +1,4 @@
-= form_for @artwork.persisted? ? [:admin, @artwork] : [:admin, @article, @artwork], html: { class: 'admin-form' } do |f|
+= form_for @artwork.persisted? ? [:admin, @artwork] : [:admin, @article, @artwork], html: {class: 'admin-form', data: {"form-target": "form"}} do |f|
   - if @artwork.errors.any?
     %ul.errors
       - @artwork.errors.full_messages.each do |message|
