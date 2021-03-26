@@ -6,6 +6,7 @@
   position: sticky;
   top: var(--progress-bar-y);
   padding: 0 1rem;
+  z-index: var(--z-subheader);
 }
 
 .admin-subheader > div {
@@ -15,7 +16,7 @@
   align-items: center;
   padding: 1rem 0;
   &:last-of-type {
-    border-bottom: 1px solid var(--black);
+    border-bottom: 1px solid var(--div);
   }
 }
 

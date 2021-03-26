@@ -24,5 +24,3 @@ module Inquirer
     end
   end
 end
-
-Rack::MiniProfiler.config.position = 'bottom-right'

@@ -57,7 +57,15 @@ input[type="submit"] {
   width: 100%;
 }
 .admin-form .field select {
+  appearance: none;
   width: 100%;
+  background-color: var(--bg);
+  border: 1px solid var(--ink);
+  padding: 0.25rem;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: calc(25 / 18);
 }
 .admin-form .field textarea.article {
   height: 80vh;

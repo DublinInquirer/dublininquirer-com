@@ -13,7 +13,7 @@
     .field
       %label Merge into:
       .input
-        %select#merge_tag_id{name: 'destination_id'}
+        %select{name: 'destination_id', data: {form: {target: "select", id: "tag"}}}
 
   .actions
     = submit_tag 'Save', class: 'button'

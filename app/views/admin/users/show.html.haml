@@ -9,7 +9,7 @@
       - if @user.scheduled_for_deletion?
         = link_to "Cancel deletion", [:cancel_delete, :admin, @user], class: 'button', method: :put
       - else
-        = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put
+        = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put, 'data-confirm': "This will send a link to the user's email address allowing them to reset their password. Are you sure?"
         = link_to "Edit", [:edit, :admin, @user], class: 'button'
         = link_to "Delete", [:confirm_delete, :admin, @user], class: 'button'
         - if !current_user.subscriber?
