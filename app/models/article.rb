@@ -49,6 +49,7 @@ class Article < ApplicationRecord
 
   def published_on
     return nil unless self.issue
+    return Date.new(2021,4,1) if (self.id.to_i == 3044)
     self.issue.issue_date
   end
 
