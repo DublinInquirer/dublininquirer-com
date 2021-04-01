@@ -47,6 +47,11 @@ class Article < ApplicationRecord
     @same_issue ||= self.issue.articles.includes(:authors, :artworks).where.not(id: self.id)
   end
 
+  def published_on
+    return nil unless self.issue
+    self.issue.issue_date
+  end
+
   def author
     @author ||= authors.last
   end
