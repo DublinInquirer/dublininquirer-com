@@ -1,6 +1,6 @@
 class UserSessionsController < ApplicationController
   before_action :require_login, only: [:destroy]
-  skip_before_action :verify_authenticity_token, only: [:accept_cookies]
+  skip_before_action :verify_authenticity_token, only: [:accept_cookies, :dismiss_newsletter_subscribe]
 
   layout 'modal'
 
@@ -32,6 +32,14 @@ class UserSessionsController < ApplicationController
 
   def accept_cookies
     cookies.permanent[:accepts_cookies] = "yes"
+    render plain: 'noted.'
+  end
+
+  def dismiss_newsletter_subscribe
+    if permission_for_cookie?
+      cookies[:newsletter_subscribe_dismissed] = { expires: 1.day }
+    end
+
     render plain: 'noted.'
   end
 end
