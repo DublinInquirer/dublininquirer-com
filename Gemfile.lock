@@ -313,7 +313,8 @@ GEM
     pretender (0.3.4)
       actionpack (>= 4.2)
     public_suffix (4.0.6)
-    puma (3.12.6)
+    puma (5.4.0)
+      nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-mini-profiler (2.3.3)
@@ -517,7 +518,7 @@ DEPENDENCIES
   plyr-rails
   postmark-rails
   pretender
-  puma (~> 3.12)
+  puma (>= 4.3.8)
   rack-mini-profiler
   rails (~> 6.1.x)
   redis (~> 4.0)
