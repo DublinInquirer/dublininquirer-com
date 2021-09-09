@@ -17,5 +17,6 @@
 //= require sticky
 //= require overlay
 //= require cookie
+//= require newsletter
 //= require notice
 //= require front
