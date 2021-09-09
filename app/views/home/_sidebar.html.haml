@@ -10,7 +10,9 @@
       .block.-mt2= link_to "Subscribe", '/resubscribe-offer-2018', class: 'button -white'
 
   - elsif !logged_in? or !current_user.subscriber?
-    %section.block.-py2.-px1.-mb2.-bg-blue
+    %section.block.-py2.-px1.-mb2.-bg-blue.-artworked
+      = image_tag "https://d1trxack2ykyus.cloudfront.net/25439908_1555010937919816_8873633341112035018_o.jpg", loading: 'lazy', class: 'artwork -sidebar'
+      
       %h4.c.-w8 Support local journalism
 
       .block.-my1
@@ -18,6 +20,7 @@
           Dublin Inquirer is funded by its readers, not advertisers.
 
       .block.-mt2= link_to "Subscribe", :products, class: 'button -white'
+      
   - elsif !is_christmastime?
     .block.block.-py2.-px1.-mb2.-bg-blue
       %h4.c.-w8 Give a subscription
@@ -38,13 +41,13 @@
         .block.-mt2
           #{ link_to "See options", :gift_subscriptions, class: 'button -christmas' }
 
-  - else
-    %section.block.-mb2
-      .block.-pb1.-bb
-        %h4.c.-w8= link_to 'The Podcast', category_path('podcast'), class: 'a -elsewhere'
-
-      .block.-mt1
-        = render partial: 'recent_podcasts'
+  - elsif false
+    = link_to "https://shop.dublininquirer.com", class: 'block -py2 -px1 -mb2 -bg-white -b external-ad' do
+      %h4.c.-w8 The shop
+  
+      .block.-my1
+        :markdown
+          Dublin Inquirer prints, totes, t-shirts, and more.
 
   %section.block
     .block.-pb1.-bb
