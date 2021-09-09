@@ -5,7 +5,7 @@ ruby '2.7.2'
 
 gem 'rails', '~> 6.1.x'
 gem 'pg'
-gem 'puma', '~> 3.12'
+gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
 gem 'haml'
 gem 'http'
