@@ -4,11 +4,7 @@ module ApplicationHelper
   end
 
   def asset_exists?(path)
-    if Rails.configuration.assets.compile
-      Rails.application.precompiled_assets.include? path
-    else
-      Rails.application.assets_manifest.assets[path].present?
-    end
+    raise "TODO: implement ability to check for portrait existence"
   end
 
   def is_christmastime?

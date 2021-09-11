@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.0.2'
 
 gem 'rails', '~> 6.1.x'
 gem 'pg'
 gem "puma", ">= 4.3.8"
-gem 'sass-rails', '~> 5.0'
 gem 'haml'
 gem 'http'
 gem 'uglifier', '>= 1.3.0'
@@ -22,17 +21,13 @@ gem 'sanitize'
 gem "nokogiri", ">= 1.10.4"
 gem 'jbuilder', '~> 2.5'
 gem 'kramdown'
-gem 'autoprefixer-rails'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'webpacker-svelte', "~> 0.0.0"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
 
-gem 'textacular', "~> 5.0"
+gem 'textacular', "~> 5.0" # search
 gem 'sorcery'
 gem 'pretender'
 gem 'namae'
@@ -42,7 +37,6 @@ gem 'reverse_markdown' # used to re-display html after saving
 
 gem 'browser'
 gem 'kaminari' # pagination
-gem 'plyr-rails'
 gem 'rinku'
 gem 'postmark-rails'
 gem 'stripe'
