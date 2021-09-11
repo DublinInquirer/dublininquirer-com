@@ -11,11 +11,9 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'audio', media: 'all'
-    = stylesheet_link_tag 'application', media: 'all'
-
-    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    = javascript_include_tag 'application'
+    
+    = javascript_packs_with_chunks_tag 'application'
+    = stylesheet_packs_with_chunks_tag 'application'
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">

@@ -1,19 +1,31 @@
 {
-  "name": "dublininquirer-com",
+  "name": "app",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "^5.4.2",
-    "svelte": "^3.8.1",
-    "svelte-loader": "^2.13.6",
-    "turbolinks": "^5.2.0",
-    "webpacker-svelte": "^0.1.0"
+    "@hotwired/turbo": "^7.0.0-rc.3",
+    "@rails/webpacker": "^6.0.0-rc.5",
+    "autoprefixer": "^10.3.4",
+    "css-loader": "^6.2.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "mini-css-extract-plugin": "^2.3.0",
+    "postcss": "^8.3.6",
+    "postcss-import": "^14.0.2",
+    "postcss-loader": "^6.1.1",
+    "postcss-nested": "^5.0.6",
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
   },
   "version": "0.1.0",
+  "babel": {
+    "presets": [
+      "./node_modules/@rails/webpacker/package/babel/preset.js"
+    ]
+  },
+  "browserslist": [
+    "defaults"
+  ],
   "devDependencies": {
-    "@webpack-cli/serve": "^1.4.0",
-    "webpack-dev-server": "^3.11.2"
+    "@webpack-cli/serve": "^1.5.2",
+    "webpack-dev-server": "^4.2.0"
   }
 }

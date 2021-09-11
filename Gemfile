@@ -8,12 +8,13 @@ gem 'pg'
 gem "puma", ">= 4.3.8"
 gem 'haml'
 gem 'http'
-gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
-gem 'webpacker'
+gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 gem 'redis', '~> 4.0'
 gem 'sucker_punch', '~> 2.0'
+
+gem 'whenever', require: false # scheduling cron jobs
 
 gem 'oj'
 gem 'roo' # CSV importing
@@ -22,11 +23,8 @@ gem "nokogiri", ">= 1.10.4"
 gem 'jbuilder', '~> 2.5'
 gem 'kramdown'
 gem 'bcrypt', '~> 3.1.7'
-gem 'webpacker-svelte', "~> 0.0.0"
-
 gem 'meta-tags'
 gem 'sitemap_generator'
-
 gem 'textacular', "~> 5.0" # search
 gem 'sorcery'
 gem 'pretender'
@@ -34,7 +32,6 @@ gem 'namae'
 gem 'countries'
 gem 'country_select', '~> 3.1'
 gem 'reverse_markdown' # used to re-display html after saving
-
 gem 'browser'
 gem 'kaminari' # pagination
 gem 'rinku'
@@ -42,16 +39,11 @@ gem 'postmark-rails'
 gem 'stripe'
 gem 'stripe_event'
 gem 'appsignal'
-
 gem 'carrierwave', '~> 1.0'
 gem "mini_magick", ">= 4.9.4"
 gem 'fog-aws', group: :production
 gem 'aws-sdk-s3', require: false
-
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'turbolinks'
-
-gem 'whenever', require: false
 
 group :development, :test do
   gem 'rack-mini-profiler'
