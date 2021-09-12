@@ -38,18 +38,18 @@
         .question.block.-brief
           .header
             - if question.position > 1
-              %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
+              %a.back{href: "#question-#{ question.position - 1 }", data: {action: "election#scrollTo"}} Back
 
             .wrapper.-small{role: 'layout'}
               .h.-h3.-centered
-                %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
+                %a{href: "#question-#{ question.position }", data: {action: "election#scrollTo"}}
                   .c.-w8
                     #{ question.position }.
                     %br
                     = question.body
 
             - if question.position < 10
-              %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
+              %a.next{href: "#question-#{ question.position + 1 }", data: {action: "election#scrollTo"}} Next
 
           .wrapper.-container{role: 'layout'}
             .wrapper.-large{role: 'layout'}

@@ -9,22 +9,21 @@
       - if @user.scheduled_for_deletion?
         = link_to "Cancel deletion", [:cancel_delete, :admin, @user], class: 'button', method: :put
       - else
-        = link_to "Edit user", [:edit, :admin, @user], class: 'button'
-        = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put
-        = link_to "Delete this user", [:confirm_delete, :admin, @user], class: 'button', method: :get
-
+        = link_to "Send password reset", [:reset_password, :admin, @user], class: 'button', method: :put, 'data-confirm': "This will send a link to the user's email address allowing them to reset their password. Are you sure?"
+        = link_to "Edit", [:edit, :admin, @user], class: 'button'
+        = link_to "Delete", [:confirm_delete, :admin, @user], class: 'button'
         - if !current_user.subscriber?
           = link_to "Add sub (fixed)", new_admin_user_subscription_path(@user, subscription_type: 'fixed'), class: 'button'
           = link_to "Add sub (stripe)", new_admin_user_subscription_path(@user, subscription_type: 'stripe'), class: 'button'
         
       - if current_user.is_superadmin?
-        = link_to "Impersonate this user", [:impersonate, :admin, @user], class: 'button', method: :put
+        = link_to "Impersonate", [:impersonate, :admin, @user], class: 'button', method: :put
 
 .admin-details
   - if @user.scheduled_for_deletion?
     .block.-bg-red.-p2.-mb2
       .p.-t3
-        This user will be fully, permanently, terrifyingly deleted in #{ time_ago_in_words @user.deleted_at }.
+        This user will be permanently deleted in #{ time_ago_in_words @user.deleted_at }.
 
   %dl.admin-data
     %dt Email address
@@ -63,22 +62,26 @@
 
     %dt Subscriptions
     %dd
-      %ul.admin-list.-subscriptions.-hyphenated
-        - @user.subscriptions.order('created_at desc').each do |subscription|
-          %li
-            = link_to [:admin, subscription] do
-              = subscription.plan.product.name
-              (#{subscription.human_status})
+      - if @user.subscriptions.any?
+        %ul.admin-list.-subscriptions.-hyphenated
+          - @user.subscriptions.order('created_at desc').each do |subscription|
+            %li
+              = link_to [:admin, subscription] do
+                = subscription.plan.product.name
+                (#{subscription.human_status})
+      - else
+        [none]
 
-    .block.-bt.-pt2.-mt2
+    .admin-notes
+      %h3 Notes
       - @user.user_notes.reverse_chronologically.reject { |u| !u.persisted? }.each do |user_note|
-        .block.-bg-faint.-p2.-mb2
+        .admin-notes__note
           :markdown
             #{ user_note.body } _<span class="c -grey"> — #{ user_note.created_at.strftime('%d/%m/%Y') }</span>_
 
-      = form_for [:admin, @user, @user_note], html: { class: 'admin-form block -m0' } do |f|
+      = form_for [:admin, @user, @user_note], html: { class: 'admin-notes__form' } do |f|
         .field
           = f.label :body, 'Add a note:'
           = f.text_area :body
         .actions
-          = f.submit 'Save', class: 'button'
+          = f.submit 'Add note', class: 'button'

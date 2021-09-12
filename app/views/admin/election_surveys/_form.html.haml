@@ -1,4 +1,4 @@
-= form_for [:admin, election_survey], html: { class: 'admin-form' } do |f|
+= form_for [:admin, election_survey], html: {class: 'admin-form', data: {"form-target": "form"}} do |f|
   - if election_survey.errors.any?
     %ul.errors
       - election_survey.errors.full_messages.each do |message|

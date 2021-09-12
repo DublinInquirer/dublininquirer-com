@@ -6,6 +6,6 @@
 
     %nav
       = link_to "Cancel without saving", [:admin, :users], class: 'button -cancel'
-      = link_to "Save", [:admin, :users], class: 'button', 'data-action': 'submitForm'
+      = link_to "Save", [:admin, :users], class: 'button', data: {action: "form#submitForm"}
 
 = render partial: 'admin/users/form', locals: {user: @user}

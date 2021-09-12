@@ -6,7 +6,7 @@
       = link_to 'Edit', [:edit, :admin, @subscription]
 
     %nav
-      = link_to "Cancel without saving", [:admin, @subscription], class: 'button -cancel'
-      = link_to "Save", [:admin, @subscription], class: 'button', 'data-action': 'submitForm'
+      = link_to "Cancel", [:admin, @subscription], class: 'button -cancel'
+      = link_to "Save", [:admin, @subscription], class: 'button', data: {action: "form#submitForm"}
 
 = render partial: 'admin/subscriptions/form', locals: { subscription: @subscription }

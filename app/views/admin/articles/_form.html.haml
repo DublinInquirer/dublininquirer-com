@@ -1,4 +1,4 @@
-= form_for [:admin, article], html: { class: 'admin-form' } do |f|
+= form_for [:admin, article], html: {class: 'admin-form', data: {"form-target": "form"}}do |f|
   - if article.errors.any?
     %ul.errors
       - article.errors.full_messages.each do |message|
@@ -8,10 +8,10 @@
     .field
       = f.label :title, 'Headline'
       .input= f.text_field :title
-    .field
+    .field{data: {controller: "excerpt", excerpt: {"min-value": 140, "max-value": 160}}}
       = f.label :excerpt_markdown, 'Excerpt'
-      .input= f.text_area :excerpt_markdown
-      .hint{'data-bind': 'charCount'}
+      .input= f.text_area :excerpt_markdown, data: {action: "excerpt#updateHint", "excerpt-target": "input"}
+      .hint{data: {excerpt: {target: "hint"}}}
     .field
       = f.label :category
       .input= f.select :category, Article.category_options
@@ -38,23 +38,3 @@
               = image_tag artwork.image.small.url, loading: 'lazy'
 
   .actions= f.submit 'Save', class: 'button'
-
-:coffee
-  for charCounter in $('[data-bind="charCount"]')
-    el = $(charCounter)
-    field = $(el.parents('.field:first'))
-    hint = $('.hint', field)
-    input = $('textarea:first', field)
-
-    count = input.val().length
-    if count < 1
-      hint.text "Ideal excerpt length: 140-160 characters."
-    else if count > 0
-      hint.text count + " characters. Ideal excerpt length: 140-160 characters."
-
-    input.on 'keyup', ->
-      count = input.val().length
-      if count < 1
-        hint.text "Ideal excerpt length: 140-160 characters."
-      else if count > 0
-        hint.text count + " characters. Ideal excerpt length: 140-160 characters."

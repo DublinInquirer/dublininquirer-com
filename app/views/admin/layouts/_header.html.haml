@@ -1,0 +1,12 @@
+%header.admin-header{date: {controller: "header", header: {target: "header"}}}
+  %section
+    = link_to 'Dashboard', admin_root_path
+    = link_to 'Subscriptions', admin_subscriptions_path
+    = link_to 'Users', admin_users_path
+    = link_to 'Comments', admin_comments_path
+    = link_to 'Gifts', admin_gift_subscriptions_path
+  %section
+    = link_to 'Issues', admin_issues_path
+    = link_to 'Articles', admin_articles_path
+    = link_to 'Authors', admin_authors_path
+    = link_to 'Tags', admin_tags_path

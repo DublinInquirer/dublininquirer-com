@@ -16,7 +16,7 @@
     = render partial: "layouts/snippets/favicon"
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     = render partial: 'layouts/partials/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/partials/primary-flag'
 

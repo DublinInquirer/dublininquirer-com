@@ -6,19 +6,7 @@
       = link_to 'New landing page', [:new, :admin, :landing_page], class: 'button'
 
   %div.filters
-    .page
-      .current #{ @landing_pages.current_page }/#{ @landing_pages.total_pages }
-      .pagination
-        - if !@landing_pages.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@landing_pages.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@landing_pages.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@landing_pages.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @landing_pages}
 
     .options &nbsp;
 

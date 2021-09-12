@@ -5,24 +5,33 @@
       = link_to @author.full_name, [:admin, @author]
 
     %nav
+      = link_to "Delete", [:admin, @author], class: 'button', 'data-confirm': "This can't be undone! Are you 100% sure?", method: 'delete'
       = link_to "Edit", [:edit, :admin, @author], class: 'button'
 
 %dl.admin-data
-  %dt Portrait
-  %dd
-    - if @author.portrait.present?
-      = image_tag @author.portrait.url, loading: 'lazy'
+      
   %dt Name
   %dd= @author.full_name
+
   %dt Bio
   %dd
-    :markdown
-      #{ raw @author.bio }
+    - if @author.bio.present?
+      :markdown
+        #{ raw @author.bio }
+    - else
+      [blank]
+
+  %dt Portrait
+  %dd
+    - if @author.portrait.url.present?
+      = image_tag @author.portrait.url, loading: 'lazy'
+    - else
+      [none]
 
 - cache ['admin', @author, @author.articles] do
   %table.admin-table
     %tbody
-      - @author.articles.each do |article|
+      - @author.articles.by_date.each do |article|
         - cache ['admin', @author, article, 'row'] do
           %tr
             %td= link_to truncate(article.title, length: 92), [:admin, article]

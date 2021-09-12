@@ -46,6 +46,15 @@ class Admin::AuthorsController < Admin::ApplicationController
     end
   end
 
+  def destroy
+    @author = Author.find_by(slug: params[:id])
+    if @author.articles.empty? && @author.destroy
+      redirect_to [:admin, :authors]
+    else
+      redirect_to [:admin, @author]
+    end
+  end
+
   def author_params
     params.require(:author).permit(:full_name, :bio, :portrait, :remove_portrait)
   end

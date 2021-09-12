@@ -8,19 +8,7 @@
       = link_to "Export shipping list", shipping_list_admin_subscriptions_path(format: 'csv'), class: 'button'
 
   %div.filters
-    .page
-      .current #{ @subscriptions.current_page }/#{ @subscriptions.total_pages }
-      .pagination
-        - if !@subscriptions.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@subscriptions.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@subscriptions.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@subscriptions.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @subscriptions}
 
     .options
       = form_tag [:admin, :subscriptions], method: 'get', class: 'admin-search-form' do

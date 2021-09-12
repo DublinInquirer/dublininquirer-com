@@ -2,7 +2,7 @@
   %div
     .breadcrumbs
       = link_to 'Issues', [:admin, :issues]
-      = link_to @issue.issue_date, [:admin, @issue]
+      = link_to @issue.issue_date.strftime("%e %b %Y"), [:admin, @issue]
 
     %nav
       - if current_user.is_admin?
@@ -12,31 +12,13 @@
           = link_to "Publish", [:publish, :admin, @issue], class: 'button', method: :put
 
 - cache ['admin', @issue, @issue.articles] do
-  %table.admin-table.-issue
-    %tbody.-sortable{'data-url': reorder_admin_issue_path(@issue)}
+  .layouter.-issue{data: {controller: "layouter", layouter: {"persist-url-value": reorder_admin_issue_path(@issue)}}}
+    .layouter__preview{data: {layouter: {target: "preview"}}}
       - @issue.articles.by_position.each do |article|
         - cache ['admin', @issue, article, 'row'] do
-          %tr{'data-id': article.id}
-            %td= link_to truncate(article.title, length: 92), [:admin, article]
-            %td= raw article.authors.map { |author| link_to(author.full_name, [:admin, author]) }.to_sentence
-
-:coffeescript
-  for sortableTable in $('tbody.-sortable')
-    $(sortableTable).sortable
-      placeholder: 'placeholder'
-      stop: ->
-        payload = tableToPositionHash($(sortableTable))
-        $.ajax(
-          type: 'put'
-          data: {positions: payload}
-          url: $(sortableTable).data('url')
-          ).done (res) ->
-            console.log res
-
-  tableToPositionHash = (table) ->
-    positions = []
-
-    for row in $('tr', table)
-      positions.push $(row).data('id')
-
-    positions
+          .layouter__article{data: {layouter: {target: "article", "article-id": article.id}}}
+            .layouter__image
+              - if article.featured_artwork.present?
+                = image_tag article.featured_artwork.image.large.url
+            .layouter__headline= link_to article.title, [:admin, article]
+            .layouter__byline= raw article.authors.map { |author| link_to(author.full_name, [:admin, author]) }.to_sentence

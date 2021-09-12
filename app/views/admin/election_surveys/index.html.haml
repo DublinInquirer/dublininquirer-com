@@ -7,19 +7,7 @@
       = link_to 'New election', [:new, :admin, :election_survey], class: 'button'
 
   %div.filters
-    .page
-      .current #{ @election_surveys.current_page }/#{ @election_surveys.total_pages }
-      .pagination
-        - if !@election_surveys.first_page?
-          = link_to '<', request.query_parameters.merge(p: (@election_surveys.current_page - 1))
-        - else
-          %a.-disabled
-            <
-        - if !@election_surveys.last_page?
-          = link_to '>', request.query_parameters.merge(p: (@election_surveys.current_page + 1))
-        - else
-          %a.-disabled
-            >
+    .page= render partial: "admin/layouts/pagination", locals: {collection: @election_surveys}
 
     .options &nbsp;
 

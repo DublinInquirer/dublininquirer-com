@@ -12,17 +12,16 @@
           - if @subscription.product.is_active_digital?
             = link_to "Switch to print", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: false), class: 'button', method: 'put'
           - elsif @subscription.product.is_active_print?
-            = link_to "Switch to digital-only", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
+            = link_to "Switch to digital", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
           - else
             = link_to "Switch to print (base price)", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: false), class: 'button', method: 'put'
             = link_to "Switch to print (current price)", change_product_admin_subscription_path(@subscription, product_slug: 'print', maintain_price: true), class: 'button', method: 'put'
-            = link_to "Switch to digital-only (base price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
-            = link_to "Switch to digital-only (current price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: true), class: 'button', method: 'put'
+            = link_to "Switch to digital (base price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: false), class: 'button', method: 'put'
+            = link_to "Switch to digital (current price)", change_product_admin_subscription_path(@subscription, product_slug: 'digital', maintain_price: true), class: 'button', method: 'put'
 
-          = link_to "Change subscription price", [:change_price, :admin, @subscription], class: 'button', method: 'get'
-          = link_to "Change billing day", [:change_day, :admin, @subscription], class: 'button', method: 'get'
-
-          = link_to (@subscription.is_delinquent? ? "Cancel now" : "Cancel at period end"), [:cancel, :admin, @subscription], class: 'button', method: 'put'
+          = link_to "Change sub price", [:change_price, :admin, @subscription], class: 'button'
+          = link_to "Change billing day", [:change_day, :admin, @subscription], class: 'button'
+          = link_to "Cancel sub", [:cancel, :admin, @subscription], class: 'button', method: 'put'
 
       - elsif !@subscription.is_cancelled?
         = link_to "Edit subscription", [:edit, :admin, @subscription], class: 'button'

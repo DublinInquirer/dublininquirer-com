@@ -5,15 +5,15 @@
       = link_to "Merge #{ @tag.name }", [:merge, :admin, @tag]
 
     %nav
-      = link_to "Cancel without saving", [:admin, @tag], class: 'button -cancel'
-      = link_to "Save", [:merge, :admin, @tag], class: 'button', 'data-action': 'submitForm'
+      = link_to "Cancel", [:admin, @tag], class: 'button -cancel'
+      = link_to "Merge", [:merge, :admin, @tag], class: 'button', data: {action: "form#submitForm"}
 
-= form_tag [:merge, :admin, @tag], class: 'admin-form' do
+= form_tag [:merge, :admin, @tag], class: 'admin-form', data: {"form-target": "form"} do
   %fieldset
     .field
       %label Merge into:
-      .input
-        %select#merge_tag_id{name: 'destination_id'}
+      .input{data: {controller: "tag"}}
+        %input{type: "text", name: 'destination_name', autocomplete: "off", data: {tag: {target: "textInput"}, action: "tag#autocomplete"}}
 
   .actions
-    = submit_tag 'Save', class: 'button'
+    = submit_tag 'Merge', class: 'button'

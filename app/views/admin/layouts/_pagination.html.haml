@@ -1,0 +1,12 @@
+.current #{ collection.current_page }/#{ collection.total_pages }
+.pagination
+  - if !collection.first_page?
+    = link_to '<', request.query_parameters.merge(p: (collection.current_page - 1)), class: "button"
+  - else
+    %a.button.-disabled
+      <
+  - if (collection.total_pages > 0) && !collection.last_page?
+    = link_to '>', request.query_parameters.merge(p: (collection.current_page + 1)), class: "button"
+  - else
+    %a.button.-disabled
+      >

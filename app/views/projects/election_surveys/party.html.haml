@@ -15,7 +15,7 @@
       .col-xs-12.col-md-3.col-md-offset-1.flex
         .area-switcher
           %label switch party
-          %select{'data-behaviour': 'switchView', 'data-path': party_projects_election_survey_path(id: @survey.slug, party_id: '')}
+          %select{data: {election: {target: "switcher", path: party_projects_election_survey_path(id: @survey.slug, party_id: '')}, action: "election#switchView"}}
             %option Switch party
             <option disabled>──────────</option>
             - @parties.each do |party|
@@ -27,18 +27,18 @@
       .question.block
         .header
           - if question.position > 1
-            %a.back{href: "#question-#{ question.position - 1 }", 'data-behaviour': 'scroll'} Back
+            %a.back{href: "#question-#{ question.position - 1 }", data: {action: "election#scrollTo"}} Back
 
           .wrapper.-small{role: 'layout'}
             .h.-h3.-centered
-              %a{href: "#question-#{ question.position }", 'data-behaviour': 'scroll'}
+              %a{href: "#question-#{ question.position }", data: {action: "election#scrollTo"}}
                 .c.-w8
                   #{ question.position }.
                   %br
                   = question.body
 
           - if question.position < 10
-            %a.next{href: "#question-#{ question.position + 1 }", 'data-behaviour': 'scroll'} Next
+            %a.next{href: "#question-#{ question.position + 1 }", data: {action: "election#scrollTo"}} Next
 
         .wrapper.-container{role: 'layout'}
           .wrapper.-large{role: 'layout'}

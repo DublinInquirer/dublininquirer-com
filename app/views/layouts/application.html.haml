@@ -17,7 +17,7 @@
     
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     .wrapper.-container{role: 'layout'}
       = render partial: 'layouts/partials/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
 

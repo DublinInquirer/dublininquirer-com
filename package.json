@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@hotwired/turbo": "^7.0.0-rc.3",
+    "@rails/ujs": "^6.1.4-1",
     "@rails/webpacker": "^6.0.0-rc.5",
     "autoprefixer": "^10.3.4",
     "css-loader": "^6.2.0",
@@ -12,6 +13,9 @@
     "postcss-import": "^14.0.2",
     "postcss-loader": "^6.1.1",
     "postcss-nested": "^5.0.6",
+    "smoothscroll-polyfill": "^0.4.4",
+    "sortablejs": "^1.13.0",
+    "stimulus": "^2.0.0",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"
   },

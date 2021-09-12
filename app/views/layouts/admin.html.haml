@@ -13,32 +13,25 @@
   %body.admin
     .progress-bar.-fixed &nbsp;
     .admin{role: 'layout'}
-      %header.admin-header
-        = link_to 'Dashboard', admin_root_path
-        = link_to 'Users', admin_users_path
-        = link_to 'Comments', admin_comments_path
-        .block.-px1.-my1
-          .block.-bt
-        = link_to 'Issues', admin_issues_path
-        = link_to 'Articles', admin_articles_path
-        = link_to 'Authors', admin_authors_path
-        = link_to 'Tags', admin_tags_path
-        .block.-px1.-my1
-          .block.-bt
-        = link_to 'Subscriptions', admin_subscriptions_path
-        = link_to 'Gifts', admin_gift_subscriptions_path
-        = link_to 'Landing pages', admin_landing_pages_path
-        = link_to 'Contact', admin_contact_messages_path
-        .block.-px1.-my1
-          .block.-bt
-        = link_to 'Elections', admin_election_surveys_path
+      %header.admin-header{date: {controller: "header", header: {target: "header"}}}
+        %section
+          = link_to 'Dashboard', admin_root_path
+          = link_to 'Subscriptions', admin_subscriptions_path
+          = link_to 'Users', admin_users_path
+          = link_to 'Comments', admin_comments_path
+          = link_to 'Gifts', admin_gift_subscriptions_path
+        %section
+          = link_to 'Issues', admin_issues_path
+          = link_to 'Articles', admin_articles_path
+          = link_to 'Authors', admin_authors_path
+          = link_to 'Tags', admin_tags_path
 
-      %main.admin-main
-        - if content_for(:subheader_detail) && content_for(:subheader_list)
-          - raise "Choose detail or list header only"
-        - elsif content_for(:subheader_detail)
-          .admin-subheader.-detail= yield :subheader_detail
-        - elsif content_for(:subheader_list)
-          .admin-subheader.-index= yield :subheader_list
-
-        .admin-view= yield
+      %main.admin-main{data: {controller: "form"}}
+      - if content_for(:subheader_detail) && content_for(:subheader_list)
+        - raise "Choose detail or list header only"
+      - elsif content_for(:subheader_detail)
+        .admin-subheader.-detail= yield :subheader_detail
+      - elsif content_for(:subheader_list)
+        .admin-subheader.-index= yield :subheader_list
+      
+      .admin-view= yield
