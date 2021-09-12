@@ -246,9 +246,7 @@ GEM
       actionmailer (>= 3.2)
       letter_opener (~> 1.0)
       railties (>= 3.2)
-    libv8-node (15.14.0.1)
     libv8-node (15.14.0.1-x86_64-darwin-20)
-    libv8-node (15.14.0.1-x86_64-linux)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -271,7 +269,6 @@ GEM
     mini_histogram (0.3.1)
     mini_magick (4.11.0)
     mini_mime (1.1.1)
-    mini_portile2 (2.6.1)
     mini_racer (0.4.0)
       libv8-node (~> 15.14.0.0)
     minitest (5.14.4)
@@ -284,12 +281,7 @@ GEM
     multipart-post (2.1.1)
     namae (1.1.1)
     nio4r (2.5.8)
-    nokogiri (1.12.4)
-      mini_portile2 (~> 2.6.1)
-      racc (~> 1.4)
     nokogiri (1.12.4-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.4-x86_64-linux)
       racc (~> 1.4)
     oauth (0.5.6)
     oauth2 (1.4.7)
@@ -298,7 +290,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    oj (3.13.5)
+    oj (3.13.6)
     parallel (1.20.1)
     parser (3.0.2.0)
       ast (~> 2.4.1)
@@ -450,9 +442,7 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
-  ruby
   x86_64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   appsignal
