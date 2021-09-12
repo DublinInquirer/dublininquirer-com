@@ -1,0 +1,97 @@
+.box-fields {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  border: 1px solid var(--black);
+}
+.box-fields .field + .field,
+.box-fields .field + .twofer {
+  border-top: 1px solid var(--black);
+}
+.box-fields .twofer {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+}
+.box-fields .twofer .field {
+  border: 0;
+  flex: 1;
+}
+.box-fields .twofer .field + .field {
+  border-left: 1px solid var(--black);
+}
+.box-fields .field {
+  position: relative;
+}
+.box-fields .field .hint,
+.box-fields .field .error {
+  position: absolute;
+  top: calc(var(--baseline) / 2);
+  right: var(--baseline);
+  font-size: var(--t5);
+  color: var(--grey);
+}
+.box-fields .field .error {
+  color: var(--red);
+}
+.box-fields .field label {
+  position: absolute;
+  top: calc(var(--baseline) / 2);
+  left: var(--baseline);
+  font-size: var(--t5);
+}
+.box-fields .field [type="text"],
+.box-fields .field [type="email"],
+.box-fields .field [type="password"],
+.box-fields .field textarea {
+  padding: calc(var(--baseline) * 2.9) var(--baseline)
+    calc(var(--baseline) * 1.25);
+  width: 100%;
+  margin: 0;
+  border: 0;
+  background-color: var(--default);
+  resize: none;
+  font-size: var(--b3);
+}
+.box-fields .field textarea {
+  font-family: var(--serif);
+}
+.box-fields .field .StripeElement {
+  padding: calc(var(--baseline) * 2.9) var(--baseline)
+    calc(var(--baseline) * 1.25);
+}
+.box-fields .field.-select {
+  padding: calc(var(--baseline) * 2.9) var(--baseline) var(--baseline);
+}
+.box-fields .field.-check {
+  padding: var(--baseline);
+}
+.box-fields .field.-check input,
+.box-fields .field.-check label {
+  display: inline;
+}
+.box-fields .field.-check label {
+  position: relative;
+  top: 0;
+  left: 0;
+  font-size: var(--t5);
+}
+.box-fields .submitted-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.form-overlay {
+  padding: var(--gutter) 0;
+  text-align: center;
+}

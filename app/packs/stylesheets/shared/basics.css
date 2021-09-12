@@ -1,0 +1,100 @@
+html {
+  font-size: 8px;
+}
+@media screen and (min-width: 780px) {
+  html {
+    font-size: 9px;
+  }
+}
+@media screen and (min-width: 1080px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width: 1500px) {
+  html {
+    font-size: 11px;
+  }
+}
+
+body {
+  border-top: 0.75rem solid var(--black);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: var(--t4);
+  line-height: calc(var(--baseline) * 2);
+  background-color: var(--default);
+}
+body.-overlay-open {
+  overflow: hidden;
+}
+
+::selection {
+  color: var(--white);
+  background: var(--blue);
+  text-shadow: none;
+}
+::selection a,
+::selection a:link,
+::selection a:visited {
+  text-shadow: none;
+}
+
+a,
+a:link,
+a:visited {
+  color: var(--black);
+  text-decoration: none;
+}
+a:hover,
+a:link:hover,
+a:visited:hover {
+  color: var(--blue);
+  cursor: pointer;
+}
+a.-disabled,
+a:link.-disabled,
+a:visited.-disabled {
+  color: var(--grey);
+}
+a.-disabled:hover,
+a:link.-disabled:hover,
+a:visited.-disabled:hover {
+  cursor: default;
+  color: var(--grey);
+}
+
+code {
+  font-family: var(--mono);
+  background-color: var(--faint);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+big,
+strong,
+b {
+  font-weight: 600;
+}
+
+.sub-omnipresent {
+  padding-top: calc(4.32rem - 0.75rem);
+}
+
+.hidden {
+  display: none;
+}
+@media screen and (min-width: 780px) {
+  .hidden.-md-show {
+    display: block;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .hidden.-lg-show {
+    display: block;
+  }
+}

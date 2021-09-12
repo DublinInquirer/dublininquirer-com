@@ -1,0 +1,135 @@
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Light.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Light-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Book.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Book-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Regular.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Regular-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Medium.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Medium-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Bold.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Bold-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Black.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Zirkon";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-Zirkon-Black-Italic.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Suisse Works";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/SuisseWorks-Book-WebXL.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Suisse Works";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/SuisseWorks-BookItalic-WebXL.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Suisse Works";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/SuisseWorks-Bold-WebXL.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Suisse Works";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/SuisseWorks-BoldItalic-WebXL.woff2")
+    format("woff2");
+  font-style: italic;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "America Mono";
+  src: url("https://d1trxack2ykyus.cloudfront.net/fonts/GT-America-Mono-Regular.woff2")
+    format("woff2");
+  font-style: normal;
+  font-weight: 400;
+}

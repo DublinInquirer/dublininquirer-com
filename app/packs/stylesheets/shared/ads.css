@@ -1,0 +1,51 @@
+.-bg-christmas {
+  position: relative;
+}
+.-bg-christmas .snowing-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.christmas-ad {
+  background-color: var(--christmas-red);
+  width: 100%;
+  color: var(--default);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem;
+  position: relative;
+}
+.christmas-ad .snowing-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.christmas-ad .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.christmas-ad .content .info {
+  text-align: center;
+}
+
+@media screen and (min-width: 1080px) {
+  .christmas-ad {
+    min-height: 60vh;
+  }
+  .christmas-ad .content .info {
+    max-width: 48rem;
+  }
+  .christmas-ad .content .info p {
+    padding: 0 5%;
+  }
+}

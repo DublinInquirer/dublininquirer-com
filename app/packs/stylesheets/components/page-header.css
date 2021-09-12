@@ -1,0 +1,24 @@
+.page-header {
+  padding: 5rem 0 4rem;
+  position: relative;
+  text-align: center;
+}
+.page-header .illustration {
+  display: none;
+}
+@media screen and (min-width: 780px) {
+  .page-header {
+    padding: 7.5rem calc(50% - 30rem) 6.75rem;
+  }
+  .page-header .illustration {
+    display: block;
+    width: 16rem;
+    height: 16rem;
+    margin: 0 auto;
+  }
+  .page-header .illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}

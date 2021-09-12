@@ -1,0 +1,55 @@
+.excerpt,
+a.excerpt,
+a.excerpt:link,
+a.excerpt:visited {
+  transition: color 0.25s ease;
+  width: 100%;
+}
+.excerpt:hover,
+a.excerpt:hover,
+a.excerpt:link:hover,
+a.excerpt:visited:hover {
+  color: var(--black);
+}
+.excerpt:hover .headline,
+a.excerpt:hover .headline,
+a.excerpt:link:hover .headline,
+a.excerpt:visited:hover .headline {
+  color: var(--blue);
+}
+.excerpt.-election,
+a.excerpt.-election,
+a.excerpt:link.-election,
+a.excerpt:visited.-election {
+  background-color: var(--blue);
+  color: var(--default);
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+  padding-right: calc(45% + 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.excerpt.-election figure,
+a.excerpt.-election figure,
+a.excerpt:link.-election figure,
+a.excerpt:visited.-election figure {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  left: 55%;
+  padding: 0;
+  margin: 0;
+}
+.excerpt.-election figure img,
+a.excerpt.-election figure img,
+a.excerpt:link.-election figure img,
+a.excerpt:visited.-election figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

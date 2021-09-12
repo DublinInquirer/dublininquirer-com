@@ -1,0 +1,18 @@
+.admin[role="layout"] {
+  padding-left: var(--header-width);
+
+  header.admin-header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--header-width);
+  }
+
+  main.admin-main {
+    position: relative;
+    min-height: var(100vh - var(--progress-bar-y));
+    display: flex;
+    flex-direction: column;
+  }
+}

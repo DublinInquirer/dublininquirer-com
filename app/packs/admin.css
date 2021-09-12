@@ -1,11 +1,20 @@
-/* 
-Any CSS added to this file or imported from this file, e.g. `@import '../stylesheets/my-css.css'`,
-will be included in the "application" pack. Any CSS imported from application.js or as part of the 
-application.js dependency graph, e.g. `import '../stylesheets/my-css.css'` will also be included 
-in the "application" pack. 
-
-To reference this file, add <%= stylesheet_pack_tag 'application' %> to the appropriate
-layout file, like app/views/layouts/application.html.erb
-*/
-
 @import "stylesheets/shared/reset.css";
+@import "stylesheets/shared/variables.css";
+
+@import "stylesheets/shared/fonts.css";
+@import "stylesheets/admin/variables.css";
+@import "stylesheets/admin/basics.css";
+@import "stylesheets/admin/icon.css";
+
+@import "stylesheets/admin/layout.css";
+@import "stylesheets/admin/header.css";
+@import "stylesheets/admin/view.css";
+
+@import "stylesheets/admin/table.css";
+@import "stylesheets/admin/layouter.css";
+@import "stylesheets/admin/subheader.css";
+@import "stylesheets/admin/form.css";
+@import "stylesheets/admin/data.css";
+@import "stylesheets/admin/notes.css";
+@import "stylesheets/admin/select.css";
+@import "stylesheets/admin/search-form.css";

@@ -1,0 +1,40 @@
+:root {
+  --sans: "Zirkon", sans-serif;
+  --serif: "Suisse Works", serif;
+  --mono: "America Mono";
+
+  --t5: 1.4rem;
+  --t4: 1.7rem;
+  --t3: 2.2rem;
+  --t2: 2.8rem;
+  --t1: 3.6rem;
+
+  --small: 640px;
+  --medium: 780px;
+  --large: 1080px;
+  --contained: 1360px;
+  --max: 1500px;
+  --baseline: 1rem;
+  --gutter: 4rem;
+
+  --default: #f2f0ed;
+  --white: #faf9f7;
+  --faint: #ebe9e6;
+  --grey: #999;
+  --black: #070707;
+
+  --blue: #4000ff;
+  --red: #fc4604;
+  --green: #a7fc04;
+  --yellow: #fcfc04;
+  --blue-dark: #2f00bf;
+
+  --christmas-red: rgba(150, 32, 32);
+}
+
+@media screen and (min-width: 780px) {
+  :root {
+    --t2: 3.9rem;
+    --t1: 6rem;
+  }
+}

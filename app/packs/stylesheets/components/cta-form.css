@@ -1,0 +1,46 @@
+.cta-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.cta-form .cta-form_content {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 0;
+}
+.cta-form .cta-form_content .field {
+  flex-grow: 1;
+  display: flex;
+}
+.cta-form .cta-form_content .field label {
+  display: none;
+}
+.cta-form .cta-form_content .field input {
+  padding: var(--baseline);
+  width: 100%;
+  margin: 0;
+  border: 1px solid var(--black);
+  border-right: 0;
+  background-color: transparent;
+  resize: none;
+  font-size: var(--b3);
+}
+.cta-form .cta-form_content .field input:focus {
+  background-color: var(--white);
+}
+.cta-form .cta-form_content .action {
+  flex-grow: 0;
+  display: flex;
+}
+.cta-form .cta-form_content .action input.button {
+  padding: var(--baseline);
+  border: 1px solid var(--black);
+  background-color: var(--yellow);
+  margin: 0;
+  color: var(--black);
+}
+.cta-form .cta-form_content .action input.button:hover {
+  color: var(--red);
+}

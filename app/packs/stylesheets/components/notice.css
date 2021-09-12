@@ -1,0 +1,42 @@
+.notice.-fixed {
+  position: fixed;
+  left: 2rem;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 999;
+  padding: 0;
+  padding-left: 4rem;
+  opacity: 1;
+  transition: 1s ease bottom, 1s ease opacity;
+}
+.notice.-fixed.-hidden {
+  bottom: -100%;
+  opacity: 0;
+}
+.notice.-fixed nav {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+.notice.-fixed nav a.icon,
+.notice.-fixed nav a:link.icon,
+.notice.-fixed nav a:visited.icon {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+.notice.-fixed nav a.icon:hover,
+.notice.-fixed nav a:link.icon:hover,
+.notice.-fixed nav a:visited.icon:hover {
+  background-color: transparent;
+}
+.notice.-fixed nav a.icon:hover svg rect,
+.notice.-fixed nav a:link.icon:hover svg rect,
+.notice.-fixed nav a:visited.icon:hover svg rect {
+  fill: var(--blue);
+}
+@media screen and (min-width: 780px) {
+  .notice.-fixed {
+    padding-left: 0rem;
+    flex-direction: row;
+  }
+}

@@ -1,0 +1,140 @@
+.article.-formatted {
+  font-size: 15px;
+  line-height: 23px;
+  font-family: var(--serif);
+}
+@media screen and (min-width: 780px) {
+  .article.-formatted {
+    font-size: 20px;
+    line-height: 30px;
+  }
+}
+.article.-formatted figure.artwork {
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+}
+.article.-formatted figure.artwork.-portrait {
+  max-width: 68rem;
+}
+.article.-formatted section.content {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+.article.-formatted section.content > *:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.article.-formatted section.content.-p,
+.article.-formatted section.content.-ul,
+.article.-formatted section.content.-ol,
+.article.-formatted section.content.-blockquote,
+.article.-formatted section.content.-figure,
+.article.-formatted section.content.-iframe,
+.article.-formatted section.content.-video,
+.article.-formatted section.content.-podcast {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.article.-formatted section.content.-h3,
+.article.-formatted section.content.-h4 {
+  margin-top: 4em;
+  padding-left: 2em;
+}
+.article.-formatted section.content.-h3 + .-p,
+.article.-formatted section.content.-h3 + .-ul,
+.article.-formatted section.content.-h3 + .-ol,
+.article.-formatted section.content.-h3 + .-blockquote,
+.article.-formatted section.content.-h4 + .-p,
+.article.-formatted section.content.-h4 + .-ul,
+.article.-formatted section.content.-h4 + .-ol,
+.article.-formatted section.content.-h4 + .-blockquote {
+  margin-top: 1rem;
+  padding-top: 0;
+}
+.article.-formatted a,
+.article.-formatted a:link,
+.article.-formatted a:visited {
+  display: inline;
+  border-bottom: 1px solid var(--black);
+}
+.article.-formatted a:hover,
+.article.-formatted a:link:hover,
+.article.-formatted a:visited:hover {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+.article.-formatted h3,
+.article.-formatted h4 {
+  font-family: var(--sans);
+  font-size: 27px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.0325em;
+}
+.article.-formatted ul,
+.article.-formatted ol {
+  padding-left: 6rem;
+  padding-right: 10%;
+}
+.article.-formatted ul {
+  list-style: square outside;
+}
+.article.-formatted ol {
+  list-style: decimal outside;
+}
+.article.-formatted video,
+.article.-formatted figure,
+.article.-formatted iframe {
+  width: 100%;
+}
+.article.-formatted hr {
+  max-width: 8rem;
+  border-style: solid;
+  border-color: var(--black);
+  border-width: 0.5px 0;
+  margin: 8rem auto !important;
+  padding: 0;
+}
+.article.-formatted .section-separator {
+  text-align: center;
+  color: var(--blue);
+}
+.article.-formatted.-stacked.-figure,
+.article.-formatted.-stacked.-iframe,
+.article.-formatted.-stacked.-video {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.article.-formatted.-constrained > *:first-child {
+  margin-top: 0;
+  padding-top: 0;
+}
+.article.-formatted.-constrained p,
+.article.-formatted.-constrained ul,
+.article.-formatted.-constrained ol,
+.article.-formatted.-constrained blockquote {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.article.-formatted.-constrained h3,
+.article.-formatted.-constrained h4 {
+  margin-top: 4em;
+  padding-left: 2em;
+}
+.article.-formatted.-constrained h3 + p,
+.article.-formatted.-constrained h3 + ul,
+.article.-formatted.-constrained h3 + ol,
+.article.-formatted.-constrained h3 + blockquote,
+.article.-formatted.-constrained h4 + p,
+.article.-formatted.-constrained h4 + ul,
+.article.-formatted.-constrained h4 + ol,
+.article.-formatted.-constrained h4 + blockquote {
+  margin-top: 1rem;
+  padding-top: 0;
+}
+.article.-formatted.-constrained h3.-plain,
+.article.-formatted.-constrained h4.-plain {
+  margin-top: 0;
+  padding-left: 0;
+}

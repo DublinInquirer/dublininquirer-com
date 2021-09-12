@@ -1,0 +1,22 @@
+@media screen and (min-width: 780px) {
+  .sidebar {
+    font-size: var(--t5);
+    line-height: 1.25;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: flex-start;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .sidebar > .content {
+    width: 100%;
+  }
+}
+@media screen and (min-height: 700px) {
+  .sidebar > .content {
+    position: sticky;
+    top: 7.25rem;
+  }
+}

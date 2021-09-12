@@ -1,0 +1,46 @@
+.wrapper[role="layout"].-container {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 100vw;
+}
+@media screen and (min-width: 1080px) {
+  .wrapper[role="layout"].-container {
+    margin-left: 3vw;
+    margin-right: 3vw;
+  }
+}
+@media screen and (min-width: 780px) {
+  .wrapper[role="layout"].-medium {
+    max-width: 80rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 1080px) {
+  .wrapper[role="layout"].-large {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 64rem) {
+  .wrapper[role="layout"].-small {
+    max-width: 68rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 36rem) {
+  .wrapper[role="layout"].-tiny {
+    max-width: 42rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (min-width: 1360px) {
+  .wrapper[role="layout"].-contained {
+    max-width: var(--contained);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

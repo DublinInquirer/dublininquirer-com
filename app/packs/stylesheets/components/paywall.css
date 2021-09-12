@@ -1,0 +1,52 @@
+[role="overlay"] {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  transition: 0.25s all ease;
+  pointer-events: none;
+}
+[role="overlay"].-limited {
+  transition: all 1s ease;
+}
+[role="overlay"].-displayed {
+  display: block;
+}
+[role="overlay"].-open {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.paywall-content {
+  transition: top 1s ease;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 100vh;
+  height: 60vh;
+  overflow: hidden;
+  background-color: var(--default);
+  border-top: 2px solid var(--black);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+.paywall-content section {
+  padding: 2rem;
+}
+.paywall-content section:first-child {
+  border-bottom: 1px solid var(--faint);
+}
+.paywall-content section:last-child {
+  border-top: 1px solid var(--faint);
+}
+.paywall-content section.-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}

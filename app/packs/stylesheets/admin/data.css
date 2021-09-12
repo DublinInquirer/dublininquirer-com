@@ -1,0 +1,34 @@
+.admin-data {
+  margin-bottom: 2rem;
+}
+
+.admin-data img {
+  width: 12rem;
+  height: auto;
+}
+
+.admin-data dd + dt {
+  margin-top: 1rem;
+}
+
+.admin-data dt {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.admin-data dd {
+  background: var(--offset);
+  border: 1px solid var(--offset);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  width: 100%;
+}
+
+.admin-data a,
+.admin-data a:link,
+.admin-data a:visited {
+  border-bottom: 1px solid var(--blue);
+}

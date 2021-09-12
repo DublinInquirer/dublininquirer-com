@@ -1,0 +1,32 @@
+.primary-footer {
+  font-size: var(--b3);
+  line-height: 1.5;
+}
+.primary-footer .logotype {
+  width: 90%;
+  max-width: 20rem;
+  height: auto;
+  margin-bottom: 1rem;
+}
+.primary-footer .logotype svg {
+  fill: var(--black);
+}
+.primary-footer big {
+  display: block;
+  font-weight: 400;
+  margin-top: 1rem;
+}
+.primary-footer big:first-child {
+  margin: 0;
+}
+.primary-footer p {
+  margin-top: 1rem;
+}
+.primary-footer p:first-child {
+  margin: 0;
+}
+.primary-footer a,
+.primary-footer a:link,
+.primary-footer a:visited {
+  color: var(--black);
+}

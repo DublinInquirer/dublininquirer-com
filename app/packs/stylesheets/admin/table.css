@@ -1,0 +1,52 @@
+.admin-table {
+  width: 100%;
+  font-size: 0.875rem;
+}
+
+.admin-table tr:nth-child(odd) {
+}
+
+.admin-table tr {
+  border-bottom: 1px solid var(--div);
+}
+
+.admin-table td,
+.admin-table th {
+  padding: 0.325rem 0;
+}
+
+.admin-table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 1rem;
+
+  &:last-child {
+    padding-right: 0;
+    text-align: right;
+  }
+}
+
+.admin-table tr.-deleted td:first-of-type {
+  text-decoration: line-through;
+}
+
+.admin-table tr.placeholder {
+  height: 1px;
+  overflow: hidden;
+  background-color: var(--accent);
+  padding: 0;
+}
+
+.admin-table tr.ui-sortable-helper {
+  background-color: var(--bg);
+  border: 1px solid var(--ink);
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.075);
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.admin-table.-issue tbody tr:first-child td:first-child {
+  font-weight: 600;
+}

@@ -1,0 +1,194 @@
+.button,
+a.button,
+a.button:link,
+a.button:visited,
+input.button {
+  font-family: var(--sans);
+  -webkit-appearance: none;
+  margin-left: 0;
+  margin-right: 0;
+  border: 0;
+}
+.button:hover,
+a.button:hover,
+a.button:link:hover,
+a.button:visited:hover,
+input.button:hover {
+  cursor: pointer;
+}
+.button.-standard,
+a.button.-standard,
+a.button:link.-standard,
+a.button:visited.-standard,
+input.button.-standard {
+  background: var(--default);
+  color: var(--black);
+  padding: 0.675rem 1.25rem;
+  border: 1px solid var(--black);
+  transition: 0.125s ease all;
+}
+.button.-standard:hover,
+a.button.-standard:hover,
+a.button:link.-standard:hover,
+a.button:visited.-standard:hover,
+input.button.-standard:hover {
+  background: var(--yellow);
+  color: var(--black);
+}
+.button.-standard.-big,
+a.button.-standard.-big,
+a.button:link.-standard.-big,
+a.button:visited.-standard.-big,
+input.button.-standard.-big {
+  font-size: var(--t3);
+  line-height: 1.5;
+  padding: 1.75rem 3.25rem;
+  font-weight: 800;
+}
+.button.-standard:disabled,
+.button.-standard[disabled],
+a.button.-standard:disabled,
+a.button.-standard[disabled],
+a.button:link.-standard:disabled,
+a.button:link.-standard[disabled],
+a.button:visited.-standard:disabled,
+a.button:visited.-standard[disabled],
+input.button.-standard:disabled,
+input.button.-standard[disabled] {
+  background-color: var(--faint);
+  color: var(--grey);
+  border-color: var(--grey);
+}
+.button.-standard:disabled:hover,
+.button.-standard[disabled]:hover,
+a.button.-standard:disabled:hover,
+a.button.-standard[disabled]:hover,
+a.button:link.-standard:disabled:hover,
+a.button:link.-standard[disabled]:hover,
+a.button:visited.-standard:disabled:hover,
+a.button:visited.-standard[disabled]:hover,
+input.button.-standard:disabled:hover,
+input.button.-standard[disabled]:hover {
+  cursor: default;
+  background-color: var(--faint);
+  color: var(--grey);
+}
+.button.-red,
+a.button.-red,
+a.button:link.-red,
+a.button:visited.-red,
+input.button.-red {
+  background: var(--red);
+  color: var(--white);
+  padding: 0.675rem 1.25rem;
+  transition: 0.25s ease all;
+}
+.button.-red:hover,
+a.button.-red:hover,
+a.button:link.-red:hover,
+a.button:visited.-red:hover,
+input.button.-red:hover {
+  color: var(--yellow);
+}
+.button.-red.-big,
+a.button.-red.-big,
+a.button:link.-red.-big,
+a.button:visited.-red.-big,
+input.button.-red.-big {
+  padding: 1.5rem 3rem;
+  font-weight: 600;
+  background-color: var(--red);
+  color: var(--white);
+}
+.button.-yellow,
+a.button.-yellow,
+a.button:link.-yellow,
+a.button:visited.-yellow,
+input.button.-yellow {
+  background: var(--yellow);
+  color: var(--black);
+  padding: 0.675rem 1.25rem;
+  border: 1px solid var(--black);
+  transition: 0.25s ease all;
+}
+.button.-yellow:hover,
+a.button.-yellow:hover,
+a.button:link.-yellow:hover,
+a.button:visited.-yellow:hover,
+input.button.-yellow:hover {
+  color: var(--red);
+}
+.button.-yellow.-big,
+a.button.-yellow.-big,
+a.button:link.-yellow.-big,
+a.button:visited.-yellow.-big,
+input.button.-yellow.-big {
+  padding: 1.5rem 3rem;
+  font-weight: 600;
+}
+.button.-white,
+a.button.-white,
+a.button:link.-white,
+a.button:visited.-white,
+input.button.-white {
+  background: var(--default);
+  color: var(--black);
+  padding: 0.575rem 1rem;
+  border: 1px solid var(--black);
+  transition: 0.125s ease all;
+  font-weight: 600;
+}
+.button.-white:hover,
+a.button.-white:hover,
+a.button:link.-white:hover,
+a.button:visited.-white:hover,
+input.button.-white:hover {
+  background: var(--white);
+  color: var(--blue);
+}
+.button.-christmas,
+a.button.-christmas,
+a.button:link.-christmas,
+a.button:visited.-christmas,
+input.button.-christmas {
+  position: relative;
+  background: var(--white);
+  padding: 0.575rem 1rem;
+  color: var(--black);
+  border-radius: 0.175rem;
+  font-weight: 600;
+  box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.125);
+  transition: all ease 0.25s;
+}
+.button.-christmas:hover,
+a.button.-christmas:hover,
+a.button:link.-christmas:hover,
+a.button:visited.-christmas:hover,
+input.button.-christmas:hover {
+  transform: translateY(0.125rem);
+}
+.button.-christmas.-big,
+a.button.-christmas.-big,
+a.button:link.-christmas.-big,
+a.button:visited.-christmas.-big,
+input.button.-christmas.-big {
+  display: block;
+  padding: 1.5rem 3rem;
+}
+
+.text-button {
+  -webkit-appearance: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 400;
+  color: var(--black);
+  border: 0;
+  background-color: transparent;
+}
+.text-button:hover {
+  color: var(--blue);
+  border-color: transparent;
+  cursor: pointer;
+}

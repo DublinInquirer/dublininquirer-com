@@ -1,0 +1,122 @@
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="number"],
+button,
+input[type="submit"] {
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: calc(25 / 18);
+  text-transform: none;
+}
+
+.admin-form {
+}
+.admin-form .errors {
+}
+.admin-form .errors li {
+  color: var(--red);
+  font-weight: 400;
+}
+.admin-form .errors li:before {
+  content: "– ";
+}
+.admin-form .field {
+  margin-bottom: 1rem;
+
+  &.-tick {
+    input {
+      padding: 0;
+      width: auto;
+      margin-right: 0.25rem;
+    }
+    label:last-of-type {
+      font-weight: 400;
+      text-transform: none;
+      margin: 0;
+    }
+  }
+}
+.admin-form .field .hint {
+  text-align: right;
+  font-size: 0.75rem;
+}
+.admin-form .field label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.admin-form .field input,
+.admin-form .field textarea {
+  background: var(--bg);
+  border-radius: 0.25rem;
+  border: 1px solid var(--ink);
+  padding: 0.25rem;
+  width: 100%;
+}
+.admin-form .field select {
+  appearance: none;
+  width: 100%;
+  background-color: var(--bg);
+  border: 1px solid var(--ink);
+  padding: 0.25rem;
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: calc(25 / 18);
+}
+.admin-form .field textarea.article {
+  height: 80vh;
+  font-family: var(--serif);
+}
+.admin-form .field img {
+  max-width: 30vw;
+  width: auto;
+  max-height: 40vh;
+  height: auto;
+}
+.admin-form .actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  .button {
+    display: none;
+  }
+}
+
+.input.-image-picker {
+  overflow: hidden;
+  margin: 0 -1rem;
+}
+.input.-image-picker .option {
+  float: left;
+  width: 20%;
+  padding: 1rem;
+}
+
+.input {
+  position: relative;
+}
+
+.input .autocomplete__popup {
+  display: flex;
+  flex-direction: flex-start;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+
+  a {
+    margin-right: 0.5rem;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    &:before {
+      content: "#";
+    }
+    &:hover {
+      color: var(--brand);
+      cursor: pointer;
+    }
+  }
+}
