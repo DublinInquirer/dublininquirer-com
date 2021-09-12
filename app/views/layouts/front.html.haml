@@ -32,4 +32,5 @@
 
     = render partial: 'layouts/partials/search'
     = render partial: 'layouts/partials/expansive-nav'
+    = auto_discovery_link_tag(:rss, feed_url(format: :xml))
     = render partial: 'layouts/snippets/analytics'
