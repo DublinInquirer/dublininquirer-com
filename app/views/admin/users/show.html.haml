@@ -74,14 +74,13 @@
 
     .admin-notes
       %h3 Notes
-      - @user.user_notes.reverse_chronologically.reject { |u| !u.persisted? }.each do |user_note|
-        .admin-notes__note
-          :markdown
-            #{ user_note.body } _<span class="c -grey"> — #{ user_note.created_at.strftime('%d/%m/%Y') }</span>_
-
       = form_for [:admin, @user, @user_note], html: { class: 'admin-notes__form' } do |f|
         .field
           = f.label :body, 'Add a note:'
           = f.text_area :body
         .actions
           = f.submit 'Add note', class: 'button'
+      - @user.user_notes.reverse_chronologically.reject { |u| !u.persisted? }.each do |user_note|
+        .admin-notes__note
+          :markdown
+            #{ user_note.body } _<span class="c -grey"> — #{ user_note.created_at.strftime('%d/%m/%Y') }</span>_
