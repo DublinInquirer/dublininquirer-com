@@ -362,6 +362,10 @@
   flex-direction: row;
   justify-content: flex-start;
 }
+.block.-artworked {
+  position: relative;
+  padding-top: 12.5rem;
+}
 
 .flex {
   display: flex;

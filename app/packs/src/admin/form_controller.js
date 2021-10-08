@@ -6,7 +6,7 @@ export default class extends Controller {
   connect() {}
 
   submitForm(event) {
-    console.log(event);
     event.preventDefault();
+    this.formTarget.submit();
   }
 }

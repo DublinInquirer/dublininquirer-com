@@ -7,6 +7,13 @@
     flex-direction: column;
     justify-content: stretch;
     align-items: flex-start;
+
+    .artwork.-sidebar {
+      margin: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
   }
 }
 @media screen and (min-width: 1080px) {

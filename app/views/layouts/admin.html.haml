@@ -27,11 +27,11 @@
           = link_to 'Tags', admin_tags_path
 
       %main.admin-main{data: {controller: "form"}}
-      - if content_for(:subheader_detail) && content_for(:subheader_list)
-        - raise "Choose detail or list header only"
-      - elsif content_for(:subheader_detail)
-        .admin-subheader.-detail= yield :subheader_detail
-      - elsif content_for(:subheader_list)
-        .admin-subheader.-index= yield :subheader_list
-      
-      .admin-view= yield
+        - if content_for(:subheader_detail) && content_for(:subheader_list)
+          - raise "Choose detail or list header only"
+        - elsif content_for(:subheader_detail)
+          .admin-subheader.-detail= yield :subheader_detail
+        - elsif content_for(:subheader_list)
+          .admin-subheader.-index= yield :subheader_list
+        
+        .admin-view= yield
