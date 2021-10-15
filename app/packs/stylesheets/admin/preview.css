@@ -1,0 +1,88 @@
+.admin-preview {
+  padding-right: 15%;
+  padding-left: 5%;
+}
+.admin-preview header {
+  padding: 2rem 0;
+}
+.admin-preview header .headline {
+  /* font-size: var(--t2); */
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  font-weight: 400;
+  text-align: left;
+  margin: calc(var(--gutter) / 2) 0;
+  max-width: 24em;
+}
+.admin-preview article {
+  font-family: var(--serif);
+  /* font-size: var(--t3); */
+  line-height: 1.5;
+}
+.admin-preview article a,
+.admin-preview article a:link,
+.admin-preview article a:visited {
+  border-bottom: 1px solid var(--blue);
+}
+.admin-preview article h3,
+.admin-preview article h4,
+.admin-preview article h5 {
+  /* font-size: var(--t2); */
+  font-weight: 800;
+  font-family: var(--sans);
+  margin-left: var(--gutter);
+  margin-top: var(--gutter);
+  margin-bottom: 1rem;
+}
+.admin-preview article figure.artwork {
+  display: block;
+  margin: 0;
+  padding-top: 60%;
+  width: 100%;
+  position: relative;
+  background: var(--faint);
+}
+.admin-preview article figure.artwork img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.admin-preview article figure.artwork figcaption {
+  position: absolute;
+  right: 0.5rem;
+  bottom: 0.5rem;
+  display: block;
+  z-index: 999;
+  color: var(--default);
+}
+.admin-preview article p,
+.admin-preview article ul,
+.admin-preview article ol,
+.admin-preview article blockquote,
+.admin-preview article h3,
+.admin-preview article h4 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+.admin-preview article ul {
+  list-style: disc inside;
+}
+.admin-preview article ol {
+  list-style: decimal inside;
+}
+.admin-preview article .section-separator {
+  text-align: center;
+  color: var(--black);
+}
+.admin-preview article .artwork {
+  font-family: var(--sans);
+  font-size: var(--t5);
+  color: var(--grey);
+}
+.admin-preview article .artwork figcaption {
+  text-align: right;
+  margin-top: var(--baseline);
+}

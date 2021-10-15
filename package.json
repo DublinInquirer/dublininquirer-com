@@ -5,6 +5,7 @@
     "@hotwired/turbo": "^7.0.0-rc.3",
     "@rails/ujs": "^6.1.4-1",
     "@rails/webpacker": "^6.0.0-rc.5",
+    "@yaireo/tagify": "^4.8.1",
     "autoprefixer": "^10.3.4",
     "css-loader": "^6.2.0",
     "css-minimizer-webpack-plugin": "^3.0.2",

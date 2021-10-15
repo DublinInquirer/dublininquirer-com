@@ -46,6 +46,7 @@ class Admin::ArticlesController < Admin::ApplicationController
 
   def update
     @article = Article.find(params[:id])
+    raise meta_params.inspect
     if @article.update(meta_params)
       redirect_to([:admin, @article])
     else

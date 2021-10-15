@@ -171,7 +171,7 @@ class Article < ApplicationRecord
   end
 
   def self.category_options
-    CATEGORIES
+    CATEGORIES.map { |c| [c.gsub("-", " "), c] }
   end
 
   private

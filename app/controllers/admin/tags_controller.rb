@@ -50,14 +50,19 @@ class Admin::TagsController < Admin::ApplicationController
     end
   end
 
+  # refactor
   def merge
     @tag = Tag.find_by(slug: params[:id])
     if (request.method.downcase.to_sym != :post) # if it's a get request, render the form
       render :merge
     else
       @destination_tag = Tag.find_by(name: params[:destination_name])
-      @tag.merge_into!(@destination_tag)
-      redirect_to [:admin, @destination_tag]
+      if @destination_tag
+        @tag.merge_into!(@destination_tag)
+        redirect_to [:admin, @destination_tag]
+      else
+        render :merge
+      end
     end
   end
 
