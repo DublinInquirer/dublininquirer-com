@@ -7,8 +7,8 @@ export default class extends Controller {
   connect() {
     var tagify = new Tagify(this.tagInputTarget, {
       whitelist: ["music", "society", "culture"],
-      editTags: false,
-      enforceWhitelist: true,
+      editTags: true,
+      enforceWhitelist: false,
     });
   }
 }

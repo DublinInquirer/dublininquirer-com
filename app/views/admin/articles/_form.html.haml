@@ -19,16 +19,17 @@
       = f.label :template
       .input= f.select :template, Article.template_options
     .field
-      = f.label :tag_ids, 'Tags'
+      = f.label :tags_str, 'Tags'
       .input{data: {controller: "multi-tag"}}
-        = f.text_field :tags, value: article.tags.map(&:name).join(','), data: {"multi-tag-target": "tagInput"}
+        = f.text_field :tags_str, value: article.tags.map(&:name).join(','), data: {"multi-tag-target": "tagInput"}
     .field
       = f.label :issue_id, 'Issue'
       .input= f.select :issue_id, Issue.order('issue_date desc').map { |i| [i.issue_date, i.id] }, include_blank: true
     - if article.persisted?
       .field
-        = f.label :author_ids, 'Author'
-        .input= f.select :author_ids, Author.order('full_name asc').map { |a| [a.full_name, a.id] }, {include_blank: true}, {multiple: true, 'data-behaviour': 'token'}
+        = f.label :authors_str, 'Author'
+        .input{data: {controller: "author", author: {"authors": Author.order('full_name asc').map { |a| [a.full_name, a.id] }}}}
+          = f.text_field :authors_str, value: article.authors.map(&:full_name).join(','), data: {"author-target": "authorInput"}
     .field
       = f.label :featured_artwork_id, 'Featured image'
       .input.-image-picker
