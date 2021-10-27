@@ -13,8 +13,8 @@ class PlanTest < ActiveSupport::TestCase
   end
 
   test "friends and patrons" do
-    product = build(:product, base_price: 5_00)
-    rplan = build(:plan, amount: 5_00, product: product)
+    product = build(:product, base_price: 6_00)
+    rplan = build(:plan, amount: 6_00, product: product)
     fplan = build(:plan, amount: 20_00, product: product)
     pplan = build(:plan, amount: 50_00, product: product)
 
