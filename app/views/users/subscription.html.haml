@@ -12,7 +12,7 @@
 
     %nav.block.-mt2.-mb1
       - if @subscription.requires_address?
-        = link_to raw("Subscribe &mdash; €5/month"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
+        = link_to raw("Subscribe &mdash; €6/month"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
       - else
         = link_to raw("<span>Keep Digital-only</span>"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
 
@@ -28,7 +28,7 @@
       - if @subscription.requires_address?
         = link_to raw("<span>Keep Digital + Print</span>"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
       - else
-        = link_to raw("Subscribe &mdash; €8/month"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
+        = link_to raw("Subscribe &mdash; €9/month"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered

@@ -2,11 +2,11 @@ class StripeSetterUp
   def self.setup_products # move to a rake task
     create_product(
       name: 'Digital subscription',
-      base_price: 5_00)
+      base_price: 6_00)
 
     create_product(
       name: 'Digital + Print subscription',
-      base_price: 8_00)
+      base_price: 9_00)
   end
 
   def self.create_product(params)
