@@ -3,9 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.2'
 
-gem 'rails', '~> 6.1.x'
+gem 'rails', '~> 6.1.4'
 gem 'pg'
-gem "puma", ">= 4.3.8"
+gem "puma"
 gem 'haml'
 gem 'http'
 gem 'mini_racer', platforms: :ruby
