@@ -21,10 +21,10 @@
           .block
             - @recent_subs.each do |subscription|
               .p.-t5
-                .inline.c.-w6= link_to "· #{ subscription.user.email_address }:", [:admin, subscription]
-                #{ subscription.plan.human_name }
+                .inline.c.-w6= link_to "· #{ subscription.user&.email_address }:", [:admin, subscription]
+                #{ subscription.plan&.human_name }
                 - if subscription.is_stripe?
-                  (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
+                  (#{number_to_currency((subscription.plan&.amount/100.0), unit: '€')})
 
     .col-xs-12.col-md-4
       - cache ['admin', 'dashboard', @in_danger] do
@@ -35,7 +35,7 @@
           .block
             - @in_danger.each do |subscription|
               .p.-t5
-                .inline.c.-w6= link_to "· #{ subscription.user.email_address }:", [:admin, subscription]
-                #{ subscription.plan.is_print? ? 'Print' : 'Digital' }
+                .inline.c.-w6= link_to "· #{ subscription.user&.email_address }:", [:admin, subscription]
+                #{ subscription.plan&.is_print? ? 'Print' : 'Digital' }
                 - if subscription.is_stripe?
-                  (#{number_to_currency((subscription.plan.amount/100.0), unit: '€')})
+                  (#{number_to_currency((subscription.plan&.amount/100.0), unit: '€')})
