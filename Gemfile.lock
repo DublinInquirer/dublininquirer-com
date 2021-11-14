@@ -220,7 +220,7 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n_data (0.8.0)
     ipaddress (0.8.3)
-    jbuilder (2.11.2)
+    jbuilder (2.11.3)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
     jquery-rails (4.4.0)
