@@ -52,7 +52,7 @@ class GiftSubscription < ApplicationRecord
 
   def price # plan.amount * duration = full price, except at christmas
     date = self.persisted? ? self.created_at : Date.current
-    if (date.month == 12) or (date.month == 11) && (date.day > 15)
+    if (Date.current.month == 12) or (Date.current.month == 11)
       (self.plan.amount * (duration * (10.0/12)).round)
     else
       (self.plan.amount * self.duration)
