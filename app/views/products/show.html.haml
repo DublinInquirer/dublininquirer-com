@@ -16,7 +16,8 @@
         :markdown
           Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
 
-  #subscribe-form{data: {'action': subscriptions_path, user: @user_data.to_json, plan: {address_required: @plan.requires_address?, stripe_id: @plan.stripe_id}.to_json}}
+  .subscribe-form
+    [TODO: subscribe form]
 
   .block.-my4.-pb4
     .p.-t4.-sf.-centered
@@ -30,6 +31,3 @@
           %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed monthly
           %li Subscriptions renew automatically
           %li Cancel any time
-
-- content_for :head_tags do
-  = javascript_pack_tag 'subscribe'

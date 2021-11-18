@@ -28,7 +28,7 @@
     - if article.persisted?
       .field
         = f.label :authors_str, 'Author'
-        .input{data: {controller: "author", author: {"authors": Author.order('full_name asc').map { |a| [a.full_name, a.id] }}}}
+        .input{data: {controller: "author", "author-authors-value": Author.order('full_name asc').map { |a| [a.full_name, a.id] }}}
           = f.text_field :authors_str, value: article.authors.map(&:full_name).join(','), data: {"author-target": "authorInput"}
     .field
       = f.label :featured_artwork_id, 'Featured image'

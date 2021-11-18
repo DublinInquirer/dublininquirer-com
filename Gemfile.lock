@@ -484,7 +484,7 @@ DEPENDENCIES
   pretender
   puma
   rack-mini-profiler
-  rails (~> 6.1.4)
+  rails (~> 6.1.4.1)
   redis (~> 4.0)
   reverse_markdown
   rinku

@@ -6,9 +6,10 @@ export default class extends Controller {
   static targets = ["authorInput"];
 
   connect() {
-    console.log(this.authorsValue);
+    // TODO figure out how to persist IDs
+    const authorNames = this.authorsValue.map(authorItem => authorItem[0]);
     var tagify = new Tagify(this.authorInputTarget, {
-      whitelist: ["music", "society", "culture"],
+      whitelist: authorNames,
       editTags: false,
       enforceWhitelist: true,
     });
