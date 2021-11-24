@@ -31,6 +31,7 @@ gem 'webpacker-svelte', "~> 0.0.0"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
+gem 'gibbon' # mailchimp integration
 
 gem 'textacular', "~> 5.0"
 gem 'sorcery'

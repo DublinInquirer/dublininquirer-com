@@ -13,3 +13,7 @@ end
 every 30.minutes do
   rake "users:cancel_missing_subs"
 end
+
+every 1.hour do
+  rake "mailchimp:upsert_subscribers"
+end
