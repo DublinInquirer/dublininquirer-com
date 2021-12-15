@@ -12,6 +12,7 @@ gem 'http'
 gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
+gem 'dotenv-rails'
 
 gem 'redis', '~> 4.0'
 gem 'sucker_punch', '~> 2.0'
