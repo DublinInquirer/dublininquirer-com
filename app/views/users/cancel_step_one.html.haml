@@ -1,0 +1,17 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Cancel your subscription
+
+  %div
+    .block.-form.-b.-p2.-bg-faint
+      .p.-t4.-centered.-sf
+        .p
+          :markdown
+            Dublin Inquirer is funded by subscribers like you, and we truly appreciate your support. It&rsquo;s subscribers who make what we do possible. While we understand if you need to cancel, we do hope you&rsquo;ll consider continuing to support our work, or resubscribing in the future.
+      %nav.block.-mt4.buttons.-options
+        = link_to "😊 Nevermind, continue my subscription", :root, class: "button -standard"
+        = link_to "😭 Cancel my subscription", [:confirm_cancellation, :user], class: "button -standard"
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      &nbsp;

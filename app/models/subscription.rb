@@ -217,6 +217,11 @@ class Subscription < ApplicationRecord
     (self.is_stripe? && self.product.is_active? && self.is_base_price?)
   end
 
+  # users can only cancel if they're paying monthly, not recipients of a gift
+  def cancellable?
+    self.is_stripe?
+  end
+
   def change_product_to!(product_sym, maintain_price=false) # affects stripe
     new_product = Product.find_by_slug(product_sym.to_sym)
     old_plan = self.plan

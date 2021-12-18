@@ -1,0 +1,17 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Cancel your subscription
+
+  %div
+    .block.-form.-b.-p2.-bg-faint
+      .p.-t4.-centered.-sf
+        .p
+          :markdown
+            We know that people are in different situations, and we don’t want to price anyone out of reading us. Would you be interested in continuing your subscription at a lower price point? (We're only able to offer this price for digital-only subscriptions.)
+      %nav.block.-mt4.buttons.-options
+        = link_to raw("Yes, I&rsquo;ll pay €3/month for a digital subscription"), [:accept_lower_offer, :user], class: "button -standard", method: :put
+        = link_to "No, just cancel!", [:confirm_cancellation, :user], class: "button -standard", method: :delete
+
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      &nbsp;
