@@ -85,4 +85,6 @@
           - if current_user.subscription.requires_address?
             %li= link_to "Change subscription address", [:address, :user]
           %li= link_to "Update payment method", [:payment, :user]
+        - if current_user.subscription.cancellable?
+          %li= link_to "Cancel subscription", [:cancel, :user]
         %li= link_to "Log out", :user_session, method: :delete

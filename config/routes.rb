@@ -108,6 +108,8 @@ Rails.application.routes.draw do
     end
   end
 
+  # user controller panel
+
   resource :user, only: [:show, :edit, :update] do
     member do
       get :subscription
@@ -115,6 +117,14 @@ Rails.application.routes.draw do
 
       get :address
       put :address
+
+      get :cancel, to: "users#cancel_step_one", as: :cancel
+      get :cancelled
+      get :confirm_cancellation, to: "users#cancel_step_two", as: :confirm_cancellation
+      delete :confirm_cancellation, to: "users#cancel_step_two"
+      # if they start cancelling but don't finish
+      put :accept_lower_offer
+      get :accepted_lower_offer
 
       get :payment
       post :payment_submit

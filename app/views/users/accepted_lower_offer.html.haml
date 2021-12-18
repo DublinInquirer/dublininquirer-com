@@ -1,0 +1,14 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2 Thanks for staying
+
+  %div
+    .block.-form.-b.-p2.-bg-faint
+      .p.-t4.-centered.-sf
+        .p
+          :markdown
+            We greatly appreciate you sticking around at this reduced rate. You&rsquo;ll be charged #{number_to_currency((@subscription.plan.amount/100.0), unit: '€')}/#{@subscription.plan.interval} starting at the end of the current billing period (#{ @subscription.current_period_ends_at.strftime("%m/%d/%Y") }). If you have further questions or concerns, please do not hesitate to email us at #{ mail_to "info@dublininquirer.com" }
+  .block.-my4.-py4
+    .p.-t4.-sf.-centered
+      %ul
+        %li= link_to raw("&larr; Return to the home page"), :root

@@ -85,6 +85,42 @@ class UsersController < ApplicationController
     end
   end
 
+  def cancel_step_one
+    @user = current_user
+    @subscription = @user.subscription
+  end
+
+  def cancel_step_two
+    @user = current_user
+    @subscription = @user.subscription
+
+    case request.request_method.downcase.to_sym
+    when :get
+      render :cancel_step_two
+    when :delete
+      @subscription.cancel_subscription!
+      redirect_to [:cancelled, :user]
+    end
+  end
+
+  def cancelled
+    @user = current_user
+    @subscription = @user.subscription
+  end
+
+  def accept_lower_offer
+    @user = current_user
+    @subscription = @user.subscription
+    @subscription.change_product_to!(:digital) if @subscription.print?
+    @subscription.change_price_and_interval_to!(300,"month")
+    redirect_to [:accepted_lower_offer, :user]
+  end
+
+  def accepted_lower_offer
+    @user = current_user
+    @subscription = @user.subscription
+  end
+
   def payment
     @user = current_user
   end
