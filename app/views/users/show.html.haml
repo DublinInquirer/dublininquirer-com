@@ -82,7 +82,7 @@
         - if current_user.subscription && current_user.subscriber?
           - if current_user.subscription.changeable?
             %li= link_to "Change subscription plan", [:subscription, :user]
-          - if current_user.subscription.requires_address?
+          - if current_user.subscription.print?
             %li= link_to "Change subscription address", [:address, :user]
           %li= link_to "Update payment method", [:payment, :user]
         - if current_user.subscription.cancellable?

@@ -27,9 +27,8 @@
           %li Cancel any time
       - else
         %ul.list.-nav
-          %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed monthly
           %li Subscriptions renew automatically
-          %li Cancel any time
+          %li Cancel any time with a click
 
 - content_for :head_tags do
   = javascript_pack_tag 'subscribe'

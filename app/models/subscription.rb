@@ -214,7 +214,7 @@ class Subscription < ApplicationRecord
 
   # users can only change their sub if they're paying the base price on the active products
   def changeable?
-    (self.is_stripe? && self.product.is_active? && self.is_base_price?)
+    (self.is_stripe? && self.product.is_active?)
   end
 
   # users can only cancel if they're paying monthly, not recipients of a gift
@@ -268,6 +268,12 @@ class Subscription < ApplicationRecord
     }]
 
     str_sub.save && update_from_stripe_object!(str_sub)
+  end
+
+  def is_allowed_to_pay_amount?(amount)
+    return true if amount >= self.plan.amount # yes if more than you're currently paying
+    return true if amount >= self.product.base_price # yes if more than the base price
+    false
   end
 
   def change_price_to!(amount) # affects stripe

@@ -108,12 +108,15 @@ Rails.application.routes.draw do
     end
   end
 
-  # user controller panel
+  # user control panel
 
   resource :user, only: [:show, :edit, :update] do
     member do
       get :subscription
       put :subscription
+
+      get :price
+      put :price
 
       get :address
       put :address

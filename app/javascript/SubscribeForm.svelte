@@ -9,8 +9,8 @@
 
   let elements, card, stripeToken;
   let piStatus, piClientId, piClientSecret;
-  let givenName, surname, emailAddress, password, payment, createdAt;
-  let givenNameError, surnameError, emailAddressError, passwordError, paymentError;
+  let givenName, surname, emailAddress, password, payment, createdAt, amount;
+  let givenNameError, surnameError, emailAddressError, passwordError, paymentError, amountError;
   let planId, addressRequired;
   let isSubmitting = false;
 
@@ -220,6 +220,13 @@
         <div id="card"></div>
       </Field>
     </div>
+      
+    <div class="block -b -p2 -my2 -bg-faint">
+        <Field label="Price" error={amountError}>
+          <input type="number" name="user[amount]" required bind:value={amount} />
+        </Field>
+    </div>
+
     <nav class="block -mt2 actions">
       <button class="button -standard -big" disabled={isSubmitting}>
         {#if isSubmitting}
