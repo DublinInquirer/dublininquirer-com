@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 
-gem 'rails', '~> 6.1.x'
+gem 'rails', '~> 7.0.x'
 gem 'pg'
 gem "puma", ">= 4.3.8"
 gem 'sass-rails'
@@ -13,6 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
 gem 'webpacker'
 gem 'dotenv-rails'
+gem 'bcrypt', '~> 3.1.7'
 
 gem 'redis', '~> 4.0'
 gem 'sucker_punch', '~> 2.0'
@@ -27,14 +28,13 @@ gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'bcrypt', '~> 3.1.7'
 gem 'webpacker-svelte', "~> 0.0.0"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
 gem 'gibbon' # mailchimp integration
 
-gem 'textacular', "~> 5.0"
+gem 'textacular', git: 'https://github.com/textacular/textacular'
 gem 'sorcery'
 gem 'pretender'
 gem 'namae'
