@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/textacular/textacular
-  revision: ee4e13ebc8aa323806c948f687d8cfc0303807f2
+  revision: e9dcfe151962f218db9fb69f38468dee9193ec20
   specs:
     textacular (5.5.0)
       activerecord (>= 5.0, < 7.1)
@@ -113,7 +113,6 @@ GEM
       mime-types (>= 1.16)
       ssrf_filter (~> 1.0)
     childprocess (3.0.0)
-    chronic (0.10.2)
     coffee-rails (5.0.0)
       coffee-script (>= 2.2.0)
       railties (>= 5.2.0)
@@ -488,8 +487,6 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    whenever (1.0.0)
-      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.5.1)
@@ -569,7 +566,6 @@ DEPENDENCIES
   webmock
   webpacker
   webpacker-svelte (~> 0.0.0)
-  whenever
 
 RUBY VERSION
    ruby 3.0.3p157
