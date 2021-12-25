@@ -1,8 +1,3 @@
-# Be sure to restart your server when you modify this file.
-
-# Version of your assets, change this if you want to expire all your assets.
-Rails.application.config.assets.version = "1.0"
-
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
 
@@ -11,12 +6,11 @@ Rails.application.config.assets.version = "1.0"
 # folder are already added.
 # Rails.application.config.assets.precompile += %w( admin.js admin.css )
 
-# TODO RAILS 6
-# Rails.application.config.assets.version = '1.0'
-# Rails.application.config.assets.paths << Rails.root.join('node_modules')
-# Rails.application.config.assets.paths << Rails.root.join('vendor', 'javascripts')
-# Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-# Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf admin.css admin.js fonts.css audio.css elections.css elections.js neighbours.css)
-# Rails.application.config.assets.configure do |env|
-#   env.export_concurrent = false
-# end
+Rails.application.config.assets.version = '1.0'
+Rails.application.config.assets.paths << Rails.root.join('node_modules')
+Rails.application.config.assets.paths << Rails.root.join('vendor', 'javascripts')
+Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
+Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf admin.css admin.js fonts.css audio.css elections.css elections.js neighbours.css)
+Rails.application.config.assets.configure do |env|
+  env.export_concurrent = false
+end
