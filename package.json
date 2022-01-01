@@ -1,17 +1,6 @@
 {
   "name": "dublininquirer-com",
   "private": true,
-  "dependencies": {
-    "@rails/ujs": "^6.1.4",
-    "@rails/webpacker": "^5.4.2",
-    "svelte": "^3.8.1",
-    "svelte-loader": "^2.13.6",
-    "turbolinks": "^5.2.0",
-    "webpacker-svelte": "^0.1.0"
-  },
-  "version": "0.1.0",
-  "devDependencies": {
-    "@webpack-cli/serve": "^1.4.0",
-    "webpack-dev-server": "^3.11.2"
-  }
+  "dependencies": {},
+  "version": "0.1.0"
 }
