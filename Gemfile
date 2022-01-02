@@ -24,14 +24,10 @@ gem 'kramdown'
 
 # assets
 gem 'sass-rails'
-# gem 'uglifier', '>= 1.3.0'
-# gem 'webpacker'
-# gem 'turbolinks'
-# gem 'autoprefixer-rails'
+gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-# gem 'webpacker-svelte', "~> 0.0.0"
 
 # esbuild
 gem "jsbundling-rails", "~> 0.1.0"

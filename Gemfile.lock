@@ -72,6 +72,8 @@ GEM
     appsignal (3.0.17)
       rack
     ast (2.4.2)
+    autoprefixer-rails (10.4.0.0)
+      execjs (~> 2)
     aws-eventstream (1.2.0)
     aws-partitions (1.543.0)
     aws-sdk-core (3.125.0)
@@ -459,6 +461,7 @@ PLATFORMS
 
 DEPENDENCIES
   appsignal
+  autoprefixer-rails
   aws-sdk-s3
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)

@@ -26,11 +26,6 @@ Rails.application.routes.draw do
   # projects
 
   namespace :projects do
-    # helping neighbours
-    namespace :neighbours do
-      root to: 'services#index'
-      resources :services, only: [:new, :create, :index]
-    end
     # election survey
     resources :election_surveys, only: [:show], path: 'elections' do
       member do

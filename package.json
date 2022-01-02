@@ -1,6 +1,12 @@
 {
   "name": "dublininquirer-com",
   "private": true,
-  "dependencies": {},
-  "version": "0.1.0"
+  "dependencies": {
+    "esbuild": "^0.14.2",
+    "esbuild-svelte": "^0.6.0"
+  },
+  "version": "0.1.0",
+  "scripts": {
+    "build": "node ./esbuild.config.js"
+  }
 }

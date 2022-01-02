@@ -13,7 +13,8 @@
     = csp_meta_tag
     <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
+    = javascript_include_tag "deprecated", "data-turbo-track": "reload", defer: true
+    = javascript_include_tag "esbuild", "data-turbo-track": "reload", defer: true
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
