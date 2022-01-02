@@ -5,15 +5,12 @@ ruby '3.0.3'
 
 gem 'rails', '~> 7.0.x'
 gem 'pg'
-gem "puma", ">= 4.3.8"
-gem 'sass-rails'
+gem "puma"
 gem 'haml'
-gem 'http'
-gem 'uglifier', '>= 1.3.0'
 gem 'mini_racer', platforms: :ruby
-gem 'webpacker'
 gem 'dotenv-rails'
 gem 'bcrypt', '~> 3.1.7'
+gem 'http'
 
 gem 'redis', '~> 4.0'
 gem 'sucker_punch', '~> 2.0'
@@ -22,13 +19,19 @@ gem 'oj'
 gem 'roo' # CSV importing
 gem 'sanitize'
 gem "nokogiri", ">= 1.10.4"
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.7'
 gem 'kramdown'
+
+# assets
+gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'webpacker-svelte', "~> 0.0.0"
+
+# esbuild
+gem "jsbundling-rails", "~> 0.1.0"
+gem "stimulus-rails"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
@@ -55,9 +58,7 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick", ">= 4.9.4"
 gem 'fog-aws', group: :production
 gem 'aws-sdk-s3', require: false
-
-gem 'bootsnap', '>= 1.1.0', require: false
-gem 'turbolinks'
+gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   gem 'rack-mini-profiler'
@@ -71,11 +72,8 @@ end
 
 group :development do
   gem "memory_profiler"
-  gem "derailed_benchmarks"
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'letter_opener'
   gem 'letter_opener_web'
   gem 'rubocop', require: false

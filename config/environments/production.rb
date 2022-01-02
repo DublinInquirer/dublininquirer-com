@@ -10,7 +10,7 @@ Rails.application.configure do
   config.require_master_key = true
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
-  config.action_controller.asset_host = Rails.application.credentials.dig(:production, :aws, :asset_cloudfront_url)
+  # config.action_controller.asset_host = Rails.application.credentials.dig(:production, :aws, :asset_cloudfront_url)
   # config.active_storage.service = :amazon
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass

@@ -49,3 +49,6 @@ yarn-debug.log*
 yarn-debug.log*
 .yarn-integrity
 .sass-cache
+
+/app/assets/builds/*
+!/app/assets/builds/.keep

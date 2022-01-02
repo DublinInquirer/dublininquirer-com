@@ -2,16 +2,12 @@
   "name": "dublininquirer-com",
   "private": true,
   "dependencies": {
-    "@rails/ujs": "^6.1.4",
-    "@rails/webpacker": "^5.4.2",
-    "svelte": "^3.8.1",
-    "svelte-loader": "^2.13.6",
-    "turbolinks": "^5.2.0",
-    "webpacker-svelte": "^0.1.0"
+    "@hotwired/stimulus": "^3.0.1",
+    "esbuild": "^0.14.2",
+    "esbuild-svelte": "^0.6.0"
   },
   "version": "0.1.0",
-  "devDependencies": {
-    "@webpack-cli/serve": "^1.4.0",
-    "webpack-dev-server": "^3.11.2"
+  "scripts": {
+    "build": "node ./esbuild.config.js"
   }
 }

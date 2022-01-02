@@ -30,6 +30,3 @@
           %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed monthly
           %li Subscriptions renew automatically
           %li Cancel any time
-
-- content_for :head_tags do
-  = javascript_pack_tag 'subscribe'

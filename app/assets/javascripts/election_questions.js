@@ -18,6 +18,7 @@ $(document).on('ready turbolinks:load', function() {
     path = selectEl.data('path') + selectEl.val();
     e.stopImmediatePropagation();
 
-    Turbolinks.visit(path);
+    // Turbolinks.visit(path);
+    document.location.href = path;
   });
 });
