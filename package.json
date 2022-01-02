@@ -3,11 +3,18 @@
   "private": true,
   "dependencies": {
     "@hotwired/stimulus": "^3.0.1",
+    "autoprefixer": "^10.4.1",
     "esbuild": "^0.14.2",
-    "esbuild-svelte": "^0.6.0"
+    "esbuild-svelte": "^0.6.0",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0",
+    "postcss-import": "^14.0.2",
+    "postcss-nested": "^5.0.6",
+    "postcss-preset-env": "^7.1.0"
   },
   "version": "0.1.0",
   "scripts": {
-    "build": "node ./esbuild.config.js"
+    "build": "node ./esbuild.config.js",
+    "build:css": "postcss ./app/assets/css/application.postcss.css -o ./app/assets/builds/application.css"
   }
 }

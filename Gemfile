@@ -22,7 +22,7 @@ gem "nokogiri", ">= 1.10.4"
 gem 'jbuilder', '~> 2.7'
 gem 'kramdown'
 
-# assets
+# asset pipeline
 gem 'terser'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
@@ -30,9 +30,12 @@ gem 'coffee-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 
-# esbuild
-gem "jsbundling-rails", "~> 0.1.0"
+# js bundling
+gem "jsbundling-rails"
 gem "stimulus-rails"
+
+# css bundling
+gem "cssbundling-rails"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
