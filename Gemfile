@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 gem 'kramdown'
 
 # assets
+gem 'uglifier'
 gem 'sass-rails'
 gem 'autoprefixer-rails'
 gem 'coffee-rails'
