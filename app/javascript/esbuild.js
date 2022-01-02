@@ -1,6 +1,6 @@
-import GiftForm from './GiftForm.svelte'
-import PaymentForm from './PaymentForm.svelte'
-import SubscribeForm from './SubscribeForm.svelte'
+import GiftForm from './svelte/GiftForm.svelte'
+import PaymentForm from './svelte/PaymentForm.svelte'
+import SubscribeForm from './svelte/SubscribeForm.svelte'
 
 document.addEventListener('DOMContentLoaded', () => {
   const giftFormTarget = document.getElementById('gift-form');

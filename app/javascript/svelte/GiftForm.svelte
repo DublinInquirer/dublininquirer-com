@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { styles, classes, fonts } from './stripe-elements.js';
+  import { styles, classes, fonts } from './../stripe-elements.js';
   import Field from './Field.svelte';
   import Header from './Header.svelte';
 

@@ -1,7 +1,7 @@
 const path = require('path');
 
 require('esbuild').build({
-  entryPoints: ["esbuild.js"],
+  entryPoints: ["esbuild.js", "application.js"],
     bundle: true,
     outdir: path.join(process.cwd(), "app/assets/builds"),
     absWorkingDir: path.join(process.cwd(), "app/javascript"),

@@ -414,6 +414,8 @@ GEM
       sprockets (>= 3.0.0)
     squasher (0.6.2)
     ssrf_filter (1.0.7)
+    stimulus-rails (1.0.2)
+      railties (>= 6.0.0)
     stripe (5.42.0)
     stripe-ruby-mock (2.5.8)
       dante (>= 0.2.0)
@@ -514,6 +516,7 @@ DEPENDENCIES
   sitemap_generator
   sorcery
   squasher
+  stimulus-rails
   stripe
   stripe-ruby-mock (~> 2.5.8)
   stripe_event

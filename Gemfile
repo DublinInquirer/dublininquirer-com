@@ -31,6 +31,7 @@ gem 'jquery-ui-rails'
 
 # esbuild
 gem "jsbundling-rails", "~> 0.1.0"
+gem "stimulus-rails"
 
 gem 'meta-tags'
 gem 'sitemap_generator'
