@@ -33,6 +33,7 @@ gem 'jquery-ui-rails'
 # js bundling
 gem "jsbundling-rails"
 gem "stimulus-rails"
+gem 'turbo-rails'
 
 # css bundling
 gem "cssbundling-rails"
