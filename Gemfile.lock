@@ -433,6 +433,9 @@ GEM
       execjs (>= 0.3.0, < 3)
     thor (1.1.0)
     tilt (2.0.10)
+    turbo-rails (1.0.0)
+      actionpack (>= 6.0.0)
+      railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -528,6 +531,7 @@ DEPENDENCIES
   sucker_punch (~> 2.0)
   terser
   textacular!
+  turbo-rails
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers (~> 3.0)
