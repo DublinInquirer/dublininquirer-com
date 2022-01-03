@@ -1,4 +1,4 @@
-$(document).on('ready turbolinks:load', function() {
+$(document).on('ready', function() {
   'use strict';
 
   $('[data-behaviour="scroll"]').on('click', function(e) {
