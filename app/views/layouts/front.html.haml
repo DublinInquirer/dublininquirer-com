@@ -11,23 +11,12 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-    <script src="//cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    = stylesheet_link_tag 'deprecated', media: 'all'
-    = javascript_include_tag "deprecated", "data-turbo-track": "reload", defer: true
-    = javascript_include_tag "esbuild", "data-turbo-track": "reload", defer: true
-    = javascript_include_tag "application", "data-turbo-track": "reload", defer: true
-    = stylesheet_link_tag "application", media: 'all'
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4000ff">
-    <meta name="msapplication-TileColor" content="#4000ff">
-    <meta name="theme-color" content="#ff0000">
+    
+    = render partial: "layouts/partials/links"
+    = render partial: "layouts/snippets/favicon"
     %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     = render partial: 'layouts/partials/meta-nav', locals: { fixed: true, small: false}
     = render partial: 'layouts/partials/primary-flag'
 
@@ -43,4 +32,5 @@
 
     = render partial: 'layouts/partials/search'
     = render partial: 'layouts/partials/expansive-nav'
+    = auto_discovery_link_tag(:rss, feed_url(format: :xml))
     = render partial: 'layouts/snippets/analytics'

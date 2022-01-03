@@ -12,19 +12,13 @@
 
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag 'deprecated', media: 'all'
-    = javascript_include_tag "deprecated", "data-turbo-track": "reload", defer: true
-    = javascript_include_tag "esbuild", "data-turbo-track": "reload", defer: true
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#4000ff">
-    <meta name="msapplication-TileColor" content="#4000ff">
+    
+    = render partial: "layouts/partials/links"
+    = render partial: "layouts/snippets/favicon"
+    
     <meta name="theme-color" content="#ff0000">
 
-  %body
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
     .wrapper.-container{role: 'layout'}
       = render partial: 'layouts/partials/meta-nav', locals: { omnipresent: true, fixed: true, small: false, brief: true }
 

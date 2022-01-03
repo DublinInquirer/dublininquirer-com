@@ -5,13 +5,13 @@
 - css_classes = css_classes.compact
 
 %div.progress-bar.-fixed &nbsp;
-%nav.meta-nav{class: css_classes}
+%nav.meta-nav{class: css_classes, data: {layout: {target: css_classes.include?("-fixed") ? "metaNav" : nil}}}
   .wrapper.-container{role: 'layout'}
     .block.-bb
       .meta-nav_content{style: 'min-height: 4.5rem'}
         .left
           - unless (defined?(brief) && brief)
-            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'menu'}
+            %a.meta-nav_item{data: {action: "layout#openMenu"}}
               .icon= render partial: 'layouts/images/hamburger'
 
         - if !(defined?(small) && small)
@@ -26,7 +26,7 @@
               - if current_user.is_admin?
                 - if content_for(:admin_actions)
                   = yield :admin_actions
-                = link_to [:admin, :root], class: 'meta-nav_item' do
+                = link_to [:admin, :root], class: 'meta-nav_item', data: {turbo: false} do
                   %span admin
 
               = link_to :user, class: 'meta-nav_item' do
@@ -46,5 +46,5 @@
               = link_to :products, class: 'meta-nav_item -subscribe' do
                 Subscribe
 
-            %a.meta-nav_item{'data-action': 'openOverlay', 'data-target': 'search'}
+            %a.meta-nav_item{data: {action: "layout#openSearch"}}
               .icon= render partial: 'layouts/images/search'
