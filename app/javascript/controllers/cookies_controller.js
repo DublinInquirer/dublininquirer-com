@@ -8,9 +8,7 @@ export default class extends Controller {
 
   closeNotice() {
     this.noticeTarget.classList.add("-hidden");
-    setTimeout(function () {
-      return this.noticeTarget.detach();
-    }, 1000);
+    this.noticeTarget.remove(); // todo animate this
   }
 
   acceptCookies() {
