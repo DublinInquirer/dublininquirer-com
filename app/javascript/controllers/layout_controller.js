@@ -51,11 +51,10 @@ export default class extends Controller {
     let overlay = document.getElementById(id);
 
     overlay.classList.remove("-hidden");
-
     setTimeout(function () {
       document.body.classList.add("-overlay-open");
       overlay.classList.add("-open");
-      overlay.querySelector("[name=q]").focus();
+      if (id == "search") { overlay.querySelector("[name=q]").focus(); }
     }, 25);
   }
 
