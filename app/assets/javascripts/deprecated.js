@@ -12,8 +12,4 @@
 //= require rails-ujs
 //= require jquery
 //= require jquery.key
-//= require plyr
-//= require sticky
-//= require overlay
 //= require notice
-//= require front

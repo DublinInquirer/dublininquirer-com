@@ -7,7 +7,6 @@ export default class extends Controller {
   static targets = ["metaNav"];
 
   connect() {
-    console.log("whatup son")
     smoothscroll.polyfill();
     this.maybeShowMetaNav();
   }

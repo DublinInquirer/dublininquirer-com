@@ -9,3 +9,6 @@ application.register("cookies", CookiesController)
 
 import LayoutController from "./layout_controller.js"
 application.register("layout", LayoutController)
+
+import PlayerController from "./player_controller.js"
+application.register("player", PlayerController)
