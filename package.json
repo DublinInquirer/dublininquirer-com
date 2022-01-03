@@ -7,11 +7,13 @@
     "autoprefixer": "^10.4.1",
     "esbuild": "^0.14.2",
     "esbuild-svelte": "^0.6.0",
+    "plyr": "^3.6.12",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
-    "postcss-preset-env": "^7.1.0"
+    "postcss-preset-env": "^7.1.0",
+    "smoothscroll-polyfill": "^0.4.4"
   },
   "version": "0.1.0",
   "scripts": {

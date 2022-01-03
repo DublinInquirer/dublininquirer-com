@@ -1,47 +1,47 @@
 - if logged_in? && current_user.delinquent?
-  .notice.-paywall.-fixed.block.-bg-black
+  .notice.-paywall.-fixed.block.-bg-black{data: {controller: "notice", notice: {target: "notice"}}}
     %nav.close
-      %a.icon{'data-action': 'closeNotice'}
+      %a.icon{data: {action: 'notice#closeNotice'}}
         %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
-
+  
     .block.-p1
       .p.-centered.-t4
         :markdown
           We're having trouble charging your card. Please update your payment details.
-
+  
         .block.-my1
           #{ link_to "Update payment details", [:payment, :user], class: 'button -white' }
 
 - elsif logged_in? && current_user.needs_source?
-  .notice.-paywall.-fixed.block.-bg-black
+  .notice.-paywall.-fixed.block.-bg-black{data: {controller: "notice", notice: {target: "notice"}}}
     %nav.close
-      %a.icon{'data-action': 'closeNotice'}
+      %a.icon{data: {action: 'notice#closeNotice'}}
         %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
-
+  
     .block.-p1
       .p.-centered.-t4
         :markdown
           We don't have payment details on file for you. Please update your card details when you have a moment.
-
+  
         .block.-my1
           #{ link_to "Update payment details", [:payment, :user], class: 'button -white' }
 
 - elsif logged_in? && current_user.lapsed?
-  .notice.-paywall.-fixed.block.-bg-black
+  .notice.-paywall.-fixed.block.-bg-black{data: {controller: "notice", notice: {target: "notice"}}}
     %nav.close
-      %a.icon{'data-action': 'closeNotice'}
+      %a.icon{data: {action: 'notice#closeNotice'}}
         %svg{height: "242px", version: "1.1", viewbox: "0 0 242 242", width: "242px", xmlns: "http://www.w3.org/2000/svg", "xmlns:xlink" => "http://www.w3.org/1999/xlink"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.208153, 121.208153) rotate(45.000000) translate(-121.208153, -121.208153) ", width: "320", x: "-38.7918472", y: "111.208153"}
           %rect{fill: "#fafafa", height: "20", transform: "translate(121.000000, 121.000000) rotate(-45.000000) translate(-121.000000, -121.000000) ", width: "320", x: "-39", y: "111"}
-
+  
     .block.-p1
       .p.-centered.-t4
         :markdown
           Your subscription has lapsed. Resubscribe now to continue enjoying (and supporting) quality local journalism.
-
+  
         .block.-my1
           #{ link_to "See subscription options", :products, class: 'button -white' }

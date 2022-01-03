@@ -6,3 +6,15 @@ import { application } from "./application"
 
 import CookiesController from "./cookies_controller.js"
 application.register("cookies", CookiesController)
+
+import LayoutController from "./layout_controller.js"
+application.register("layout", LayoutController)
+
+import NoticeController from "./notice_controller.js"
+application.register("notice", NoticeController)
+
+import PaywallController from "./paywall_controller.js"
+application.register("paywall", PaywallController)
+
+import PlayerController from "./player_controller.js"
+application.register("player", PlayerController)
