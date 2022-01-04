@@ -1,4 +1,4 @@
-$(document).on('ready turbolinks:load', function() {
+$(document).on('ready turbolinks:load', function () {
   'use strict';
 
   $('[data-behaviour="token"]').select2();
@@ -6,45 +6,45 @@ $(document).on('ready turbolinks:load', function() {
     ajax: {
       url: '/admin/tags/autocomplete',
       minimumInputLength: 2,
-      processResults: function(data) {
+      processResults: function (data) {
         var i, len, tag, tags;
         tags = [];
         for (i = 0, len = data.length; i < len; i++) {
           tag = data[i];
           tags.push({
             id: tag.id,
-            text: tag.name
+            text: tag.name,
           });
         }
         return {
-          results: tags
+          results: tags,
         };
-      }
-    }
+      },
+    },
   });
 
   $('select#merge_tag_id').select2({
     ajax: {
       url: '/admin/tags/autocomplete',
       minimumInputLength: 2,
-      processResults: function(data) {
+      processResults: function (data) {
         var i, len, tag, tags;
         tags = [];
         for (i = 0, len = data.length; i < len; i++) {
           tag = data[i];
           tags.push({
             id: tag.id,
-            text: tag.name
+            text: tag.name,
           });
         }
         return {
-          results: tags
+          results: tags,
         };
-      }
-    }
+      },
+    },
   });
 
-  $('[data-action="submitForm"]').on('click', function(e) {
+  $('[data-action="submitForm"]').on('click', function (e) {
     $('form.admin-form:first').submit();
     return e.preventDefault();
   });

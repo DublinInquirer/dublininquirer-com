@@ -19,5 +19,10 @@
   "scripts": {
     "build": "node ./esbuild.config.js",
     "build:css": "postcss ./app/assets/css/application.postcss.css -o ./app/assets/builds/application.css"
+  },
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^2.0.0",
+    "prettier": "^2.5.1",
+    "prettier-plugin-erb": "^0.4.0"
   }
 }

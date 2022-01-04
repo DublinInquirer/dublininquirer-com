@@ -1,0 +1,41 @@
+!!!
+%html
+  %head
+    %meta{charset: "utf-8"}/
+    %meta{'http-equiv' => 'x-ua-compatible', 'content' => 'ie=edge'}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    - set_meta_tags site: 'Dublin Inquirer'
+    - set_meta_tags og: {site_name: :site}
+    - set_meta_tags twitter: { card: 'photo', site: "@dublininquirer", title: :title, site_name: :site, _: :image_src }
+    = display_meta_tags reverse: true, separator: '|'
+
+    = csrf_meta_tags
+    = csp_meta_tag
+    
+    = render partial: "layouts/partials/links"
+    = render partial: "layouts/snippets/favicon"
+    
+    %meta{name: 'viewport', content: "width=device-width, initial-scale=1, user-scalable=no"}/
+
+  %body{data: {controller: "layout", action: "scroll@window->layout#onScroll"}}
+    .wrapper.-container{role: 'layout'}
+      = render partial: 'layouts/partials/meta-nav', locals: { omnipresent: true, fixed: true, small: false}
+
+      .sub-omnipresent{role: 'layout'}
+        = yield
+
+      .block.-bt
+        = render partial: 'layouts/partials/primary-footer'
+
+    = render partial: 'user_sessions/cookies'
+
+    - if permission_for_cookie?
+      = render partial: 'user_sessions/delinquent'
+
+    - if current_user != true_user
+      = render partial: 'user_sessions/impersonating'
+
+    = render partial: 'layouts/partials/search'
+    = render partial: 'layouts/partials/expansive-nav'
+    = render partial: 'layouts/snippets/analytics'
+    = auto_discovery_link_tag(:rss, feed_url(format: :xml))

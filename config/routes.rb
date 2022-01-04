@@ -103,6 +103,12 @@ Rails.application.routes.draw do
     end
   end
 
+  # flexible subscribe flow
+
+  namespace :v2 do
+    resources :subscriptions, only: [:new, :create]
+  end
+
   # user controller panel
 
   resource :user, only: [:show, :edit, :update] do

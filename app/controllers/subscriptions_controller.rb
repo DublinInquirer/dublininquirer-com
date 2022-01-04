@@ -7,10 +7,10 @@ class SubscriptionsController < ApplicationController
     @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
     @user.assign_attributes(user_params)
 
-    # if the user is invalid, return here
+    # if the user is invalid, return here
     validate_user(@user) { return }
 
-    # if the card is invalid, return here
+    # if the card is invalid, return here
     setup_user_with_card(@user, payment_params) { return }
     @subscription = setup_subscription(@user, subscription_params)
     auto_login(@user) # login regardless as the user has been created/saved
