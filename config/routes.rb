@@ -172,6 +172,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root to: 'dashboard#show'
+    get "metrics", to: "metrics#index"
     resources :articles do
       member do
         get :edit_content
