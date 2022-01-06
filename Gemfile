@@ -66,29 +66,22 @@ gem 'aws-sdk-s3', require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
-  gem 'rack-mini-profiler'
-  gem 'stripe-ruby-mock', '~> 2.5.8', :require => 'stripe_mock'
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'database_cleaner'
-  gem 'mocha'
+  gem "standard", '~> 1.5.x'
+  gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
 
 group :development do
-  gem "memory_profiler"
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem "web-console"
+  gem 'rack-mini-profiler'
   gem 'letter_opener'
   gem 'letter_opener_web'
-  gem 'rubocop', require: false
-  gem 'squasher', require: false
 end
 
 group :test do
-  gem 'capybara'
-  gem 'webmock'
-  gem 'webdrivers', '~> 3.0'
+  gem 'stripe-ruby-mock', '~> 2.5.8', :require => 'stripe_mock'
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

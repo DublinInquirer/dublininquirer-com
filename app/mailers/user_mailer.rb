@@ -9,7 +9,7 @@ class UserMailer < ApplicationMailer
   def migrate_account_email(user)
     @user = User.find user.id
     @url  = migrate_url(token: @user.reset_password_token)
-    mail(to: @user.email_address,
+    mail(to: @user.email_address, bcc: "brian@civictech.ie",
       subject: "Set up your new Dublin Inquirer account")
   end
 

@@ -1,0 +1,68 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>Week</th>
+        <th>New subs</th>
+        <th>Split</th>
+        <th>ARPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @metric_weeks.each do |metric_week| %>
+        <tr>
+          <th><%= metric_week[:date] %></th>
+          <td>
+            <%= metric_week[:acquisition] %>
+          </td>
+          <td>
+            <%- if metric_week[:acquisition] > 0 %>
+              <%= metric_week[:medium_split].round %>%
+            <%- else %>
+              &mdash;
+            <%- end %></td>
+          <td>
+            <%- if metric_week[:average_price] %>
+              <%= number_to_currency (metric_week[:average_price] / 100), unit: "€" %>
+            <%- else %>
+              &mdash;
+            <%- end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>New subs</th>
+        <th>Split</th>
+        <th>ARPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%- @metric_months.each do |metric_month| %>
+        <tr>
+          <th><%= metric_month[:date] %></th>
+          <td>
+            <%= metric_month[:acquisition] %>
+          </td>
+          <td>
+            <%- if metric_month[:acquisition] > 0 %>
+              <%= metric_month[:medium_split].round %>%
+            <%- else %>
+              &mdash;
+            <%- end %></td>
+          <td>
+            <%- if metric_month[:average_price] %>
+              <%= number_to_currency (metric_month[:average_price] / 100), unit: "€" %>
+            <%- else %>
+              &mdash;
+            <%- end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
