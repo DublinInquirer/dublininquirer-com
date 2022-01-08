@@ -106,6 +106,9 @@ Rails.application.routes.draw do
   # flexible subscribe flow
 
   namespace :v2 do
+    get "subscribe", to: "subscriptions#index"
+    get "subscribe/:product_slug/:amount", to: "subscriptions#new"
+    post "subscribe/validate", to: "subscriptions#validate"
     resources :subscriptions, only: [:new, :create]
   end
 

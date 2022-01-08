@@ -1,0 +1,140 @@
+- set_meta_tags title: "Become a subscriber"
+
+.block.-pt4.-px2.-bg-image{style: "background-image: url('#{ asset_path "ads/cranes.jpg" }')"}
+  .p.-centered
+    .block.-pt2
+      %h1.h.-h1.c.-serif Help our reporters<br>cover the important stories
+      .block.-mt2.p.-t3 Become a subscriber for as little as €6 per month
+
+  .v2-product-options
+    .v2-product-options__option
+      %h3.v2-product-options__option__name
+        %strong Digital + Print
+        %span from €9/month
+      .v2-product-options__option__description
+        :markdown
+          The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
+
+          **Set your monthly subscription price:**
+
+      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe"} do |f|
+        .flexible-price
+          = f.hidden_field :product_slug, value: "print", "data-price-chooser-target": "productSlug"
+          %fieldset.flexible-price__price
+            .currency €
+            .amount
+              = f.number_field :amount, value: 9, min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount"
+              .hint per month
+          %nav.flexible-price__actions
+            = f.submit raw("Subscribe &rarr;")
+
+    .v2-product-options__option
+      %h3.v2-product-options__option__name
+        %strong Digital
+        %span from €6/month
+      .v2-product-options__option__description
+        :markdown
+          Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
+
+          **Set your monthly subscription price:**
+
+      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe"} do |f|
+        .flexible-price
+          = f.hidden_field :product_slug, value: "digital", "data-price-chooser-target": "productSlug"
+          %fieldset.flexible-price__price
+            .currency €
+            .amount
+              = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: false
+              .hint per month
+          %nav.flexible-price__actions
+            = f.submit raw("Subscribe &rarr;")
+
+.block.-bt.-bg-default.-py4
+  .block.-my4.-pt4
+    .wrapper.-small{role: 'layout'}
+      .block.-mb1
+        %h3.h.-h2.-centered Independent, impactful
+      .p.-t3.-centered
+        :markdown
+          Dublin Inquirer is funded by its subscribers. That way, we can stay independent, and focused on the stories that readers want and need – and stories that make a big impact on the city:
+
+  .wrapper.-large{role: 'layout'}
+    .block.-mt4.-mb2
+      .row
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/c9d12d29a59b2ae8/large_image.jpg"
+
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif  A giant illegal waste dump has been growing for years in the north of the city.
+
+              :markdown
+                For as a long as a decade, a council-owned green space has been used for broad-daylight illegal dumping, with trucks driving up to add to the giant mounds of waste.
+
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/49b678399185e22b/large_image.jpg"
+
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif FOI Chief Overrules Government Refusal to Release Fire-Safety Reports
+
+              :markdown
+                We forced the Department of Education to release fire safety audits for schools with structural defects, which led to a national media storm, more inspections and remedial works, and the promise of an inquiry.
+
+        .col-xs-12.col-md-4.flex
+          .block.-p2.-bg-faint.-b.-mb2
+            .block.-mb2
+              %figure.artwork.-landscape
+                = image_tag "https://d1trxack2ykyus.cloudfront.net/artwork/626e4eb64db850b4/large_image.jpg"
+
+            .block.p.-t4.c.-w4
+              .block.-mb1
+                %h3.c.-w4.-serif Should Homeless Families Have to Use the Side Door?
+
+              :markdown
+                We highlighted the restrictive rules homeless families have to follow in hotels where they live in emergency accommodation.
+
+  .wrapper.-small{role: 'layout'}
+    .block.-mb4
+      .p.-t3.-centered
+        The work we do is regularly picked up by newspapers, blogs, and radio stations, but without our on-the-ground reporting, these stories wouldn't be covered. And that wouldn't be possible without the support of readers like you.
+
+  %hr.-separator
+
+  .block.-my4
+    .wrapper.-small{role: 'layout'}
+      .block.-bg-faint.-p4.-b
+        .block.-mb2
+          %h3.h.-h3.-centered Become a subscriber:
+        .p.-t4.-centered
+          = link_to raw("Digital + Print &mdash; €9/month"), "/v2/subscribe/:print/9", class: 'block -mb1 button -standard -big'
+          = link_to raw("Digital &mdash; €6/month"), "/v2/subscribe/:digital/6", class: 'block -mb1 button -standard -big'
+          = link_to raw("Student (Digital-only) &mdash; €3/month"), "/v2/subscribe/:digital/:student", class: 'block button -standard -big'
+
+.block.-bt.-py4.-bg-faint
+  .wrapper.-small{role: 'layout'}
+    .block.-p4.-b.-bg-default
+      %header.block.-mb4
+        %h3.h.-h4.-centered Frequently asked questions
+
+      .p.-t4.-sf
+        :markdown
+          #### What does 'independent' and 'reader-funded' mean?
+
+          _Independent_ means that the company is wholly owned by us. We don't need to answer to investors or shareholders who demand we maximise profitability or push a particular agenda.
+
+          _Reader-funded_ means the _vast_ majority of our revenue comes from readers who subscribe. We think this aligns our incentives with those of our readers, rather than those of advertisers.
+
+          #### Is there an unwaged rate?
+
+          Nobody will be turned away for want of funds. If you're not working or are otherwise unable to afford a subscription, send [us an email](mailto:info@dublininquirer.com) and we'll see if we can work something out.
+
+          #### What is the cancellation policy?
+
+          You can cancel at any time. Your subscription will continue until the end of your billing cycle, and you won't be billed again. No long term contracts or funny business.
