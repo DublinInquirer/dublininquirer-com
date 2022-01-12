@@ -1,0 +1,22 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2= @product.name
+
+  .block.-mb4
+    .p.-t3.-sf
+      - if @product.is_print?
+        :markdown
+          **Monthly print edition** featuring a selection of our favourite online articles delivered to your door, in addition to unlimited **digital access**, including our full archive.
+
+      - else
+        :markdown
+          Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+
+  #subscribe-form{data: {'action': "/v2/subscribe/create", user: @user_data.to_json, plan: {address_required: @plan.requires_address?, stripe_id: @plan.stripe_id}.to_json}}
+
+  .block.-my4.-pb4
+    .p.-t4.-sf.-centered
+      %ul.list.-nav
+        %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed monthly
+        %li Subscriptions renew automatically
+        %li Cancel any time

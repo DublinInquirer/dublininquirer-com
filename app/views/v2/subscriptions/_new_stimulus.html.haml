@@ -1,0 +1,60 @@
+.wrapper.-small{role: 'layout'}
+  %header.page-header
+    %h1.h.-h2= @product.name
+
+  .block.-mb4
+    .p.-t3.-sf
+      - if @product.is_print?
+        :markdown
+          **Monthly print edition** featuring a selection of our favourite online articles delivered to your door, in addition to unlimited **digital access**, including our full archive.
+
+      - else
+        :markdown
+          Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+
+  = form_with model: @subscription, url: [:v2, :subscriptions], method: :post, local: true, html: {"data-controller": "subscribe-form", "data-action": "subscribe-form#subscribe"} do |f|
+    .block.-form
+      .block.-b.-p2.-my2.-bg-faint
+        .field
+          .twofer
+            .field{"data-subscribe-form-target": "givenNameField"}
+              = f.label :given_name, "First name"
+              = f.text_field :given_name
+              - if @subscription.errors[:given_name].any?
+                .error= @subscription.full_messages_for(:given_name).first
+
+            .field{"data-subscribe-form-target": "surnameField"}
+              = f.label :surname, "Surname"
+              = f.text_field :surname
+              - if @subscription.errors[:surname].any?
+                .error= @subscription.full_messages_for(:surname).first
+
+        - if !logged_in?
+          .field{"data-subscribe-form-target": "emailAddressField"}
+            = f.label :email_address
+            = f.email_field :email_address
+            - if @subscription.errors[:email_address].any?
+              .error= @subscription.full_messages_for(:email_address).first
+
+          .field{"data-subscribe-form-target": "passwordField"}
+            = f.label :password
+            = f.password_field :password
+            - if @subscription.errors[:password].any?
+              .error= @subscription.full_messages_for(:password).first
+      .block.-b.-p2.-my2.-bg-faint
+        .field{"data-subscribe-form-target": "cardField"}
+          %label Credit/debit card
+          %div{"data-subscribe-form-target": "cardFieldInput"}
+
+      %nav.block.-mt2.actions
+        %button.button.-standard.-big{"data-subscribe-form-target": "submitButton"} Subscribe
+
+  .block.-my4.-pb4
+    .p.-t4.-sf.-centered
+      %ul.list.-nav
+        - if @plan.interval_count == 1
+          %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed #{ @plan.interval }ly
+        - else
+          %li #{ number_to_currency((@plan.amount/100.0), unit: '€', precision: 2) } billed every #{ pluralize @plan.interval_count, @plan.interval }
+        %li Subscriptions renew automatically
+        %li Cancel any time

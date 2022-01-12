@@ -1,7 +1,32 @@
-class SubscriptionsController < ApplicationController
-  before_action :require_login, only: [:upgrade, :thanks]
-  before_action :require_no_subscription, only: [:create]
-  layout 'modal', only: [:upgrade, :create, :address, :thanks]
+class V2::SubscriptionsController < ApplicationController
+  layout "modal"
+
+  def new
+    product_slug = params[:product_slug]&.downcase&.to_sym
+    amount = params[:amount].to_i
+
+    @product = case product_slug
+    when :digital
+      Product.find_by_slug('digital')
+    when :print
+      Product.find_by_slug('print')
+    when :student
+      Product.find_by_slug('digital')
+    else
+      raise ActiveRecord::RecordNotFound
+    end
+
+    @plan = Plan.find_or_create_by!(
+      amount: (amount * 100),
+      product_id: @product.id,
+      interval: "month",
+      interval_count: 1
+    )
+
+    @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
+    @user_data = { attributes: @user.attributes.slice('created_at', 'given_name','surname','email_address'), errors: @user.errors.messages }
+    @subscription = Subscription.new(user: @user, plan: @plan)
+  end
 
   def create
     @user = logged_in? ? current_user : User.new(subscribed_weekly: true)
@@ -36,11 +61,11 @@ class SubscriptionsController < ApplicationController
       if payment_intent_id
         intent = Stripe::PaymentIntent.retrieve(payment_intent_id)
         invoice = Stripe::Invoice.retrieve(intent.invoice)
-        
+
         if intent.status != 'succeeded'
           intent = Stripe::PaymentIntent.confirm(payment_intent_id)
         end
-        
+
         subscription = Subscription.find_by(stripe_id: invoice.lines.data[0]["subscription"])
         subscription.status = "active"
         subscription.save
@@ -62,39 +87,6 @@ class SubscriptionsController < ApplicationController
         payment: {error: e.message}
       }) and return # exit
     end
-  end
-
-  def upgrade
-    @subscription = current_user.subscription
-    if request.put?
-      case params[:id].downcase.to_sym
-      when :friend
-        @subscription.change_price_to!(20_00)
-      when :patron
-        @subscription.change_price_to!(50_00)
-      end
-
-      redirect_to [:thanks, :subscriptions]
-    end
-  end
-
-  def address
-    @user = current_user
-
-    case request.request_method.downcase.to_sym
-    when :get
-      render :address
-    when :put
-      if @user.update(address_params)
-        redirect_to [:thanks, :subscriptions]
-      else
-        render :address
-      end
-    end
-  end
-
-  def thanks
-    @subscription = current_user.subscription
   end
 
   private
@@ -170,3 +162,27 @@ class SubscriptionsController < ApplicationController
     params.require(:user).permit(:address_line_1, :address_line_2, :city, :county, :post_code, :country_code)
   end
 end
+
+  # def validate # v2
+  #   if logged_in?
+  #     @user = current_user.assign_attributes(existing_user_params)
+  #   else
+  #     @user = User.new(new_user_params)
+  #   end
+  #   if @user.valid?
+  #     render json: {status: 200}, status: 200
+  #   else
+  #     render json: {status: 422, errors: @user.errors}, status: 422
+  #   end
+  # end
+
+  # private
+
+  # def new_user_params # v2
+  #   params.require(:subscription).permit(:given_name, :surname, :email_address, :password)
+  # end
+
+  # def existing_user_params # v2
+  #   params.require(:subscription).permit(:given_name, :surname, :email_address, :password)
+  # end
+# end

@@ -103,6 +103,18 @@ Rails.application.routes.draw do
     end
   end
 
+  # flexible subscribe flow
+
+  namespace :v2 do
+    get "subscribe", to: "subscriptions#index"
+    get "subscribe/:product_slug/:amount", to: "subscriptions#new"
+    post "subscribe/validate", to: "subscriptions#validate"
+    post "subscribe/create", to: "subscriptions#create"
+    post "subscribe/confirm", to: "subscriptions#confirm"
+    get "subscribe/next", to: "subscriptions#next"
+    resources :subscriptions, only: [:new]
+  end
+
   # user controller panel
 
   resource :user, only: [:show, :edit, :update] do

@@ -78,7 +78,7 @@ class Plan < ApplicationRecord
   private
 
   def sync_to_stripe
-    if !self.stripe_id.present? # if already exists, it already exists
+    if !self.stripe_id.present? # if already exists, it already exists
       potential_id = "#{ self.product.slug }-#{ self.interval.first }-#{ self.amount }"
       begin
         str_plan = Stripe::Plan.retrieve(potential_id)

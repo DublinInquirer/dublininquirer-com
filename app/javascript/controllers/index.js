@@ -2,19 +2,25 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from './application';
 
-import CookiesController from "./cookies_controller.js"
-application.register("cookies", CookiesController)
+import CookiesController from './cookies_controller.js';
+application.register('cookies', CookiesController);
 
-import LayoutController from "./layout_controller.js"
-application.register("layout", LayoutController)
+import LayoutController from './layout_controller.js';
+application.register('layout', LayoutController);
 
-import NoticeController from "./notice_controller.js"
-application.register("notice", NoticeController)
+import NoticeController from './notice_controller.js';
+application.register('notice', NoticeController);
 
-import PaywallController from "./paywall_controller.js"
-application.register("paywall", PaywallController)
+import PaywallController from './paywall_controller.js';
+application.register('paywall', PaywallController);
 
-import PlayerController from "./player_controller.js"
-application.register("player", PlayerController)
+import PlayerController from './player_controller.js';
+application.register('player', PlayerController);
+
+import PriceChooserController from './price_chooser_controller.js';
+application.register('price-chooser', PriceChooserController);
+
+import SubscribeFormController from './subscribe_form_controller.js';
+application.register('subscribe-form', SubscribeFormController);
