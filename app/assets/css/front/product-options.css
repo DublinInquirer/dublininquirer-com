@@ -2,11 +2,15 @@
   padding-top: 4rem;
   padding-bottom: 4rem;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: row;
+  justify-content: centre;
+  align-items: stretch;
 
   &__option {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
     width: 100%;
     max-width: 68rem;
     background-color: var(--default);
@@ -42,10 +46,16 @@
         background-color: var(--black);
       }
     }
+    &__form {
+      justify-self: flex-end;
+      h4 {
+        margin-bottom: 1rem;
+      }
+    }
   }
 
   &__option + &__option {
-    margin-top: 1rem;
+    margin-left: 2rem;
   }
 }
 
@@ -114,6 +124,22 @@
         -moz-appearance: textfield;
       }
     }
+
+    &.-error {
+      animation: shake 0.76s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 100rem;
+      box-shadow: 0 0 0 1px var(--red);
+
+      input {
+        box-shadow: 0 0 0 1px var(--red);
+      }
+
+      .hint {
+        color: var(--red);
+      }
+    }
   }
   &__actions {
     flex-basis: 16rem;
@@ -139,5 +165,28 @@
         cursor: pointer;
       }
     }
+  }
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
   }
 }
