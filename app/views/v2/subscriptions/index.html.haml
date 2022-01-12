@@ -26,7 +26,7 @@
                 = f.number_field :amount, value: 9, min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
                 .hint per month
             %nav.flexible-price__actions
-              = f.submit raw("Subscribe &rarr;"), data: { disable_with: false }
+              = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
     .v2-product-options__option
       %div
@@ -47,7 +47,7 @@
               = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
               .hint per month
           %nav.flexible-price__actions
-            = f.submit raw("Subscribe &rarr;"), data: { disable_with: false }
+            = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
 .block.-bt.-bg-default.-py4
   .block.-my4.-pt4
