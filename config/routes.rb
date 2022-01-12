@@ -109,7 +109,10 @@ Rails.application.routes.draw do
     get "subscribe", to: "subscriptions#index"
     get "subscribe/:product_slug/:amount", to: "subscriptions#new"
     post "subscribe/validate", to: "subscriptions#validate"
-    resources :subscriptions, only: [:new, :create]
+    post "subscribe/create", to: "subscriptions#create"
+    post "subscribe/confirm", to: "subscriptions#confirm"
+    get "subscribe/next", to: "subscriptions#next"
+    resources :subscriptions, only: [:new]
   end
 
   # user controller panel

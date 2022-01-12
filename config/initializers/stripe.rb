@@ -49,9 +49,18 @@ StripeEvent.configure do |events|
   end
   
   events.subscribe 'product.updated' do |event|
-    product = Product.where(stripe_id: event.data.object.id).take
-    if product
-      product.update_from_stripe_object!(event.data.object)
+    raise event.inspect
+    # subscription = Subscription.where(stripe_id: subscription_id).take
+    # if subscription
+    #   subscription.update_from_stripe_object!(event.data.object)
+    # end
+  end
+
+  events.subscribe 'invoice.paid' do |event|
+    customer_id = event.data.object.customer
+    if customer_id && customer_id.is_a?(String)
+      user = User.find_by(stripe_id: customer_id)
+      user.send_dunning_email!
     end
   end
 

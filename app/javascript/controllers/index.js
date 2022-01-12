@@ -22,5 +22,5 @@ application.register('player', PlayerController);
 import PriceChooserController from './price_chooser_controller.js';
 application.register('price-chooser', PriceChooserController);
 
-import SubscibeFormController from './subscibe_form_controller.js';
-application.register('subscibe-form', SubscibeFormController);
+import SubscribeFormController from './subscribe_form_controller.js';
+application.register('subscribe-form', SubscribeFormController);
