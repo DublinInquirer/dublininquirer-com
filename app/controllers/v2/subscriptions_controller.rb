@@ -1,4 +1,6 @@
 class V2::SubscriptionsController < ApplicationController
+  before_action :require_login, only: [:upgrade, :thanks]
+  before_action :require_no_subscription, only: [:create]
   layout "modal"
 
   def new
