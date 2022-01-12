@@ -2,9 +2,20 @@
   padding-top: 4rem;
   padding-bottom: 4rem;
   display: flex;
-  flex-direction: row;
-  justify-content: centre;
-  align-items: stretch;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  @media screen and (min-width: 780px) {
+    flex-direction: row;
+    justify-content: centre;
+    align-items: stretch;
+
+    .v2-product-options__option + .v2-product-options__option {
+      margin-left: 2rem;
+      margin-top: 0;
+    }
+  }
 
   &__option {
     display: flex;
@@ -55,7 +66,8 @@
   }
 
   &__option + &__option {
-    margin-left: 2rem;
+    margin-left: 0rem;
+    margin-top: 2rem;
   }
 }
 
