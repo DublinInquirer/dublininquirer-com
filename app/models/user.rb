@@ -10,6 +10,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, length: { minimum: 6 }, on: :password_reset
   validates :nickname, uniqueness: true, allow_blank: true
+  validates :rss_key, uniqueness: true
 
   has_many :comments
   has_many :subscriptions
@@ -33,6 +34,14 @@ class User < ApplicationRecord
   scope :needs_shipping, -> { joins(:subscriptions).merge( Subscription.needs_shipping ).distinct }
   scope :admin, -> { where(role: %w(admin superadmin)) }
   scope :superadmin, -> { where(role: 'superadmin') }
+
+  def self.is_valid_key?(key)
+    return false unless key.present?
+    user = User.where(rss_key: key.strip.downcase).take
+    return false unless user.present?
+    return false unless user.subscriber?
+    true
+  end
 
   def slug
     self.id # TODO hashed?
@@ -334,6 +343,11 @@ class User < ApplicationRecord
     end
   end
 
+  def generate_rss_key!
+    generate_rss_key
+    save!
+  end
+
   def self.to_csv
     CSV.generate(headers: true) do |csv|
       csv << %w(name email_address)
@@ -346,12 +360,15 @@ class User < ApplicationRecord
     end
   end
 
-
   def self.searchable_columns
     [:email_address, :full_name, :nickname, :stripe_id, :address_line_1, :address_line_2, :city, :county, :post_code, :country, :country_code, :hub]
   end
 
   private
+
+  def generate_rss_key
+    self.rss_key = SecureRandom.hex(24).downcase
+  end
 
   def reset_hub
     self.hub = ''

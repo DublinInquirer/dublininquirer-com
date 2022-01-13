@@ -22,6 +22,18 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def full_feed
+    raise ActionController::BadRequest.new('Not authorized') unless params[:user_key] && User.is_valid_key?(params[:user_key])
+
+    @articles = Rails.cache.fetch("/articles/full_feed", expires_in: 1.hour) do
+      Article.published.includes(:authors, :artworks).by_date.limit(50)
+    end
+
+    respond_to do |format|
+      format.xml { render layout: false }
+    end
+  end
+
   def search
     @page = [params[:p].to_i, 1].compact.max
     @query = params[:q]

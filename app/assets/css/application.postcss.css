@@ -1,6 +1,6 @@
 /* Entry point for your PostCSS build */
 
-@import 'front/product-options';
+@import 'dep/product-options';
 
 body {
 }

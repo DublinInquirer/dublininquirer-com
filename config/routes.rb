@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   }
 
   get 'feed', to: 'articles#feed', as: 'feed', format: 'xml'
+  get 'my/feed/:user_key', to: 'articles#full_feed', as: 'full_feed', format: 'xml'
 
   resources :comments, only: [:create]
   resources :contact_messages, only: [:create]

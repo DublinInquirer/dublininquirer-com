@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_23_210147) do
+ActiveRecord::Schema.define(version: 2022_01_13_115544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -336,6 +336,7 @@ ActiveRecord::Schema.define(version: 2021_12_23_210147) do
     t.datetime "deleted_at"
     t.jsonb "notes", default: {}
     t.datetime "payment_failed_email_sent_at"
+    t.text "rss_key"
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
     t.index "to_tsvector('english'::regconfig, full_name)", name: "users_full_name", using: :gin
