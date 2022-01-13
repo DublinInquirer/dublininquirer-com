@@ -214,7 +214,7 @@ class Subscription < ApplicationRecord
 
   # users can only change their sub if they're paying the base price on the active products
   def changeable?
-    (self.is_stripe? && self.product.is_active? && self.is_base_price?)
+    self.is_stripe? && self.product.is_active?
   end
 
   # users can only cancel if they're paying monthly, not recipients of a gift

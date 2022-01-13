@@ -57,6 +57,8 @@ class UsersController < ApplicationController
 
   def subscription
     @subscription = current_user.subscription
+    @plan = @subscription.plan
+    @product = @plan.product
 
     case request.request_method.downcase.to_sym
     when :get
