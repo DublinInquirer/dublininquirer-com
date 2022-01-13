@@ -14,7 +14,7 @@ class Admin::MetricsController < Admin::ApplicationController
     end
 
     @metric_months = 10.times.map do |i|
-      d = (@date - i.months)
+      d = (@date - i.months).beginning_of_month
       acquired_subs = Subscription.where(created_at: d.beginning_of_month.beginning_of_day..d.end_of_month.end_of_day)
       {
         date: d,
