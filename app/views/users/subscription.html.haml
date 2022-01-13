@@ -12,7 +12,7 @@
           :markdown
             The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-        = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe", novalidate: true} do |f|
+        = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
           - if @product.slug.to_s == "print"
             %h4 Change your monthly subscription price:
           - else
@@ -36,7 +36,7 @@
           :markdown
             Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe", novalidate: true} do |f|
+      = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
         - if @product.slug.to_s == "digital"
           %h4 Change your monthly subscription price:
         - else

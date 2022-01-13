@@ -122,6 +122,7 @@ Rails.application.routes.draw do
     member do
       get :subscription
       put :subscription
+      get "subscription/:product_slug/:amount", to: "users#change_subscription"
 
       get :address
       put :address
