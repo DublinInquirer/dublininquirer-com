@@ -8,46 +8,46 @@
 
   .v2-product-options
     .v2-product-options__option
-      %h3.v2-product-options__option__name
-        %strong Digital + Print
-        %span from €9/month
-      .v2-product-options__option__description
-        :markdown
-          The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
+      %div
+        %h3.v2-product-options__option__name
+          %strong Digital + Print
+          %span from €9/month
+        .v2-product-options__option__description
+          :markdown
+            The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-          **Set your monthly subscription price:**
-
-      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe"} do |f|
-        .flexible-price
-          = f.hidden_field :product_slug, value: "print", "data-price-chooser-target": "productSlug"
-          %fieldset.flexible-price__price
-            .currency €
-            .amount
-              = f.number_field :amount, value: 9, min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount"
-              .hint per month
-          %nav.flexible-price__actions
-            = f.submit raw("Subscribe &rarr;")
+        = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe", novalidate: true} do |f|
+          %h4 Set your monthly subscription price:
+          .flexible-price
+            = f.hidden_field :product_slug, value: "print", "data-price-chooser-target": "productSlug"
+            %fieldset.flexible-price__price
+              .currency €
+              .amount
+                = f.number_field :amount, value: 9, min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+                .hint per month
+            %nav.flexible-price__actions
+              = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
     .v2-product-options__option
-      %h3.v2-product-options__option__name
-        %strong Digital
-        %span from €6/month
-      .v2-product-options__option__description
-        :markdown
-          Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
+      %div
+        %h3.v2-product-options__option__name
+          %strong Digital
+          %span from €6/month
+        .v2-product-options__option__description
+          :markdown
+            Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-          **Set your monthly subscription price:**
-
-      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe"} do |f|
+      = form_with url: [:new, :v2, :subscription], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#subscribe", novalidate: true} do |f|
+        %h4 Set your monthly subscription price:
         .flexible-price
           = f.hidden_field :product_slug, value: "digital", "data-price-chooser-target": "productSlug"
           %fieldset.flexible-price__price
             .currency €
             .amount
-              = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: false
+              = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
               .hint per month
           %nav.flexible-price__actions
-            = f.submit raw("Subscribe &rarr;")
+            = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
 .block.-bt.-bg-default.-py4
   .block.-my4.-pt4
@@ -113,9 +113,9 @@
         .block.-mb2
           %h3.h.-h3.-centered Become a subscriber:
         .p.-t4.-centered
-          = link_to raw("Digital + Print &mdash; €9/month"), "/v2/subscribe/:print/9", class: 'block -mb1 button -standard -big'
-          = link_to raw("Digital &mdash; €6/month"), "/v2/subscribe/:digital/6", class: 'block -mb1 button -standard -big'
-          = link_to raw("Student (Digital-only) &mdash; €3/month"), "/v2/subscribe/:digital/:student", class: 'block button -standard -big'
+          = link_to raw("Digital + Print &mdash; €9/month"), "/v2/subscribe/print/9", class: 'block -mb1 button -standard -big'
+          = link_to raw("Digital &mdash; €6/month"), "/v2/subscribe/digital/6", class: 'block -mb1 button -standard -big'
+          = link_to raw("Student (Digital-only) &mdash; €3/month"), "/v2/subscribe/student", class: 'block button -standard -big'
 
 .block.-bt.-py4.-bg-faint
   .wrapper.-small{role: 'layout'}

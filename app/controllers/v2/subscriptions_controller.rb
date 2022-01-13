@@ -1,9 +1,10 @@
 class V2::SubscriptionsController < ApplicationController
+  before_action :require_login, only: [:upgrade, :thanks]
+  before_action :require_no_subscription, only: [:create]
   layout "modal"
 
   def new
     product_slug = params[:product_slug]&.downcase&.to_sym
-    amount = params[:amount].to_i
 
     @product = case product_slug
     when :digital
@@ -16,8 +17,17 @@ class V2::SubscriptionsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
 
+    amount = case product_slug
+    when :digital, :print
+      ((params[:amount].to_i * 100) >= @product.base_price) ? (params[:amount].to_i * 100) : raise(ActiveRecord::RecordNotFound)
+    when :student
+      (@product.base_price / 2)
+    else
+      raise ActiveRecord::RecordNotFound
+    end
+
     @plan = Plan.find_or_create_by!(
-      amount: (amount * 100),
+      amount: amount,
       product_id: @product.id,
       interval: "month",
       interval_count: 1

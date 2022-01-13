@@ -30,13 +30,7 @@
             %li.block.-mb1
               %label.c.-w8 Plan
               %p
-                - if current_user.subscription.plan.is_friend?
-                  #{ 'Friend' }:
-                - elsif current_user.subscription.plan.is_patron?
-                  #{ 'Patron' }:
-                - else
-                  #{ current_user.subscription.plan.product.name }:
-
+                #{ current_user.subscription.plan.product.name }:
                 #{ number_to_currency((current_user.subscription.plan.amount/100.0), unit: '€') }/#{ current_user.subscription.plan.interval }
 
             %li.block.-mb1

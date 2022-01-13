@@ -43,7 +43,7 @@
 
           - unless (defined?(brief) && brief)
             - if !logged_in? or !current_user.subscriber?
-              = link_to :products, class: 'meta-nav_item -subscribe' do
+              = link_to "/v2/subscribe", class: 'meta-nav_item -subscribe' do
                 Subscribe
 
             %a.meta-nav_item{data: {action: "layout#openSearch"}}
