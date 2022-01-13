@@ -41,7 +41,7 @@
               - if logged_in?
                 %li= link_to "Account details", :user
               - if !(logged_in? and current_user.subscriber?)
-                %li= link_to "Subscribe", :products
+                %li= link_to "Subscribe", "/v2/subscribe"
               - if logged_in? and current_user.subscriber?
                 %li= link_to "Manage subscription", :user
               %li= link_to "Give a subscription", :gift_subscriptions
