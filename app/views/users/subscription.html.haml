@@ -2,33 +2,54 @@
   %header.page-header
     %h1.h.-h2 Change subscription plan
 
-  .block.-form.-b.-p2.-bg-faint.-mb2
-    .block.-pb1.-bb.-mb2
-      %h3.c.-w8 Digital
+  .v2-product-options.-vertical
+    .v2-product-options__option{class: (@product.slug.to_s == "print" ? "-active" : "-inactive")}
+      %div
+        %h3.v2-product-options__option__name
+          %strong Digital + Print
+          %span from €9/month
+        .v2-product-options__option__description
+          :markdown
+            The monthly print edition features a selection of our favourite online articles delivered to your door. Pairs well with coffee. Comes with unlimited digital access.
 
-    .p.-t4.-sf
-      :markdown
-        Unlimited digital access to **DublinInquirer.com**, including our full archive, optimised for desktop and mobile.
+        = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
+          - if @product.slug.to_s == "print"
+            %h4 Change your monthly subscription price:
+          - else
+            %h4 Set your monthly subscription price:
+          .flexible-price
+            = f.hidden_field :product_slug, value: "print", "data-price-chooser-target": "productSlug"
+            %fieldset.flexible-price__price
+              .currency €
+              .amount
+                = f.number_field :amount, value: (@plan.amount / 100), min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+                .hint per month
+            %nav.flexible-price__actions
+              = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
-    %nav.block.-mt2.-mb1
-      - if @subscription.requires_address?
-        = link_to raw("Subscribe &mdash; €6/month"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
-      - else
-        = link_to raw("<span>Keep Digital-only</span>"), subscription_user_path(plan: 'digital'), class: 'button -standard', method: 'put'
+    .v2-product-options__option{class: (@product.slug.to_s == "digital" ? "-active" : "-inactive")}
+      %div
+        %h3.v2-product-options__option__name
+          %strong Digital
+          %span from €6/month
+        .v2-product-options__option__description
+          :markdown
+            Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-  .block.-form.-b.-p2.-bg-faint
-    .block.-pb1.-bb.-mb2
-      %h3.c.-w8 Digital + Print
-
-    .p.-t4.-sf
-      :markdown
-        The **monthly print edition** features a selection of our favourite online articles delivered to your door. Comes with unlimited **digital access**.
-
-    %nav.block.-mt2.-mb1
-      - if @subscription.requires_address?
-        = link_to raw("<span>Keep Digital + Print</span>"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
-      - else
-        = link_to raw("Subscribe &mdash; €9/month"), subscription_user_path(plan: 'print'), class: 'button -standard', method: 'put'
+      = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
+        - if @product.slug.to_s == "digital"
+          %h4 Change your monthly subscription price:
+        - else
+          %h4 Set your monthly subscription price:
+        .flexible-price
+          = f.hidden_field :product_slug, value: "digital", "data-price-chooser-target": "productSlug"
+          %fieldset.flexible-price__price
+            .currency €
+            .amount
+              = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+              .hint per month
+          %nav.flexible-price__actions
+            = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered

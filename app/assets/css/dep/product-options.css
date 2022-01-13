@@ -6,6 +6,23 @@
   justify-content: flex-start;
   align-items: center;
 
+  &.-vertical {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    @media screen and (min-width: 780px) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      .v2-product-options__option + .v2-product-options__option {
+        margin-left: 0;
+        margin-top: 2rem;
+      }
+    }
+  }
+
   @media screen and (min-width: 780px) {
     flex-direction: row;
     justify-content: centre;
@@ -27,6 +44,11 @@
     background-color: var(--default);
     padding: 3rem;
     box-shadow: 0 0 0 1px var(--black);
+
+    &.-active {
+      box-shadow: 0 0 0 2.55px var(--blue);
+    }
+
     &__name {
       margin-bottom: 1rem;
       font-weight: 400;

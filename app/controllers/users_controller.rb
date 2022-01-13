@@ -57,6 +57,8 @@ class UsersController < ApplicationController
 
   def subscription
     @subscription = current_user.subscription
+    @plan = @subscription.plan
+    @product = @plan.product
 
     case request.request_method.downcase.to_sym
     when :get
@@ -68,6 +70,15 @@ class UsersController < ApplicationController
         render :subscription
       end
     end
+  end
+
+  def change_subscription
+    @subscription = current_user.subscription
+    @plan = @subscription.plan
+    @product = @plan.product
+    @subscription.change_product_to!(params[:product_slug], true)
+    @subscription.change_price_to!((params[:amount] * 100))
+    redirect_to :user
   end
 
   def address

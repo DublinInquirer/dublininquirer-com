@@ -40,6 +40,17 @@ export default class extends Controller {
     }
   }
 
+  change(e) {
+    this.disableSubmit();
+    e.preventDefault();
+    if (this.anyErrors()) {
+      this.undisableSubmit();
+      this.shake();
+    } else {
+      window.location.href = `/user/subscription/${this.productSlugTarget.value}/${this.amountTarget.value}`;
+    }
+  }
+
   minimumFor(slug) {
     switch (slug) {
       case 'digital':
