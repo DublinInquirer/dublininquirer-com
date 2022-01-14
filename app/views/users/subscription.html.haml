@@ -22,7 +22,7 @@
             %fieldset.flexible-price__price
               .currency €
               .amount
-                = f.number_field :amount, value: (@plan.amount / 100), min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+                = f.number_field :amount, value: ((@product.slug.to_s == "print") ? (@plan.amount / 100) : 9), min: 9, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
                 .hint per month
             %nav.flexible-price__actions
               = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
@@ -46,7 +46,7 @@
           %fieldset.flexible-price__price
             .currency €
             .amount
-              = f.number_field :amount, value: 6, min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+              = f.number_field :amount, ((@product.slug.to_s == "digital") ? (@plan.amount / 100) : 6), min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
               .hint per month
           %nav.flexible-price__actions
             = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
