@@ -73,11 +73,22 @@ class UsersController < ApplicationController
   end
 
   def change_subscription
+    product_slug = params[:product_slug].to_sym
     @subscription = current_user.subscription
     @plan = @subscription.plan
     @product = @plan.product
-    @subscription.change_product_to!(params[:product_slug], true)
-    @subscription.change_price_to!((params[:amount].to_i * 100))
+
+    amount = case product_slug
+    when :digital, :print
+      ((params[:amount].to_i * 100) >= @product.base_price) ? (params[:amount].to_i * 100) : raise(ActiveRecord::RecordNotFound)
+    when :student
+      (@product.base_price / 2)
+    else
+      raise ActiveRecord::RecordNotFound
+    end
+
+    @subscription.change_product_to!(product_slug, true)
+    @subscription.change_price_to!((amount * 100))
     redirect_to :user
   end
 
