@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, if: -> { new_record? || changes[:crypted_password] }
   validates :password, length: { minimum: 6 }, on: :password_reset
   validates :nickname, uniqueness: true, allow_blank: true
-  validates :rss_key, uniqueness: true
+  validates :rss_key, uniqueness: true, allow_blank: true
 
   has_many :comments
   has_many :subscriptions
@@ -370,11 +370,7 @@ class User < ApplicationRecord
   def generate_rss_key
     if self.rss_key.nil? or self.rss_key.blank?
       self.rss_key = SecureRandom.hex(24).downcase
-      Appsignal.send_error("Set rss key for user #{self.inspect}")
-    else
-      Appsignal.send_error("Not generating rss key for user #{self.inspect}")
     end
-    true
   end
 
   def reset_hub
