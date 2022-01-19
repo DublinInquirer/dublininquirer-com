@@ -22,6 +22,7 @@ class User < ApplicationRecord
   attribute :stripe_token, :string
 
   before_save :create_stripe_customer, unless: :stripe_id?
+  before_save :generate_rss_key, unless: :rss_key?
   before_save :reset_hub, if: :will_save_change_to_address?
   before_validation :normalise_email, :figure_out_country_code, :normalise_name
 
