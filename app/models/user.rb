@@ -370,7 +370,11 @@ class User < ApplicationRecord
   def generate_rss_key
     if self.rss_key.nil? or self.rss_key.blank?
       self.rss_key = SecureRandom.hex(24).downcase
+    else
+      Appsignal.send_error("Not generating rss key for user #{self.inspect}")
     end
+
+    true
   end
 
   def reset_hub
