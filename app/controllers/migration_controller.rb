@@ -48,7 +48,7 @@ class MigrationController < ApplicationController
       if @user.needs_to_confirm_plan?
         redirect_to :migrate_plan
       elsif @user.delinquent?
-        redirect_to :migrate_payment
+        redirect_to [:payment, :user]
       else
         redirect_to :migrate_welcome
       end
@@ -89,7 +89,7 @@ class MigrationController < ApplicationController
     subscription.change_product_to!(product.slug)
 
     if @user.delinquent?
-      redirect_to :migrate_payment
+      redirect_to [:payment, :user]
     else
       redirect_to :migrate_welcome
     end
