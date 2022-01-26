@@ -59,6 +59,7 @@ class MigrationController < ApplicationController
 
   def payment # req login
     @user = current_user
+    raise "Attempt to use the migration payment form: #{current_user.inspect}"
 
     case request.request_method.downcase.to_sym
     when :get
