@@ -9,11 +9,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @legacy_user = User.where(email_address: params[:email_address].downcase.strip).first
-    if @legacy_user.present? && @legacy_user.persisted? && @legacy_user.needs_setup?
-      # setup legacy account
-      setup_legacy_account(@legacy_user) && return
-    elsif @user = login(params[:email_address].downcase.strip, params[:password], true)
+    if @user = login(params[:email_address].downcase.strip, params[:password], true)
       if @user.delinquent?
         redirect_to [:payment, :user]
       else
