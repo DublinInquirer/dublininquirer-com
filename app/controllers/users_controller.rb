@@ -88,7 +88,7 @@ class UsersController < ApplicationController
     end
 
     @subscription.change_product_to!(product_slug, true)
-    @subscription.change_price_to!((amount * 100))
+    @subscription.change_price_to!(amount)
     redirect_to :user
   end
 
