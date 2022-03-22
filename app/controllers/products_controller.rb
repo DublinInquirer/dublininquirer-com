@@ -9,19 +9,16 @@ class ProductsController < ApplicationController
 
   def show
     @product = case params[:id].try(:downcase).try(:to_sym)
-    when :digital
-      Product.find_by_slug('digital')
+    when :digital, :student
+      Product.find_by_slug(:digital)
     when :print
-      Product.find_by_slug('print')
-    when :student
-      Product.find_by_slug('digital')
+      Product.find_by_slug(:print)
     else
       raise ActiveRecord::RecordNotFound
     end
+
     @plan = case params[:id].try(:downcase).try(:to_sym)
-    when :digital
-      @product.base_plan
-    when :print
+    when :digital, :print
       @product.base_plan
     when :student
       @product.student_plan
