@@ -73,10 +73,17 @@ class UsersController < ApplicationController
   end
 
   def change_subscription
-    product_slug = params[:product_slug].to_sym
+    product_slug = params[:product_slug].try(:downcase).try(:to_sym)
+    @product = case product_slug
+    when :digital, :student
+      Product.find_by_slug(:digital)
+    when :print
+      Product.find_by_slug(:print)
+    else
+      raise ActiveRecord::RecordNotFound
+    end
+
     @subscription = current_user.subscription
-    @plan = @subscription.plan
-    @product = @plan.product
 
     amount = case product_slug
     when :digital, :print
