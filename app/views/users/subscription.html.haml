@@ -3,10 +3,10 @@
     %h1.h.-h2 Change subscription plan
 
   .v2-product-options.-vertical
-    .v2-product-options__option{class: (@product.slug.to_s == "print" ? "-active" : "-inactive")}
+    .v2-product-options__option{class: (@product.slug.to_s == "digital" ? "-active" : "-inactive")}
       %div
         %h3.v2-product-options__option__name
-          %strong Digital + Print
+          %strong Digital + digital
           %span from €9/month
         .v2-product-options__option__description
           :markdown
@@ -36,20 +36,20 @@
           :markdown
             Unlimited digital access to DublinInquirer.com, including our full archive, optimised for desktop and mobile.
 
-      = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
-        - if @product.slug.to_s == "digital"
-          %h4 Change your monthly subscription price:
-        - else
-          %h4 Set your monthly subscription price:
-        .flexible-price
-          = f.hidden_field :product_slug, value: "digital", "data-price-chooser-target": "productSlug"
-          %fieldset.flexible-price__price
-            .currency €
-            .amount
-              = f.number_field :amount, value: ((@product.slug.to_s == "digital") ? (@plan.amount / 100) : 6), min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
-              .hint per month
-          %nav.flexible-price__actions
-            = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
+        = form_with url: [:subscription, :user], class: "v2-product-options__option__form", autocomplete: "off", method: :get, local: true, html: {"data-controller": "price-chooser", "data-action": "price-chooser#change", novalidate: true} do |f|
+          - if @product.slug.to_s == "print"
+            %h4 Change your monthly subscription price:
+          - else
+            %h4 Set your monthly subscription price:
+          .flexible-price
+            = f.hidden_field :product_slug, value: "digital", "data-price-chooser-target": "productSlug"
+            %fieldset.flexible-price__price
+              .currency €
+              .amount
+                = f.number_field :amount, value: ((@product.slug.to_s == "digital") ? (@plan.amount / 100) : 6), min: 6, "data-price-chooser-target": "amount", "data-action": "change->price-chooser#validateAmount", autocomplete: "off"
+                .hint per month
+            %nav.flexible-price__actions
+              = f.submit raw("Subscribe &rarr;"), data: { "price-chooser-target": "subscribeButton", disable_with: false }
 
   .block.-my4.-py4
     .p.-t4.-sf.-centered
