@@ -20,7 +20,7 @@
   display: flex
   flex-direction: row
   justify-content: space-between
-  align-items: center
+  align-items: stretch
   width: 100%
   position: relative
   overflow: visible
@@ -33,6 +33,7 @@
   input[type="text"], input[type="email"], input[type="password"]
     background: transparent
     -webkit-apperance: none
+    margin: 0
     border: 0
     color: var(--default)
     border: 1px solid var(--default)
@@ -40,11 +41,16 @@
     line-height: calc(var(--baseline) * 1.25)
     width: 100%
     padding: 0.25rem
+    background-color: var(--default)
     &:focus
       border-color: var(--default)
   
+  .field
+    background-color: red
+    
   .action
-    margin-left: 0.5rem
+    background-color: var(--blue)
   
   input[type="submit"]
     color: var(--default)
+    padding: 0.25rem 0.5rem
