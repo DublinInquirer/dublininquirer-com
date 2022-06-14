@@ -22,7 +22,7 @@
       .block.-mt2= link_to "Subscribe", "/v2/subscribe", class: 'button -white'
       
   - elsif !is_christmastime?
-    .block.block.-py2.-px1.-mb2.-bg-blue
+    .block.-py2.-px1.-mb2.-bg-blue
       %h4.c.-w8 Give a subscription
       .block.-my1
         :markdown
@@ -32,7 +32,7 @@
           #{ link_to "See options", :gift_subscriptions, class: 'button -white' }
 
   - if (!logged_in? or (logged_in? and current_user.subscriber?)) and is_christmastime?
-    .block.block.-pt2.-px1.-pb1.-mb2.-bg-christmas{'data-behaviour': 'snowing'}
+    .block.-pt2.-px1.-pb1.-mb2.-bg-christmas{'data-behaviour': 'snowing'}
       %h4.c.-w8 Gift subscriptions
       .block.-my1
         :markdown
@@ -48,6 +48,21 @@
       .block.-my1
         :markdown
           Dublin Inquirer prints, totes, t-shirts, and more.
+  
+  
+  .block.-py2.-px1.-mb2.-bg-black
+    %h4.c.-w8 Free email newsletter
+    .block.-my1
+      :markdown
+        Sign up to get updates directly in your inbox:
+      %form#mc-embedded-subscribe-form.sidebar-form{:action => "https://dublininquirer.us10.list-manage.com/subscribe/post?u=24e41bd5d7188febc86b710f7&id=b34685dddf", :method => "post", :name => "mc-embedded-subscribe-form", :novalidate => "", :target => "_blank", data: {turbo: "false"}}
+        .field
+          %label{:for => "mce-EMAIL"} Email Address
+          %input#mce-EMAIL.required.email{:name => "EMAIL", :type => "email", :value => "", placeholder: 'Enter your email'}/
+          %div{"aria-hidden" => "true", :style => "position: absolute; left: -9999px;"}
+            %input{:name => "b_24e41bd5d7188febc86b710f7_b34685dddf", :tabindex => "-1", :type => "text", :value => ""}/
+        .action
+          %input#mc-embedded-subscribe.text-button{:name => "subscribe", :type => "submit", :value => "→"}/
 
   %section.block
     .block.-pb1.-bb

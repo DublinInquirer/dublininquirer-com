@@ -15,3 +15,36 @@
     & > .content
       position: sticky
       top: 7.25rem
+
+.sidebar-form
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  width: 100%
+  position: relative
+  overflow: visible
+  margin-top: 1rem
+  margin-bottom: -1rem
+  
+  label
+    display: none
+  
+  input[type="text"], input[type="email"], input[type="password"]
+    background: transparent
+    -webkit-apperance: none
+    border: 0
+    color: var(--default)
+    border: 1px solid var(--default)
+    text-align: left
+    line-height: calc(var(--baseline) * 1.25)
+    width: 100%
+    padding: 0.25rem
+    &:focus
+      border-color: var(--default)
+  
+  .action
+    margin-left: 0.5rem
+  
+  input[type="submit"]
+    color: var(--default)
