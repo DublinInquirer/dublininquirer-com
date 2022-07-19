@@ -3,7 +3,7 @@
     = link_to article.path, class: ['block', '-my2', '-p2', '-b', '-bg-faint', 'excerpt'] do
       .block.-mb1
         %figure.artwork.-square
-          - if article.featured_artwork.image.present?
+          - if article.featured_artwork && article.featured_artwork.image.present? && article.featured_artwork.image.url.present?
             = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
 
       .p.-centered
