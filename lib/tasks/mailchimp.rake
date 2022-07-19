@@ -4,4 +4,8 @@ namespace :mailchimp do
       Newsletter.upsert_subscriber(user)
     end
   end
+
+  task sync_from_mailchimp: :environment do
+    Newsletter.sync_from_mailchimp!
+  end
 end
