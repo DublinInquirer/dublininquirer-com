@@ -6,7 +6,7 @@
           .overlay.block.-b.-bg-default
             .p.-t5.c.-w4= display_category(article.category)
 
-          - if article.featured_artwork.image.present?
+          - if article.featured_artwork && article.featured_artwork.image.present? && article.featured_artwork.image.url.present?
             = image_tag article.featured_artwork.image.medium.url, loading: 'lazy'
 
       .p.-t4
