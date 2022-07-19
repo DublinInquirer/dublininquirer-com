@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_13_115544) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_07_19_213702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -32,7 +31,7 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
@@ -46,8 +45,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "article_authors", force: :cascade do |t|
     t.bigint "article_id"
     t.bigint "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["article_id"], name: "index_article_authors_on_article_id"
     t.index ["author_id"], name: "index_article_authors_on_author_id"
   end
@@ -58,8 +57,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "excerpt"
     t.text "content"
     t.text "text"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "featured_artwork_id"
     t.text "former_slugs", default: [], array: true
     t.text "template"
@@ -85,8 +84,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "caption"
     t.text "image"
     t.text "hashed_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "article_id"
     t.integer "width_px"
     t.integer "height_px"
@@ -99,8 +98,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "full_name", null: false
     t.text "slug", null: false
     t.text "bio"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "portrait"
     t.index "to_tsvector('english'::regconfig, bio)", name: "authors_bio", using: :gin
     t.index "to_tsvector('english'::regconfig, full_name)", name: "authors_full_name", using: :gin
@@ -115,9 +114,9 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "nickname"
     t.text "email_address"
     t.text "status"
-    t.datetime "published_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "published_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "marked_as_spam", default: false
     t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["email_address"], name: "index_comments_on_email_address"
@@ -132,8 +131,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "regarding"
     t.text "full_name"
     t.text "email_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["email_address"], name: "index_contact_messages_on_email_address"
     t.index ["regarding"], name: "index_contact_messages_on_regarding"
   end
@@ -147,8 +146,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.jsonb "questions", default: {}, null: false
     t.jsonb "parties", default: {}, null: false
     t.jsonb "areas", default: {}, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["areas"], name: "index_election_surveys_on_areas", using: :gin
     t.index ["candidates"], name: "index_election_surveys_on_candidates", using: :gin
     t.index ["election_type"], name: "index_election_surveys_on_election_type"
@@ -173,10 +172,10 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "first_country_code"
     t.text "notes"
     t.text "redemption_code"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "stripe_id"
-    t.datetime "charged_at"
+    t.datetime "charged_at", precision: nil
     t.index ["charged_at"], name: "index_gift_subscriptions_on_charged_at"
     t.index ["plan_id"], name: "index_gift_subscriptions_on_plan_id"
     t.index ["redemption_code"], name: "index_gift_subscriptions_on_redemption_code", unique: true
@@ -195,14 +194,14 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.boolean "forgiven"
     t.date "created_on"
     t.date "due_on"
-    t.datetime "period_starts_at"
-    t.datetime "period_ends_at"
-    t.datetime "next_payment_attempt_at"
+    t.datetime "period_starts_at", precision: nil
+    t.datetime "period_ends_at", precision: nil
+    t.datetime "next_payment_attempt_at", precision: nil
     t.jsonb "lines", default: {}
     t.bigint "user_id"
     t.bigint "subscription_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["created_on"], name: "index_invoices_on_created_on"
     t.index ["due_on"], name: "index_invoices_on_due_on"
     t.index ["number"], name: "index_invoices_on_number"
@@ -215,8 +214,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "issues", force: :cascade do |t|
     t.date "issue_date"
     t.boolean "published", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["issue_date"], name: "index_issues_on_issue_date", unique: true
     t.index ["published"], name: "index_issues_on_published"
   end
@@ -224,10 +223,23 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "landing_pages", force: :cascade do |t|
     t.text "name"
     t.text "slug", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "template"
     t.index ["slug"], name: "index_landing_pages_on_slug", unique: true
+  end
+
+  create_table "newsletter_subscribers", force: :cascade do |t|
+    t.text "mailchimp_id"
+    t.text "email_address"
+    t.text "given_name"
+    t.text "surname"
+    t.text "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_newsletter_subscribers_on_email_address"
+    t.index ["mailchimp_id"], name: "index_newsletter_subscribers_on_mailchimp_id", unique: true
+    t.index ["status"], name: "index_newsletter_subscribers_on_status"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -236,8 +248,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "interval"
     t.integer "interval_count"
     t.bigint "product_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["product_id"], name: "index_plans_on_product_id"
     t.index ["stripe_id"], name: "index_plans_on_stripe_id", unique: true
   end
@@ -245,8 +257,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "products", force: :cascade do |t|
     t.text "name"
     t.text "stripe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "base_price", default: 0
     t.index ["stripe_id"], name: "index_products_on_stripe_id", unique: true
   end
@@ -255,17 +267,17 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "stripe_id"
     t.bigint "plan_id"
     t.bigint "user_id"
-    t.datetime "current_period_ends_at"
+    t.datetime "current_period_ends_at", precision: nil
     t.text "status"
     t.jsonb "metadata"
-    t.datetime "canceled_at"
-    t.datetime "ended_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "canceled_at", precision: nil
+    t.datetime "ended_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "subscription_type", default: "stripe"
     t.boolean "cancel_at_period_end"
     t.bigint "product_id"
-    t.datetime "trial_ends_at"
+    t.datetime "trial_ends_at", precision: nil
     t.text "landing_page_slug"
     t.index ["current_period_ends_at"], name: "index_subscriptions_on_current_period_ends_at"
     t.index ["landing_page_slug"], name: "index_subscriptions_on_landing_page_slug"
@@ -282,8 +294,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "name"
     t.text "slug"
     t.boolean "displayable", default: true
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "autolink", default: false
     t.index "to_tsvector('english'::regconfig, name)", name: "tags_name", using: :gin
     t.index ["autolink"], name: "index_tags_on_autolink"
@@ -294,8 +306,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "user_notes", force: :cascade do |t|
     t.bigint "user_id"
     t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_user_notes_on_user_id"
   end
 
@@ -305,18 +317,18 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "salt"
     t.text "given_name"
     t.text "surname"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "remember_me_token"
-    t.datetime "remember_me_token_expires_at"
+    t.datetime "remember_me_token_expires_at", precision: nil
     t.text "reset_password_token"
-    t.datetime "reset_password_token_expires_at"
-    t.datetime "reset_password_email_sent_at"
+    t.datetime "reset_password_token_expires_at", precision: nil
+    t.datetime "reset_password_email_sent_at", precision: nil
     t.integer "access_count_to_reset_password_page", default: 0
     t.text "nickname"
     t.text "portrait"
     t.text "stripe_id"
-    t.datetime "set_password_at"
+    t.datetime "set_password_at", precision: nil
     t.boolean "subscribed_weekly", default: false
     t.string "role", default: "user"
     t.text "address_line_1"
@@ -328,14 +340,14 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
     t.text "country_code"
     t.jsonb "metadata"
     t.text "hub"
-    t.datetime "banned_at"
+    t.datetime "banned_at", precision: nil
     t.text "full_name"
     t.integer "sources_count", default: 0
     t.text "card_last_4"
     t.text "card_brand"
-    t.datetime "deleted_at"
+    t.datetime "deleted_at", precision: nil
     t.jsonb "notes", default: {}
-    t.datetime "payment_failed_email_sent_at"
+    t.datetime "payment_failed_email_sent_at", precision: nil
     t.text "rss_key"
     t.index "to_tsvector('english'::regconfig, address_line_1)", name: "users_address_line_1", using: :gin
     t.index "to_tsvector('english'::regconfig, address_line_2)", name: "users_address_line_2", using: :gin
@@ -362,8 +374,8 @@ ActiveRecord::Schema.define(version: 2022_01_13_115544) do
   create_table "visitors", force: :cascade do |t|
     t.json "viewed_articles", default: {}
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["user_id"], name: "index_visitors_on_user_id"
   end
 
